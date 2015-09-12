@@ -100,7 +100,7 @@ is being run, there will be different parameters and conditions
 for the cells, which will be kept in the Details class to be 
 printed by printDetails. 
 
-*NEED TO ADD DIAGRAM OF CLASSES* 
+[Diagram of Design]()
 
 ##User Interface
 The user will interact with the system through the onscreen GUI. 
@@ -121,7 +121,8 @@ bounds or otherwise impossible to apply to the simulation.
 
 *NEED TO ADD IMAGE OF GUI* 
 
-Design Details
+##Design Details
+
 Chronologically, the first class that will be called in our project 
 is the Main class. This class is responsible for initializing the 
 GUI and Setup classes. The GUI class will be responsible for 
@@ -251,7 +252,7 @@ MAIN (open)
 
 ###Use Cases
  
-1. Apply the rules to a middle cell: set the next state of a cell to 
+* Apply the rules to a middle cell: set the next state of a cell to 
 dead by counting its number of neighbors using the Game of Life rules 
 for a cell in the middle (i.e., with all its neighbors)
 
@@ -262,7 +263,7 @@ then according to the number of live/dead neighbors, it will modify
 the variable nextState (this also depends on whether the state of 
 the cell is dead or alive)
 
-2. Apply the rules to an edge cell: set the next state of a cell to 
+* Apply the rules to an edge cell: set the next state of a cell to 
 live by counting its number of neighbors using the Game of Life 
 rules for a cell on the edge (i.e., with some of its neighbors 
 missing)
@@ -270,7 +271,7 @@ missing)
 The procedure is similar to the previous case except for one detail: 
 the array of neighboring cells will have less elements. 
 
-3. Move to the next generation: update all cells in a simulation 
+* Move to the next generation: update all cells in a simulation 
 from their current state to their next state and display the result 
 graphically
 
@@ -285,7 +286,7 @@ change its state to nextState, effectively also visually updating
 their position. The Simulation class would then call the method 
 showGrid, which will display graphically the result. 
 
-4. Set a simulation parameter: set the value of a parameter, 
+* Set a simulation parameter: set the value of a parameter, 
 probCatch, for a simulation, Fire, based on the value given in an 
 XML file
 
@@ -296,7 +297,7 @@ the Cell, by assigning the value of probCatch to a private final
 variable that will store this information (this variable will be 
 used every time we create a new Cell class). 
 
-5. Switch simulations: use the GUI to change the current simulation 
+* Switch simulations: use the GUI to change the current simulation 
 from Game of Life to Wator
 
 The user would have to choose a simulation from a drop down menu. 
@@ -323,7 +324,7 @@ classes from containing all the functions and details, so we will
 try to find logical ways to separate the responsibilities into 
 different classes. 
 
-Team responsibilities
-Emanuele - GUI / xml
-Daniel - Simulation/Setup
-Lucas - Cell/Grid
+##Team responsibilities
+1. Emanuele - GUI / xml
+2. Daniel - Simulation/Setup
+3. Lucas - Cell/Grid
