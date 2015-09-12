@@ -119,7 +119,7 @@ the system, an error message will be generated. A similar message
 will be generated if the user specifies a parameter that is out of 
 bounds or otherwise impossible to apply to the simulation. 
 
-*NEED TO ADD IMAGE OF GUI* 
+[GUI Design](https://github.com/duke-compsci308-fall2015/cellsociety_team05/blob/master/design_images/gui_design.png)
 
 ##Design Details
 
