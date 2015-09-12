@@ -100,7 +100,7 @@ is being run, there will be different parameters and conditions
 for the cells, which will be kept in the Details class to be 
 printed by printDetails. 
 
-[Diagram of Design]()
+[Diagram of Design](https://github.com/duke-compsci308-fall2015/cellsociety_team05/blob/master/design_images/design_diagram.png)
 
 ##User Interface
 The user will interact with the system through the onscreen GUI. 
