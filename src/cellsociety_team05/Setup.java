@@ -1,7 +1,7 @@
 package cellsociety_team05;
 
 public class Setup {
-<<<<<<< HEAD
+
 	private Simulation[] myPossibleSimulations =
 		{
 			new SegregationSimulation(this)
@@ -12,7 +12,7 @@ public class Setup {
 	}
 	
 	public Grid initGrid(){
-		Grid myGrid = new Grid();
+		Grid myGrid = new Grid(0, 0);
 		return myGrid;
 		//Fill in with information of from XML file
 	}
@@ -26,11 +26,4 @@ public class Setup {
 		Grid grid = initGrid();
 		initSimulation(grid);
 	}
-=======
-	
-	public Setup(String simulation){
-		//creates a specific setup according to the simulation
-	}
-
->>>>>>> master
 }
