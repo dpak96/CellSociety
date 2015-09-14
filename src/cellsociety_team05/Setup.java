@@ -1,10 +1,9 @@
 package cellsociety_team05;
 
 public class Setup {
-<<<<<<< HEAD
 	private Simulation[] myPossibleSimulations =
 		{
-			new SegregationSimulation(new Grid())
+			new SegregationSimulation(this)
 		};
 	
 	public Setup(String file){
@@ -19,18 +18,11 @@ public class Setup {
 	
 	//Need to find a way to change which simulation is being run w/o using too many if statements
 	public void initSimulation(Grid grid){
-		Simulation mySimulation = new SegregationSimulation(grid);
+		Simulation mySimulation = new SegregationSimulation(this);
 	}
 	
 	public void reset(String file){
 		Grid grid = initGrid();
 		initSimulation(grid);
 	}
-=======
-	
-	public Setup(String simulation){
-		//creates a specific setup according to the simulation
-	}
-
->>>>>>> master
 }

@@ -4,8 +4,8 @@ public class SegregationSimulation extends Simulation {
 	private Grid myGrid;
 	private double similar; 
 
-	public SegregationSimulation(Grid grid){
-		super(grid);
+	public SegregationSimulation(Setup setup){
+		super(setup);
 		similar = 0;
 	}
 	
