@@ -1,11 +1,22 @@
 package cellsociety_team05;
 
+<<<<<<< HEAD
 public abstract class Simulation {
 	private Grid myGrid;
 	private int mySpeed; 
 
 	public Simulation(Grid grid){
 		myGrid = grid;
+=======
+public class Simulation {
+	
+	public Simulation(Setup mySetup){
+		//creates new simulation according to the setup
+	}
+	
+	public void start(){
+		//initiates the timeline loop
+>>>>>>> master
 	}
 	
 	public void changeFlow(){
@@ -13,6 +24,7 @@ public abstract class Simulation {
 		//if the timeline is paused, resume it 
 	}
 	
+<<<<<<< HEAD
 	public void updateSpeed(int speed){
 		mySpeed = speed;	
 	}
@@ -37,4 +49,10 @@ public abstract class Simulation {
 	public void showGrid(){
 		myGrid.drawGrid();
 	}
+=======
+	public void nextStep(){
+		
+	}
+
+>>>>>>> master
 }
