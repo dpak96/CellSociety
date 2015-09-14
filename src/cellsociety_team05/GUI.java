@@ -1,14 +1,22 @@
 package cellsociety_team05;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.CustomMenuItem;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -20,21 +28,30 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GUI {
 	
+<<<<<<< HEAD
+	private Stage myStage;	
+=======
 	private Stage myStage;
+>>>>>>> master
 	private BorderPane root;
 	private final String FLOW_BOX = "f";
 	private final String SPEED_BOX = "s";
 	private final int DEFAULT_SPEED = 5;
 	private final String[] simulationTypes = {"Segregation", "Game of Life", "Predator-Prey"};
-	//private boolean simulationRunning = false;
-	
-	//want to get rid of this variable
+	private Setup mySetup;
+	private Simulation mySimulation;
+	private String currentSimulationName;
 	private long simulationSpeed;
+	private boolean paused;
+	private Button nextStepButton;
+	private Button flowButton;
+	private GridPane myGrid;
 	
 	public GUI(Stage primaryStage){
 		
@@ -42,26 +59,40 @@ public class GUI {
 		myStage.setTitle("Cell Society");
 		myStage.setResizable(false);
 		root = new BorderPane();
-		Scene scene = new Scene(root, 640, 480, Color.WHITE);
+		Scene scene = new Scene(root, 553, 640, Color.WHITE);
 		root.setTop(createTopMenu());
 		root.setBottom(createFlowControlBox());
-		root.setCenter(new GridPane());
-		
+		myGrid = new GridPane();
+		root.setCenter(myGrid);
+		createChoiceDialog();
 		myStage.setScene(scene);
 		myStage.show();
 	}
 	
+	private void createChoiceDialog(){
+		ArrayList<String> choices = new ArrayList<>(Arrays.asList(simulationTypes));
+		ChoiceDialog<String> dialog = new ChoiceDialog<>(simulationTypes[0], choices);
+		dialog.setTitle("Cell Society");
+		dialog.setHeaderText("Please choose a simulation");
+		dialog.setContentText("Simulation:");
+		Node endApplication = dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+		endApplication.addEventFilter(ActionEvent.ACTION, event -> System.exit(0));
+		dialog.showAndWait().ifPresent(letter -> loadSimulationValue(letter));
+	}
+
+	private void loadSimulationValue(String letter) {
+		mySetup = new Setup(letter);
+		mySimulation = new Simulation(mySetup);
+	}
+
 	private MenuBar createTopMenu() {
 		MenuBar topMenu = new MenuBar();
 		Menu simulationMenu = new Menu("Simulation");
-		
 		for(String sim: simulationTypes){
 			simulationMenu.getItems().add(new MenuItem(sim));
 		}
-		
 		topMenu.getMenus().add(simulationMenu);
 		topMenu.prefWidthProperty().bind(myStage.widthProperty());
-		
 		return topMenu;
 	}
 	
@@ -98,23 +129,36 @@ public class GUI {
 	
 	private void updateFlowBox(HBox hbox){
 		Button start = new Button("Start");
-		Button stop = new Button("Pause");
-		Button nextStep = new Button("Next step");
+		start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> startSimulation());
+		flowButton = new Button("Pause");
+		flowButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> changeSimulationFlow());
+		nextStepButton = new Button("Next step");
+		nextStepButton.setDisable(true);
+		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {mySimulation.nextStep(); System.out.println("next step");});
 		Button restart = new Button("Restart");
+		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
+		hbox.getChildren().addAll(start, flowButton, nextStepButton, restart);
+	}
+	
+	private void startSimulation() {
+		mySimulation.start();
+		paused = false;
+		System.out.println("Start");
+		testGridPane();
+	}
+	
+	private void restartSimulation(){
 		
-		hbox.getChildren().addAll(start, stop, nextStep);
 	}
 
 	private VBox createFlowControlBox(){
-		
 		VBox vbox = new VBox();
 		vbox.setSpacing(10.0);
 		vbox.getChildren().add(createControlBox(FLOW_BOX));
 		vbox.getChildren().add(createControlBox(SPEED_BOX));
 		vbox.getChildren().add(new HBox());
-		
+		vbox.setPrefHeight(50);
 		return vbox;
-		
 	}
 	
 	private void updateSimulationSpeed(long speed){
@@ -123,10 +167,28 @@ public class GUI {
 		//update the simulation speed
 	}
 	
-
-	public void launchSetup(){
-		
+	
+	/**
+	 * This is a small tester for the GridPane. It shows how we are going to display 
+	 * the cells. In the future I will add an event handler to allow the user to 
+	 * click on a cell and change its color (and thus its state).
+	 */
+	
+	private void testGridPane(){
+		System.out.println(myGrid.getWidth());
+		System.out.println(myGrid.getHeight());
+		double constant = myGrid.getHeight()/2.0 - 5;
+		Rectangle test1 = new Rectangle(constant, constant, Color.RED);
+		GridPane.setConstraints(test1, 0 , 0);
+		Rectangle test2 = new Rectangle(constant, constant, Color.BLACK);
+		GridPane.setConstraints(test2, 0 , 1);
+		Rectangle test3 = new Rectangle(constant, constant, Color.BEIGE);
+		GridPane.setConstraints(test3, 1 , 0);
+		Rectangle test4 = new Rectangle(constant, constant, Color.ALICEBLUE);
+		GridPane.setConstraints(test4, 1 , 1);
+		myGrid.getChildren().addAll(test1, test2, test3, test4);
 	}
+	
 
 	public void displayMainWindow(){
 		
@@ -140,23 +202,18 @@ public class GUI {
 		
 	}
 	
-	/*
-	 * Incorporate these two methods in one (The only thing they actually do is to start/stop the timeline;
-	 * i.e. just change the gameLoop state. The simulation class will deal with it. 
-	 */
-	
 	private void changeSimulationFlow(){
 		//stop or starts the sim according to whatever happens. 
+		mySimulation.changeFlow();
+		paused = !paused;
+		if(paused){
+			System.out.println("Paused");
+			nextStepButton.setDisable(false);
+			flowButton.setText("Resume");
+		} else {
+			System.out.println("Resumed");
+			nextStepButton.setDisable(true);
+			flowButton.setText("Pause");
+		}
 	}
-	/*
-	private void stopSimulation(){
-		simulationRunning = false;
-	}
-	
-	private void startSimulation(){
-		simulationRunning = true;
-		
-	}
-	*/
-
 }
