@@ -1,5 +1,6 @@
 package cellsociety_team05;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,21 @@ import java.util.List;
  *
  */
 public class Grid {
+    
     List<Cell> myCells;
+    
+    public Grid(int width, int height){
+        myCells = new ArrayList<Cell>();
+        for (int i=0;i<width;i++){
+            for (int j=0;j<height;j++){
+                Cell newcell = new Cell(this,j,i,0);
+                myCells.add(newcell);
+            }
+        }
+        for (Cell cell: myCells){
+            cell.initNeighbors();
+        }
+    }
     
     /**
      * Sets the next state of each cell in the grid.

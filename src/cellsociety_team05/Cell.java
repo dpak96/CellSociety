@@ -1,6 +1,8 @@
 package cellsociety_team05;
 
+import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.paint.Color;
 
 /**
  * 
@@ -17,6 +19,7 @@ public class Cell {
     protected Grid myGrid;
     private final String[] myPossibleStates = {"Alive","Dead"};
     //alive = 0, dead = 1 (based on index)
+    private final Color[] myColors = {Color.BLACK, Color.WHITE};
     //Simulation mySimulation;
     
     /**
@@ -35,6 +38,22 @@ public class Cell {
         //mySimulation = simulation;
     }
     
+    public void initNeighbors(){
+        myNeighbors = new ArrayList<Cell>();
+        for(Cell cell: myGrid.myCells){
+            if (cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate-1 ||
+                    cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate ||
+                    cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate+1 ||
+                    cell.myXCoordinate==myXCoordinate && cell.myYCoordinate==myYCoordinate-1 ||
+                    cell.myXCoordinate==myXCoordinate && cell.myYCoordinate==myYCoordinate+1 ||
+                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate-1 ||
+                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate ||
+                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate+1){
+                myNeighbors.add(cell);
+            }
+        }
+    }
+    
     /**
      * Gets this cells neighbors.
      * @return A list of this cell's neighbors
@@ -49,6 +68,10 @@ public class Cell {
      */
     public int getCurrentState(){
         return myCurrentState;
+    }
+    
+    public Color getCurrentColor(){
+        return myColors[myCurrentState];
     }
     
     /**
