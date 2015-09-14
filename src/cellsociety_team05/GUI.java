@@ -34,11 +34,7 @@ import javafx.stage.Stage;
 
 public class GUI {
 	
-<<<<<<< HEAD
-	private Stage myStage;	
-=======
 	private Stage myStage;
->>>>>>> master
 	private BorderPane root;
 	private final String FLOW_BOX = "f";
 	private final String SPEED_BOX = "s";
