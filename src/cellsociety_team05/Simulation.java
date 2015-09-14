@@ -1,9 +1,12 @@
 package cellsociety_team05;
 
-public class Simulation {
-	
-	public Simulation(Setup mySetup){
-		//creates new simulation according to the setup
+public abstract class Simulation {
+	private Grid myGrid;
+	private Setup mySetup;
+	private int mySpeed; 
+
+	public Simulation(Setup setup){
+		mySetup = setup;
 	}
 	
 	public void start(){
@@ -15,9 +18,29 @@ public class Simulation {
 		//if the timeline is paused, resume it 
 	}
 	
-	public void nextStep(){
-		
+	public void updateSpeed(int speed){
+		mySpeed = speed;	
 	}
 
+	//single step of simulation First step would be updateState 
+	//Second step would be updateGrid
+	public void step(){
+		myGrid.updateGrid();
+	}
+	
+	//run steps continuously (take a boolean?)
+	public void run(boolean canRun){
+		while(canRun){
+			step(); 
+		}
+	}
+	
+	//Will be implemented in subclasses
+	public abstract void updateState(Cell cell);
+	
+	//calls drawGrid, displays graphically the Grid
+	public void showGrid(){
+		myGrid.drawGrid();
+	}
 
 }
