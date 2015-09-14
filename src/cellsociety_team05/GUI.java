@@ -33,12 +33,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GUI {
-	
-<<<<<<< HEAD
-	private Stage myStage;	
-=======
+    
 	private Stage myStage;
->>>>>>> master
 	private BorderPane root;
 	private final String FLOW_BOX = "f";
 	private final String SPEED_BOX = "s";
@@ -51,7 +47,8 @@ public class GUI {
 	private boolean paused;
 	private Button nextStepButton;
 	private Button flowButton;
-	private GridPane myGrid;
+	private GridPane myGridPane;
+	private Grid myGrid;
 	
 	public GUI(Stage primaryStage){
 		
@@ -62,8 +59,8 @@ public class GUI {
 		Scene scene = new Scene(root, 553, 640, Color.WHITE);
 		root.setTop(createTopMenu());
 		root.setBottom(createFlowControlBox());
-		myGrid = new GridPane();
-		root.setCenter(myGrid);
+		myGridPane = new GridPane();
+		root.setCenter(myGridPane);
 		createChoiceDialog();
 		myStage.setScene(scene);
 		myStage.show();
@@ -141,10 +138,23 @@ public class GUI {
 	}
 	
 	private void startSimulation() {
+            mySimulation.start();
+            paused = false;
+            System.out.println("Start");
+            testGridPane();
+	}
+	
+	private void anotherStartSimulation() {
 		mySimulation.start();
 		paused = false;
 		System.out.println("Start");
 		testGridPane();
+		myGrid = new Grid(3,3);
+		for (int i=0;i<0;i++){
+		    myGrid.preUpdateGrid();
+		    myGrid.updateGrid();
+		    updateGrid();  
+		}
 	}
 	
 	private void restartSimulation(){
@@ -175,9 +185,9 @@ public class GUI {
 	 */
 	
 	private void testGridPane(){
-		System.out.println(myGrid.getWidth());
-		System.out.println(myGrid.getHeight());
-		double constant = myGrid.getHeight()/2.0 - 5;
+                System.out.println(myGridPane.getWidth());
+                System.out.println(myGridPane.getHeight());
+                double constant = myGridPane.getHeight()/2.0 - 5;
 		Rectangle test1 = new Rectangle(constant, constant, Color.RED);
 		GridPane.setConstraints(test1, 0 , 0);
 		Rectangle test2 = new Rectangle(constant, constant, Color.BLACK);
@@ -186,7 +196,33 @@ public class GUI {
 		GridPane.setConstraints(test3, 1 , 0);
 		Rectangle test4 = new Rectangle(constant, constant, Color.ALICEBLUE);
 		GridPane.setConstraints(test4, 1 , 1);
-		myGrid.getChildren().addAll(test1, test2, test3, test4);
+		myGridPane.getChildren().addAll(test1, test2, test3, test4);
+	}
+	
+	private void anotherTestGridPane(){
+            System.out.println(myGridPane.getWidth());
+            System.out.println(myGridPane.getHeight());
+            double constant = myGridPane.getHeight()/2.0 - 5;
+            for (int i=0;i<3;i++){
+                for (int j=0;j<3;j++){
+                    Rectangle add = new Rectangle(constant, constant, Color.BLACK);
+                    GridPane.setConstraints(add, i, j);
+                    myGridPane.getChildren().add(add);
+                }
+            }
+	}
+	
+	public void updateGrid(){
+	    System.out.println("update");
+	    for (int i=0;i<myGrid.myCells.size();i++){
+	        Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(i);
+	        if(myGrid.myCells.get(i).myCurrentState==0){
+	            thisRec.setFill(Color.BLACK);
+	        }
+	        else{
+	            thisRec.setFill(Color.WHITE);
+	        }
+	    }
 	}
 	
 
