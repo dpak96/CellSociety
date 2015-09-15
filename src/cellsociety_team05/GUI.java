@@ -33,7 +33,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GUI {
-    
+	
+	/**
+	 * @author Emanuele Macchi
+	 */
+	
 	private Stage myStage;
 	private BorderPane root;
 	private final String FLOW_BOX = "f";
@@ -49,6 +53,7 @@ public class GUI {
 	private Button flowButton;
 	private GridPane myGridPane;
 	private Grid myGrid;
+	//private guiButtons myButtons;
 	
 	public GUI(Stage primaryStage){
 		
@@ -79,7 +84,7 @@ public class GUI {
 
 	private void loadSimulationValue(String letter) {
 		mySetup = new Setup(letter);
-		mySimulation = new Simulation(mySetup);
+		//mySimulation = new Simulation(mySetup);
 	}
 
 	private MenuBar createTopMenu() {
@@ -95,6 +100,7 @@ public class GUI {
 	
 	private HBox createControlBox(String function){
 		HBox hbox = new HBox();
+		hbox.setPrefHeight(20);
 		hbox.setSpacing(20.0);
 		if(function.equals(SPEED_BOX)){
 			updateSpeedBox(hbox);
@@ -131,7 +137,8 @@ public class GUI {
 		flowButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> changeSimulationFlow());
 		nextStepButton = new Button("Next step");
 		nextStepButton.setDisable(true);
-		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {step(); System.out.println("next step");});
+		//nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {step(); System.out.println("next step");});
+		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {/*mySimulation.nextStep();*/ System.out.println("next step");});
 		Button restart = new Button("Restart");
 		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
 		hbox.getChildren().addAll(start, flowButton, nextStepButton, restart);
@@ -141,6 +148,7 @@ public class GUI {
             mySimulation.start();
             paused = false;
             System.out.println("Start");
+            mySimulation = new SimulationTester(mySetup, myGridPane);
             testGridPane();
 	}
 	
@@ -241,7 +249,7 @@ public class GUI {
 	
 	private void changeSimulationFlow(){
 		//stop or starts the sim according to whatever happens. 
-		mySimulation.changeFlow();
+		//mySimulation.changeFlow();
 		paused = !paused;
 		if(paused){
 			System.out.println("Paused");
