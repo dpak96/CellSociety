@@ -2,6 +2,8 @@ package cellsociety_team05;
 
 import java.util.List;
 
+import javafx.scene.paint.Color;
+
 /**
  * 
  * @author Lucas Donaldson
@@ -90,4 +92,19 @@ public class Cell {
     public void updateCell(){
         myCurrentState = myNextState;
     }
-}
+ 
+    
+    /**
+     * returns the x coordinate of the cell
+     */
+    public int getX(){
+    	return myXCoordinate;
+    }
+    
+    /**
+     * returns the y coordinate of the cell 
+     */
+    public int getY(){
+    	return myYCoordinate;
+    }
+}	
