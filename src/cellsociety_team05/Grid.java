@@ -16,7 +16,8 @@ public class Grid {
         myCells = new ArrayList<Cell>();
         for (int i=0;i<width;i++){
             for (int j=0;j<height;j++){
-                Cell newcell = new Cell(this,j,i,0);
+                int state = (int) Math.floor(Math.random()*2);
+                Cell newcell = new Cell(this,j,i,state);
                 myCells.add(newcell);
             }
         }

@@ -126,12 +126,12 @@ public class GUI {
 	
 	private void updateFlowBox(HBox hbox){
 		Button start = new Button("Start");
-		start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> startSimulation());
+		start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> anotherStartSimulation());
 		flowButton = new Button("Pause");
 		flowButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> changeSimulationFlow());
 		nextStepButton = new Button("Next step");
 		nextStepButton.setDisable(true);
-		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {mySimulation.nextStep(); System.out.println("next step");});
+		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {step(); System.out.println("next step");});
 		Button restart = new Button("Restart");
 		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
 		hbox.getChildren().addAll(start, flowButton, nextStepButton, restart);
@@ -148,13 +148,14 @@ public class GUI {
 		mySimulation.start();
 		paused = false;
 		System.out.println("Start");
-		testGridPane();
-		myGrid = new Grid(3,3);
-		for (int i=0;i<0;i++){
-		    myGrid.preUpdateGrid();
-		    myGrid.updateGrid();
-		    updateGrid();  
-		}
+		myGrid = new Grid(4,4);
+                anotherTestGridPane();
+	}
+	
+	private void step(){
+	    myGrid.preUpdateGrid();
+	    myGrid.updateGrid();
+	    updateGrid();
 	}
 	
 	private void restartSimulation(){
@@ -202,10 +203,10 @@ public class GUI {
 	private void anotherTestGridPane(){
             System.out.println(myGridPane.getWidth());
             System.out.println(myGridPane.getHeight());
-            double constant = myGridPane.getHeight()/2.0 - 5;
-            for (int i=0;i<3;i++){
-                for (int j=0;j<3;j++){
-                    Rectangle add = new Rectangle(constant, constant, Color.BLACK);
+            double constant = myGridPane.getHeight()/4.0 - 5;
+            for (int i=0;i<4;i++){
+                for (int j=0;j<4;j++){
+                    Rectangle add = new Rectangle(constant, constant, myGrid.myCells.get(i+j).getCurrentColor());
                     GridPane.setConstraints(add, i, j);
                     myGridPane.getChildren().add(add);
                 }
