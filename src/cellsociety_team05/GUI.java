@@ -34,6 +34,10 @@ import javafx.stage.Stage;
 
 public class GUI {
 	
+	/**
+	 * @author Emanuele Macchi
+	 */
+	
 	private Stage myStage;
 	private BorderPane root;
 	private final String FLOW_BOX = "f";
@@ -47,7 +51,8 @@ public class GUI {
 	private boolean paused;
 	private Button nextStepButton;
 	private Button flowButton;
-	private GridPane myGrid;
+	private GridPane myGridPane;
+	//private guiButtons myButtons;
 	
 	public GUI(Stage primaryStage){
 		
@@ -58,8 +63,8 @@ public class GUI {
 		Scene scene = new Scene(root, 553, 640, Color.WHITE);
 		root.setTop(createTopMenu());
 		root.setBottom(createFlowControlBox());
-		myGrid = new GridPane();
-		root.setCenter(myGrid);
+		myGridPane = new GridPane();
+		root.setCenter(myGridPane);
 		createChoiceDialog();
 		myStage.setScene(scene);
 		myStage.show();
@@ -78,7 +83,7 @@ public class GUI {
 
 	private void loadSimulationValue(String letter) {
 		mySetup = new Setup(letter);
-		mySimulation = new Simulation(mySetup);
+		//mySimulation = new Simulation(mySetup);
 	}
 
 	private MenuBar createTopMenu() {
@@ -94,6 +99,7 @@ public class GUI {
 	
 	private HBox createControlBox(String function){
 		HBox hbox = new HBox();
+		hbox.setPrefHeight(20);
 		hbox.setSpacing(20.0);
 		if(function.equals(SPEED_BOX)){
 			updateSpeedBox(hbox);
@@ -130,17 +136,17 @@ public class GUI {
 		flowButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> changeSimulationFlow());
 		nextStepButton = new Button("Next step");
 		nextStepButton.setDisable(true);
-		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {mySimulation.nextStep(); System.out.println("next step");});
+		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {/*mySimulation.nextStep();*/ System.out.println("next step");});
 		Button restart = new Button("Restart");
 		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
 		hbox.getChildren().addAll(start, flowButton, nextStepButton, restart);
 	}
 	
 	private void startSimulation() {
-		mySimulation.start();
+		//mySimulation.start();
 		paused = false;
 		System.out.println("Start");
-		testGridPane();
+		mySimulation = new SimulationTester(mySetup, myGridPane);
 	}
 	
 	private void restartSimulation(){
@@ -163,28 +169,6 @@ public class GUI {
 		//update the simulation speed
 	}
 	
-	
-	/**
-	 * This is a small tester for the GridPane. It shows how we are going to display 
-	 * the cells. In the future I will add an event handler to allow the user to 
-	 * click on a cell and change its color (and thus its state).
-	 */
-	
-	private void testGridPane(){
-		System.out.println(myGrid.getWidth());
-		System.out.println(myGrid.getHeight());
-		double constant = myGrid.getHeight()/2.0 - 5;
-		Rectangle test1 = new Rectangle(constant, constant, Color.RED);
-		GridPane.setConstraints(test1, 0 , 0);
-		Rectangle test2 = new Rectangle(constant, constant, Color.BLACK);
-		GridPane.setConstraints(test2, 0 , 1);
-		Rectangle test3 = new Rectangle(constant, constant, Color.BEIGE);
-		GridPane.setConstraints(test3, 1 , 0);
-		Rectangle test4 = new Rectangle(constant, constant, Color.ALICEBLUE);
-		GridPane.setConstraints(test4, 1 , 1);
-		myGrid.getChildren().addAll(test1, test2, test3, test4);
-	}
-	
 
 	public void displayMainWindow(){
 		
@@ -200,7 +184,7 @@ public class GUI {
 	
 	private void changeSimulationFlow(){
 		//stop or starts the sim according to whatever happens. 
-		mySimulation.changeFlow();
+		//mySimulation.changeFlow();
 		paused = !paused;
 		if(paused){
 			System.out.println("Paused");

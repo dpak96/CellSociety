@@ -1,13 +1,17 @@
 package cellsociety_team05;
+import javafx.scene.layout.GridPane;
 
 public abstract class Simulation {
-	private Grid myGrid;
+	//changed it to protected so i could extend it 
+	protected Grid myGrid;
 	private Setup mySetup;
 	private int mySpeed; 
 
-	public Simulation(Setup setup){
+	public Simulation(Setup setup, GridPane gridPane){
 		mySetup = setup;
+		myGrid = new Grid(gridPane);
 	}
+
 	
 	public void start(){
 		//initiates the timeline loop
@@ -40,7 +44,7 @@ public abstract class Simulation {
 	
 	//calls drawGrid, displays graphically the Grid
 	public void showGrid(){
-		myGrid.drawGrid();
+		myGrid.drawSquareGrid();
 	}
 
 }
