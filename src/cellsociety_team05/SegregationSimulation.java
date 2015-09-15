@@ -5,7 +5,7 @@ public class SegregationSimulation extends Simulation {
 	private double similar; 
 
 	public SegregationSimulation(Setup setup){
-		super(setup);
+		super(setup, null);
 		similar = 0;
 	}
 	
