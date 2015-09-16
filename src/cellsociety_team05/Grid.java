@@ -23,14 +23,15 @@ public class Grid {
      * @author Emanuele
      */
     public Grid(GridPane gridPane){
-    	myGridPane = gridPane;
+        myGridPane = gridPane;
     }
     
     public Grid(int width, int height){
         myCells = new ArrayList<Cell>();
         for (int i=0;i<width;i++){
             for (int j=0;j<height;j++){
-                Cell newcell = new Cell(this,j,i,0);
+                int state = (int) Math.floor(Math.random()*2);
+                Cell newcell = new Cell(this,j,i,state);
                 myCells.add(newcell);
             }
         }
@@ -75,14 +76,14 @@ public class Grid {
     
     public void drawSquareGrid(){
         //need communication with GUI
-    	double squareSide = myGridPane.getHeight() / Math.sqrt(mySegregationCells.size());
-    	ArrayList<Rectangle> newSquares = new ArrayList<Rectangle>();
-    	for(SegregationCell cell: mySegregationCells){
-    		Rectangle square = new Rectangle(squareSide, squareSide, cell.getColor());
-    		GridPane.setConstraints(square, cell.getX(), cell.getY());
-    		newSquares.add(square);
-    	}
-    	myGridPane.getChildren().addAll(newSquares);
+        double squareSide = myGridPane.getHeight() / Math.sqrt(mySegregationCells.size());
+        ArrayList<Rectangle> newSquares = new ArrayList<Rectangle>();
+        for(SegregationCell cell: mySegregationCells){
+                Rectangle square = new Rectangle(squareSide, squareSide, cell.getColor());
+                GridPane.setConstraints(square, cell.getX(), cell.getY());
+                newSquares.add(square);
+        }
+        myGridPane.getChildren().addAll(newSquares);
     }
     
     /**
@@ -90,12 +91,12 @@ public class Grid {
      * @author Emanuele
      */
     public void drawGridTester(){
-    	SegregationCell[] cellList = {new SegregationCell(this, 0, 0, 0, 1.0),new SegregationCell(this, 0, 1, 1, 1.0),new SegregationCell(this, 0, 2, 0, 1.0),
-    			new SegregationCell(this, 1, 0, 1, 1.0), new SegregationCell(this, 1, 1, 0, 1.0), new SegregationCell(this, 1, 2, 1, 1.0),
-    			new SegregationCell(this, 2, 0, 0, 1.0), new SegregationCell(this, 2, 1, 1, 1.0), new SegregationCell(this, 2, 2, 0, 1.0)};
-    	for(SegregationCell c: cellList){
-    		mySegregationCells.add(c);
-    	}
+        SegregationCell[] cellList = {new SegregationCell(this, 0, 0, 0, 1.0),new SegregationCell(this, 0, 1, 1, 1.0),new SegregationCell(this, 0, 2, 0, 1.0),
+                        new SegregationCell(this, 1, 0, 1, 1.0), new SegregationCell(this, 1, 1, 0, 1.0), new SegregationCell(this, 1, 2, 1, 1.0),
+                        new SegregationCell(this, 2, 0, 0, 1.0), new SegregationCell(this, 2, 1, 1, 1.0), new SegregationCell(this, 2, 2, 0, 1.0)};
+        for(SegregationCell c: cellList){
+                mySegregationCells.add(c);
+        }
     }
     
 
