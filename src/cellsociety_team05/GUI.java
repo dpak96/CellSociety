@@ -133,34 +133,43 @@ public class GUI {
 	private void updateFlowBox(HBox hbox){
 		Button start = new Button("Start");
 		start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> anotherStartSimulation());
+		//start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> startSimulation());
 		flowButton = new Button("Pause");
 		flowButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> changeSimulationFlow());
 		nextStepButton = new Button("Next step");
 		nextStepButton.setDisable(true);
-		//nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {step(); System.out.println("next step");});
-		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {/*mySimulation.nextStep();*/ System.out.println("next step");});
+		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {step(); System.out.println("next step");});
+		//nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {/*mySimulation.nextStep();*/ System.out.println("next step");});
 		Button restart = new Button("Restart");
 		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
 		hbox.getChildren().addAll(start, flowButton, nextStepButton, restart);
 	}
 	
 	private void startSimulation() {
-            mySimulation.start();
+            //mySimulation.start();
             paused = false;
             System.out.println("Start");
             mySimulation = new SimulationTester(mySetup, myGridPane);
-            testGridPane();
+            testGridPane();   
 	}
 	
 	private void anotherStartSimulation() {
-		mySimulation.start();
+		//mySimulation.start();
 		paused = false;
 		System.out.println("Start");
 		myGrid = new Grid(4,4);
                 anotherTestGridPane();
+                for(int i=0;i<5;i++){
+                    step();
+                    long start = System.currentTimeMillis();
+                    while(System.currentTimeMillis()-start<1000){
+                        
+                    }
+                }
 	}
 	
 	private void step(){
+	    System.out.println("step");
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	    updateGrid();
