@@ -3,7 +3,8 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
-
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -31,6 +32,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class GUI {
 	
@@ -83,8 +85,8 @@ public class GUI {
 	}
 
 	private void loadSimulationValue(String letter) {
-		mySetup = new Setup(letter);
-		//mySimulation = new Simulation(mySetup);
+		//mySetup = new Setup(letter);
+		//mySimulation = new SegregationSimulation(mySetup);
 	}
 
 	private MenuBar createTopMenu() {
@@ -149,18 +151,24 @@ public class GUI {
             //mySimulation.start();
             paused = false;
             System.out.println("Start");
-            mySimulation = new SimulationTester(mySetup, myGridPane);
+            //mySimulation = new SimulationTester(mySetup, myGridPane);
             testGridPane();   
 	}
 	
 	private void anotherStartSimulation() {
-		//mySimulation.start();
 		paused = false;
 		System.out.println("Start");
 		myGrid = new Grid(4,4);
                 anotherTestGridPane();
+                mySimulation = new SegregationSimulation(new Setup(""),myGridPane,this,.5);
+                Timeline animation = new Timeline();
+                KeyFrame frame = new KeyFrame(Duration.millis(1000),
+                                              e -> this.step());
+                              animation.setCycleCount(Timeline.INDEFINITE);
+                              animation.getKeyFrames().add(frame);
+                              animation.play();
                 /*for(int i=0;i<5;i++){
-                    step();
+                    mySimulation.step();
                     long start = System.currentTimeMillis();
                     while(System.currentTimeMillis()-start<1000){
                         

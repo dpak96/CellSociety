@@ -12,14 +12,16 @@ public abstract class Simulation {
 	private Setup mySetup;
 	private int mySpeed; 
 	private GridPane myGridPane;
+	private GUI myGUI;
 	public static final int FRAMES_PER_SECOND = 60;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	private Timeline animation;
 
-	public Simulation(Setup setup, GridPane gridPane){
+	public Simulation(Setup setup, GridPane gridPane, GUI gui){
 		mySetup = setup;
-		myGrid = new Grid(gridPane);
+		myGrid = new Grid(4,4);
 		animation = new Timeline();
+		myGUI = gui;
 	}
 
 	public void start(){	     
@@ -30,7 +32,6 @@ public abstract class Simulation {
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
-
 	}
 
 
@@ -48,7 +49,9 @@ public abstract class Simulation {
 	//single step of simulation First step would be updateState 
 	//Second step would be updateGrid
 	public void step(){
+	        myGrid.preUpdateGrid();
 		myGrid.updateGrid();
+		myGUI.updateGrid();
 	}
 
 	//run steps continuously (take a boolean?)

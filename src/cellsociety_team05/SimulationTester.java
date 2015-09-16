@@ -1,4 +1,4 @@
-package cellsociety_team05;
+/*package cellsociety_team05;
 
 import javafx.scene.layout.GridPane;
 
@@ -17,3 +17,4 @@ public class SimulationTester extends Simulation{
 	}
 
 }
+*/
