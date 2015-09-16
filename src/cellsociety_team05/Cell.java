@@ -42,16 +42,13 @@ public class Cell {
     
     public void initNeighbors(){
         myNeighbors = new ArrayList<Cell>();
-        for(Cell cell: myGrid.myCells){
-            if (cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate-1 ||
-                    cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate ||
-                    cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate+1 ||
-                    cell.myXCoordinate==myXCoordinate && cell.myYCoordinate==myYCoordinate-1 ||
-                    cell.myXCoordinate==myXCoordinate && cell.myYCoordinate==myYCoordinate+1 ||
-                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate-1 ||
-                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate ||
-                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate+1){
-                myNeighbors.add(cell);
+        int[] x = {0,0,1,1,1,-1,-1,-1};
+        int[] y = {1,-1,0,1,-1,0,1,-1};
+        for (int i=0;i<x.length;i++){
+            int xCoordinate = myXCoordinate+x[i];
+            int yCoordinate = myYCoordinate+y[i];
+            if(xCoordinate>=0 && yCoordinate>=0 && xCoordinate<myGrid.getGrid().size() && yCoordinate<myGrid.getGrid().get(0).size()){
+                myNeighbors.add(myGrid.getGrid().get(xCoordinate).get(yCoordinate));
             }
         }
     }
@@ -107,6 +104,9 @@ public class Cell {
                 myNextState=0;
             }
         }
+        System.out.println("my current state: "+myCurrentState);
+        System.out.println("my live neighbors: "+liveNeighbors);
+        System.out.println("my next state: "+myNextState);
     }
     
     /**

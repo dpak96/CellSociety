@@ -14,7 +14,7 @@ import javafx.scene.shape.Rectangle;
  */
 public class Grid {
     
-    List<Cell> myCells;
+    private List<ArrayList<Cell>> myCells;
     ArrayList<SegregationCell> mySegregationCells = new ArrayList<SegregationCell>();
     GridPane myGridPane;
     
@@ -27,16 +27,19 @@ public class Grid {
     }
     
     public Grid(int width, int height){
-        myCells = new ArrayList<Cell>();
+        myCells = new ArrayList<ArrayList<Cell>>();
         for (int i=0;i<width;i++){
+            myCells.add(new ArrayList<Cell>());
             for (int j=0;j<height;j++){
                 int state = (int) Math.floor(Math.random()*2);
                 Cell newcell = new Cell(this,j,i,state);
-                myCells.add(newcell);
+                myCells.get(i).add(newcell);
             }
         }
-        for (Cell cell: myCells){
-            cell.initNeighbors();
+        for (ArrayList<Cell> list: myCells){
+            for (Cell cell: list){
+                cell.initNeighbors();
+            }
         }
     }
     
@@ -44,8 +47,10 @@ public class Grid {
      * Sets the next state of each cell in the grid.
      */
     public void preUpdateGrid(){
-        for(Cell currentCell: myCells){
-            currentCell.preUpdateCell();
+        for (ArrayList<Cell> list: myCells){
+            for (Cell cell: list){
+                cell.preUpdateCell();
+            }
         }
     }
     
@@ -53,8 +58,10 @@ public class Grid {
      * Switches the state of each cell in the grid to it's next state.
      */
     public void updateGrid(){
-        for(Cell currentCell: myCells){
-            currentCell.updateCell();
+        for (ArrayList<Cell> list: myCells){
+            for (Cell cell: list){
+                cell.updateCell();
+            }
         }
     }
     
@@ -62,7 +69,7 @@ public class Grid {
      * 
      * @return A list of the cells in the grid.
      */
-    public List<Cell> getGrid(){
+    public List<ArrayList<Cell>> getGrid(){
         return myCells;
     }
 

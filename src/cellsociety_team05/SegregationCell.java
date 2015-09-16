@@ -35,9 +35,11 @@ public class SegregationCell extends Cell {
         }
         else {
             List<Cell> empties = new ArrayList<Cell>();
-            for (Cell cell: myGrid.getGrid()) {
-                if (cell.myCurrentState==2){
-                    empties.add(cell);
+            for (ArrayList<Cell> list: myGrid.getGrid()){
+                for (Cell cell: list){
+                    if (cell.myCurrentState==2){
+                        empties.add(cell);
+                    }
                 }
             }
             int randomIndex = (int) Math.floor(Math.random()*empties.size());
