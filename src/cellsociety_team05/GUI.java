@@ -169,6 +169,7 @@ public class GUI {
 	}
 	
 	private void step(){
+	    System.out.println("step");
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	    updateGrid();
@@ -222,7 +223,7 @@ public class GUI {
             double constant = myGridPane.getHeight()/4.0 - 5;
             for (int i=0;i<4;i++){
                 for (int j=0;j<4;j++){
-                    Rectangle add = new Rectangle(constant, constant, myGrid.getGrid().get(i).get(j).getCurrentColor());
+                    Rectangle add = new Rectangle(constant, constant, myGrid.myCells.get((i*4)+j).getCurrentColor());
                     GridPane.setConstraints(add, i, j);
                     myGridPane.getChildren().add(add);
                 }
@@ -230,15 +231,14 @@ public class GUI {
 	}
 	
 	public void updateGrid(){
-	    for (int i=0;i<myGrid.getGrid().size();i++){
-	        for (int j=0;j<myGrid.getGrid().get(i).size();j++){
-	            Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(i+j);
-	            if(myGrid.getGrid().get(i).get(j).myCurrentState==0){
-	                thisRec.setFill(Color.BLACK);
-	            }
-	            else{
-	                thisRec.setFill(Color.WHITE);
-	            }
+	    System.out.println("update");
+	    for (int i=0;i<myGrid.myCells.size();i++){
+	        Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(i);
+	        if(myGrid.myCells.get(i).myCurrentState==0){
+	            thisRec.setFill(Color.BLACK);
+	        }
+	        else{
+	            thisRec.setFill(Color.WHITE);
 	        }
 	    }
 	}

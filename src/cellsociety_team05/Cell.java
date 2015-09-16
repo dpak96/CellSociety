@@ -42,13 +42,16 @@ public class Cell {
     
     public void initNeighbors(){
         myNeighbors = new ArrayList<Cell>();
-        int[] x = {0,0,1,1,1,-1,-1,-1};
-        int[] y = {1,-1,0,1,-1,0,1,-1};
-        for (int i=0;i<x.length;i++){
-            int xCoordinate = myXCoordinate+x[i];
-            int yCoordinate = myYCoordinate+y[i];
-            if(xCoordinate>=0 && yCoordinate>=0 && xCoordinate<myGrid.getGrid().size() && yCoordinate<myGrid.getGrid().get(0).size()){
-                myNeighbors.add(myGrid.getGrid().get(xCoordinate).get(yCoordinate));
+        for(Cell cell: myGrid.getGrid()){
+            if (cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate-1 ||
+                    cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate ||
+                    cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate+1 ||
+                    cell.myXCoordinate==myXCoordinate && cell.myYCoordinate==myYCoordinate-1 ||
+                    cell.myXCoordinate==myXCoordinate && cell.myYCoordinate==myYCoordinate+1 ||
+                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate-1 ||
+                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate ||
+                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate+1){
+                myNeighbors.add(cell);
             }
         }
     }
@@ -121,13 +124,13 @@ public class Cell {
      * returns the x coordinate of the cell
      */
     public int getX(){
-    	return myXCoordinate;
+        return myXCoordinate;
     }
     
     /**
      * returns the y coordinate of the cell 
      */
     public int getY(){
-    	return myYCoordinate;
+        return myYCoordinate;
     }
-}	
+}       
