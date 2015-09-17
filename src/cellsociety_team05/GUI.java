@@ -2,6 +2,7 @@ package cellsociety_team05;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -236,7 +237,7 @@ public class GUI {
             double constant = myGridPane.getHeight()/4.0 - 5;
             for (int i=0;i<4;i++){
                 for (int j=0;j<4;j++){
-                    Rectangle add = new Rectangle(constant, constant, myGrid.myCells.get((i*4)+j).getCurrentColor());
+                    Rectangle add = new Rectangle(constant, constant, myGrid.getGrid().get(i).get(j).getCurrentColor());
                     GridPane.setConstraints(add, i, j);
                     myGridPane.getChildren().add(add);
                 }
@@ -245,13 +246,18 @@ public class GUI {
 	
 	public void updateGrid(){
 	    System.out.println("update");
-	    for (int i=0;i<myGrid.myCells.size();i++){
-	        Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(i);
-	        if(myGrid.myCells.get(i).myCurrentState==0){
-	            thisRec.setFill(Color.BLACK);
-	        }
-	        else{
-	            thisRec.setFill(Color.WHITE);
+	    for (int i=0;i<myGrid.getGrid().size();i++){
+	        List<Cell> list = myGrid.getGrid().get(i);
+	        for (int j=0;j<list.size();j++){
+	            Rectangle thisRec = (Rectangle) myGridPane.getChildren().get((j*4)+i);
+	            //System.out.println("GridPane: ("+i+","+j+")");
+	            //System.out.println("Cell: ("+list.get(j).getX()+","+list.get(j).getY()+")");
+	            if(list.get(j).myCurrentState==0){
+	                thisRec.setFill(Color.BLACK);
+	            }
+	            else{
+	                thisRec.setFill(Color.WHITE);
+	            }
 	        }
 	    }
 	}

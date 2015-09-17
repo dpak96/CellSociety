@@ -76,7 +76,7 @@ public class XMLReader {
 					int x = Integer.valueOf(eElement.getElementsByTagName("xcord").item(0).getTextContent());
 					int y = Integer.valueOf(eElement.getElementsByTagName("ycord").item(0).getTextContent());
 					int state = Integer.valueOf(eElement.getElementsByTagName("state").item(0).getTextContent());
-					cells.add(new Cell(myGrid, x,y,state));
+					//cells.add(new Cell(myGrid, x,y,state));
 
 				}
 			}

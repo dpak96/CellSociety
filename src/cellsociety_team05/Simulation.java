@@ -27,8 +27,7 @@ public abstract class Simulation {
 		myGUI = gui;
 	}
 
-	public void start(){	     
-
+	public void start(){
 		// sets the game's loop
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> this.step());
@@ -36,7 +35,6 @@ public abstract class Simulation {
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
-
 
 	public void changeFlow(){
 		if(animation.getStatus().equals(Animation.Status.RUNNING)){

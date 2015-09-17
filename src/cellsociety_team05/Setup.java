@@ -11,8 +11,8 @@ public class Setup {
 		};
 	
 	public Setup(String file){
-		XMLReader xml = new XMLReader(file);
-		parameters = xml.getParams();
+		//XMLReader xml = new XMLReader(file);
+		//parameters = xml.getParams();
 	}
 	
 	public Grid initGrid(XMLReader xml){
@@ -27,7 +27,7 @@ public class Setup {
 	}
 	
 	public void reset(String file){
-		Grid grid = initGrid();
-		initSimulation(grid);
+		//Grid grid = initGrid();
+		//initSimulation(grid);
 	}
 }
