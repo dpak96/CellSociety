@@ -23,8 +23,8 @@ public class FlowControlBox extends HorizontalControlBoxes{
 		myHBox.setAlignment(Pos.CENTER);
 		StartButton s = new StartButton(myGui);
 		PauseButton p = new PauseButton(myGui);
-		RestartButton r = new RestartButton(myGui);
 		NextStepButton n = new NextStepButton(gui);
+		RestartButton r = new RestartButton(myGui);
 		myHBox.getChildren().add(s.getButton());
 		myHBox.getChildren().add(p.getButton());
 		myHBox.getChildren().add(n.getButton());
