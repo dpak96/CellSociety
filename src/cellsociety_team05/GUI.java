@@ -90,9 +90,9 @@ public class GUI {
 	private void anotherStartSimulation() {
 	    //startButton.setDisable(true);
 		System.out.println("Start");
-		myGrid = new Grid(4,4);
+		myGrid = new Grid(10,10);
                 anotherTestGridPane();
-                mySimulation = new SegregationSimulation(new Setup(""),myGridPane,this,.5);
+                //mySimulation = new SegregationSimulation(new Setup(""),myGridPane,this,.5,.7,.1,myGrid);
                 animation = new Timeline();
                 KeyFrame frame = new KeyFrame(Duration.millis(1000),
                                               e -> this.step());
