@@ -14,7 +14,6 @@ public class SegregationCell extends Cell {
     private final String[] myPossibleStates = {"X/Blue", "O/Red", "Empty"};
     private double mySatisfactionPercent;
     private Grid myGrid;
-    private final Color[] myPossibleColors = {Color.BLUE, Color.RED, Color.WHITE};
     
     public SegregationCell (int xCoordinate, int yCoordinate, 
                             int startingState,
@@ -22,8 +21,9 @@ public class SegregationCell extends Cell {
         super(xCoordinate, yCoordinate, startingState);
         mySatisfactionPercent = satisfaction;
         myGrid = grid;
+        myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
     }
-      
+    
     @Override
     public void preUpdateCell() {
         int sameNeighbors = 0;
@@ -56,6 +56,6 @@ public class SegregationCell extends Cell {
      * @Emanuele
      */
     public Color getColor(){
-    	return myPossibleColors[myCurrentState];
+    	return myColors[myCurrentState];
     }
 }
