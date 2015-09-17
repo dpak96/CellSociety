@@ -31,6 +31,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import toolsForGui.GuiBoxContainer;
 
 public class GUI {
 	
@@ -53,6 +54,7 @@ public class GUI {
 	private Button flowButton;
 	private GridPane myGridPane;
 	//private guiButtons myButtons;
+	private GuiBoxContainer myBoxContainer;
 	
 	public GUI(Stage primaryStage){
 		
@@ -62,7 +64,11 @@ public class GUI {
 		root = new BorderPane();
 		Scene scene = new Scene(root, 553, 640, Color.WHITE);
 		root.setTop(createTopMenu());
+		/*
 		root.setBottom(createFlowControlBox());
+		*/
+		myBoxContainer = new GuiBoxContainer(this, myStage);
+		root.setBottom(myBoxContainer.getVBox());
 		myGridPane = new GridPane();
 		root.setCenter(myGridPane);
 		createChoiceDialog();
@@ -130,19 +136,26 @@ public class GUI {
 	}
 	
 	private void updateFlowBox(HBox hbox){
+		/*
 		Button start = new Button("Start");
 		start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> startSimulation());
 		flowButton = new Button("Pause");
 		flowButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> changeSimulationFlow());
 		nextStepButton = new Button("Next step");
 		nextStepButton.setDisable(true);
-		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {/*mySimulation.nextStep();*/ System.out.println("next step");});
+		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {System.out.println("next step");});
 		Button restart = new Button("Restart");
 		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
+		*/
+		Button start = new Button("Start");
+		flowButton = new Button("Pause");
+		nextStepButton = new Button("Next step");
+		Button restart = new Button("Restart");
 		hbox.getChildren().addAll(start, flowButton, nextStepButton, restart);
+
 	}
 	
-	private void startSimulation() {
+	public void startSimulation() {
 		//mySimulation.start();
 		paused = false;
 		System.out.println("Start");
@@ -182,7 +195,11 @@ public class GUI {
 		
 	}
 	
-	private void changeSimulationFlow(){
+	public Simulation getCurrentSimulation(){
+		return mySimulation;
+	}
+	
+	public void changeSimulationFlow(){
 		//stop or starts the sim according to whatever happens. 
 		//mySimulation.changeFlow();
 		paused = !paused;
@@ -195,5 +212,10 @@ public class GUI {
 			nextStepButton.setDisable(true);
 			flowButton.setText("Pause");
 		}
+	}
+
+	public Object nextStep() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
