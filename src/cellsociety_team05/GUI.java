@@ -2,38 +2,26 @@ package cellsociety_team05;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.CustomMenuItem;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import toolsForGui.GuiBoxContainer;
 import javafx.util.Duration;
+import toolsForGui.GuiBoxContainer;
+import javafx.animation.Animation;
 
 public class GUI {
 	
@@ -43,18 +31,10 @@ public class GUI {
 	
 	private Stage myStage;
 	private BorderPane root;
-	private final String FLOW_BOX = "f";
-	private final String SPEED_BOX = "s";
-	private final int DEFAULT_SPEED = 5;
 	private final String[] simulationTypes = {"Segregation", "Game of Life", "Predator-Prey"};
-	private Setup mySetup;
 	private Simulation mySimulation;
-	private String currentSimulationName;
 	private long simulationSpeed;
-	private boolean paused;
-	private Button nextStepButton;
-	private Button flowButton;
-	private Button startButton;
+	//private Button startButton;
 	private GridPane myGridPane;
 	private Grid myGrid;
 	private Timeline animation;
@@ -108,7 +88,6 @@ public class GUI {
 	
 	private void anotherStartSimulation() {
 	    //startButton.setDisable(true);
-		paused = false;
 		System.out.println("Start");
 		myGrid = new Grid(4,4);
                 anotherTestGridPane();
@@ -133,9 +112,10 @@ public class GUI {
 		anotherStartSimulation();
 	}
 	
-	private void restartSimulation(){
-	        animation.stop();
-	        myGridPane.getChildren().clear();
+	public void restartSimulation(){
+		System.out.println("RESTART");
+	    animation.stop();
+	    myGridPane.getChildren().clear();
 		anotherStartSimulation();
 	}
 	
@@ -167,7 +147,7 @@ public class GUI {
 	}
 	
 	public void updateDisplayedGrid(){
-	    System.out.println("update");
+	    //System.out.println("update");
 	    for (int i=0;i<myGrid.myCells.size();i++){
 	        Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(i);
 	        if(myGrid.myCells.get(i).myCurrentState==0){
@@ -184,19 +164,10 @@ public class GUI {
 	}
 	
 	public void changeSimulationFlow(){
-		//stop or starts the sim according to whatever happens. 
-		//mySimulation.changeFlow();
-		paused = !paused;
-		if(paused){
-		        animation.pause();
-			System.out.println("Paused");
-			nextStepButton.setDisable(false);
-			flowButton.setText("Resume");
+		if(animation.getStatus() == Animation.Status.RUNNING){
+			animation.pause();
 		} else {
-		        animation.play();
-			System.out.println("Resumed");
-			nextStepButton.setDisable(true);
-			flowButton.setText("Pause");
+			animation.play();
 		}
 	}
 	
