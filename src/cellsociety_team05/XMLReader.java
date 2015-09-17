@@ -29,6 +29,7 @@ public class XMLReader {
 	public XMLReader(String file){
 		fileName = file;
 		cells = new ArrayList<Cell>();
+		//myGrid = grid;
 	}
 
 	public void readFile(){

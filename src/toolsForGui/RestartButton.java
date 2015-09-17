@@ -10,7 +10,7 @@ public class RestartButton extends GuiButton{
 	public RestartButton(GUI gui) {
 		super(gui);
 		// TODO Auto-generated constructor stub
-		myButton = new Button("Restart Button");
+		myButton = new Button("Restart");
 	}
 
 	@Override

@@ -18,7 +18,11 @@ public class StartButton extends GuiButton{
 
 	@Override
 	protected void implementAction() {
-		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> myGui.startSimulation());
+		if(myGui != null){
+			System.out.println("HO");
+		}
+		
+		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> myGui.startSimulation());
 	}
 
 	@Override
