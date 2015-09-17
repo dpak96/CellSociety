@@ -11,7 +11,7 @@ import javafx.util.Duration;
 public abstract class Simulation {
 	//changed it to protected so i could extend it 
 	protected Grid myGrid;
-	private int mySpeed; 
+	protected int mySpeed; 
 	private GridPane myGridPane;
 	private GUI myGUI;
 	public static final int FRAMES_PER_SECOND = 60;

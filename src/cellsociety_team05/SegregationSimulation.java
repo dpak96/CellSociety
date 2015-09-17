@@ -34,7 +34,7 @@ public class SegregationSimulation extends Simulation {
 	public void initGrid(Grid grid){
 	    int num = grid.getGrid().size();
 	    ArrayList<Integer> list = new ArrayList<Integer>();
-	    num-= (int) Math.floor(((double)num)*empty);
+	    num -= (int) Math.floor(((double)num)*empty);
 	    int num1 = (int) Math.floor(((double)num)*ratio);
 	    int num2 = num - num1;
 	    for (int i=0;i<empty;i++){
