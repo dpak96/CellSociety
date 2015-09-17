@@ -14,12 +14,14 @@ public class SegregationCell extends Cell {
     private final String[] myPossibleStates = {"X/Blue", "O/Red", "Empty"};
     private double mySatisfactionPercent;
     private final Color[] myPossibleColors = {Color.BLUE, Color.RED};
+    private Grid myGrid;
     
-    public SegregationCell (/*Grid grid, */int xCoordinate, int yCoordinate, 
-                            int startingState/*, Simulation simulation*/,
-                            double satisfaction) {
-        super(/*grid, */xCoordinate, yCoordinate, startingState/*, simulation*/);
+    public SegregationCell (int xCoordinate, int yCoordinate, 
+                            int startingState,
+                            double satisfaction,Grid grid) {
+        super(xCoordinate, yCoordinate, startingState);
         mySatisfactionPercent = satisfaction;
+        myGrid = grid;
     }
       
     @Override

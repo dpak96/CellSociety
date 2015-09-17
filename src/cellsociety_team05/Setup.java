@@ -11,7 +11,7 @@ public class Setup {
 	public Setup(String file){
 		XMLReader xml = new XMLReader(file);
 		parameters = xml.getParams();
-		myPossibleSimulations.set("segregation", new SegregationSimulation());
+		//myPossibleSimulations.set("segregation", new SegregationSimulation());
 
 	}
 	
@@ -24,7 +24,7 @@ public class Setup {
 	
 	//Need to find a way to change which simulation is being run w/o using too many if statements
 	public void initSimulation(Grid grid){
-		Simulation mySimulation = new SegregationSimulation(this);
+		//Simulation mySimulation = new SegregationSimulation(this);
 	}
 	
 	public void reset(String file){

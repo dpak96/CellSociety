@@ -2,7 +2,9 @@ package cellsociety_team05;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -90,9 +92,16 @@ public class GUI {
 	private void anotherStartSimulation() {
 	    //startButton.setDisable(true);
 		System.out.println("Start");
-		myGrid = new Grid(10,10);
+		myGrid = new Grid(4,4);
                 anotherTestGridPane();
-                //mySimulation = new SegregationSimulation(new Setup(""),myGridPane,this,.5,.7,.1,myGrid);
+                HashMap<String, Double> map = new HashMap<String, Double>();
+                map.put("similar", 0.3);
+                map.put("ratio", 0.5);
+                map.put("empty", 0.1);
+                mySimulation = new SegregationSimulation(myGridPane,this,map);
+                //mySimulation.setCellType(myGrid);
+                //myGrid.printType();
+                mySimulation.initGrid(myGrid);
                 animation = new Timeline();
                 KeyFrame frame = new KeyFrame(Duration.millis(1000),
                                               e -> this.step());

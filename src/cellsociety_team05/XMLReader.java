@@ -84,7 +84,7 @@ public class XMLReader {
 					int y = Integer.valueOf(eElement.getElementsByTagName("ycord").item(0).getTextContent());
 					int state = Integer.valueOf(eElement.getElementsByTagName("state").item(0).getTextContent());
 					//cells.add(new Cell(myGrid, x,y,state));
-					cells.add(new Cell(x,y,state));
+					cells.add(new GameOfLifeCell(x,y,state));
 
 				}
 			}
