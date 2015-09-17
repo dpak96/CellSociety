@@ -3,7 +3,8 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
-
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -31,6 +32,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class GUI {
 	
@@ -51,8 +53,10 @@ public class GUI {
 	private boolean paused;
 	private Button nextStepButton;
 	private Button flowButton;
+	private Button startButton;
 	private GridPane myGridPane;
 	private Grid myGrid;
+	private Timeline animation;
 	//private guiButtons myButtons;
 	
 	public GUI(Stage primaryStage){
@@ -83,8 +87,8 @@ public class GUI {
 	}
 
 	private void loadSimulationValue(String letter) {
-		mySetup = new Setup(letter);
-		//mySimulation = new Simulation(mySetup);
+		//mySetup = new Setup(letter);
+		//mySimulation = new SegregationSimulation(mySetup);
 	}
 
 	private MenuBar createTopMenu() {
@@ -131,8 +135,8 @@ public class GUI {
 	}
 	
 	private void updateFlowBox(HBox hbox){
-		Button start = new Button("Start");
-		start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> anotherStartSimulation());
+		startButton = new Button("Start");
+		startButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> anotherStartSimulation());
 		//start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> startSimulation());
 		flowButton = new Button("Pause");
 		flowButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> changeSimulationFlow());
@@ -142,25 +146,32 @@ public class GUI {
 		//nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {/*mySimulation.nextStep();*/ System.out.println("next step");});
 		Button restart = new Button("Restart");
 		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
-		hbox.getChildren().addAll(start, flowButton, nextStepButton, restart);
+		hbox.getChildren().addAll(startButton, flowButton, nextStepButton, restart);
 	}
 	
 	private void startSimulation() {
             //mySimulation.start();
             paused = false;
             System.out.println("Start");
-            mySimulation = new SimulationTester(mySetup, myGridPane);
+            //mySimulation = new SimulationTester(mySetup, myGridPane);
             testGridPane();   
 	}
 	
 	private void anotherStartSimulation() {
-		//mySimulation.start();
+	        startButton.setDisable(true);
 		paused = false;
 		System.out.println("Start");
 		myGrid = new Grid(4,4);
                 anotherTestGridPane();
+                mySimulation = new SegregationSimulation(new Setup(""),myGridPane,this,.5);
+                animation = new Timeline();
+                KeyFrame frame = new KeyFrame(Duration.millis(1000),
+                                              e -> this.step());
+                              animation.setCycleCount(Timeline.INDEFINITE);
+                              animation.getKeyFrames().add(frame);
+                              animation.play();
                 /*for(int i=0;i<5;i++){
-                    step();
+                    mySimulation.step();
                     long start = System.currentTimeMillis();
                     while(System.currentTimeMillis()-start<1000){
                         
@@ -176,7 +187,9 @@ public class GUI {
 	}
 	
 	private void restartSimulation(){
-		
+	        animation.stop();
+	        myGridPane.getChildren().clear();
+		anotherStartSimulation();
 	}
 
 	private VBox createFlowControlBox(){
@@ -261,10 +274,12 @@ public class GUI {
 		//mySimulation.changeFlow();
 		paused = !paused;
 		if(paused){
+		        animation.pause();
 			System.out.println("Paused");
 			nextStepButton.setDisable(false);
 			flowButton.setText("Resume");
 		} else {
+		        animation.play();
 			System.out.println("Resumed");
 			nextStepButton.setDisable(true);
 			flowButton.setText("Pause");

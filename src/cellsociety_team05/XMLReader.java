@@ -10,6 +10,7 @@ import org.w3c.dom.Element;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class XMLReader {
@@ -18,7 +19,9 @@ public class XMLReader {
 	private  ArrayList<Cell> cells;
 	private static String SIMNAME = "simulation";
 	private static String TAGNAME = "cell";
-	private  Grid myGrid; 
+	private static String PARAM = "parameters";
+			private  Grid myGrid; 
+	private HashMap<String, Double> parameters; 
 	private int rule;
 
 	public XMLReader(String file, Grid grid){
@@ -37,6 +40,7 @@ public class XMLReader {
 
 			doc.getDocumentElement().normalize();
 
+			//Getting simulation type
 			NodeList nList = doc.getElementsByTagName(SIMNAME);
 			Node nNode = nList.item(0);
 			if(nNode.getNodeType() == Node.ELEMENT_NODE){
@@ -46,9 +50,20 @@ public class XMLReader {
 				//Simulation parameter. Maybe make a new class for different rules? 
 				rule = Integer.valueOf(eElement.getElementsByTagName("param").item(0).getTextContent());
 			}
-			
+
+			//Getting parameters
+			nList = doc.getElementsByTagName(PARAM);
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+
+				nNode = nList.item(temp);
+				Element eElement = (Element) nNode;
+				parameters.put(eElement.getAttribute("name"), Double.parseDouble(eElement.getAttribute("val")));
+				}
+				
+
+			//Getting cells
 			nList = doc.getElementsByTagName(TAGNAME);
-			
+
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 
 				nNode = nList.item(temp);
@@ -68,5 +83,8 @@ public class XMLReader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public HashMap getParams(){
+		return parameters;
 	}
 }

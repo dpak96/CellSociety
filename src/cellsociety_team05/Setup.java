@@ -1,6 +1,9 @@
 package cellsociety_team05;
 
+import java.util.HashMap;
+
 public class Setup {
+	private HashMap<String, Double> parameters; 
 
 	private Simulation[] myPossibleSimulations =
 		{
@@ -8,10 +11,11 @@ public class Setup {
 		};
 	
 	public Setup(String file){
-		//Read in XML file using file
+		XMLReader xml = new XMLReader(file);
+		parameters = xml.getParams();
 	}
 	
-	public Grid initGrid(){
+	public Grid initGrid(XMLReader xml){
 		Grid myGrid = new Grid(0, 0);
 		return myGrid;
 		//Fill in with information of from XML file

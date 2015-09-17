@@ -1,12 +1,18 @@
 package cellsociety_team05;
 
+import javafx.scene.layout.GridPane;
+
 public class SegregationSimulation extends Simulation {
 	private Grid myGrid;
 	private double similar; 
 
+	public SegregationSimulation(Setup setup, GridPane gridPane, GUI gui, double sim){
+		super(setup, gridPane, gui);
+		similar = sim;
+	}
+	
 	public SegregationSimulation(Setup setup){
-		super(setup, null);
-		similar = 0;
+	        super(setup,null,null);
 	}
 	
 	//Need a way to set similarity percentage
@@ -16,7 +22,7 @@ public class SegregationSimulation extends Simulation {
 	
 	@Override
 	public void updateState(Cell cell) {
-		int sim = 0;
+		/*int sim = 0;
 		int tot = 0;
 		for(Cell nCell: cell.getNeighbors()){
 			++tot;
@@ -26,7 +32,8 @@ public class SegregationSimulation extends Simulation {
 		}
 		if((double)sim/tot < similar){
 			//make cell empty and move it elsewhere
-		}	
+		}*/
+	    myGrid.preUpdateGrid();
 	}
 
 }
