@@ -26,8 +26,7 @@ public abstract class Simulation {
 		myParameters = params;
 	}
 
-	public void start(){	     
-
+	public void start(){
 		// sets the game's loop
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> this.step());
@@ -35,7 +34,6 @@ public abstract class Simulation {
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
-
 
 	public void changeFlow(){
 		if(animation.getStatus().equals(Animation.Status.RUNNING)){
@@ -53,7 +51,7 @@ public abstract class Simulation {
 	public void step(){
 		myGrid.preUpdateGrid();
 		myGrid.updateGrid();
-		myGUI.updateGrid();
+		myGUI.updateDisplayedGrid();
 	}
 
 	//run steps continuously (take a boolean?)

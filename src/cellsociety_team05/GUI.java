@@ -2,6 +2,7 @@ package cellsociety_team05;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -69,9 +70,6 @@ public class GUI {
 		root = new BorderPane();
 		Scene scene = new Scene(root, 553, 640, Color.WHITE);
 		root.setTop(createTopMenu());
-		/*
-		root.setBottom(createFlowControlBox());
-		*/
 		myBoxContainer = new GuiBoxContainer(this, myStage);
 		root.setBottom(myBoxContainer.getVBox());
 		myGridPane = new GridPane();
@@ -96,7 +94,8 @@ public class GUI {
 		//mySetup = new Setup(letter);
 		//mySimulation = new SegregationSimulation(mySetup);
 	}
-
+	
+	//handle menu somewhere else
 	private MenuBar createTopMenu() {
 		MenuBar topMenu = new MenuBar();
 		Menu simulationMenu = new Menu("Simulation");
@@ -108,84 +107,8 @@ public class GUI {
 		return topMenu;
 	}
 	
-	private HBox createControlBox(String function){
-		HBox hbox = new HBox();
-		hbox.setPrefHeight(20);
-		hbox.setSpacing(20.0);
-		if(function.equals(SPEED_BOX)){
-			updateSpeedBox(hbox);
-		} else if (function.equals(FLOW_BOX)){
-			updateFlowBox(hbox);
-		}
-		hbox.setAlignment(Pos.CENTER);
-		hbox.prefWidthProperty().bind(myStage.widthProperty());
-		return hbox;
-	}
-	
-	private void updateSpeedBox(HBox hbox){
-		Label sliderDescription = new Label("Speed");
-		Label speedValue = new Label(Integer.toString(DEFAULT_SPEED));
-		simulationSpeed = DEFAULT_SPEED;
-		Slider slider = new Slider(0, 10, DEFAULT_SPEED);
-		slider.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,Number old_val, Number new_val) {
-            	long updatedSpeed = Math.round(slider.getValue());
-            	speedValue.setText(Long.toString(updatedSpeed)); 
-            	if(updatedSpeed != simulationSpeed){
-            		updateSimulationSpeed(updatedSpeed);
-            	}
-            }
-        });
-		speedValue.setPrefWidth(20);
-	    hbox.getChildren().addAll(sliderDescription, slider, speedValue);
-	}
-	
-	private void updateFlowBox(HBox hbox){
-
-		/*
-		Button start = new Button("Start");
-		start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> startSimulation());
-=======
-		startButton = new Button("Start");
-		startButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> anotherStartSimulation());
-		//start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> startSimulation());
->>>>>>> origin/master
-		flowButton = new Button("Pause");
-		flowButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> changeSimulationFlow());
-		nextStepButton = new Button("Next step");
-		nextStepButton.setDisable(true);
-<<<<<<< HEAD
-		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {System.out.println("next step");});
-		Button restart = new Button("Restart");
-		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
-		*/
-		Button start = new Button("Start");
-		flowButton = new Button("Pause");
-		nextStepButton = new Button("Next step");
-		Button restart = new Button("Restart");
-		hbox.getChildren().addAll(start, flowButton, nextStepButton, restart);
-
-	}
- 
-	public void startSimulation() {
-		//mySimulation.start();
-		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {step(); System.out.println("next step");});
-		//nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {/*mySimulation.nextStep();*/ System.out.println("next step");});
-		Button restart = new Button("Restart");
-		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
-		//hbox.getChildren().addAll(startButton, flowButton, nextStepButton, restart);
-	}
-/*	
-	private void startSimulation() {
-            //mySimulation.start();
-            paused = false;
-            System.out.println("Start");
-            //mySimulation = new SimulationTester(mySetup, myGridPane);
-            testGridPane();   
-	}
-*/	
 	private void anotherStartSimulation() {
-	        startButton.setDisable(true);
+	    //startButton.setDisable(true);
 		paused = false;
 		System.out.println("Start");
 		myGrid = new Grid(4,4);
@@ -197,20 +120,18 @@ public class GUI {
                               animation.setCycleCount(Timeline.INDEFINITE);
                               animation.getKeyFrames().add(frame);
                               animation.play();
-                /*for(int i=0;i<5;i++){
-                    mySimulation.step();
-                    long start = System.currentTimeMillis();
-                    while(System.currentTimeMillis()-start<1000){
-                        
-                    }
-                }*/
 	}
 	
 	private void step(){
 	    System.out.println("step");
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
-	    updateGrid();
+	    updateDisplayedGrid();
+	}
+	
+	public void startSimulation(){
+		System.out.println("Start");
+		anotherStartSimulation();
 	}
 	
 	private void restartSimulation(){
@@ -218,43 +139,19 @@ public class GUI {
 	        myGridPane.getChildren().clear();
 		anotherStartSimulation();
 	}
-
-	private VBox createFlowControlBox(){
-		VBox vbox = new VBox();
-		vbox.setSpacing(10.0);
-		vbox.getChildren().add(createControlBox(FLOW_BOX));
-		vbox.getChildren().add(createControlBox(SPEED_BOX));
-		vbox.getChildren().add(new HBox());
-		vbox.setPrefHeight(50);
-		return vbox;
-	}
 	
-	private void updateSimulationSpeed(long speed){
+	public void updateSimulationSpeed(long speed){
 		System.out.println(speed);
 		simulationSpeed = speed;
-		//update the simulation speed
+	}
+	
+	public void nextStep() {
+		//to complete
 	}
 	
 	
-	/**
-	 * This is a small tester for the GridPane. It shows how we are going to display 
-	 * the cells. In the future I will add an event handler to allow the user to 
-	 * click on a cell and change its color (and thus its state).
-	 */
-	
-	private void testGridPane(){
-                System.out.println(myGridPane.getWidth());
-                System.out.println(myGridPane.getHeight());
-                double constant = myGridPane.getHeight()/2.0 - 5;
-		Rectangle test1 = new Rectangle(constant, constant, Color.RED);
-		GridPane.setConstraints(test1, 0 , 0);
-		Rectangle test2 = new Rectangle(constant, constant, Color.BLACK);
-		GridPane.setConstraints(test2, 0 , 1);
-		Rectangle test3 = new Rectangle(constant, constant, Color.BEIGE);
-		GridPane.setConstraints(test3, 1 , 0);
-		Rectangle test4 = new Rectangle(constant, constant, Color.ALICEBLUE);
-		GridPane.setConstraints(test4, 1 , 1);
-		myGridPane.getChildren().addAll(test1, test2, test3, test4);
+	public void dostuff(){
+		System.out.println("HAHAHAH");
 	}
 	
 	private void anotherTestGridPane(){
@@ -263,37 +160,29 @@ public class GUI {
             double constant = myGridPane.getHeight()/4.0 - 5;
             for (int i=0;i<4;i++){
                 for (int j=0;j<4;j++){
-                    Rectangle add = new Rectangle(constant, constant, myGrid.myCells.get((i*4)+j).getCurrentColor());
+                    Rectangle add = new Rectangle(constant, constant, myGrid.getGrid().get(i).get(j).getCurrentColor());
                     GridPane.setConstraints(add, i, j);
                     myGridPane.getChildren().add(add);
                 }
             }
 	}
 	
-	public void updateGrid(){
+	public void updateDisplayedGrid(){
 	    System.out.println("update");
-	    for (int i=0;i<myGrid.myCells.size();i++){
-	        Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(i);
-	        if(myGrid.myCells.get(i).myCurrentState==0){
-	            thisRec.setFill(Color.BLACK);
-	        }
-	        else{
-	            thisRec.setFill(Color.WHITE);
+	    for (int i=0;i<myGrid.getGrid().size();i++){
+	        List<Cell> list = myGrid.getGrid().get(i);
+	        for (int j=0;j<list.size();j++){
+	            Rectangle thisRec = (Rectangle) myGridPane.getChildren().get((j*4)+i);
+	            //System.out.println("GridPane: ("+i+","+j+")");
+	            //System.out.println("Cell: ("+list.get(j).getX()+","+list.get(j).getY()+")");
+	            if(list.get(j).myCurrentState==0){
+	                thisRec.setFill(Color.BLACK);
+	            }
+	            else{
+	                thisRec.setFill(Color.WHITE);
+	            }
 	        }
 	    }
-	}
-	
-
-	public void displayMainWindow(){
-		
-	}
-	
-	public void displayGrid(){
-		
-	}
-	
-	public void currentSetup(){
-		
 	}
 	
 	public Simulation getCurrentSimulation(){
@@ -317,8 +206,7 @@ public class GUI {
 		}
 	}
 	
-	public Object nextStep() {
-		// TODO Auto-generated method stub
-		return null;
+	public long getSimulationSpeed() {
+		return simulationSpeed;
 	}
 }

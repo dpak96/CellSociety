@@ -12,6 +12,7 @@ public class Setup {
 		XMLReader xml = new XMLReader(file);
 		parameters = xml.getParams();
 		myPossibleSimulations.set("segregation", new SegregationSimulation());
+
 	}
 	
 	public Grid initGrid(XMLReader xml){
@@ -27,7 +28,7 @@ public class Setup {
 	}
 	
 	public void reset(String file){
-		Grid grid = initGrid();
-		initSimulation(grid);
+		//Grid grid = initGrid();
+		//initSimulation(grid);
 	}
 }

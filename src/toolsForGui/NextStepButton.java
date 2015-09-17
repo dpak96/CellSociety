@@ -11,7 +11,7 @@ public class NextStepButton extends GuiButton{
 	public NextStepButton(GUI gui) {
 		super(gui);
 		myGui = gui;
-		myButton = new Button("Start");
+		myButton = new Button("Next Step");
 		this.implementAction();
 	}
 

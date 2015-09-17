@@ -14,29 +14,40 @@ import javafx.scene.shape.Rectangle;
  */
 public class Grid {
     
-    List<Cell> myCells;
+    List<List<Cell>> myCells;
     ArrayList<SegregationCell> mySegregationCells = new ArrayList<SegregationCell>();
     GridPane myGridPane;
     
-    /**
-     * Constructor method
-     * @author Emanuele
-     */
-    public Grid(GridPane gridPane){
-        myGridPane = gridPane;
-    }
-    
     public Grid(int width, int height){
-        myCells = new ArrayList<Cell>();
+        myCells = new ArrayList<List<Cell>>();
         for (int i=0;i<width;i++){
+            myCells.add(new ArrayList<Cell>());
             for (int j=0;j<height;j++){
                 int state = (int) Math.floor(Math.random()*2);
-                Cell newcell = new Cell(this,j,i,state);
-                myCells.add(newcell);
+                Cell newcell = new Cell(i,j,state);
+                myCells.get(i).add(newcell);
             }
         }
-        for (Cell cell: myCells){
-            cell.initNeighbors();
+        initNeighbors();
+    }
+    
+    private void initNeighbors(){
+        for (List<Cell> list: myCells){
+            for (Cell cell: list){
+                //System.out.println("Cell: ("+cell.getX()+","+cell.getY()+")");
+                List<Cell> neighbors = new ArrayList<Cell>();
+                int[] x = {0,0,1,1,1,-1,-1,-1};
+                int[] y = {1,-1,0,1,-1,0,1,-1};
+                for (int i=0;i<x.length;i++){
+                    int xCoordinate = cell.getX()+x[i];
+                    int yCoordinate = cell.getY()+y[i];
+                    if(xCoordinate>=0 && yCoordinate>=0 && xCoordinate<myCells.size() && yCoordinate<myCells.get(0).size()){
+                        neighbors.add(myCells.get(xCoordinate).get(yCoordinate));
+                        //System.out.println("neighbor: ("+myCells.get(xCoordinate).get(yCoordinate).getX()+","+myCells.get(xCoordinate).get(yCoordinate).getY()+")");
+                    }
+                }
+                cell.setNeighbors(neighbors);
+            }
         }
     }
     
@@ -44,8 +55,10 @@ public class Grid {
      * Sets the next state of each cell in the grid.
      */
     public void preUpdateGrid(){
-        for(Cell currentCell: myCells){
-            currentCell.preUpdateCell();
+        for (List<Cell> list: myCells){
+            for (Cell cell: list){
+                cell.preUpdateCell();
+            }
         }
     }
     
@@ -53,8 +66,10 @@ public class Grid {
      * Switches the state of each cell in the grid to it's next state.
      */
     public void updateGrid(){
-        for(Cell currentCell: myCells){
-            currentCell.updateCell();
+        for (List<Cell> list: myCells){
+            for (Cell cell: list){
+                cell.updateCell();
+            }
         }
     }
     
@@ -62,7 +77,7 @@ public class Grid {
      * 
      * @return A list of the cells in the grid.
      */
-    public List<Cell> getGrid(){
+    public List<List<Cell>> getGrid(){
         return myCells;
     }
 
@@ -90,7 +105,7 @@ public class Grid {
      * TESTER FOR DRAW GRID METHOD
      * @author Emanuele
      */
-    public void drawGridTester(){
+    /*public void drawGridTester(){
         SegregationCell[] cellList = {new SegregationCell(this, 0, 0, 0, 1.0),new SegregationCell(this, 0, 1, 1, 1.0),new SegregationCell(this, 0, 2, 0, 1.0),
                         new SegregationCell(this, 1, 0, 1, 1.0), new SegregationCell(this, 1, 1, 0, 1.0), new SegregationCell(this, 1, 2, 1, 1.0),
                         new SegregationCell(this, 2, 0, 0, 1.0), new SegregationCell(this, 2, 1, 1, 1.0), new SegregationCell(this, 2, 2, 0, 1.0)};
@@ -98,6 +113,6 @@ public class Grid {
                 mySegregationCells.add(c);
         }
     }
-    
+    */
 
 }
