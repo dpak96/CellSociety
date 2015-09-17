@@ -11,11 +11,13 @@ public class Setup {
 	public Setup(String file){
 		XMLReader xml = new XMLReader(file);
 		parameters = xml.getParams();
+		myPossibleSimulations.set("segregation", new SegregationSimulation());
+
 	}
 	
 	public Grid initGrid(XMLReader xml){
 		ArrayList<Cell> cells = xml.getCells();
-		Grid myGrid = new Grid(0, 0);
+		Grid myGrid = new Grid(xml.getGridWidth(), xml.getGridHeight(), cells);
 		return myGrid;
 		//Fill in with information of from XML file
 	}

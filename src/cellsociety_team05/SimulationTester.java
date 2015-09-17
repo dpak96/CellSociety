@@ -26,11 +26,10 @@ public class SimulationTester extends Simulation{
 		private double similar;
 		private boolean paused;
 
-		public SimulationTester(Setup setup, GridPane gridPane, GUI gui, double sim) {
-			super(setup, gridPane, gui);
+		public SimulationTester( GridPane gridPane, GUI gui,HashMap<String, Double> params, double sim) {
+			super(gridPane, gui, params);
 			
 			myGridPane = gridPane;
-			mySetup = setup;
 			myGUI = gui;
 			similar = sim;
 			myGrid = new Grid(8,8);

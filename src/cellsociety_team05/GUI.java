@@ -2,7 +2,8 @@ package cellsociety_team05;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.List;
+import java.util.Optional;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -89,9 +90,9 @@ public class GUI {
 	private void anotherStartSimulation() {
 	    //startButton.setDisable(true);
 		System.out.println("Start");
-		myGrid = new Grid(4,4);
+		myGrid = new Grid(10,10);
                 anotherTestGridPane();
-                mySimulation = new SegregationSimulation(new Setup(""),myGridPane,this,.5);
+                //mySimulation = new SegregationSimulation(new Setup(""),myGridPane,this,.5,.7,.1,myGrid);
                 animation = new Timeline();
                 KeyFrame frame = new KeyFrame(Duration.millis(1000),
                                               e -> this.step());
@@ -136,15 +137,49 @@ public class GUI {
 		System.out.println("HAHAHAH");
 	}
 	/*
+=======
+	
+	private void anotherTestGridPane(){
+            System.out.println(myGridPane.getWidth());
+            System.out.println(myGridPane.getHeight());
+            double constant = myGridPane.getHeight()/4.0 - 5;
+            for (int i=0;i<4;i++){
+                for (int j=0;j<4;j++){
+                    Rectangle add = new Rectangle(constant, constant, myGrid.getGrid().get(i).get(j).getCurrentColor());
+                    GridPane.setConstraints(add, i, j);
+                    myGridPane.getChildren().add(add);
+                }
+            }
+	}
+	
+>>>>>>> master
 	public void updateDisplayedGrid(){
 	    //System.out.println("update");
-	    for (int i=0;i<myGrid.myCells.size();i++){
-	        Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(i);
-	        if(myGrid.myCells.get(i).myCurrentState==0){
-	            thisRec.setFill(Color.BLACK);
+	    for (int k=0;k<myGrid.getGrid().size();k++){
+	        List<Cell> cells = myGrid.getGrid().get(k);
+	        for (Cell cell: cells){
+	            Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(k);
+	            if(cell.myCurrentState==0){
+	                thisRec.setFill(Color.BLACK);
+	            }
+	            else{
+	                thisRec.setFill(Color.WHITE);
+	            }
 	        }
-	        else{
-	            thisRec.setFill(Color.WHITE);
+	        System.out.println("update");
+	        for (int i=0;i<myGrid.getGrid().size();i++){
+	            List<Cell> list = myGrid.getGrid().get(i);
+	            for (int j=0;j<list.size();j++){
+	                Rectangle thisRec = (Rectangle) myGridPane.getChildren().get((j*4)+i);
+	                //System.out.println("GridPane: ("+i+","+j+")");
+	                //System.out.println("Cell: ("+list.get(j).getX()+","+list.get(j).getY()+")");
+	                if(list.get(j).myCurrentState==0){
+	                    thisRec.setFill(Color.BLACK);
+	                }
+	                else{
+	                    thisRec.setFill(Color.WHITE);
+	                }
+	            }
 	        }
 	    }
 	}
