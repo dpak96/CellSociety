@@ -27,8 +27,8 @@ public class FlowControlBox extends HorizontalControlBoxes{
 		NextStepButton n = new NextStepButton(gui);
 		myHBox.getChildren().add(s.getButton());
 		myHBox.getChildren().add(p.getButton());
-		myHBox.getChildren().add(r.getButton());
 		myHBox.getChildren().add(n.getButton());
+		myHBox.getChildren().add(r.getButton());
 	}
 	
 	@Override
