@@ -107,9 +107,9 @@ public class Cell {
                 myNextState=0;
             }
         }
-        System.out.println("my current state: "+myCurrentState);
-        System.out.println("my live neighbors: "+liveNeighbors);
-        System.out.println("my next state: "+myNextState);
+        //System.out.println("my current state: "+myCurrentState);
+        //System.out.println("my live neighbors: "+liveNeighbors);
+        //System.out.println("my next state: "+myNextState);
     }
     
     /**

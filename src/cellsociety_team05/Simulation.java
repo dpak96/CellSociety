@@ -52,9 +52,9 @@ public abstract class Simulation {
 	//single step of simulation First step would be updateState 
 	//Second step would be updateGrid
 	public void step(){
-	        myGrid.preUpdateGrid();
+	    myGrid.preUpdateGrid();
 		myGrid.updateGrid();
-		myGUI.updateDisplayedGrid();
+		//myGUI.updateDisplayedGrid();
 	}
 
 	//run steps continuously (take a boolean?)
