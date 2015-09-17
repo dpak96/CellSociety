@@ -3,6 +3,7 @@ package cellsociety_team05;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.layout.GridPane;
 
 public class SegregationSimulation extends Simulation {
@@ -23,8 +24,10 @@ public class SegregationSimulation extends Simulation {
 	}
 	
 	public void setCellType(Grid grid){
-	    for (Cell cell: grid.getGrid()){
-	        cell = new SegregationCell(grid,cell.myXCoordinate,cell.myYCoordinate,0,similar);
+	    for (List<Cell> list: grid.getGrid()){
+	        for (Cell cell: list){
+	            cell = new SegregationCell(cell.myXCoordinate,cell.myYCoordinate,0,similar);
+	        }
 	    }
 	}
 	
