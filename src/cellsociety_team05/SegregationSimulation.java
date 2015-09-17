@@ -1,13 +1,17 @@
 package cellsociety_team05;
 
-import java.util.HashMap;
 
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.layout.GridPane;
 
 public class SegregationSimulation extends Simulation {
 	private Grid myGrid;
 	private double similar; 
-
+	private double ratio;
+	private double empty;
+	
 	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param){
 		super(gridPane, gui, param);
 		similar = param.get("similar");
@@ -17,6 +21,35 @@ public class SegregationSimulation extends Simulation {
 	//Need a way to set similarity percentage
 	public void setSimilar(double x){
 		similar = x;
+	}
+	
+	public void setCellType(Grid grid){
+	    for (List<Cell> list: grid.getGrid()){
+	        for (Cell cell: list){
+	            cell = new SegregationCell(cell.myXCoordinate,cell.myYCoordinate,0,similar);
+	        }
+	    }
+	}
+	
+	public void initGrid(Grid grid){
+	    int num = grid.getGrid().size();
+	    ArrayList<Integer> list = new ArrayList<Integer>();
+	    num-= (int) Math.floor(((double)num)*empty);
+	    int num1 = (int) Math.floor(((double)num)*ratio);
+	    int num2 = num - num1;
+	    for (int i=0;i<empty;i++){
+	        list.add(2);
+	    }
+	    for (int i=0;i<num1;i++){
+	        list.add(0);
+	    }
+	    for (int i=0;i<num2;i++){
+	        list.add(1);
+	    }
+	    for (int i=0;i<grid.getGrid().size();i++){
+	        int ran = (int) Math.floor(Math.random()*list.size());
+	        grid.getGrid().get(i).setCurrentState(list.remove(ran));
+	    }
 	}
 	
 	@Override

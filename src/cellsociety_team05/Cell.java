@@ -2,6 +2,7 @@ package cellsociety_team05;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.animation.Timeline;
 import javafx.scene.paint.Color;
 
 import javafx.scene.paint.Color;
@@ -87,6 +88,12 @@ public class Cell {
     public void setNextState(int state) {
         myNextState = state;
     }
+    
+    public void setCurrentState(int state) {
+        myCurrentState = state;
+    }
+    
+    
      /**
       * Determines this cell's next state based on rules of simulation.
       */
