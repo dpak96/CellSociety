@@ -1,14 +1,12 @@
 package cellsociety_team05;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Setup {
 	private HashMap<String, Double> parameters; 
-
-	private Simulation[] myPossibleSimulations =
-		{
-			new SegregationSimulation(this)
-		};
+	
+	private HashMap<String, Simulation> myPossibleSimulations;
 	
 	public Setup(String file){
 		XMLReader xml = new XMLReader(file);
@@ -16,6 +14,7 @@ public class Setup {
 	}
 	
 	public Grid initGrid(XMLReader xml){
+		ArrayList<Cell> cells = xml.getCells();
 		Grid myGrid = new Grid(0, 0);
 		return myGrid;
 		//Fill in with information of from XML file
