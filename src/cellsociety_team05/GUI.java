@@ -2,6 +2,7 @@ package cellsociety_team05;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import javafx.animation.KeyFrame;
@@ -111,7 +112,7 @@ public class GUI {
 	*/
 	public void startSimulation(){
 		System.out.println("Start");
-		mySimulation = new SimulationTester(new Setup(null), myGridPane, this, 0.5);
+		mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 0.5);
 		mySimulation.start();
 		//anotherStartSimulation();
 	}

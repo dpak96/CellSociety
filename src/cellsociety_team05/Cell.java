@@ -3,8 +3,9 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.animation.Timeline;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-
+import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
 /**
@@ -24,6 +25,7 @@ public class Cell {
     //alive = 0, dead = 1 (based on index)
     private final Color[] myColors = {Color.BLACK, Color.WHITE};
     //Simulation mySimulation;
+    private Rectangle mySquare;
     
     /**
      * Cell constructor
@@ -39,6 +41,13 @@ public class Cell {
         myYCoordinate = yCoordinate;
         myCurrentState = startingState;
         //mySimulation = simulation;
+        //this works only for an 8x8 simulation
+        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
+        GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
+    }
+    
+    public Rectangle getSquare(){
+    	return mySquare;
     }
     
     /*public void initNeighbors(){
@@ -99,9 +108,9 @@ public class Cell {
       */
     public void preUpdateCell(){
         int liveNeighbors = 0;
-        System.out.println("Cell: ("+getX()+","+getY()+")");
+        //System.out.println("Cell: ("+getX()+","+getY()+")");
         for (Cell neighbor: myNeighbors) {
-            System.out.println("neighbor: ("+neighbor.getX()+","+neighbor.getY()+") "+neighbor.myPossibleStates[neighbor.getCurrentState()]);
+            //System.out.println("neighbor: ("+neighbor.getX()+","+neighbor.getY()+") "+neighbor.myPossibleStates[neighbor.getCurrentState()]);
             if (neighbor.myCurrentState==0){
                 liveNeighbors+=1;
             }
@@ -120,15 +129,9 @@ public class Cell {
                 myNextState=0;
             }
         }
-<<<<<<< HEAD
         //System.out.println("my current state: "+myCurrentState);
         //System.out.println("my live neighbors: "+liveNeighbors);
         //System.out.println("my next state: "+myNextState);
-=======
-        System.out.println("my current state: "+myPossibleStates[myCurrentState]);
-        System.out.println("my live neighbors: "+liveNeighbors);
-        System.out.println("my next state: "+myPossibleStates[myNextState]);
->>>>>>> master
     }
     
     /**
@@ -136,6 +139,7 @@ public class Cell {
      */
     public void updateCell(){
         myCurrentState = myNextState;
+        mySquare.setFill(myColors[myCurrentState]);
     }
  
     
