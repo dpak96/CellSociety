@@ -28,6 +28,7 @@ public abstract class Simulation {
 
 	public void start(){
 		// sets the game's loop
+	        animation = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> this.step());
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -49,9 +50,9 @@ public abstract class Simulation {
 	//single step of simulation First step would be updateState 
 	//Second step would be updateGrid
 	public void step(){
-		myGrid.preUpdateGrid();
+	    myGrid.preUpdateGrid();
 		myGrid.updateGrid();
-		myGUI.updateDisplayedGrid();
+		//myGUI.updateDisplayedGrid();
 	}
 
 	//run steps continuously (take a boolean?)
@@ -63,11 +64,15 @@ public abstract class Simulation {
 
 	//Will be implemented in subclasses
 	public abstract void updateState(Cell cell);
+	
+	public abstract void setCellType(Grid grid);
+	
+	public abstract void initGrid(Grid grid);
 
 	//calls drawGrid, displays graphically the Grid
-	public void showGrid(){
+	/*public void showGrid(){
 		myGrid.drawSquareGrid();
-	}
+	}*/
 
 
 }

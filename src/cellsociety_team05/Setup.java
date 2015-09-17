@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 public class Setup {
 	private HashMap<String, Double> parameters; 
 	private HashMap<String, Simulation> myPossibleSimulations;
+	private Simulation mySimulation;
 	private XMLReader xml;
 	
 	public Setup(String file, GUI gui, GridPane gp){
@@ -15,7 +16,12 @@ public class Setup {
 		GridPane myGridPane = gp;
 		xml = new XMLReader(file);
 		parameters = xml.getParams();
-		myPossibleSimulations.put("segregation", new SegregationSimulation(myGridPane, myGUI, parameters));
+
+		myPossibleSimulations.put("segregation", new SegregationSimulation());
+
+		//myPossibleSimulations.set("segregation", new SegregationSimulation());
+
+
 	}
 	
 	public Grid initGrid(XMLReader xml){
@@ -27,11 +33,20 @@ public class Setup {
 	
 	//Need to find a way to change which simulation is being run w/o using too many if statements
 	public void initSimulation(Grid grid){
-		Simulation mySimulation = myPossibleSimulations.get(xml.getSimulation());
+
+		mySimulation = new SegregationSimulation(this);
+
+
+		//Simulation mySimulation = new SegregationSimulation(this);
+
 	}
 	
 	public void reset(String file){
 		//Grid grid = initGrid();
 		//initSimulation(grid);
+	}
+	
+	public Simulation getSimulation(){
+		return mySimulation; 
 	}
 }
