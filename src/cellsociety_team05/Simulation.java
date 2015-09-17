@@ -52,7 +52,7 @@ public abstract class Simulation {
 	public void step(){
 	        myGrid.preUpdateGrid();
 		myGrid.updateGrid();
-		myGUI.updateGrid();
+		myGUI.updateDisplayedGrid();
 	}
 
 	//run steps continuously (take a boolean?)
