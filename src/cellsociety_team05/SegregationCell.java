@@ -13,13 +13,15 @@ import javafx.scene.paint.Color;
 public class SegregationCell extends Cell {
     private final String[] myPossibleStates = {"X/Blue", "O/Red", "Empty"};
     private double mySatisfactionPercent;
-    private final Color[] myPossibleColors = {Color.BLUE, Color.RED};
+    private Grid myGrid;
+    private final Color[] myPossibleColors = {Color.BLUE, Color.RED, Color.WHITE};
     
-    public SegregationCell (/*Grid grid, */int xCoordinate, int yCoordinate, 
-                            int startingState/*, Simulation simulation*/,
-                            double satisfaction) {
-        super(/*grid, */xCoordinate, yCoordinate, startingState/*, simulation*/);
+    public SegregationCell (int xCoordinate, int yCoordinate, 
+                            int startingState,
+                            double satisfaction,Grid grid) {
+        super(xCoordinate, yCoordinate, startingState);
         mySatisfactionPercent = satisfaction;
+        myGrid = grid;
     }
       
     @Override
@@ -35,7 +37,7 @@ public class SegregationCell extends Cell {
         }
         else {
             List<Cell> empties = new ArrayList<Cell>();
-            for (List<Cell> list: myGrid.getGrid()) {
+            for (List<Cell> list: myGrid.getCellMatrix()) {
                 for (Cell cell: list){
                     if (cell.myCurrentState==2){
                         empties.add(cell);

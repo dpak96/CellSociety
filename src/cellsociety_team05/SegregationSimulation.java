@@ -15,6 +15,8 @@ public class SegregationSimulation extends Simulation {
 	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param){
 		super(gridPane, gui, param);
 		similar = param.get("similar");
+		ratio = param.get("ratio");
+		empty = param.get("empty");
 	}
 	
 	
@@ -24,20 +26,23 @@ public class SegregationSimulation extends Simulation {
 	}
 	
 	public void setCellType(Grid grid){
-	    for (List<Cell> list: grid.getGrid()){
+	    for (List<Cell> list: grid.getCellMatrix()){
 	        for (Cell cell: list){
-	            cell = new SegregationCell(cell.myXCoordinate,cell.myYCoordinate,0,similar);
+	            cell = new SegregationCell(cell.myXCoordinate,cell.myYCoordinate,0,similar,grid);
+	            System.out.println(cell.getClass().toString());
 	        }
 	    }
 	}
 	
 	public void initGrid(Grid grid){
-	    int num = grid.getGrid().size();
+	    int num = grid.getCellMatrix().size();
 	    ArrayList<Integer> list = new ArrayList<Integer>();
-	    num -= (int) Math.floor(((double)num)*empty);
+	    int numEmpty = (int) Math.floor(((double)num)*empty);
+	    num-= numEmpty;
 	    int num1 = (int) Math.floor(((double)num)*ratio);
 	    int num2 = num - num1;
-	    for (int i=0;i<empty;i++){
+	    int k = 0;
+	    for (int i=0;i<numEmpty;i++){
 	        list.add(2);
 	    }
 	    for (int i=0;i<num1;i++){
@@ -46,8 +51,12 @@ public class SegregationSimulation extends Simulation {
 	    for (int i=0;i<num2;i++){
 	        list.add(1);
 	    }
-	    for (List<Cell> cells: grid.getGrid()){
+	    System.out.println("empty: "+numEmpty);
+	    System.out.println("blue: "+num1);
+	    System.out.println("red: "+num2);
+	    for (List<Cell> cells: grid.getCellMatrix()){
                 for (Cell cell: cells){
+                    System.out.println(k++);
                     int ran = (int) Math.floor(Math.random()*list.size());
                     cell.setCurrentState(list.remove(ran));
                 }

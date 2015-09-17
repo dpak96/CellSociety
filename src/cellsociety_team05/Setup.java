@@ -16,7 +16,11 @@ public class Setup {
 		GridPane myGridPane = gp;
 		xml = new XMLReader(file);
 		parameters = xml.getParams();
+
 		myPossibleSimulations.put("segregation", new SegregationSimulation());
+
+		//myPossibleSimulations.set("segregation", new SegregationSimulation());
+
 
 	}
 	
@@ -29,7 +33,11 @@ public class Setup {
 	
 	//Need to find a way to change which simulation is being run w/o using too many if statements
 	public void initSimulation(Grid grid){
+
 		mySimulation = new SegregationSimulation(this);
+
+
+		//Simulation mySimulation = new SegregationSimulation(this);
 
 	}
 	
