@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
  * @author Lucas Donaldson
  *
  */
-public class Cell {
+public abstract class Cell {
     // Default Cell class could implement game of life for testing?
     protected List<Cell> myNeighbors;
     protected int myXCoordinate;
@@ -49,22 +49,6 @@ public class Cell {
     public Rectangle getSquare(){
         return mySquare;
     }
-    
-    /*public void initNeighbors(){
-        myNeighbors = new ArrayList<Cell>();
-        for(Cell cell: myGrid.getGrid()){
-            if (cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate-1 ||
-                    cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate ||
-                    cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate+1 ||
-                    cell.myXCoordinate==myXCoordinate && cell.myYCoordinate==myYCoordinate-1 ||
-                    cell.myXCoordinate==myXCoordinate && cell.myYCoordinate==myYCoordinate+1 ||
-                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate-1 ||
-                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate ||
-                    cell.myXCoordinate==myXCoordinate+1 && cell.myYCoordinate==myYCoordinate+1){
-                myNeighbors.add(cell);
-            }
-        }
-    }*/
     
     /**
      * Gets this cells neighbors.
@@ -106,33 +90,7 @@ public class Cell {
      /**
       * Determines this cell's next state based on rules of simulation.
       */
-    public void preUpdateCell(){
-        int liveNeighbors = 0;
-        //System.out.println("Cell: ("+getX()+","+getY()+")");
-        for (Cell neighbor: myNeighbors) {
-            //System.out.println("neighbor: ("+neighbor.getX()+","+neighbor.getY()+") "+neighbor.myPossibleStates[neighbor.getCurrentState()]);
-            if (neighbor.myCurrentState==0){
-                liveNeighbors+=1;
-            }
-        }
-        myNextState = myCurrentState;
-        if (myCurrentState==0){
-            if (liveNeighbors<2){
-                myNextState=1;
-            }
-            else if(liveNeighbors>3) {
-                myNextState=1;
-            }
-        }
-        else if (myCurrentState==1){
-            if(liveNeighbors==3){
-                myNextState=0;
-            }
-        }
-        //System.out.println("my current state: "+myCurrentState);
-        //System.out.println("my live neighbors: "+liveNeighbors);
-        //System.out.println("my next state: "+myNextState);
-    }
+    public abstract void preUpdateCell();
     
     /**
      * Switches this cell's state from it's current to it's next state.
@@ -155,5 +113,9 @@ public class Cell {
      */
     public int getY(){
         return myYCoordinate;
+    }
+
+    public String[] getPossibleStates () {
+        return myPossibleStates;
     }
 }   

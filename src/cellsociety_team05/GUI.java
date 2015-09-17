@@ -120,7 +120,12 @@ public class GUI {
 	*/
 	public void startSimulation(){
 		System.out.println("Start");
-		mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 0.5);
+		//mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 0.5);
+		HashMap<String, Double> map = new HashMap<String, Double>();
+                map.put("similar", 0.3);
+                map.put("ratio", 0.5);
+                map.put("empty", 0.1);
+		mySimulation = new SegregationSimulation(myGridPane,this,map);
 		mySimulation.start();
 		//anotherStartSimulation();
 	}

@@ -28,6 +28,7 @@ public abstract class Simulation {
 
 	public void start(){
 		// sets the game's loop
+	        animation = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> this.step());
 		animation.setCycleCount(Timeline.INDEFINITE);
