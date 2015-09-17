@@ -1,4 +1,6 @@
 package cellsociety_team05;
+import java.util.HashMap;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,6 +18,7 @@ public abstract class Simulation {
 	public static final int FRAMES_PER_SECOND = 60;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	private Timeline animation;
+	protected HashMap<String, Double> myParameters;
 
 	public Simulation(Setup setup, GridPane gridPane, GUI gui){
 		mySetup = setup;
@@ -24,8 +27,7 @@ public abstract class Simulation {
 		myGUI = gui;
 	}
 
-	public void start(){	     
-
+	public void start(){
 		// sets the game's loop
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> this.step());
@@ -33,7 +35,6 @@ public abstract class Simulation {
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
-
 
 	public void changeFlow(){
 		if(animation.getStatus().equals(Animation.Status.RUNNING)){
@@ -51,7 +52,7 @@ public abstract class Simulation {
 	public void step(){
 	        myGrid.preUpdateGrid();
 		myGrid.updateGrid();
-		myGUI.updateGrid();
+		myGUI.updateDisplayedGrid();
 	}
 
 	//run steps continuously (take a boolean?)
@@ -68,5 +69,6 @@ public abstract class Simulation {
 	public void showGrid(){
 		myGrid.drawSquareGrid();
 	}
+	
 
 }

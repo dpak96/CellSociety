@@ -32,16 +32,16 @@ public class Cell {
      * @param yCoordinate
      * @param startingState
      */
-    public Cell(Grid grid, int xCoordinate, int yCoordinate,
+    public Cell(/*Grid2d grid, */int xCoordinate, int yCoordinate,
                      int startingState/*, Simulation simulation*/){
-        myGrid = grid;
+        //myGrid = grid;
         myXCoordinate = xCoordinate;
         myYCoordinate = yCoordinate;
         myCurrentState = startingState;
         //mySimulation = simulation;
     }
     
-    public void initNeighbors(){
+    /*public void initNeighbors(){
         myNeighbors = new ArrayList<Cell>();
         for(Cell cell: myGrid.getGrid()){
             if (cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate-1 ||
@@ -55,7 +55,7 @@ public class Cell {
                 myNeighbors.add(cell);
             }
         }
-    }
+    }*/
     
     /**
      * Gets this cells neighbors.
@@ -63,6 +63,10 @@ public class Cell {
      */
     public List<Cell> getNeighbors(){
         return myNeighbors;
+    }
+    
+    public void setNeighbors(List<Cell> list){
+        myNeighbors = list;
     }
     
     /**
@@ -95,7 +99,9 @@ public class Cell {
       */
     public void preUpdateCell(){
         int liveNeighbors = 0;
+        System.out.println("Cell: ("+getX()+","+getY()+")");
         for (Cell neighbor: myNeighbors) {
+            System.out.println("neighbor: ("+neighbor.getX()+","+neighbor.getY()+") "+neighbor.myPossibleStates[neighbor.getCurrentState()]);
             if (neighbor.myCurrentState==0){
                 liveNeighbors+=1;
             }
@@ -114,9 +120,9 @@ public class Cell {
                 myNextState=0;
             }
         }
-        System.out.println("my current state: "+myCurrentState);
+        System.out.println("my current state: "+myPossibleStates[myCurrentState]);
         System.out.println("my live neighbors: "+liveNeighbors);
-        System.out.println("my next state: "+myNextState);
+        System.out.println("my next state: "+myPossibleStates[myNextState]);
     }
     
     /**
