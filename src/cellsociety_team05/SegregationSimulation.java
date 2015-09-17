@@ -1,19 +1,18 @@
 package cellsociety_team05;
 
+import java.util.HashMap;
+
 import javafx.scene.layout.GridPane;
 
 public class SegregationSimulation extends Simulation {
 	private Grid myGrid;
 	private double similar; 
 
-	public SegregationSimulation(Setup setup, GridPane gridPane, GUI gui, double sim){
-		super(setup, gridPane, gui);
-		similar = sim;
+	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param){
+		super(gridPane, gui, param);
+		similar = param.get("similar");
 	}
 	
-	public SegregationSimulation(Setup setup){
-	        super(setup,null,null);
-	}
 	
 	//Need a way to set similarity percentage
 	public void setSimilar(double x){
