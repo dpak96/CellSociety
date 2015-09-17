@@ -37,7 +37,7 @@ public class SegregationCell extends Cell {
         }
         else {
             List<Cell> empties = new ArrayList<Cell>();
-            for (List<Cell> list: myGrid.getGrid()) {
+            for (List<Cell> list: myGrid.getCellMatrix()) {
                 for (Cell cell: list){
                     if (cell.myCurrentState==2){
                         empties.add(cell);

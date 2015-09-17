@@ -103,7 +103,7 @@ public class Grid {
      * 
      * @return A list of the cells in the grid.
      */
-    public List<List<Cell>> getGrid(){
+    public List<List<Cell>> getCellMatrix(){
         return myCells;
     }
 
@@ -127,18 +127,7 @@ public class Grid {
         myGridPane.getChildren().addAll(newSquares);
     }*/
     
-    /**
-     * TESTER FOR DRAW GRID METHOD
-     * @author Emanuele
-     */
-    /*public void drawGridTester(){
-        SegregationCell[] cellList = {new SegregationCell(this, 0, 0, 0, 1.0),new SegregationCell(this, 0, 1, 1, 1.0),new SegregationCell(this, 0, 2, 0, 1.0),
-                        new SegregationCell(this, 1, 0, 1, 1.0), new SegregationCell(this, 1, 1, 0, 1.0), new SegregationCell(this, 1, 2, 1, 1.0),
-                        new SegregationCell(this, 2, 0, 0, 1.0), new SegregationCell(this, 2, 1, 1, 1.0), new SegregationCell(this, 2, 2, 0, 1.0)};
-        for(SegregationCell c: cellList){
-                mySegregationCells.add(c);
-        }
-    }
-    */
+    
+
 
 }

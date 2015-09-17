@@ -26,7 +26,7 @@ public class SegregationSimulation extends Simulation {
 	}
 	
 	public void setCellType(Grid grid){
-	    for (List<Cell> list: grid.getGrid()){
+	    for (List<Cell> list: grid.getCellMatrix()){
 	        for (Cell cell: list){
 	            cell = new SegregationCell(cell.myXCoordinate,cell.myYCoordinate,0,similar,grid);
 	            System.out.println(cell.getClass().toString());
@@ -35,8 +35,7 @@ public class SegregationSimulation extends Simulation {
 	}
 	
 	public void initGrid(Grid grid){
-	    int num = grid.getGrid().size()*grid.getGrid().get(0).size();
-	    System.out.println("num: "+num);
+	    int num = grid.getCellMatrix().size();
 	    ArrayList<Integer> list = new ArrayList<Integer>();
 	    int numEmpty = (int) Math.floor(((double)num)*empty);
 	    num-= numEmpty;
@@ -55,7 +54,7 @@ public class SegregationSimulation extends Simulation {
 	    System.out.println("empty: "+numEmpty);
 	    System.out.println("blue: "+num1);
 	    System.out.println("red: "+num2);
-	    for (List<Cell> cells: grid.getGrid()){
+	    for (List<Cell> cells: grid.getCellMatrix()){
                 for (Cell cell: cells){
                     System.out.println(k++);
                     int ran = (int) Math.floor(Math.random()*list.size());
