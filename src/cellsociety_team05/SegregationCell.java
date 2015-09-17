@@ -15,10 +15,10 @@ public class SegregationCell extends Cell {
     private double mySatisfactionPercent;
     private final Color[] myPossibleColors = {Color.BLUE, Color.RED};
     
-    public SegregationCell (Grid grid, int xCoordinate, int yCoordinate, 
+    public SegregationCell (/*Grid grid, */int xCoordinate, int yCoordinate, 
                             int startingState/*, Simulation simulation*/,
                             double satisfaction) {
-        super(grid, xCoordinate, yCoordinate, startingState/*, simulation*/);
+        super(/*grid, */xCoordinate, yCoordinate, startingState/*, simulation*/);
         mySatisfactionPercent = satisfaction;
     }
       
@@ -35,9 +35,11 @@ public class SegregationCell extends Cell {
         }
         else {
             List<Cell> empties = new ArrayList<Cell>();
-            for (Cell cell: myGrid.getGrid()) {
-                if (cell.myCurrentState==2){
-                    empties.add(cell);
+            for (List<Cell> list: myGrid.getGrid()) {
+                for (Cell cell: list){
+                    if (cell.myCurrentState==2){
+                        empties.add(cell);
+                    }
                 }
             }
             int randomIndex = (int) Math.floor(Math.random()*empties.size());

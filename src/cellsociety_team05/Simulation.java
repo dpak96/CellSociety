@@ -11,7 +11,6 @@ import javafx.util.Duration;
 public abstract class Simulation {
 	//changed it to protected so i could extend it 
 	protected Grid myGrid;
-	private Setup mySetup;
 	private int mySpeed; 
 	private GridPane myGridPane;
 	private GUI myGUI;
@@ -20,15 +19,14 @@ public abstract class Simulation {
 	private Timeline animation;
 	protected HashMap<String, Double> myParameters;
 
-	public Simulation(Setup setup, GridPane gridPane, GUI gui){
-		mySetup = setup;
+	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params){
 		myGrid = new Grid(4,4);
 		animation = new Timeline();
 		myGUI = gui;
+		myParameters = params;
 	}
 
-	public void start(){	     
-
+	public void start(){
 		// sets the game's loop
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> this.step());
@@ -36,7 +34,6 @@ public abstract class Simulation {
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
-
 
 	public void changeFlow(){
 		if(animation.getStatus().equals(Animation.Status.RUNNING)){
@@ -52,7 +49,7 @@ public abstract class Simulation {
 	//single step of simulation First step would be updateState 
 	//Second step would be updateGrid
 	public void step(){
-	        myGrid.preUpdateGrid();
+		myGrid.preUpdateGrid();
 		myGrid.updateGrid();
 		myGUI.updateDisplayedGrid();
 	}
@@ -71,6 +68,6 @@ public abstract class Simulation {
 	public void showGrid(){
 		myGrid.drawSquareGrid();
 	}
-	
+
 
 }
