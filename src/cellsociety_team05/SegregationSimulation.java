@@ -59,6 +59,7 @@ public class SegregationSimulation extends Simulation {
                     System.out.println(k++);
                     int ran = (int) Math.floor(Math.random()*list.size());
                     cell.setCurrentState(list.remove(ran));
+                    cell.getSquare().setFill(cell.myColors[cell.getCurrentState()]);
                 }
 	    }
 	}

@@ -57,6 +57,10 @@ public abstract class Simulation {
 	    myGrid.updateGrid();
 		//myGUI.updateDisplayedGrid();
 	}
+	
+	public void stopAnimation(){
+	    animation.stop();
+	}
 
 	//run steps continuously (take a boolean?)
 	public void run(boolean canRun){

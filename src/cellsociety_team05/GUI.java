@@ -112,7 +112,7 @@ public class GUI {
 	}*/
 	
 	
-	private void step(){
+	public void step(){
 	    System.out.println("step");
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
@@ -125,29 +125,26 @@ public class GUI {
 		HashMap<String, Double> map = new HashMap<String, Double>();
                 map.put("similar", 0.3);
                 map.put("ratio", 0.5);
-                map.put("empty", 0.1);
+                map.put("empty", 0.2);
                 myGrid = new Grid(4,4);
-                myGrid.linkGridPane(myGridPane);
 		mySimulation = new SegregationSimulation(myGridPane,this,map,myGrid);
-                //mySimulation.initGrid(myGrid);
+                mySimulation.initGrid(myGrid);
+                myGrid.linkGridPane(myGridPane);
 		mySimulation.start();
 		//anotherStartSimulation();
 	}
 	
 	public void restartSimulation(){
 		System.out.println("RESTART");
-	    //animation.stop();
-	    //myGridPane.getChildren().clear();
+	        mySimulation.stopAnimation();
+	        myGridPane.getChildren().clear();
 		//anotherStartSimulation();
+	        startSimulation();
 	}
 	
 	public void updateSimulationSpeed(long speed){
 		System.out.println(speed);
 		simulationSpeed = speed;
-	}
-	
-	public void nextStep() {
-		//to complete
 	}
 	
 	
