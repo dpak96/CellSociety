@@ -1,4 +1,4 @@
-package cellsociety_team05;
+/*package cellsociety_team05;
 
 import javafx.scene.layout.GridPane;
 
@@ -11,5 +11,10 @@ public class SimulationTester extends Simulation{
 		myGrid.drawSquareGrid();
 		System.out.println("A");
 	}
+	
+	public void updateState(Cell cell){
+		
+	}
 
 }
+*/
