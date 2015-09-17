@@ -3,7 +3,8 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
-
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -32,6 +33,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import toolsForGui.GuiBoxContainer;
+import javafx.util.Duration;
 
 public class GUI {
 	
@@ -52,7 +54,10 @@ public class GUI {
 	private boolean paused;
 	private Button nextStepButton;
 	private Button flowButton;
+	private Button startButton;
 	private GridPane myGridPane;
+	private Grid myGrid;
+	private Timeline animation;
 	//private guiButtons myButtons;
 	private GuiBoxContainer myBoxContainer;
 	
@@ -88,8 +93,8 @@ public class GUI {
 	}
 
 	private void loadSimulationValue(String letter) {
-		mySetup = new Setup(letter);
-		//mySimulation = new Simulation(mySetup);
+		//mySetup = new Setup(letter);
+		//mySimulation = new SegregationSimulation(mySetup);
 	}
 
 	private MenuBar createTopMenu() {
@@ -136,13 +141,20 @@ public class GUI {
 	}
 	
 	private void updateFlowBox(HBox hbox){
+
 		/*
 		Button start = new Button("Start");
 		start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> startSimulation());
+=======
+		startButton = new Button("Start");
+		startButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> anotherStartSimulation());
+		//start.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> startSimulation());
+>>>>>>> origin/master
 		flowButton = new Button("Pause");
 		flowButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> changeSimulationFlow());
 		nextStepButton = new Button("Next step");
 		nextStepButton.setDisable(true);
+<<<<<<< HEAD
 		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {System.out.println("next step");});
 		Button restart = new Button("Restart");
 		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
@@ -154,16 +166,57 @@ public class GUI {
 		hbox.getChildren().addAll(start, flowButton, nextStepButton, restart);
 
 	}
-	
+ 
 	public void startSimulation() {
 		//mySimulation.start();
+		nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {step(); System.out.println("next step");});
+		//nextStepButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {/*mySimulation.nextStep();*/ System.out.println("next step");});
+		Button restart = new Button("Restart");
+		restart.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> restartSimulation());
+		//hbox.getChildren().addAll(startButton, flowButton, nextStepButton, restart);
+	}
+/*	
+	private void startSimulation() {
+            //mySimulation.start();
+            paused = false;
+            System.out.println("Start");
+            //mySimulation = new SimulationTester(mySetup, myGridPane);
+            testGridPane();   
+	}
+*/	
+	private void anotherStartSimulation() {
+	        startButton.setDisable(true);
 		paused = false;
 		System.out.println("Start");
-		mySimulation = new SimulationTester(mySetup, myGridPane);
+		myGrid = new Grid(4,4);
+                anotherTestGridPane();
+                mySimulation = new SegregationSimulation(new Setup(""),myGridPane,this,.5);
+                animation = new Timeline();
+                KeyFrame frame = new KeyFrame(Duration.millis(1000),
+                                              e -> this.step());
+                              animation.setCycleCount(Timeline.INDEFINITE);
+                              animation.getKeyFrames().add(frame);
+                              animation.play();
+                /*for(int i=0;i<5;i++){
+                    mySimulation.step();
+                    long start = System.currentTimeMillis();
+                    while(System.currentTimeMillis()-start<1000){
+                        
+                    }
+                }*/
+	}
+	
+	private void step(){
+	    System.out.println("step");
+	    myGrid.preUpdateGrid();
+	    myGrid.updateGrid();
+	    updateGrid();
 	}
 	
 	private void restartSimulation(){
-		
+	        animation.stop();
+	        myGridPane.getChildren().clear();
+		anotherStartSimulation();
 	}
 
 	private VBox createFlowControlBox(){
@@ -180,6 +233,54 @@ public class GUI {
 		System.out.println(speed);
 		simulationSpeed = speed;
 		//update the simulation speed
+	}
+	
+	
+	/**
+	 * This is a small tester for the GridPane. It shows how we are going to display 
+	 * the cells. In the future I will add an event handler to allow the user to 
+	 * click on a cell and change its color (and thus its state).
+	 */
+	
+	private void testGridPane(){
+                System.out.println(myGridPane.getWidth());
+                System.out.println(myGridPane.getHeight());
+                double constant = myGridPane.getHeight()/2.0 - 5;
+		Rectangle test1 = new Rectangle(constant, constant, Color.RED);
+		GridPane.setConstraints(test1, 0 , 0);
+		Rectangle test2 = new Rectangle(constant, constant, Color.BLACK);
+		GridPane.setConstraints(test2, 0 , 1);
+		Rectangle test3 = new Rectangle(constant, constant, Color.BEIGE);
+		GridPane.setConstraints(test3, 1 , 0);
+		Rectangle test4 = new Rectangle(constant, constant, Color.ALICEBLUE);
+		GridPane.setConstraints(test4, 1 , 1);
+		myGridPane.getChildren().addAll(test1, test2, test3, test4);
+	}
+	
+	private void anotherTestGridPane(){
+            System.out.println(myGridPane.getWidth());
+            System.out.println(myGridPane.getHeight());
+            double constant = myGridPane.getHeight()/4.0 - 5;
+            for (int i=0;i<4;i++){
+                for (int j=0;j<4;j++){
+                    Rectangle add = new Rectangle(constant, constant, myGrid.myCells.get((i*4)+j).getCurrentColor());
+                    GridPane.setConstraints(add, i, j);
+                    myGridPane.getChildren().add(add);
+                }
+            }
+	}
+	
+	public void updateGrid(){
+	    System.out.println("update");
+	    for (int i=0;i<myGrid.myCells.size();i++){
+	        Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(i);
+	        if(myGrid.myCells.get(i).myCurrentState==0){
+	            thisRec.setFill(Color.BLACK);
+	        }
+	        else{
+	            thisRec.setFill(Color.WHITE);
+	        }
+	    }
 	}
 	
 
@@ -204,16 +305,18 @@ public class GUI {
 		//mySimulation.changeFlow();
 		paused = !paused;
 		if(paused){
+		        animation.pause();
 			System.out.println("Paused");
 			nextStepButton.setDisable(false);
 			flowButton.setText("Resume");
 		} else {
+		        animation.play();
 			System.out.println("Resumed");
 			nextStepButton.setDisable(true);
 			flowButton.setText("Pause");
 		}
 	}
-
+	
 	public Object nextStep() {
 		// TODO Auto-generated method stub
 		return null;

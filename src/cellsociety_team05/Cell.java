@@ -42,7 +42,7 @@ public class Cell {
     
     public void initNeighbors(){
         myNeighbors = new ArrayList<Cell>();
-        for(Cell cell: myGrid.myCells){
+        for(Cell cell: myGrid.getGrid()){
             if (cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate-1 ||
                     cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate ||
                     cell.myXCoordinate==myXCoordinate-1 && cell.myYCoordinate==myYCoordinate+1 ||
@@ -107,6 +107,9 @@ public class Cell {
                 myNextState=0;
             }
         }
+        System.out.println("my current state: "+myCurrentState);
+        System.out.println("my live neighbors: "+liveNeighbors);
+        System.out.println("my next state: "+myNextState);
     }
     
     /**
@@ -121,13 +124,13 @@ public class Cell {
      * returns the x coordinate of the cell
      */
     public int getX(){
-    	return myXCoordinate;
+        return myXCoordinate;
     }
     
     /**
      * returns the y coordinate of the cell 
      */
     public int getY(){
-    	return myYCoordinate;
+        return myYCoordinate;
     }
-}	
+}       
