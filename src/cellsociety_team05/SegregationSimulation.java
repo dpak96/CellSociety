@@ -46,9 +46,11 @@ public class SegregationSimulation extends Simulation {
 	    for (int i=0;i<num2;i++){
 	        list.add(1);
 	    }
-	    for (int i=0;i<grid.getGrid().size();i++){
-	        int ran = (int) Math.floor(Math.random()*list.size());
-	        grid.getGrid().get(i).setCurrentState(list.remove(ran));
+	    for (List<Cell> cells: grid.getGrid()){
+                for (Cell cell: cells){
+                    int ran = (int) Math.floor(Math.random()*list.size());
+                    cell.setCurrentState(list.remove(ran));
+                }
 	    }
 	}
 	

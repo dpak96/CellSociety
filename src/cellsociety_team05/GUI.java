@@ -149,26 +149,30 @@ public class GUI {
 	
 	public void updateDisplayedGrid(){
 	    //System.out.println("update");
-	    for (int i=0;i<myGrid.myCells.size();i++){
-	        Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(i);
-	        if(myGrid.myCells.get(i).myCurrentState==0){
-	            thisRec.setFill(Color.BLACK);
-	        }
-	        else{
-	            thisRec.setFill(Color.WHITE);
-	        }
-	    System.out.println("update");
-	    for (int i=0;i<myGrid.getGrid().size();i++){
-	        List<Cell> list = myGrid.getGrid().get(i);
-	        for (int j=0;j<list.size();j++){
-	            Rectangle thisRec = (Rectangle) myGridPane.getChildren().get((j*4)+i);
-	            //System.out.println("GridPane: ("+i+","+j+")");
-	            //System.out.println("Cell: ("+list.get(j).getX()+","+list.get(j).getY()+")");
-	            if(list.get(j).myCurrentState==0){
+	    for (int k=0;k<myGrid.getGrid().size();k++){
+	        List<Cell> cells = myGrid.getGrid().get(k);
+	        for (Cell cell: cells){
+	            Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(k);
+	            if(cell.myCurrentState==0){
 	                thisRec.setFill(Color.BLACK);
 	            }
 	            else{
 	                thisRec.setFill(Color.WHITE);
+	            }
+	        }
+	        System.out.println("update");
+	        for (int i=0;i<myGrid.getGrid().size();i++){
+	            List<Cell> list = myGrid.getGrid().get(i);
+	            for (int j=0;j<list.size();j++){
+	                Rectangle thisRec = (Rectangle) myGridPane.getChildren().get((j*4)+i);
+	                //System.out.println("GridPane: ("+i+","+j+")");
+	                //System.out.println("Cell: ("+list.get(j).getX()+","+list.get(j).getY()+")");
+	                if(list.get(j).myCurrentState==0){
+	                    thisRec.setFill(Color.BLACK);
+	                }
+	                else{
+	                    thisRec.setFill(Color.WHITE);
+	                }
 	            }
 	        }
 	    }
