@@ -7,11 +7,12 @@ public class Setup {
 	private HashMap<String, Double> parameters; 
 	
 	private HashMap<String, Simulation> myPossibleSimulations;
+	private Simulation mySimulation;
 	
 	public Setup(String file){
 		XMLReader xml = new XMLReader(file);
 		parameters = xml.getParams();
-		myPossibleSimulations.set("segregation", new SegregationSimulation());
+		myPossibleSimulations.put("segregation", new SegregationSimulation());
 
 	}
 	
@@ -24,11 +25,15 @@ public class Setup {
 	
 	//Need to find a way to change which simulation is being run w/o using too many if statements
 	public void initSimulation(Grid grid){
-		Simulation mySimulation = new SegregationSimulation(this);
+		mySimulation = new SegregationSimulation(this);
 	}
 	
 	public void reset(String file){
 		//Grid grid = initGrid();
 		//initSimulation(grid);
+	}
+	
+	public Simulation getSimulation(){
+		return mySimulation; 
 	}
 }
