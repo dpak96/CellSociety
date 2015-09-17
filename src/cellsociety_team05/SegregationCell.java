@@ -13,8 +13,8 @@ import javafx.scene.paint.Color;
 public class SegregationCell extends Cell {
     private final String[] myPossibleStates = {"X/Blue", "O/Red", "Empty"};
     private double mySatisfactionPercent;
-    private final Color[] myPossibleColors = {Color.BLUE, Color.RED};
     private Grid myGrid;
+    private final Color[] myPossibleColors = {Color.BLUE, Color.RED, Color.WHITE};
     
     public SegregationCell (int xCoordinate, int yCoordinate, 
                             int startingState,

@@ -20,7 +20,6 @@ public abstract class Cell {
     protected int myYCoordinate;
     protected int myCurrentState;
     protected int myNextState;
-    protected Grid myGrid;
     private final String[] myPossibleStates = {"Alive","Dead"};
     //alive = 0, dead = 1 (based on index)
     private final Color[] myColors = {Color.BLACK, Color.WHITE};
@@ -34,8 +33,8 @@ public abstract class Cell {
      * @param yCoordinate
      * @param startingState
      */
-    public Cell(/*Grid2d grid, */int xCoordinate, int yCoordinate,
-                     int startingState/*, Simulation simulation*/){
+    public Cell(int xCoordinate, int yCoordinate,
+                     int startingState){
         //myGrid = grid;
         myXCoordinate = xCoordinate;
         myYCoordinate = yCoordinate;
