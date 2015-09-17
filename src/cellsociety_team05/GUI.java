@@ -161,9 +161,9 @@ public class GUI {
 	        startButton.setDisable(true);
 		paused = false;
 		System.out.println("Start");
-		myGrid = new Grid(4,4);
+		myGrid = new Grid(10,10);
                 anotherTestGridPane();
-                mySimulation = new SegregationSimulation(new Setup(""),myGridPane,this,.5);
+                //mySimulation = new SegregationSimulation(new Setup(""),myGridPane,this,.5,.7,.1,myGrid);
                 animation = new Timeline();
                 KeyFrame frame = new KeyFrame(Duration.millis(1000),
                                               e -> this.step());
@@ -233,10 +233,10 @@ public class GUI {
 	private void anotherTestGridPane(){
             System.out.println(myGridPane.getWidth());
             System.out.println(myGridPane.getHeight());
-            double constant = myGridPane.getHeight()/4.0 - 5;
-            for (int i=0;i<4;i++){
-                for (int j=0;j<4;j++){
-                    Rectangle add = new Rectangle(constant, constant, myGrid.myCells.get((i*4)+j).getCurrentColor());
+            double constant = myGridPane.getHeight()/10.0 - 5;
+            for (int i=0;i<10;i++){
+                for (int j=0;j<10;j++){
+                    Rectangle add = new Rectangle(constant, constant, myGrid.myCells.get((i*6)+j).getCurrentColor());
                     GridPane.setConstraints(add, i, j);
                     myGridPane.getChildren().add(add);
                 }
