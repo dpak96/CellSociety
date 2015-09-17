@@ -12,8 +12,8 @@ public class SegregationSimulation extends Simulation {
 	private double ratio;
 	private double empty;
 	
-	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param){
-		super(gridPane, gui, param);
+	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param,Grid g){
+		super(gridPane, gui, param,g);
 		similar = param.get("similar");
 		ratio = param.get("ratio");
 		empty = param.get("empty");
@@ -35,7 +35,7 @@ public class SegregationSimulation extends Simulation {
 	}
 	
 	public void initGrid(Grid grid){
-	    int num = grid.getCellMatrix().size();
+	    int num = grid.getCellMatrix().size()*grid.getCellMatrix().get(0).size();
 	    ArrayList<Integer> list = new ArrayList<Integer>();
 	    int numEmpty = (int) Math.floor(((double)num)*empty);
 	    num-= numEmpty;

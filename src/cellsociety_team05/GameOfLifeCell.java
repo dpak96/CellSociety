@@ -4,11 +4,10 @@ import javafx.scene.paint.Color;
 
 public class GameOfLifeCell extends Cell {
     private final String[] myPossibleStates = {"Alive","Dead"};
-    private final Color[] myColors = {Color.BLACK, Color.WHITE};
 
     public GameOfLifeCell (int xCoordinate, int yCoordinate, int startingState) {
         super(xCoordinate, yCoordinate, startingState);
-        // TODO Auto-generated constructor stub
+        myColors = new Color[] {Color.BLACK, Color.WHITE};
     }
 
     @Override

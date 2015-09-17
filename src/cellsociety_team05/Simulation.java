@@ -19,8 +19,9 @@ public abstract class Simulation {
 	private Timeline animation;
 	protected HashMap<String, Double> myParameters;
 
-	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params){
-		myGrid = new Grid(4,4);
+	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params,Grid g){
+		myGrid = g;
+		//myGrid.linkGridPane(gridPane);
 		animation = new Timeline();
 		myGUI = gui;
 		myParameters = params;
@@ -29,7 +30,7 @@ public abstract class Simulation {
 	public void start(){
 		// sets the game's loop
 	        animation = new Timeline();
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+		KeyFrame frame = new KeyFrame(Duration.millis(1000),
 				e -> this.step());
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -40,7 +41,9 @@ public abstract class Simulation {
 		if(animation.getStatus().equals(Animation.Status.RUNNING)){
 			animation.pause();
 		}
-		animation.play();
+		else if (animation.getStatus().equals(Animation.Status.PAUSED)){
+		    animation.play();
+		}
 	}
 
 	public void updateSpeed(int speed){
@@ -51,7 +54,7 @@ public abstract class Simulation {
 	//Second step would be updateGrid
 	public void step(){
 	    myGrid.preUpdateGrid();
-		myGrid.updateGrid();
+	    myGrid.updateGrid();
 		//myGUI.updateDisplayedGrid();
 	}
 

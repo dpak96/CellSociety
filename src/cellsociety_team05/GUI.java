@@ -88,12 +88,12 @@ public class GUI {
 		topMenu.prefWidthProperty().bind(myStage.widthProperty());
 		return topMenu;
 	}
-	/*
-	private void anotherStartSimulation() {
+	
+	/*private void anotherStartSimulation() {
 	    //startButton.setDisable(true);
 		System.out.println("Start");
 		myGrid = new Grid(4,4);
-                anotherTestGridPane();
+                //anotherTestGridPane();
                 HashMap<String, Double> map = new HashMap<String, Double>();
                 map.put("similar", 0.3);
                 map.put("ratio", 0.5);
@@ -102,22 +102,23 @@ public class GUI {
                 //mySimulation.setCellType(myGrid);
                 //myGrid.printType();
                 mySimulation.initGrid(myGrid);
+                myGrid.linkGridPane(myGridPane);
                 animation = new Timeline();
                 KeyFrame frame = new KeyFrame(Duration.millis(1000),
                                               e -> this.step());
                               animation.setCycleCount(Timeline.INDEFINITE);
                               animation.getKeyFrames().add(frame);
                               animation.play();
-	}
-	*/
-	/*
+	}*/
+	
+	
 	private void step(){
 	    System.out.println("step");
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
-	    updateDisplayedGrid();
+	    //updateDisplayedGrid();
 	}
-	*/
+	
 	public void startSimulation(){
 		System.out.println("Start");
 		//mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 0.5);
@@ -125,7 +126,10 @@ public class GUI {
                 map.put("similar", 0.3);
                 map.put("ratio", 0.5);
                 map.put("empty", 0.1);
-		mySimulation = new SegregationSimulation(myGridPane,this,map);
+                myGrid = new Grid(4,4);
+                myGrid.linkGridPane(myGridPane);
+		mySimulation = new SegregationSimulation(myGridPane,this,map,myGrid);
+                //mySimulation.initGrid(myGrid);
 		mySimulation.start();
 		//anotherStartSimulation();
 	}
