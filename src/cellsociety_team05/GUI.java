@@ -2,6 +2,7 @@ package cellsociety_team05;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import javafx.animation.KeyFrame;
@@ -86,7 +87,7 @@ public class GUI {
 		topMenu.prefWidthProperty().bind(myStage.widthProperty());
 		return topMenu;
 	}
-	
+	/*
 	private void anotherStartSimulation() {
 	    //startButton.setDisable(true);
 		System.out.println("Start");
@@ -100,24 +101,27 @@ public class GUI {
                               animation.getKeyFrames().add(frame);
                               animation.play();
 	}
-	
+	*/
+	/*
 	private void step(){
 	    System.out.println("step");
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	    updateDisplayedGrid();
 	}
-	
+	*/
 	public void startSimulation(){
 		System.out.println("Start");
-		anotherStartSimulation();
+		mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 0.5);
+		mySimulation.start();
+		//anotherStartSimulation();
 	}
 	
 	public void restartSimulation(){
 		System.out.println("RESTART");
-	    animation.stop();
-	    myGridPane.getChildren().clear();
-		anotherStartSimulation();
+	    //animation.stop();
+	    //myGridPane.getChildren().clear();
+		//anotherStartSimulation();
 	}
 	
 	public void updateSimulationSpeed(long speed){
@@ -133,6 +137,8 @@ public class GUI {
 	public void dostuff(){
 		System.out.println("HAHAHAH");
 	}
+	/*
+=======
 	
 	private void anotherTestGridPane(){
             System.out.println(myGridPane.getWidth());
@@ -147,6 +153,7 @@ public class GUI {
             }
 	}
 	
+>>>>>>> master
 	public void updateDisplayedGrid(){
 	    //System.out.println("update");
 	    for (int k=0;k<myGrid.getGrid().size();k++){
@@ -177,17 +184,20 @@ public class GUI {
 	        }
 	    }
 	}
-	
+	*/
 	public Simulation getCurrentSimulation(){
 		return mySimulation;
 	}
 	
 	public void changeSimulationFlow(){
+		mySimulation.changeFlow();
+		/*
 		if(animation.getStatus() == Animation.Status.RUNNING){
 			animation.pause();
 		} else {
 			animation.play();
 		}
+		*/
 	}
 	
 	public long getSimulationSpeed() {
