@@ -24,10 +24,10 @@ public class XMLReader {
 	private HashMap<String, Double> parameters; 
 	private int rule;
 
-	public XMLReader(String file, Grid grid){
+	public XMLReader(String file){
 		fileName = file;
 		cells = new ArrayList<Cell>();
-		myGrid = grid;
+		//myGrid = grid;
 	}
 
 	public void readFile(){

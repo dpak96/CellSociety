@@ -27,7 +27,7 @@ public class Setup {
 	}
 	
 	public void reset(String file){
-		Grid grid = initGrid();
-		initSimulation(grid);
+		//Grid grid = initGrid();
+		//initSimulation(grid);
 	}
 }

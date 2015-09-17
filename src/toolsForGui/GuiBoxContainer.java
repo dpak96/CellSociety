@@ -28,7 +28,7 @@ public class GuiBoxContainer{
 		myVBox.setSpacing(10.0);
 		myVBox.setPrefHeight(50);
 		FlowControlBox f = new FlowControlBox(myGui, myStage);
-		SpeedControlBox s = new SpeedControlBox(5, myStage);
+		SpeedControlBox s = new SpeedControlBox(5, myGui);
 		myBoxes.add(f);
 		myBoxes.add(s);
 	}
