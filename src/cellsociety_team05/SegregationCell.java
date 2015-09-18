@@ -31,6 +31,7 @@ public class SegregationCell extends Cell {
     public SegregationCell(){
     	this(0, 0, 0, 0, null);
     }
+    
     public void setCell(int xCoordinate, int yCoordinate, 
             int startingState,
             HashMap<String, Double> param,Grid grid){

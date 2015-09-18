@@ -88,13 +88,11 @@ public class GUI {
 		topMenu.prefWidthProperty().bind(myStage.widthProperty());
 		return topMenu;
 	}
-	
 	public void startSimulation(){
 		System.out.println("Start");
 		mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 8, 8, 0.5);
 		mySimulation.start();
 	}
-	
 	public void step(){
 	    System.out.println("step");
 	    myGrid.preUpdateGrid();
@@ -102,7 +100,10 @@ public class GUI {
 	}
 	
 	public void restartSimulation(){
-	    myGridPane.getChildren().clear();
+		System.out.println("RESTART");
+	        mySimulation.stopAnimation();
+	        myGridPane.getChildren().clear();
+	        startSimulation();
 		mySimulation.restart();
 	}
 	
@@ -110,6 +111,10 @@ public class GUI {
 		System.out.println(speed);
 		//simulationSpeed = speed;
 		mySimulation.updateSpeed(speed);
+	}
+	
+	public void dostuff(){
+		System.out.println("HAHAHAH");
 	}
 	
 	public void nextStep() {
