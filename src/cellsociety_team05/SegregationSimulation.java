@@ -71,12 +71,6 @@ public class SegregationSimulation extends Simulation {
                 }
 	    }
 	}
-	
-	@Override
-	public void updateState(Cell cell) {
-	    myGrid.preUpdateGrid();
-	}
-
 
     @Override
     public Cell makeCell (int x, int y, int start, Grid g) {

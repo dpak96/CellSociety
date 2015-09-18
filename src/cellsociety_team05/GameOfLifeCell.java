@@ -1,13 +1,17 @@
 package cellsociety_team05;
 
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class GameOfLifeCell extends Cell {
-    private final String[] myPossibleStates = {"Alive","Dead"};
 
     public GameOfLifeCell (int xCoordinate, int yCoordinate, int startingState) {
         super(xCoordinate, yCoordinate, startingState);
         myColors = new Color[] {Color.BLACK, Color.WHITE};
+        myPossibleStates = new String[] {"Alive","Dead"};
+        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
+        GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
 
     @Override

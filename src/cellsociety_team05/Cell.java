@@ -22,12 +22,11 @@ public abstract class Cell {
     protected int myYCoordinate;
     protected int myCurrentState;
     protected int myNextState;
-    private final String[] myPossibleStates = {"Alive","Dead"};
-    //alive = 0, dead = 1 (based on index)
-    protected Color[] myColors = {Color.BLACK,Color.WHITE};
+    protected String[] myPossibleStates;
+    protected Color[] myColors;
     protected boolean myDirty;
     //Simulation mySimulation;
-    private Rectangle mySquare;
+    protected Rectangle mySquare;
     
     /**
      * Cell constructor
@@ -36,16 +35,13 @@ public abstract class Cell {
      * @param yCoordinate
      * @param startingState
      */
-    public Cell(int xCoordinate, int yCoordinate,
-                     int startingState){
+    public Cell(int xCoordinate, int yCoordinate, int startingState){
         //myGrid = grid;
         myXCoordinate = xCoordinate;
         myYCoordinate = yCoordinate;
         myCurrentState = startingState;
         //mySimulation = simulation;
         //this works only for an 8x8 simulation
-        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
-        GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     
     public abstract void setCell(int xCoordinate, int yCoordinate, 
@@ -103,9 +99,6 @@ public abstract class Cell {
      */
     public void updateCell(){
         myCurrentState = myNextState;
-        //System.out.println(this.getClass().toString());
-        //System.out.println(myCurrentState);
-        //System.out.println(myColors.length);
         mySquare.setFill(myColors[myCurrentState]);
     }
  

@@ -1,23 +1,29 @@
 package cellsociety_team05;
 
 import java.util.List;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class FireCell extends Cell {
-    private final String[] myPossibleStates = {"Empty", "Tree", "Burning"};
-    private final Color[] myPossibleColors = {Color.WHITE, Color.GREEN, Color.RED};
     private double probCatch;
-    private List<FireCell> myNeighbors;
     
 
     public FireCell (int xCoordinate, int yCoordinate, int startingState) {
         super(xCoordinate, yCoordinate, startingState);
-        // TODO Auto-generated constructor stub
+        myColors = new Color[] {Color.WHITE, Color.GREEN, Color.RED};
+        myPossibleStates = new String[] {"Empty", "Tree", "Burning"};
+        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
+        GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
+    }
+    
+    public void setProb(double prob){
+        probCatch = prob;
     }
     
     private boolean neighborIsBurning(){
         boolean result = false;
-        for (FireCell cell: myNeighbors){
+        for (Cell cell: myNeighbors){
             if (cell.myCurrentState==2){
                 result = true;
             }
@@ -27,7 +33,6 @@ public class FireCell extends Cell {
 
     @Override
     public void preUpdateCell () {
-        myNextState = 0;
         if (myCurrentState==1){
             if (neighborIsBurning()){
                 double ran = Math.random();
@@ -38,6 +43,12 @@ public class FireCell extends Cell {
                     myNextState = myCurrentState;
                 }
             }
+            else{
+                myNextState = myCurrentState;
+            }
+        }
+        else if (myCurrentState!=1) {
+            myNextState = 0;
         }
     }
 
