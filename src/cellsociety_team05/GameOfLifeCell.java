@@ -1,5 +1,6 @@
 package cellsociety_team05;
 
+import java.util.HashMap;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -41,6 +42,18 @@ public class GameOfLifeCell extends Cell {
         System.out.println("my current state: "+myPossibleStates[myCurrentState]);
         System.out.println("my live neighbors: "+liveNeighbors);
         System.out.println("my next state: "+myPossibleStates[myNextState]);
+    }
+
+    @Override
+    public void setCell (int xCoordinate,
+                         int yCoordinate,
+                         int startingState,
+                         HashMap<String, Double> params,
+                         Grid grid) {
+        this.myXCoordinate = xCoordinate;
+        this.myYCoordinate = yCoordinate;
+        this.setCurrentState(startingState);
+        
     }
 
 }

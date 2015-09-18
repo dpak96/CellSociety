@@ -25,8 +25,8 @@ public abstract class Cell {
     protected String[] myPossibleStates;
     protected Color[] myColors;
     protected boolean myDirty;
-    //Simulation mySimulation;
     protected Rectangle mySquare;
+    protected HashMap<String, Double> myParameters;
     
     /**
      * Cell constructor

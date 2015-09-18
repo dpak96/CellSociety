@@ -1,5 +1,6 @@
 package cellsociety_team05;
 
+import java.util.HashMap;
 import java.util.List;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -50,6 +51,18 @@ public class FireCell extends Cell {
         else if (myCurrentState!=1) {
             myNextState = 0;
         }
+    }
+
+    @Override
+    public void setCell (int xCoordinate,
+                         int yCoordinate,
+                         int startingState,
+                         HashMap<String, Double> params,
+                         Grid grid) {
+        this.myXCoordinate = xCoordinate;
+        this.myYCoordinate = yCoordinate;
+        this.setCurrentState(startingState);
+        probCatch = params.get("probCatch");
     }
 
 }

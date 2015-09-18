@@ -88,162 +88,45 @@ public class GUI {
 		topMenu.prefWidthProperty().bind(myStage.widthProperty());
 		return topMenu;
 	}
-	
-	/*private void anotherStartSimulation() {
-	    //startButton.setDisable(true);
+	public void startSimulation(){
 		System.out.println("Start");
-		myGrid = new Grid(4,4);
-                //anotherTestGridPane();
-                HashMap<String, Double> map = new HashMap<String, Double>();
-                map.put("similar", 0.3);
-                map.put("ratio", 0.5);
-                map.put("empty", 0.1);
-                mySimulation = new SegregationSimulation(myGridPane,this,map);
-                //mySimulation.setCellType(myGrid);
-                //myGrid.printType();
-                mySimulation.initGrid(myGrid);
-                myGrid.linkGridPane(myGridPane);
-                animation = new Timeline();
-                KeyFrame frame = new KeyFrame(Duration.millis(1000),
-                                              e -> this.step());
-                              animation.setCycleCount(Timeline.INDEFINITE);
-                              animation.getKeyFrames().add(frame);
-                              animation.play();
-	}*/
-	
-	
+		mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 8, 8, 0.5);
+		mySimulation.start();
+	}
 	public void step(){
 	    System.out.println("step");
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
-	    //updateDisplayedGrid();
-	}
-	
-	public void startSimulation(){
-		System.out.println("Start");
-		//mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 0.5);
-		/*HashMap<String, Double> map = new HashMap<String, Double>();
-                map.put("similar", 0.3);
-                map.put("ratio", 0.5);
-                map.put("empty", 0.2);
-                mySimulation = new SegregationSimulation(myGridPane,this,map);
-                myGrid = new Grid(4,4,mySimulation);
-                mySimulation.initGrid(myGrid);
-                myGrid.linkGridPane(myGridPane);
-		mySimulation.start();*/
-		//anotherStartSimulation();
-		//startGameOfLifeSimulation();
-		//startSegregationSimulation();
-		startFireSimulation();
-	}
-	
-	public void startFireSimulation(){
-	    HashMap<String, Double> map = new HashMap<String, Double>();
-            map.put("probCatch", 0.5);
-	    mySimulation = new FireSimulation(myGridPane,this,map);
-	    myGrid = new Grid(4,4,mySimulation);
-	    myGrid.linkGridPane(myGridPane);
-	    mySimulation.start();
-	}
-	
-	public void startGameOfLifeSimulation(){
-	    mySimulation = new GameOfLifeSimulation(myGridPane,this,null);
-	    myGrid = new Grid(4,4,mySimulation);
-	    myGrid.linkGridPane(myGridPane);
-	    mySimulation.start();
-	}
-	
-	public void startSegregationSimulation(){
-	    System.out.println("Start");
-            HashMap<String, Double> map = new HashMap<String, Double>();
-            map.put("similar", 0.3);
-            map.put("ratio", 0.5);
-            map.put("empty", 0.2);
-            mySimulation = new SegregationSimulation(myGridPane,this,map);
-            myGrid = new Grid(4,4,mySimulation);
-            mySimulation.initGrid(myGrid);
-            myGrid.linkGridPane(myGridPane);
-            mySimulation.start();
 	}
 	
 	public void restartSimulation(){
 		System.out.println("RESTART");
 	        mySimulation.stopAnimation();
 	        myGridPane.getChildren().clear();
-		//anotherStartSimulation();
 	        startSimulation();
+		mySimulation.restart();
 	}
 	
-	public void updateSimulationSpeed(long speed){
+	public void updateSimulationSpeed(double speed){
 		System.out.println(speed);
-		simulationSpeed = speed;
+		//simulationSpeed = speed;
+		mySimulation.updateSpeed(speed);
 	}
-	
 	
 	public void dostuff(){
 		System.out.println("HAHAHAH");
 	}
-	/*
-=======
 	
-	private void anotherTestGridPane(){
-            System.out.println(myGridPane.getWidth());
-            System.out.println(myGridPane.getHeight());
-            double constant = myGridPane.getHeight()/4.0 - 5;
-            for (int i=0;i<4;i++){
-                for (int j=0;j<4;j++){
-                    Rectangle add = new Rectangle(constant, constant, myGrid.getGrid().get(i).get(j).getCurrentColor());
-                    GridPane.setConstraints(add, i, j);
-                    myGridPane.getChildren().add(add);
-                }
-            }
+	public void nextStep() {
+		mySimulation.step();
 	}
-	
->>>>>>> master
-	public void updateDisplayedGrid(){
-	    //System.out.println("update");
-	    for (int k=0;k<myGrid.getGrid().size();k++){
-	        List<Cell> cells = myGrid.getGrid().get(k);
-	        for (Cell cell: cells){
-	            Rectangle thisRec = (Rectangle) myGridPane.getChildren().get(k);
-	            if(cell.myCurrentState==0){
-	                thisRec.setFill(Color.BLACK);
-	            }
-	            else{
-	                thisRec.setFill(Color.WHITE);
-	            }
-	        }
-	        System.out.println("update");
-	        for (int i=0;i<myGrid.getGrid().size();i++){
-	            List<Cell> list = myGrid.getGrid().get(i);
-	            for (int j=0;j<list.size();j++){
-	                Rectangle thisRec = (Rectangle) myGridPane.getChildren().get((j*4)+i);
-	                //System.out.println("GridPane: ("+i+","+j+")");
-	                //System.out.println("Cell: ("+list.get(j).getX()+","+list.get(j).getY()+")");
-	                if(list.get(j).myCurrentState==0){
-	                    thisRec.setFill(Color.BLACK);
-	                }
-	                else{
-	                    thisRec.setFill(Color.WHITE);
-	                }
-	            }
-	        }
-	    }
-	}
-	*/
+
 	public Simulation getCurrentSimulation(){
 		return mySimulation;
 	}
 	
 	public void changeSimulationFlow(){
 		mySimulation.changeFlow();
-		/*
-		if(animation.getStatus() == Animation.Status.RUNNING){
-			animation.pause();
-		} else {
-			animation.play();
-		}
-		*/
 	}
 	
 	public long getSimulationSpeed() {
