@@ -92,12 +92,7 @@ public class XMLReader {
 					System.out.println(y);
 					int state = Integer.valueOf(eElement.getElementsByTagName("state").item(0).getTextContent());
 					System.out.println(state);
-					Cell tempCell = myPossibleCells.get(simulation);
-					System.out.println("check");
-					//tempCell.setCell(x, y, state, parameters);
-					cells.add(tempCell);
-					//cells.add(new GameOfLifeCell(x,y,state));
-
+					cells.add(new CellInfo(x,y,state));
 				}
 			}
 		} catch (Exception e) {
@@ -107,7 +102,7 @@ public class XMLReader {
 	public HashMap<String, Double> getParams(){
 		return parameters;
 	}
-	public ArrayList<Cell> getCells(){
+	public ArrayList<CellInfo> getCells(){
 		return cells;
 	}
 	public String getSimulation(){
