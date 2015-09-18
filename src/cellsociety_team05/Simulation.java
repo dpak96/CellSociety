@@ -1,5 +1,6 @@
 package cellsociety_team05;
 import java.util.HashMap;
+import java.util.List;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -8,65 +9,85 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public abstract class Simulation {
-	//changed it to protected so i could extend it 
-	protected Grid myGrid;
-	private int mySpeed; 
-	private GridPane myGridPane;
-	private GUI myGUI;
-	public static final int FRAMES_PER_SECOND = 60;
-	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-	private Timeline animation;
-	protected HashMap<String, Double> myParameters;
+/**
+ * 
+ * @author emanuele macchi
+ *
+ */
 
-	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params){
-		myGrid = new Grid(4,4);
+public abstract class Simulation {
+	protected Grid myGrid;
+	protected double mySpeed; 
+	protected GridPane myGridPane;
+	protected GUI myGUI;
+	private static final int MILLISECOND_DELAY = 1000;
+	protected Timeline animation;
+	protected HashMap<String, Double> myParameters;
+	private boolean paused;
+	private int myWidth;
+	private int myHeight;
+
+	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params, int height, int width){
+		myGrid = new Grid(height, width);
+		myWidth = width;
+		myHeight = height;
+		myGridPane = gridPane;
 		animation = new Timeline();
 		myGUI = gui;
 		myParameters = params;
+		initializeGridPane();
 	}
 
 	public void start(){
-		// sets the game's loop
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> this.step());
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
+		paused = false;
 	}
 
 	public void changeFlow(){
-		if(animation.getStatus().equals(Animation.Status.RUNNING)){
+		if(paused){
+			animation.play();
+		} else {
 			animation.pause();
 		}
-		animation.play();
+		paused = !paused;
 	}
 
-	public void updateSpeed(int speed){
+	public void updateSpeed(double speed){
 		mySpeed = speed;	
+		animation.setRate(2*(speed/10));
 	}
-
-	//single step of simulation First step would be updateState 
-	//Second step would be updateGrid
+	
 	public void step(){
 	    myGrid.preUpdateGrid();
 		myGrid.updateGrid();
-		//myGUI.updateDisplayedGrid();
+	}
+	
+	public void updateState(Cell cell) {
+	    myGrid.preUpdateGrid();
+	}
+	
+	public void restart(){
+		animation.stop();
+		myGrid = new Grid(myHeight, myWidth);
+		initializeGridPane();
+		animation = new Timeline();
+		start();
 	}
 
-	//run steps continuously (take a boolean?)
-	public void run(boolean canRun){
-		while(canRun){
-			step(); 
+	protected void initializeGridPane(){
+		int row = 0; 
+		for(List<Cell> listCell: myGrid.getCellMatrix()){
+			int col = 0;
+			for(Cell cell: listCell){
+                myGridPane.getChildren().add(cell.getSquare());
+                col++;
+			}
+			row++;
 		}
-	}
-
-	//Will be implemented in subclasses
-	public abstract void updateState(Cell cell);
-
-	//calls drawGrid, displays graphically the Grid
-	public void showGrid(){
-		myGrid.drawSquareGrid();
 	}
 
 
