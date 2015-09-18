@@ -36,4 +36,28 @@ public class SimulationTester extends Simulation{
 		public void setSimilar(double x){
 			similar = x;
 		}
+
+		@Override
+		public void setCellType(Grid grid) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Cell makeCell(int x, int y, int start, Grid g) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void setSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> params) {
+			// TODO Auto-generated method stub
+			
+		}
 }
