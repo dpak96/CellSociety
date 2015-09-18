@@ -35,7 +35,7 @@ public abstract class Simulation {
 		animation = new Timeline();
 		myGUI = gui;
 		myParameters = params;
-		initializeGridPane();
+		//initializeGridPane();
 	}
 	
 	public void setGrid(Grid g){
@@ -45,8 +45,8 @@ public abstract class Simulation {
 	public void start(){
 		KeyFrame frame = new KeyFrame(Duration.millis(1000),
 				e -> this.step());
-		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
+		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.play();
 		paused = false;
 	}
@@ -84,15 +84,10 @@ public abstract class Simulation {
                 myGridPane.getChildren().add(cell.getSquare());
 			}
 		}
-	    myGrid.updateGrid();
 	}
 	
 	public void stopAnimation(){
 	    animation.stop();
-	}
-
-	public void updateState (Cell cell) {
-	        myGrid.preUpdateGrid();
 	}
 	
 	public abstract void setCellType(Grid grid);
@@ -102,7 +97,5 @@ public abstract class Simulation {
 	public void initGrid(Grid grid){}
 	
 	public abstract Cell makeCell(int x, int y, int start, Grid g);
-	
-	public abstract void setSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> params);
 	
 }

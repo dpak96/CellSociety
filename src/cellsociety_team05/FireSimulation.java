@@ -3,31 +3,29 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
+
 import javafx.scene.layout.GridPane;
 
 public class FireSimulation extends Simulation {
     private double probCatch;
 
-    public FireSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params) {
-        super(gridPane, gui, params);
-        probCatch = params.get("probCatch");
+    public FireSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params, int height, int width) {
+        super(gridPane, gui, params, height, width);
+        //probCatch = params.get("probCatch");
+        probCatch = 0.5;
+        initializeGridPane();
     }
 
     @Override
     public Cell makeCell (int x, int y, int start, Grid g) {
-        myGrid = g;
         FireCell c = new FireCell(x,y,start);
-        c.setProb(probCatch);
+        c.setProb(0.5);
         return c;
     }
 
     @Override
     public void setCellType (Grid grid) {
-        for (List<Cell> list: grid.getCellMatrix()){
-            for (Cell cell: list){
-                cell = new FireCell(cell.myXCoordinate,cell.myYCoordinate,0);
-            }
-        }
 
     }
     
@@ -37,7 +35,7 @@ public class FireSimulation extends Simulation {
         for (int i=0;i<width;i++){
             list.add(new ArrayList<Cell>());
             for (int j=0;j<height;j++){
-                int state = (int) Math.floor(Math.random()*3);
+                int state = (int) (Math.random()*3);
                 Cell newcell = makeCell(i, j, state, grid);
                 list.get(i).add(newcell);
             }
@@ -45,10 +43,4 @@ public class FireSimulation extends Simulation {
         return list;
     }
 
-    @Override
-    public void setSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params) {
-        this.myGUI = gui;
-        this.myGridPane = gridPane;
-        this.myParameters = params;
-    }
 }

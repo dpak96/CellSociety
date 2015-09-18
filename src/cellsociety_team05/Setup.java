@@ -29,7 +29,7 @@ public class Setup {
 	
 	public Grid initGrid(){
 		ArrayList<Cell> cells = xml.getCells();
-		Grid myGrid = new Grid(xml.getGridWidth(), xml.getGridHeight(), cells, initSimulation());
+		//Grid myGrid = new Grid(xml.getGridWidth(), xml.getGridHeight(), cells, initSimulation());
 		return myGrid;
 		//Fill in with information of from XML file
 	}
@@ -56,14 +56,14 @@ public class Setup {
 	public void startFireSimulation(){
 	    HashMap<String, Double> map = new HashMap<String, Double>();
             map.put("probCatch", 0.5);
-	    mySimulation = new FireSimulation(myGridPane,this,map);
+	    mySimulation = new FireSimulation(myGridPane, myGUI ,map, 4, 4);
 	    myGrid = new Grid(4,4,mySimulation);
 	    myGrid.linkGridPane(myGridPane);
 	    mySimulation.start();
 	}
 	
 	public void startGameOfLifeSimulation(){
-	    mySimulation = new GameOfLifeSimulation(myGridPane,this,null);
+	    mySimulation = new GameOfLifeSimulation(myGridPane,myGUI,null,4 , 4);
 	    myGrid = new Grid(4,4,mySimulation);
 	    myGrid.linkGridPane(myGridPane);
 	    mySimulation.start();
@@ -75,7 +75,7 @@ public class Setup {
             map.put("similar", 0.3);
             map.put("ratio", 0.5);
             map.put("empty", 0.2);
-            mySimulation = new SegregationSimulation(myGridPane,this,map);
+            mySimulation = new SegregationSimulation(myGridPane,myGUI,map, 4, 4);
             myGrid = new Grid(4,4,mySimulation);
             mySimulation.initGrid(myGrid);
             myGrid.linkGridPane(myGridPane);

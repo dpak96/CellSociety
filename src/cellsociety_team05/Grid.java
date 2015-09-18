@@ -39,6 +39,7 @@ public class Grid {
         }
     }
     */
+    
     public void linkGridPane(GridPane gp){
         for (List<Cell> list: myCells){
             for (Cell cell: list){
@@ -107,28 +108,5 @@ public class Grid {
     public List<List<Cell>> getCellMatrix(){
         return myCells;
     }
-
-    /**
-     * Display the Grid
-     * By calling the X and Y coordinates of the cell, it decides where to position them on the grid.
-     * This will work only for squares, I am starting of thinking of flexibility 
-     * to implement other shapes, say for example an L shaped area
-     * @author Emanuele
-     */
-    
-    /*public void drawSquareGrid(){
-        //need communication with GUI
-        double squareSide = myGridPane.getHeight() / Math.sqrt(mySegregationCells.size());
-        ArrayList<Rectangle> newSquares = new ArrayList<Rectangle>();
-        for(SegregationCell cell: mySegregationCells){
-                Rectangle square = new Rectangle(squareSide, squareSide, cell.getColor());
-                GridPane.setConstraints(square, cell.getX(), cell.getY());
-                newSquares.add(square);
-        }
-        myGridPane.getChildren().addAll(newSquares);
-    }*/
-    
-    
-
 
 }
