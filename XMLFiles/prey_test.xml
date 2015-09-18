@@ -20,8 +20,18 @@
 	</parameters>
 	
 	<parameters>
-		<name>energy</name>
+		<name>energylimit</name>
 		<value>5.0</value>
+	</parameters>
+	
+	<parameters>
+		<name>reproductiontime</name>
+		<value>0.0</value>
+	</parameters>
+	
+	<parameters>
+		<name>energy</name>
+		<value>0.0</value>
 	</parameters>
 	
 	<cell>
