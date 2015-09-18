@@ -13,6 +13,7 @@ public class Setup {
 	private GridPane myGridPane;
 	private Grid myGrid;
 	private int myHeight, myWidth;
+	private ArrayList<CellInfo> myCells;
 	
 	public Setup(String file, GUI gui, GridPane gp){
 		myGUI = gui; 
@@ -23,24 +24,9 @@ public class Setup {
                 myWidth = xml.getGridWidth();
 		SimulationFactory sf = new SimulationFactory(myGridPane,myGUI,parameters,myHeight,myWidth);
 		mySimulation = sf.makeSimulation(xml.getSimulation());
-	}
-	
-	public Grid initGrid(){
-		ArrayList<Cell> cells = xml.getCells();
-		Grid myGrid = new Grid(myWidth, myHeight, cells, initSimulation());
-
-		return myGrid;
-		//Fill in with information of from XML file
-	}
-	
-	//Need to find a way to change which simulation is being run w/o using too many if statements
-	public Simulation initSimulation(){
-		
-		mySimulation = myPossibleSimulations.get(xml.getSimulation());
-		mySimulation.setSimulation(myGridPane, myGUI, parameters);
-		return mySimulation;
-		//Simulation mySimulation = new SegregationSimulation(this);
-
+		myCells = xml.getCells();
+		myGrid = new Grid(myWidth,myHeight,mySimulation);
+		mySimulation.readCellList(myCells, myGrid);
 	}
 	
 	public void reset(String file){
