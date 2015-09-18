@@ -94,7 +94,9 @@ public class XMLReader {
 					System.out.println(y);
 					int state = Integer.valueOf(eElement.getElementsByTagName("state").item(0).getTextContent());
 					System.out.println(state);
-					cells.add(new Cell(x,y,state));
+					Cell tempCell = myPossibleCells.get(simulation);
+					tempCell.setCell(x, y, state, parameters);
+					cells.add(tempCell);
 					//cells.add(new GameOfLifeCell(x,y,state));
 
 				}
