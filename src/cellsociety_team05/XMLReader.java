@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class XMLReader {
 	private  String fileName; 
 	private String simulation;
-	private  ArrayList<Cell> cells;
+	private  ArrayList<CellInfo> cells;
 	private static String SIMNAME = "simulation";
 	private static String TAGNAME = "cell";
 	private static String PARAM = "parameters";
@@ -24,15 +24,13 @@ public class XMLReader {
 	private HashMap<String, Double> parameters; 
 	private int width;
 	private int height;
-	private HashMap<String, Cell> myPossibleCells;
+
 
 	public XMLReader(String file){
 		fileName = file;
-		cells = new ArrayList<Cell>();
+		cells = new ArrayList<CellInfo>();
 		parameters = new HashMap<String, Double>();
 		//myGrid = grid;
-		myPossibleCells = new HashMap<String, Cell>();
-		myPossibleCells.put("segregation", new SegregationCell());
 	}
 
 	public void readFile(){
@@ -95,7 +93,8 @@ public class XMLReader {
 					int state = Integer.valueOf(eElement.getElementsByTagName("state").item(0).getTextContent());
 					System.out.println(state);
 					Cell tempCell = myPossibleCells.get(simulation);
-					tempCell.setCell(x, y, state, parameters);
+					System.out.println("check");
+					//tempCell.setCell(x, y, state, parameters);
 					cells.add(tempCell);
 					//cells.add(new GameOfLifeCell(x,y,state));
 
