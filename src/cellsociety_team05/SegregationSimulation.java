@@ -11,28 +11,31 @@ public class SegregationSimulation extends Simulation {
 	private double ratio;
 	private double empty;
 	
-	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param, int height, int width){
-		super(gridPane, gui, param, height, width);
+	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param, List<CellInfo> list, int height, int width){
+		super(gridPane, gui, param, list, height, width);
 		similar = param.get("similar");
 		ratio = param.get("ratio");
 		empty = param.get("empty");
+		if (list==null){
+		    initGrid();
+		}
 	}
-	
+	/*
 	public SegregationSimulation(){
-		this(null, null, null,0,0);
-	}
-	
+		this(null, null, null,null,0,0);
+	}*/
+	/*
 	public void setSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param){
 		this.myGUI = gui;
 		this.myGridPane = gridPane;
 		this.myParameters = param;
-	}
+	}*/
 	
 	//Need a way to set similarity percentage
 	public void setSimilar(double x){
 		similar = x;
 	}
-	
+	/*
 	public void setCellType(Grid grid){
 	    for (List<Cell> list: grid.getCellMatrix()){
 	        for (Cell cell: list){
@@ -40,10 +43,11 @@ public class SegregationSimulation extends Simulation {
 	            System.out.println(cell.getClass().toString());
 	        }
 	    }
-	}
+	}*
+	*/
 	
-	public void initGrid(Grid grid){
-	    int num = grid.getCellMatrix().size()*grid.getCellMatrix().get(0).size();
+	public void initGrid(){
+	    int num = myGrid.getCellMatrix().size()*myGrid.getCellMatrix().get(0).size();
 	    ArrayList<Integer> list = new ArrayList<Integer>();
 	    int numEmpty = (int) Math.floor(((double)num)*empty);
 	    num-= numEmpty;
@@ -62,10 +66,11 @@ public class SegregationSimulation extends Simulation {
 	    System.out.println("empty: "+numEmpty);
 	    System.out.println("blue: "+num1);
 	    System.out.println("red: "+num2);
-	    for (List<Cell> cells: grid.getCellMatrix()){
+	    for (List<Cell> cells: myGrid.getCellMatrix()){
                 for (Cell cell: cells){
                     System.out.println(k++);
                     int ran = (int) Math.floor(Math.random()*list.size());
+                    cell.setParameter("similar",similar);
                     cell.setCurrentState(list.remove(ran));
                     cell.getSquare().setFill(cell.myColors[cell.getCurrentState()]);
                 }
@@ -79,7 +84,7 @@ public class SegregationSimulation extends Simulation {
         map.put("similar", similar);
         map.put("ratio", ratio);
         map.put("empty", empty);
-        SegregationCell c = new SegregationCell(x,y,start,map.get("similar"),myGrid);
+        SegregationCell c = new SegregationCell(x,y,start,map,myGrid);
         return c;
     }
 
@@ -91,7 +96,7 @@ public class SegregationSimulation extends Simulation {
             list.add(new ArrayList<Cell>());
             for (int j=0;j<height;j++){
                 int state = (int) Math.floor(Math.random()*2);
-                Cell newcell = makeCell(i, j, 0, grid);
+                Cell newcell = makeCell(i, j, 1, grid);
                 list.get(i).add(newcell);
             }
         }

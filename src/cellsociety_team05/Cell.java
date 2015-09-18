@@ -43,13 +43,17 @@ public abstract class Cell {
         //mySimulation = simulation;
         //this works only for an 8x8 simulation
     }
-    
+    /*
     public abstract void setCell(int xCoordinate, int yCoordinate, 
                             int startingState,
                             HashMap<String, Double> params ,Grid grid);
-    
+    */
     public Rectangle getSquare(){
         return mySquare;
+    }
+    
+    public void setParameter(String name, double value){
+        myParameters.put(name, value);
     }
     
     /**

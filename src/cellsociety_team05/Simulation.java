@@ -26,29 +26,42 @@ public abstract class Simulation {
 	private boolean paused;
 	private int myWidth;
 	private int myHeight;
+	private List<CellInfo> myInfoList;
 
-	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params, int height, int width){
-		myGrid = new Grid(height, width, this);
+	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params,List<CellInfo> list, int height, int width){
 		myWidth = width;
 		myHeight = height;
+                myInfoList = list;
+                myParameters = params;
+                myGrid = new Grid(myHeight, myWidth, this);
+                readCellList(myInfoList);
 		myGridPane = gridPane;
 		animation = new Timeline();
 		myGUI = gui;
-		myParameters = params;
-		//initializeGridPane();
+		initializeGridPane();
 	}
-	
+	/*
 	public void setGrid(Grid g){
 	    myGrid = g;
 	}
-	
-	public void readCellList(ArrayList<CellInfo> list, Grid g){
-	    for (CellInfo cell: list){
-	        g.getCellMatrix().get(cell.getX()).get(cell.getY()).setCurrentState(cell.getState());
+	*/
+	public void readCellList(List<CellInfo> list){
+	    if (list!=null){
+	        System.out.println("HIT");
+	        for (CellInfo cell: list){
+	            Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
+	            thisCell.setCurrentState(cell.getState());
+	            thisCell.mySquare.setFill(thisCell.myColors[thisCell.getCurrentState()]);
+	        }
 	    }
 	}
 
 	public void start(){
+	        for (List<Cell> list: myGrid.getCellMatrix()){
+	            for (Cell cell: list){
+	                System.out.println("("+cell.getX()+","+cell.getY()+") "+cell.getCurrentState());
+	            }
+	        }
 		KeyFrame frame = new KeyFrame(Duration.millis(1000),
 				e -> this.step());
 		animation.getKeyFrames().add(frame);
@@ -96,12 +109,12 @@ public abstract class Simulation {
 	public void stopAnimation(){
 	    animation.stop();
 	}
-	
+	/*
 	public abstract void setCellType(Grid grid);
-	
+	*/
 	public abstract ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height);
 	
-	public void initGrid(Grid grid){}
+	public void initGrid(){}
 	
 	public abstract Cell makeCell(int x, int y, int start, Grid g);
 	

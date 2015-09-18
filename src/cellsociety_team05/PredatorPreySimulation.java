@@ -10,8 +10,8 @@ public class PredatorPreySimulation extends Simulation {
     int PREDATOR_REPRODUCTION_TIME;
     int PREDATOR_ENERGY;
 
-    public PredatorPreySimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params, int height, int width) {
-        super(gridPane, gui, params, height, width);
+    public PredatorPreySimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params, List<CellInfo> list, int height, int width) {
+        super(gridPane, gui, params,list, height, width);
         PREY_REPRODUCTION_TIME = (int) Math.round(params.get("preyreproductiontime"));
         PREDATOR_REPRODUCTION_TIME = (int) Math.round(params.get("predatorreproductiontime"));
         PREDATOR_ENERGY = (int) Math.round(params.get("energy"));
@@ -24,22 +24,8 @@ public class PredatorPreySimulation extends Simulation {
         map.put("preyreproductiontime", (double) PREY_REPRODUCTION_TIME);
         map.put("predatorreproductiontime", (double) PREDATOR_REPRODUCTION_TIME);
         map.put("energy", (double) PREDATOR_ENERGY);
-        PredatorPreyCell c = new PredatorPreyCell(x,y,start,map);
+        PredatorPreyCell c = new PredatorPreyCell(x,y,start,map,myGrid);
         return c;
-    }
-
-    @Override
-    public void setCellType (Grid grid) {
-        for (List<Cell> list: grid.getCellMatrix()){
-            for (Cell cell: list){
-                HashMap<String, Double> map = new HashMap<String, Double>();
-                map.put("preyreproductiontime", (double) PREY_REPRODUCTION_TIME);
-                map.put("predatorreproductiontime", (double) PREDATOR_REPRODUCTION_TIME);
-                map.put("energy", (double) PREDATOR_ENERGY);
-                cell = new PredatorPreyCell(cell.myXCoordinate,cell.myYCoordinate,0,map);
-                System.out.println(cell.getClass().toString());
-            }
-        }
     }
 
     @Override

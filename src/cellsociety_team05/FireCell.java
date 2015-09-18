@@ -52,7 +52,7 @@ public class FireCell extends Cell {
             myNextState = 0;
         }
     }
-
+/*
     @Override
     public void setCell (int xCoordinate,
                          int yCoordinate,
@@ -64,5 +64,5 @@ public class FireCell extends Cell {
         this.setCurrentState(startingState);
         probCatch = params.get("probCatch");
     }
-
+*/
 }

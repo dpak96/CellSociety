@@ -83,15 +83,15 @@ public class XMLReader {
 
 				nNode = nList.item(temp);
 
-				System.out.println("\nCurrent Element :" + nNode.getNodeName());
+				System.out.print("(");
 
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 					Element eElement = (Element) nNode;
 					int x = Integer.valueOf(eElement.getElementsByTagName("xcord").item(0).getTextContent());
-					System.out.println(x);
+					System.out.print(x+",");
 					int y = Integer.valueOf(eElement.getElementsByTagName("ycord").item(0).getTextContent());
-					System.out.println(y);
+					System.out.print(y+") ");
 					int state = Integer.valueOf(eElement.getElementsByTagName("state").item(0).getTextContent());
 					System.out.println(state);
 					cells.add(new CellInfo(x,y,state));
