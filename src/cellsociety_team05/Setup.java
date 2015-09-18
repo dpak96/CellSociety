@@ -12,6 +12,7 @@ public class Setup {
 	private XMLReader xml;
 	private GUI myGUI;
 	private GridPane myGridPane;
+	private Grid myGrid;
 	
 	public Setup(String file, GUI gui, GridPane gp){
 		myGUI = gui; 
@@ -50,5 +51,34 @@ public class Setup {
 	
 	public Simulation getSimulation(){
 		return mySimulation; 
+	}
+	
+	public void startFireSimulation(){
+	    HashMap<String, Double> map = new HashMap<String, Double>();
+            map.put("probCatch", 0.5);
+	    mySimulation = new FireSimulation(myGridPane,this,map);
+	    myGrid = new Grid(4,4,mySimulation);
+	    myGrid.linkGridPane(myGridPane);
+	    mySimulation.start();
+	}
+	
+	public void startGameOfLifeSimulation(){
+	    mySimulation = new GameOfLifeSimulation(myGridPane,this,null);
+	    myGrid = new Grid(4,4,mySimulation);
+	    myGrid.linkGridPane(myGridPane);
+	    mySimulation.start();
+	}
+	
+	public void startSegregationSimulation(){
+	    System.out.println("Start");
+            HashMap<String, Double> map = new HashMap<String, Double>();
+            map.put("similar", 0.3);
+            map.put("ratio", 0.5);
+            map.put("empty", 0.2);
+            mySimulation = new SegregationSimulation(myGridPane,this,map);
+            myGrid = new Grid(4,4,mySimulation);
+            mySimulation.initGrid(myGrid);
+            myGrid.linkGridPane(myGridPane);
+            mySimulation.start();
 	}
 }

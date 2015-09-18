@@ -28,7 +28,7 @@ public abstract class Simulation {
 	private int myHeight;
 
 	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params, int height, int width){
-		myGrid = new Grid(height, width);
+		myGrid = new Grid(height, width, this);
 		myWidth = width;
 		myHeight = height;
 		myGridPane = gridPane;
@@ -38,13 +38,9 @@ public abstract class Simulation {
 		initializeGridPane();
 	}
 	
-	public abstract void setSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> params);
-	
 	public void setGrid(Grid g){
 	    myGrid = g;
 	}
-	
-	public abstract Cell makeCell(int x, int y, int start, Grid g);
 
 	public void start(){
 		KeyFrame frame = new KeyFrame(Duration.millis(1000),
@@ -74,27 +70,19 @@ public abstract class Simulation {
 		myGrid.updateGrid();
 	}
 	
-	public void updateState(Cell cell) {
-	    myGrid.preUpdateGrid();
-	}
-	
 	public void restart(){
 		animation.stop();
-		myGrid = new Grid(myHeight, myWidth);
+		myGrid = new Grid(myHeight, myWidth, this);
 		initializeGridPane();
 		animation = new Timeline();
 		start();
 	}
 
 	protected void initializeGridPane(){
-		int row = 0; 
 		for(List<Cell> listCell: myGrid.getCellMatrix()){
-			int col = 0;
 			for(Cell cell: listCell){
                 myGridPane.getChildren().add(cell.getSquare());
-                col++;
 			}
-			row++;
 		}
 	    myGrid.updateGrid();
 	}
@@ -111,7 +99,10 @@ public abstract class Simulation {
 	
 	public abstract ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height);
 	
-	public void initGrid(Grid grid){
-	    
-	}
+	public void initGrid(Grid grid){}
+	
+	public abstract Cell makeCell(int x, int y, int start, Grid g);
+	
+	public abstract void setSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> params);
+	
 }
