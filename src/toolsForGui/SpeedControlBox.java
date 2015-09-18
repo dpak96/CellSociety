@@ -27,6 +27,7 @@ public class SpeedControlBox extends HorizontalControlBoxes{
             	speedValue.setText(Long.toString(updatedSpeed)); 
             	if(updatedSpeed != myGui.getSimulationSpeed()){
             		myGui.updateSimulationSpeed(updatedSpeed);
+            		System.out.println("Speed " + updatedSpeed);
             	}
             }
         });
