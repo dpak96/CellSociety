@@ -29,7 +29,7 @@ public class Setup {
 		myCells = xml.getCells();
 		myGrid = new Grid(myWidth,myHeight,mySimulation);
 		mySimulation.readCellList(myCells, myGrid);
-		myGrid.linkGridPane(myGridPane);
+		//myGrid.linkGridPane(myGridPane);
 	}
 	
 	public void reset(String file){

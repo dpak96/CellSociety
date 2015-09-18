@@ -34,7 +34,6 @@ public class Grid {
     private void initNeighbors(){
         for (List<Cell> list: myCells){
             for (Cell cell: list){
-                //System.out.println("Cell: ("+cell.getX()+","+cell.getY()+")");
                 List<Cell> neighbors = new ArrayList<Cell>();
                 int[] x = {0,0,1,1,1,-1,-1,-1};
                 int[] y = {1,-1,0,1,-1,0,1,-1};
@@ -43,7 +42,7 @@ public class Grid {
                     int yCoordinate = cell.getY()+y[i];
                     if(xCoordinate>=0 && yCoordinate>=0 && xCoordinate<myCells.size() && yCoordinate<myCells.get(0).size()){
                         neighbors.add(myCells.get(xCoordinate).get(yCoordinate));
-                        //System.out.println("neighbor: ("+myCells.get(xCoordinate).get(yCoordinate).getX()+","+myCells.get(xCoordinate).get(yCoordinate).getY()+")");
+                       
                     }
                 }
                 cell.setNeighbors(neighbors);

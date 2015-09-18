@@ -90,7 +90,7 @@ public class GUI {
 	}
 	
 	public void startSimulation(){
-	        String file = "XMLFiles/test.xml";
+	        String file = "XMLFiles/fire_test.xml";
 	        Setup s = new Setup(file,this,myGridPane);
 		System.out.println("Start");
 		mySimulation = s.getSimulation();
