@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -92,7 +93,42 @@ public class GUI {
 		System.out.println("Start");
 		mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 8, 8, 0.5);
 		mySimulation.start();
-		//anotherStartSimulation();
+	}
+	
+	public void step(){
+	    System.out.println("step");
+	    myGrid.preUpdateGrid();
+	    myGrid.updateGrid();
+	    //updateDisplayedGrid();
+	}
+	
+	public void startFireSimulation(){
+	    HashMap<String, Double> map = new HashMap<String, Double>();
+            map.put("probCatch", 0.5);
+	    mySimulation = new FireSimulation(myGridPane,this,map);
+	    myGrid = new Grid(4,4,mySimulation);
+	    myGrid.linkGridPane(myGridPane);
+	    mySimulation.start();
+	}
+	
+	public void startGameOfLifeSimulation(){
+	    mySimulation = new GameOfLifeSimulation(myGridPane,this,null);
+	    myGrid = new Grid(4,4,mySimulation);
+	    myGrid.linkGridPane(myGridPane);
+	    mySimulation.start();
+	}
+	
+	public void startSegregationSimulation(){
+	    System.out.println("Start");
+            HashMap<String, Double> map = new HashMap<String, Double>();
+            map.put("similar", 0.3);
+            map.put("ratio", 0.5);
+            map.put("empty", 0.2);
+            mySimulation = new SegregationSimulation(myGridPane,this,map);
+            myGrid = new Grid(4,4,mySimulation);
+            mySimulation.initGrid(myGrid);
+            myGrid.linkGridPane(myGridPane);
+            mySimulation.start();
 	}
 	
 	public void restartSimulation(){
@@ -109,7 +145,6 @@ public class GUI {
 	public void nextStep() {
 		mySimulation.step();
 	}
-	
 
 	public Simulation getCurrentSimulation(){
 		return mySimulation;

@@ -1,7 +1,7 @@
 package cellsociety_team05;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -37,9 +37,17 @@ public abstract class Simulation {
 		myParameters = params;
 		initializeGridPane();
 	}
+	
+	public abstract void setSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> params);
+	
+	public void setGrid(Grid g){
+	    myGrid = g;
+	}
+	
+	public abstract Cell makeCell(int x, int y, int start, Grid g);
 
 	public void start(){
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+		KeyFrame frame = new KeyFrame(Duration.millis(1000),
 				e -> this.step());
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -88,7 +96,22 @@ public abstract class Simulation {
 			}
 			row++;
 		}
+	    myGrid.updateGrid();
+	}
+	
+	public void stopAnimation(){
+	    animation.stop();
 	}
 
-
+	public void updateState (Cell cell) {
+	        myGrid.preUpdateGrid();
+	}
+	
+	public abstract void setCellType(Grid grid);
+	
+	public abstract ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height);
+	
+	public void initGrid(Grid grid){
+	    
+	}
 }

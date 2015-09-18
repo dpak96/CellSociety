@@ -36,5 +36,4 @@ public class SimulationTester extends Simulation{
 		public void setSimilar(double x){
 			similar = x;
 		}
-		
 }
