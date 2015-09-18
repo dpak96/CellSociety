@@ -17,7 +17,7 @@ public class NextStepButton extends GuiButton{
 
 	@Override
 	protected void implementAction() {
-		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> myGui.nextStep());
+		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> myGui.step());
 	}
 
 	@Override

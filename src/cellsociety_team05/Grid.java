@@ -18,21 +18,8 @@ public class Grid {
     List<List<Cell>> myCells;
     GridPane myGridPane;
     
-    public Grid(int width, int height){
-        myCells = new ArrayList<List<Cell>>();
-        for (int i=0;i<width;i++){
-            myCells.add(new ArrayList<Cell>());
-            for (int j=0;j<height;j++){
-                int state = (int) Math.floor(Math.random()*2);
-                Cell newcell = new GameOfLifeCell(i,j,state);
-                /*HashMap<String, Double> map = new HashMap<String, Double>();
-                map.put("similar", 0.3);
-                map.put("ratio", 0.5);
-                map.put("empty", 0.1);
-                Cell newcell = new SegregationCell(i,j,0,map.get("similar"),this);
-                */myCells.get(i).add(newcell);
-            }
-        }
+    public Grid(int width, int height, Simulation sim){
+        myCells = sim.setUpCells(this, width, height);
         initNeighbors();
     }
     
@@ -88,6 +75,12 @@ public class Grid {
             for (Cell cell: list){
                 //System.out.println(cell.getClass().toString());
                 cell.preUpdateCell();
+            }
+        }
+        for (List<Cell> list: myCells){
+            for (Cell cell: list){
+                //System.out.println(cell.getClass().toString());
+                cell.myDirty = false;
             }
         }
     }

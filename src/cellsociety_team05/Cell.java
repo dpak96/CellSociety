@@ -23,6 +23,7 @@ public abstract class Cell {
     private final String[] myPossibleStates = {"Alive","Dead"};
     //alive = 0, dead = 1 (based on index)
     protected Color[] myColors = {Color.BLACK,Color.WHITE};
+    protected boolean myDirty;
     //Simulation mySimulation;
     private Rectangle mySquare;
     
@@ -96,9 +97,9 @@ public abstract class Cell {
      */
     public void updateCell(){
         myCurrentState = myNextState;
-        System.out.println(this.getClass().toString());
-        System.out.println(myCurrentState);
-        System.out.println(myColors.length);
+        //System.out.println(this.getClass().toString());
+        //System.out.println(myCurrentState);
+        //System.out.println(myColors.length);
         mySquare.setFill(myColors[myCurrentState]);
     }
  
