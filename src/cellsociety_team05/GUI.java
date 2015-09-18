@@ -88,14 +88,18 @@ public class GUI {
 		topMenu.prefWidthProperty().bind(myStage.widthProperty());
 		return topMenu;
 	}
-	
+	public void startSimulation(){
+		System.out.println("Start");
+		mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 8, 8, 0.5);
+		mySimulation.start();
+	}
 	public void step(){
 	    System.out.println("step");
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	}
-	
-	public void startSimulation(){
+
+	public void anotherStartSimulation(){
 		System.out.println("Start");
 		//anotherStartSimulation();
 		//startGameOfLifeSimulation();
@@ -149,18 +153,23 @@ public class GUI {
 	        mySimulation.stopAnimation();
 	        myGridPane.getChildren().clear();
 	        startSimulation();
+		mySimulation.restart();
 	}
 	
-	public void updateSimulationSpeed(long speed){
+	public void updateSimulationSpeed(double speed){
 		System.out.println(speed);
-		simulationSpeed = speed;
+		//simulationSpeed = speed;
+		mySimulation.updateSpeed(speed);
 	}
-	
 	
 	public void dostuff(){
 		System.out.println("HAHAHAH");
 	}
 	
+	public void nextStep() {
+		mySimulation.step();
+	}
+
 	public Simulation getCurrentSimulation(){
 		return mySimulation;
 	}
