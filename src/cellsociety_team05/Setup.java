@@ -28,6 +28,7 @@ public class Setup {
 	public Grid initGrid(){
 		ArrayList<Cell> cells = xml.getCells();
 		Grid myGrid = new Grid(myWidth, myHeight, cells, initSimulation());
+
 		return myGrid;
 		//Fill in with information of from XML file
 	}
