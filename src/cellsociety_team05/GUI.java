@@ -76,7 +76,7 @@ public class GUI {
 		//mySetup = new Setup(letter);
 		//mySimulation = new SegregationSimulation(mySetup);
 	}
-	
+
 	//handle menu somewhere else
 	private MenuBar createTopMenu() {
 		MenuBar topMenu = new MenuBar();
@@ -88,11 +88,13 @@ public class GUI {
 		topMenu.prefWidthProperty().bind(myStage.widthProperty());
 		return topMenu;
 	}
+	
 	public void startSimulation(){
 		System.out.println("Start");
 		mySimulation = new FireSimulation(myGridPane, this, new HashMap<String, Double>(), 8, 8);
 		mySimulation.start();
 	}
+	
 	public void step(){
 	    mySimulation.step();
 	}
