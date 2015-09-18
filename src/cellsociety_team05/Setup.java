@@ -6,8 +6,7 @@ import java.util.HashMap;
 import javafx.scene.layout.GridPane;
 
 public class Setup {
-	private HashMap<String, Double> parameters; 
-	private HashMap<String, Simulation> myPossibleSimulations;
+	private HashMap<String, Double> parameters;
 	private Simulation mySimulation;
 	private XMLReader xml;
 	private GUI myGUI;
@@ -20,17 +19,13 @@ public class Setup {
 		myGridPane = gp;
 		xml = new XMLReader(file);
 		parameters = xml.getParams();
-
-		myPossibleSimulations.put("segregation", new SegregationSimulation());
-
-		//myPossibleSimulations.set("segregation", new SegregationSimulation());
-
-
+		myHeight = xml.getGridHeight();
+                myWidth = xml.getGridWidth();
+		SimulationFactory sf = new SimulationFactory(myGridPane,myGUI,parameters,myHeight,myWidth);
+		mySimulation = sf.makeSimulation(xml.getSimulation());
 	}
 	
 	public Grid initGrid(){
-	        myHeight = xml.getGridHeight();
-	        myWidth = xml.getGridWidth();
 		ArrayList<Cell> cells = xml.getCells();
 		Grid myGrid = new Grid(myWidth, myHeight, cells, initSimulation());
 		return myGrid;
