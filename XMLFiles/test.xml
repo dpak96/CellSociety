@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <test>
 	<simulation> 
-		<name>Segregation </name>
+		<name>Segregation</name>
 	</simulation>
 	
 	<grid>

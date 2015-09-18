@@ -46,6 +46,11 @@ public abstract class Simulation {
 	    for (CellInfo cell: list){
 	        g.getCellMatrix().get(cell.getX()).get(cell.getY()).setCurrentState(cell.getState());
 	    }
+	    for (List<Cell> lis: g.getCellMatrix()){
+	        for (Cell cell: lis){
+	            System.out.println("cell: "+cell.myCurrentState);
+	        }
+	    }
 	}
 
 	public void start(){
@@ -73,7 +78,8 @@ public abstract class Simulation {
 	
 	public void step(){
 	    myGrid.preUpdateGrid();
-		myGrid.updateGrid();
+	    myGrid.updateGrid();
+	    System.out.println("hahaha");
 	}
 	
 	public void restart(){
@@ -87,7 +93,7 @@ public abstract class Simulation {
 	protected void initializeGridPane(){
 		for(List<Cell> listCell: myGrid.getCellMatrix()){
 			for(Cell cell: listCell){
-                myGridPane.getChildren().add(cell.getSquare());
+                            myGridPane.getChildren().add(cell.getSquare());
 			}
 		}
 	}

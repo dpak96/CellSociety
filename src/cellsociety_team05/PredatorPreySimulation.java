@@ -16,14 +16,7 @@ public class PredatorPreySimulation extends Simulation {
         PREDATOR_REPRODUCTION_TIME = (int) Math.round(params.get("predatorreproductiontime"));
         PREDATOR_ENERGY = (int) Math.round(params.get("energy"));
     }
-
-    @Override
-    public void setSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params) {
-        this.myGUI = gui;
-        this.myGridPane = gridPane;
-        this.myParameters = params;
-    }
-
+    
     @Override
     public Cell makeCell (int x, int y, int start, Grid g) {
         myGrid = g;

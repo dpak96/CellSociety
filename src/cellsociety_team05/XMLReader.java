@@ -33,9 +33,11 @@ public class XMLReader {
 		//myGrid = grid;
 	}
 
+	/**
+	 * 
+	 */
 	public void readFile(){
 		try {
-
 			File fXmlFile = new File(fileName);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -46,7 +48,7 @@ public class XMLReader {
 			//Getting simulation type
 			NodeList nList = doc.getElementsByTagName(SIMNAME);
 			Node nNode = nList.item(0);
-			if(nNode.getNodeType() == Node.ELEMENT_NODE){
+			if(nNode.getNodeType()==Node.ELEMENT_NODE){
 				Element eElement = (Element) nNode;
 				//Simulation type
 				simulation = eElement.getElementsByTagName("name").item(0).getTextContent();
@@ -105,7 +107,7 @@ public class XMLReader {
 	public ArrayList<CellInfo> getCells(){
 		return cells;
 	}
-	public String getSimulation(){
+	public String getSimulationName(){
 		return simulation;
 	}
 	public int getGridWidth(){
@@ -113,15 +115,5 @@ public class XMLReader {
 	}
 	public int getGridHeight(){
 		return height;
-	}
-	public static void main (String args[]){
-		XMLReader test = new XMLReader("/Users/danielpak/Desktop/test.xml");
-		test.readFile();
-
-		System.out.println(test.getSimulation());
-		System.out.println(test.getParams().get("test"));
-		System.out.println(test.getParams().get("test1"));
-		System.out.println(test.getGridHeight());
-		System.out.println(test.getGridWidth());
 	}
 }

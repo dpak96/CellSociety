@@ -90,8 +90,10 @@ public class GUI {
 	}
 	
 	public void startSimulation(){
+	        String file = "XMLFiles/test.xml";
+	        Setup s = new Setup(file,this,myGridPane);
 		System.out.println("Start");
-		mySimulation = new FireSimulation(myGridPane, this, new HashMap<String, Double>(), 8, 8);
+		mySimulation = s.getSimulation();
 		mySimulation.start();
 	}
 	
