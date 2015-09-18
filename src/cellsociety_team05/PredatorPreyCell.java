@@ -1,22 +1,29 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class PredatorPreyCell extends Cell {
-    private final String[] myPossibleStates = {"Fish/Blue", "Shark/Red", "Empty"};
-    private final Color[] myPossibleColors = {Color.BLUE, Color.RED, Color.WHITE};
     private Grid myGrid;
-    List<PredatorPreyCell> myNeighbors;
     int PREY_REPRODUCTION_TIME;
     int PREDATOR_REPRODUCTION_TIME;
     int PREDATOR_ENERGY;
     int myReproductionTime = 0;
     int myEnergy = 0;
     
-    public PredatorPreyCell (int xCoordinate, int yCoordinate, int startingState) {
+    public PredatorPreyCell (int xCoordinate, int yCoordinate, int startingState, HashMap<String, Double> param) {
         super(xCoordinate, yCoordinate, startingState);
+        PREY_REPRODUCTION_TIME = (int) Math.round(param.get("preyreproductiontime"));
+        PREDATOR_REPRODUCTION_TIME = (int) Math.round(param.get("predatorreproductiontime"));
+        PREDATOR_ENERGY = (int) Math.round(param.get("energy"));
+        myPossibleStates = new String[] {"Fish/Blue", "Shark/Red", "Empty"};
+        myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
+        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
+        GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     
     public void initNeighbors(){
@@ -51,30 +58,30 @@ public class PredatorPreyCell extends Cell {
         }
     }
     
-    private void moveTo(PredatorPreyCell prey){
+    private void moveTo(Cell prey){
         prey.myNextState = myCurrentState;
         prey.setCurrentState(prey.myNextState);
-        prey.myReproductionTime = myReproductionTime;
-        prey.myEnergy = myEnergy;
+        prey.myParameters.put("reproductiontime", (double) myReproductionTime);
+        prey.myParameters.put("energy", (double) myEnergy);
     }
     
-    private void eat(PredatorPreyCell cell){
+    private void eat(Cell cell){
         moveTo(cell);
         myEnergy=0;
         age(cell);
     }
     
-    private void checkDeath(PredatorPreyCell cell){
+    private void checkDeath(Cell cell){
         if (myEnergy>=PREDATOR_ENERGY){
             cell.myNextState = 2;
-            cell.myReproductionTime = 0;
-            cell.myEnergy = 0;
+            cell.myParameters.put("reproductiontime", 0.0);
+            cell.myParameters.put("energy", 0.0);
         }
     }
     
-    private void age(PredatorPreyCell cell){
-        cell.myEnergy+=1;
-        cell.myReproductionTime+=1;
+    private void age(Cell cell){
+        cell.myParameters.put("energy", cell.myParameters.get("energy")+1);
+        cell.myParameters.put("reproductiontime", cell.myParameters.get("reproductiontime")+1);
     }
     
     private void leave(){
@@ -103,9 +110,9 @@ public class PredatorPreyCell extends Cell {
     @Override
     public void preUpdateCell (){
         if(myCurrentState==1){
-            List<PredatorPreyCell> fish = new ArrayList<PredatorPreyCell>();
-            List<PredatorPreyCell> empties = new ArrayList<PredatorPreyCell>();
-            for (PredatorPreyCell cell: myNeighbors){
+            List<Cell> fish = new ArrayList<Cell>();
+            List<Cell> empties = new ArrayList<Cell>();
+            for (Cell cell: myNeighbors){
                 if (cell.getCurrentState()==0){
                     fish.add(cell);
                 }
@@ -115,35 +122,51 @@ public class PredatorPreyCell extends Cell {
             }
             if (fish.size()>0){
                 int ran = (int) Math.floor(Math.random()*fish.size());
-                PredatorPreyCell eatCell = fish.get(ran);
+                Cell eatCell = fish.get(ran);
                 eat(eatCell);
                 leave();
                 checkDeath(eatCell);
             }
             else if (empties.size()>0){
                 int ran = (int) Math.floor(Math.random()*empties.size());
-                PredatorPreyCell moveCell = empties.get(ran);
+                Cell moveCell = empties.get(ran);
                 moveTo(moveCell);
                 leave();
                 age(moveCell);
                 checkDeath(moveCell);
             }
         }
+        
         else if(myCurrentState==0){
-            List<PredatorPreyCell> empties = new ArrayList<PredatorPreyCell>();
-            for (PredatorPreyCell cell: myNeighbors){
+            List<Cell> empties = new ArrayList<Cell>();
+            for (Cell cell: myNeighbors){
                 if (cell.getCurrentState()==2){
                     empties.add(cell);
                 }
             }
             if (empties.size()>0){
                 int ran = (int) Math.floor(Math.random()*empties.size());
-                PredatorPreyCell moveCell = empties.get(ran);
+                Cell moveCell = empties.get(ran);
                 moveTo(moveCell);
                 leave();
                 age(moveCell);
             }
         }
+    }
+
+    @Override
+    public void setCell (int xCoordinate,
+                         int yCoordinate,
+                         int startingState,
+                         HashMap<String, Double> params,
+                         Grid grid) {
+        this.myXCoordinate = xCoordinate;
+        this.myYCoordinate = yCoordinate;
+        this.setCurrentState(startingState);
+        myReproductionTime = (int) Math.round(params.get("reproduction"));
+        myEnergy = (int) Math.round(params.get("energy"));
+        myGrid = grid;
+        
     }
 
 }
