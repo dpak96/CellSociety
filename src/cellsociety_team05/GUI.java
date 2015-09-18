@@ -98,55 +98,6 @@ public class GUI {
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	}
-
-	public void anotherStartSimulation(int height, int width){
-		System.out.println("Start");
-		//anotherStartSimulation();
-		//startGameOfLifeSimulation(height, width);
-		//startSegregationSimulation(height,width);
-		//startFireSimulation(height,width);
-		//startPredatorPreySimulation(height,width);
-	}
-	
-	public void startPredatorPreySimulation(int height, int width){
-	    HashMap<String, Double> map = new HashMap<String, Double>();
-            map.put("preyreproductiontime", 5.0);
-            map.put("predatorreproductiontime", 5.0);
-            map.put("energy", 5.0);
-            mySimulation = new PredatorPreySimulation(myGridPane,this,map,height,width);
-            myGrid = new Grid(4,4,mySimulation);
-            myGrid.linkGridPane(myGridPane);
-            mySimulation.start();
-	}
-	
-	public void startFireSimulation(int height, int width){
-	    HashMap<String, Double> map = new HashMap<String, Double>();
-            map.put("probCatch", 0.5);
-	    mySimulation = new FireSimulation(myGridPane,this,map,height,width);
-	    myGrid = new Grid(4,4,mySimulation);
-	    myGrid.linkGridPane(myGridPane);
-	    mySimulation.start();
-	}
-	
-	public void startGameOfLifeSimulation(int height, int width){
-	    mySimulation = new GameOfLifeSimulation(myGridPane,this,null,height,width);
-	    myGrid = new Grid(4,4,mySimulation);
-	    myGrid.linkGridPane(myGridPane);
-	    mySimulation.start();
-	}
-	
-	public void startSegregationSimulation(int height, int width){
-	    System.out.println("Start");
-            HashMap<String, Double> map = new HashMap<String, Double>();
-            map.put("similar", 0.3);
-            map.put("ratio", 0.5);
-            map.put("empty", 0.2);
-            mySimulation = new SegregationSimulation(myGridPane,this,map,height,width);
-            myGrid = new Grid(4,4,mySimulation);
-            mySimulation.initGrid(myGrid);
-            myGrid.linkGridPane(myGridPane);
-            mySimulation.start();
-	}
 	
 	public void restartSimulation(){
 		System.out.println("RESTART");

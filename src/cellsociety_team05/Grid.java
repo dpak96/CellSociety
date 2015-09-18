@@ -38,7 +38,6 @@ public class Grid {
             myCells.get(cell.getX()).set(cell.getY(), cell);
         }
     }
-    
     public void linkGridPane(GridPane gp){
         for (List<Cell> list: myCells){
             for (Cell cell: list){
