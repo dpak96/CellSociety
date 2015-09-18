@@ -7,13 +7,12 @@ import java.util.List;
 import javafx.scene.layout.GridPane;
 
 public class SegregationSimulation extends Simulation {
-	private Grid myGrid;
 	private double similar; 
 	private double ratio;
 	private double empty;
 	
-	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param,Grid g){
-		super(gridPane, gui, param,g);
+	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param){
+		super(gridPane, gui, param);
 		similar = param.get("similar");
 		ratio = param.get("ratio");
 		empty = param.get("empty");
@@ -66,18 +65,35 @@ public class SegregationSimulation extends Simulation {
 	
 	@Override
 	public void updateState(Cell cell) {
-		/*int sim = 0;
-		int tot = 0;
-		for(Cell nCell: cell.getNeighbors()){
-			++tot;
-			if(nCell.myCurrentState == cell.myCurrentState){
-				++sim;
-			}
-		}
-		if((double)sim/tot < similar){
-			//make cell empty and move it elsewhere
-		}*/
 	    myGrid.preUpdateGrid();
 	}
+
+
+    @Override
+    public Cell makeCell (int x, int y, int start, Grid g) {
+        myGrid = g;
+        HashMap<String, Double> map = new HashMap<String, Double>();
+        map.put("similar", similar);
+        map.put("ratio", ratio);
+        map.put("empty", empty);
+        SegregationCell c = new SegregationCell(x,y,start,map.get("similar"),myGrid);
+        return c;
+    }
+
+
+    @Override
+    public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height) {
+        ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
+        for (int i=0;i<width;i++){
+            list.add(new ArrayList<Cell>());
+            for (int j=0;j<height;j++){
+                int state = (int) Math.floor(Math.random()*2);
+                Cell newcell = makeCell(i, j, 0, grid);
+                list.get(i).add(newcell);
+            }
+        }
+        return list;
+        
+    }
 
 }

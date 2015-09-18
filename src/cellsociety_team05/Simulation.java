@@ -1,6 +1,7 @@
 package cellsociety_team05;
+import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.List;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -19,13 +20,17 @@ public abstract class Simulation {
 	private Timeline animation;
 	protected HashMap<String, Double> myParameters;
 
-	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params,Grid g){
-		myGrid = g;
-		//myGrid.linkGridPane(gridPane);
+	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params){
 		animation = new Timeline();
 		myGUI = gui;
 		myParameters = params;
 	}
+	
+	public void setGrid(Grid g){
+	    myGrid = g;
+	}
+	
+	public abstract Cell makeCell(int x, int y, int start, Grid g);
 
 	public void start(){
 		// sets the game's loop
@@ -55,18 +60,10 @@ public abstract class Simulation {
 	public void step(){
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
-		//myGUI.updateDisplayedGrid();
 	}
 	
 	public void stopAnimation(){
 	    animation.stop();
-	}
-
-	//run steps continuously (take a boolean?)
-	public void run(boolean canRun){
-		while(canRun){
-			step(); 
-		}
 	}
 
 	//Will be implemented in subclasses
@@ -74,12 +71,9 @@ public abstract class Simulation {
 	
 	public abstract void setCellType(Grid grid);
 	
-	public abstract void initGrid(Grid grid);
-
-	//calls drawGrid, displays graphically the Grid
-	/*public void showGrid(){
-		myGrid.drawSquareGrid();
-	}*/
-
-
+	public abstract ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height);
+	
+	public void initGrid(Grid grid){
+	    
+	}
 }

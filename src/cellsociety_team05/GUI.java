@@ -122,16 +122,37 @@ public class GUI {
 	public void startSimulation(){
 		System.out.println("Start");
 		//mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 0.5);
-		HashMap<String, Double> map = new HashMap<String, Double>();
+		/*HashMap<String, Double> map = new HashMap<String, Double>();
                 map.put("similar", 0.3);
                 map.put("ratio", 0.5);
                 map.put("empty", 0.2);
-                myGrid = new Grid(4,4);
-		mySimulation = new SegregationSimulation(myGridPane,this,map,myGrid);
+                mySimulation = new SegregationSimulation(myGridPane,this,map);
+                myGrid = new Grid(4,4,mySimulation);
                 mySimulation.initGrid(myGrid);
                 myGrid.linkGridPane(myGridPane);
-		mySimulation.start();
+		mySimulation.start();*/
 		//anotherStartSimulation();
+		startGameOfLifeSimulation();
+	}
+	
+	public void startGameOfLifeSimulation(){
+	    mySimulation = new GameOfLifeSimulation(myGridPane,this,null);
+	    myGrid = new Grid(4,4,mySimulation);
+	    myGrid.linkGridPane(myGridPane);
+	    mySimulation.start();
+	}
+	
+	public void startSegregationSimulation(){
+	    System.out.println("Start");
+            HashMap<String, Double> map = new HashMap<String, Double>();
+            map.put("similar", 0.3);
+            map.put("ratio", 0.5);
+            map.put("empty", 0.2);
+            mySimulation = new SegregationSimulation(myGridPane,this,map);
+            myGrid = new Grid(4,4,mySimulation);
+            mySimulation.initGrid(myGrid);
+            myGrid.linkGridPane(myGridPane);
+            mySimulation.start();
 	}
 	
 	public void restartSimulation(){
