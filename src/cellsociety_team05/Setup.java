@@ -27,6 +27,29 @@ public class Setup {
 		myCells = xml.getCells();
 		myGrid = new Grid(myWidth,myHeight,mySimulation);
 		mySimulation.readCellList(myCells, myGrid);
+
+		myPossibleSimulations.put("segregation", new SegregationSimulation());
+
+		//myPossibleSimulations.set("segregation", new SegregationSimulation());
+
+
+	}
+	
+	public Grid initGrid(){
+		ArrayList<Cell> cells = xml.getCells();
+		//Grid myGrid = new Grid(xml.getGridWidth(), xml.getGridHeight(), cells, initSimulation());
+		return myGrid;
+		//Fill in with information of from XML file
+	}
+	
+	//Need to find a way to change which simulation is being run w/o using too many if statements
+	public Simulation initSimulation(){
+		
+		mySimulation = myPossibleSimulations.get(xml.getSimulation());
+		mySimulation.setSimulation(myGridPane, myGUI, parameters);
+		return mySimulation;
+		//Simulation mySimulation = new SegregationSimulation(this);
+
 	}
 	
 	public void reset(String file){
@@ -53,9 +76,6 @@ public class Setup {
 	    HashMap<String, Double> map = new HashMap<String, Double>();
             map.put("probCatch", 0.5);
 	    mySimulation = new FireSimulation(myGridPane,myGUI,map,myHeight,myWidth);
-	    myGrid = new Grid(4,4,mySimulation);
-	    myGrid.linkGridPane(myGridPane);
-	    mySimulation.start();
 	}
 	
 	public void startGameOfLifeSimulation(){

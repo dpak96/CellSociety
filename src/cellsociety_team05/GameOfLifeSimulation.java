@@ -9,6 +9,7 @@ public class GameOfLifeSimulation extends Simulation {
 
     public GameOfLifeSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params,int height, int width) {
         super(gridPane, gui, params,height,width);
+
     }
 
     @Override
@@ -40,13 +41,6 @@ public class GameOfLifeSimulation extends Simulation {
             }
         }
         return list;
-    }
-
-    @Override
-    public void setSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params) {
-        this.myGUI = gui;
-        this.myGridPane = gridPane;
-        this.myParameters = params;
     }
 
 }
