@@ -10,8 +10,8 @@ public class PredatorPreySimulation extends Simulation {
     int PREDATOR_REPRODUCTION_TIME;
     int PREDATOR_ENERGY;
 
-    public PredatorPreySimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params) {
-        super(gridPane, gui, params);
+    public PredatorPreySimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params, int height, int width) {
+        super(gridPane, gui, params, height, width);
         PREY_REPRODUCTION_TIME = (int) Math.round(params.get("preyreproductiontime"));
         PREDATOR_REPRODUCTION_TIME = (int) Math.round(params.get("predatorreproductiontime"));
         PREDATOR_ENERGY = (int) Math.round(params.get("energy"));

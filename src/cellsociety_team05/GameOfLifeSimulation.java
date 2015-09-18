@@ -7,8 +7,8 @@ import javafx.scene.layout.GridPane;
 
 public class GameOfLifeSimulation extends Simulation {
 
-    public GameOfLifeSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params) {
-        super(gridPane, gui, params);
+    public GameOfLifeSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params,int height, int width) {
+        super(gridPane, gui, params,height,width);
     }
 
     @Override

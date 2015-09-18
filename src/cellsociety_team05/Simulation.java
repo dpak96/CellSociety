@@ -28,7 +28,7 @@ public abstract class Simulation {
 	private int myHeight;
 
 	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params, int height, int width){
-		myGrid = new Grid(height, width);
+		myGrid = new Grid(height, width, this);
 		myWidth = width;
 		myHeight = height;
 		myGridPane = gridPane;
@@ -74,13 +74,9 @@ public abstract class Simulation {
 		myGrid.updateGrid();
 	}
 	
-	public void updateState(Cell cell) {
-	    myGrid.preUpdateGrid();
-	}
-	
 	public void restart(){
 		animation.stop();
-		myGrid = new Grid(myHeight, myWidth);
+		myGrid = new Grid(myHeight, myWidth,this);
 		initializeGridPane();
 		animation = new Timeline();
 		start();

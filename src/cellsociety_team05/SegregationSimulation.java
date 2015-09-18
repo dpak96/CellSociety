@@ -11,15 +11,15 @@ public class SegregationSimulation extends Simulation {
 	private double ratio;
 	private double empty;
 	
-	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param){
-		super(gridPane, gui, param);
+	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param, int height, int width){
+		super(gridPane, gui, param, height, width);
 		similar = param.get("similar");
 		ratio = param.get("ratio");
 		empty = param.get("empty");
 	}
 	
 	public SegregationSimulation(){
-		this(null, null, null);
+		this(null, null, null,0,0);
 	}
 	
 	public void setSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param){

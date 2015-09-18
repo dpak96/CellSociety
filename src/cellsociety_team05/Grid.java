@@ -23,7 +23,7 @@ public class Grid {
         initNeighbors();
     }
     
-    /*public Grid(int width, int height, List<Cell> list){
+    public Grid(int width, int height, List<Cell> list, Simulation sim){
         myCells = new ArrayList<List<Cell>>();
         for (int i=0;i<width;i++){
             myCells.add(new ArrayList<Cell>());
@@ -37,7 +37,7 @@ public class Grid {
         for (Cell cell: list){
             myCells.get(cell.getX()).set(cell.getY(), cell);
         }
-    }*/
+    }
     
     public void linkGridPane(GridPane gp){
         for (List<Cell> list: myCells){

@@ -8,8 +8,8 @@ import javafx.scene.layout.GridPane;
 public class FireSimulation extends Simulation {
     private double probCatch;
 
-    public FireSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params) {
-        super(gridPane, gui, params);
+    public FireSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params,int height, int width) {
+        super(gridPane, gui, params, height, width);
         probCatch = params.get("probCatch");
     }
 
