@@ -76,7 +76,7 @@ public class GUI {
 		//mySetup = new Setup(letter);
 		//mySimulation = new SegregationSimulation(mySetup);
 	}
-	
+
 	//handle menu somewhere else
 	private MenuBar createTopMenu() {
 		MenuBar topMenu = new MenuBar();
@@ -88,11 +88,18 @@ public class GUI {
 		topMenu.prefWidthProperty().bind(myStage.widthProperty());
 		return topMenu;
 	}
+	
 	public void startSimulation(){
 		System.out.println("Start");
-		mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 8, 8, 0.5);
-		mySimulation.start();
+		//mySimulation = new SimulationTester(myGridPane, this, new HashMap<String, Double>(), 8, 8, 0.5);
+		HashMap<String, Double> map = new HashMap<String, Double>();
+	        map.put("probCatch", 0.5);
+	        mySimulation = new FireSimulation(myGridPane,this,map,4,4);
+	        myGrid = new Grid(4,4,mySimulation);
+	        myGrid.linkGridPane(myGridPane);
+	        mySimulation.start();
 	}
+	
 	public void step(){
 	    System.out.println("step");
 	    myGrid.preUpdateGrid();
