@@ -1,6 +1,7 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -25,6 +26,19 @@ public class SegregationCell extends Cell {
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
         mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
+    }
+    
+    public SegregationCell(){
+    	this(0, 0, 0, 0, null);
+    }
+    public void setCell(int xCoordinate, int yCoordinate, 
+            int startingState,
+            HashMap<String, Double> param,Grid grid){
+    	this.myXCoordinate = xCoordinate;
+    	this.myYCoordinate = yCoordinate;
+    	this.setCurrentState(startingState);
+    	mySatisfactionPercent = param.get("satisfaction");
+    	myGrid = grid;
     }
     
     @Override

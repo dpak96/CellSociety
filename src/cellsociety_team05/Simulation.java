@@ -13,8 +13,8 @@ public abstract class Simulation {
 	//changed it to protected so i could extend it 
 	protected Grid myGrid;
 	protected int mySpeed; 
-	private GridPane myGridPane;
-	private GUI myGUI;
+	protected GridPane myGridPane;
+	protected GUI myGUI;
 	public static final int FRAMES_PER_SECOND = 60;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	private Timeline animation;
@@ -25,6 +25,8 @@ public abstract class Simulation {
 		myGUI = gui;
 		myParameters = params;
 	}
+	
+	public abstract void setSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> params);
 	
 	public void setGrid(Grid g){
 	    myGrid = g;

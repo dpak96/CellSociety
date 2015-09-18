@@ -22,14 +22,17 @@ public class XMLReader {
 	private static String PARAM = "parameters";
 	private static String GRID = "grid";
 	private HashMap<String, Double> parameters; 
-	private int rule;
 	private int width;
 	private int height;
+	private HashMap<String, Cell> myPossibleCells;
 
 	public XMLReader(String file){
 		fileName = file;
 		cells = new ArrayList<Cell>();
+		parameters = new HashMap<String, Double>();
 		//myGrid = grid;
+		myPossibleCells = new HashMap<String, Cell>();
+		myPossibleCells.put("segregation", new SegregationCell());
 	}
 
 	public void readFile(){
@@ -48,26 +51,31 @@ public class XMLReader {
 			if(nNode.getNodeType() == Node.ELEMENT_NODE){
 				Element eElement = (Element) nNode;
 				//Simulation type
-				simulation = eElement.getElementsByTagName("type").item(0).getTextContent();
-				//Simulation parameter. Maybe make a new class for different rules? 
-				rule = Integer.valueOf(eElement.getElementsByTagName("param").item(0).getTextContent());
+				simulation = eElement.getElementsByTagName("name").item(0).getTextContent();
 			}
-
-			//Getting parameters
-			nList = doc.getElementsByTagName(PARAM);
-			nNode = nList.item(0);
-			Element eElement = (Element) nNode;
-
-			parameters.put(eElement.getAttribute("name"), Double.parseDouble(eElement.getAttribute("val")));
 
 			//Getting grid dimensions
 			nList = doc.getElementsByTagName(GRID);
 			nNode = nList.item(0);
-			eElement = (Element) nNode;
-			width = Integer.parseInt(eElement.getAttribute("width"));
-			height = Integer.parseInt(eElement.getAttribute("height"));
+			if(nNode.getNodeType() == Node.ELEMENT_NODE){
+				Element eElement = (Element) nNode;
+				width = Integer.parseInt(eElement.getElementsByTagName("width").item(0).getTextContent());
+				height = Integer.parseInt(eElement.getElementsByTagName("height").item(0).getTextContent());
+			}
 
-
+			
+			//Getting parameters
+			nList = doc.getElementsByTagName(PARAM);		
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					nNode = nList.item(temp);
+					Element eElement = (Element) nNode;
+					String name = eElement.getElementsByTagName("name").item(0).getTextContent();
+					Double val = Double.parseDouble(eElement.getElementsByTagName("value").item(0).getTextContent());
+					parameters.put(name, val);
+				}
+			}
+			
 			//Getting cells
 			nList = doc.getElementsByTagName(TAGNAME);
 
@@ -79,12 +87,17 @@ public class XMLReader {
 
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
-					eElement = (Element) nNode;
+					Element eElement = (Element) nNode;
 					int x = Integer.valueOf(eElement.getElementsByTagName("xcord").item(0).getTextContent());
+					System.out.println(x);
 					int y = Integer.valueOf(eElement.getElementsByTagName("ycord").item(0).getTextContent());
+					System.out.println(y);
 					int state = Integer.valueOf(eElement.getElementsByTagName("state").item(0).getTextContent());
-					//cells.add(new Cell(myGrid, x,y,state));
-					cells.add(new GameOfLifeCell(x,y,state));
+					System.out.println(state);
+					Cell tempCell = myPossibleCells.get(simulation);
+					tempCell.setCell(x, y, state, parameters);
+					cells.add(tempCell);
+					//cells.add(new GameOfLifeCell(x,y,state));
 
 				}
 			}
@@ -106,5 +119,15 @@ public class XMLReader {
 	}
 	public int getGridHeight(){
 		return height;
+	}
+	public static void main (String args[]){
+		XMLReader test = new XMLReader("/Users/danielpak/Desktop/test.xml");
+		test.readFile();
+
+		System.out.println(test.getSimulation());
+		System.out.println(test.getParams().get("test"));
+		System.out.println(test.getParams().get("test1"));
+		System.out.println(test.getGridHeight());
+		System.out.println(test.getGridWidth());
 	}
 }

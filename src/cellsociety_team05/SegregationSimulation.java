@@ -18,6 +18,15 @@ public class SegregationSimulation extends Simulation {
 		empty = param.get("empty");
 	}
 	
+	public SegregationSimulation(){
+		this(null, null, null);
+	}
+	
+	public void setSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param){
+		this.myGUI = gui;
+		this.myGridPane = gridPane;
+		this.myParameters = param;
+	}
 	
 	//Need a way to set similarity percentage
 	public void setSimilar(double x){
