@@ -1,7 +1,9 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 import javafx.animation.Timeline;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -45,6 +47,10 @@ public abstract class Cell {
         mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
+    
+    public abstract void setCell(int xCoordinate, int yCoordinate, 
+                            int startingState,
+                            HashMap<String, Double> params ,Grid grid);
     
     public Rectangle getSquare(){
         return mySquare;

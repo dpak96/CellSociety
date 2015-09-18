@@ -10,10 +10,12 @@ public class Setup {
 	private HashMap<String, Simulation> myPossibleSimulations;
 	private Simulation mySimulation;
 	private XMLReader xml;
+	private GUI myGUI;
+	private GridPane myGridPane;
 	
 	public Setup(String file, GUI gui, GridPane gp){
-		GUI myGUI = gui; 
-		GridPane myGridPane = gp;
+		myGUI = gui; 
+		myGridPane = gp;
 		xml = new XMLReader(file);
 		parameters = xml.getParams();
 
@@ -24,19 +26,19 @@ public class Setup {
 
 	}
 	
-	public Grid initGrid(XMLReader xml){
+	public Grid initGrid(){
 		ArrayList<Cell> cells = xml.getCells();
-		Grid myGrid = new Grid(xml.getGridWidth(), xml.getGridHeight(), cells);
+		Grid myGrid = new Grid(xml.getGridWidth(), xml.getGridHeight(), cells, initSimulation());
 		return myGrid;
 		//Fill in with information of from XML file
 	}
 	
 	//Need to find a way to change which simulation is being run w/o using too many if statements
-	public void initSimulation(Grid grid){
-
-		mySimulation = new SegregationSimulation(this);
-
-
+	public Simulation initSimulation(){
+		
+		mySimulation = myPossibleSimulations.get(xml.getSimulation());
+		mySimulation.setSimulation(myGridPane, myGUI, parameters);
+		return mySimulation;
 		//Simulation mySimulation = new SegregationSimulation(this);
 
 	}
