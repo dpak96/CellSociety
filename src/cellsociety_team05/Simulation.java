@@ -66,8 +66,9 @@ public abstract class Simulation {
 	    animation.stop();
 	}
 
-	//Will be implemented in subclasses
-	public abstract void updateState(Cell cell);
+	public void updateState (Cell cell) {
+	        myGrid.preUpdateGrid();
+	}
 	
 	public abstract void setCellType(Grid grid);
 	

@@ -132,7 +132,18 @@ public class GUI {
                 myGrid.linkGridPane(myGridPane);
 		mySimulation.start();*/
 		//anotherStartSimulation();
-		startGameOfLifeSimulation();
+		//startGameOfLifeSimulation();
+		//startSegregationSimulation();
+		startFireSimulation();
+	}
+	
+	public void startFireSimulation(){
+	    HashMap<String, Double> map = new HashMap<String, Double>();
+            map.put("probCatch", 0.5);
+	    mySimulation = new FireSimulation(myGridPane,this,map);
+	    myGrid = new Grid(4,4,mySimulation);
+	    myGrid.linkGridPane(myGridPane);
+	    mySimulation.start();
 	}
 	
 	public void startGameOfLifeSimulation(){

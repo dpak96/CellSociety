@@ -2,8 +2,9 @@ package cellsociety_team05;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  * 
@@ -22,6 +23,8 @@ public class SegregationCell extends Cell {
         mySatisfactionPercent = satisfaction;
         myGrid = grid;
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
+        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
+        GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     
     @Override
