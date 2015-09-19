@@ -7,11 +7,11 @@ import javafx.scene.shape.Rectangle;
 
 public class GameOfLifeCell extends Cell {
 
-    public GameOfLifeCell (int xCoordinate, int yCoordinate, int startingState) {
+    public GameOfLifeCell (int xCoordinate, int yCoordinate, int startingState,Simulation sim) {
         super(xCoordinate, yCoordinate, startingState);
         myColors = new Color[] {Color.BLACK, Color.WHITE};
         myPossibleStates = new String[] {"Alive","Dead"};
-        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
+        mySquare = new Rectangle(553/sim.getMyHeight(), 553/sim.getMyHeight(), myColors[startingState]);
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
 

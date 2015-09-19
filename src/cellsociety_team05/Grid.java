@@ -16,7 +16,6 @@ import javafx.scene.shape.Rectangle;
 public class Grid {
     
     List<List<Cell>> myCells;
-    GridPane myGridPane;
     Simulation mySimulation;
     
     public Grid(int width, int height, Simulation sim){
@@ -60,7 +59,6 @@ public class Grid {
     public void preUpdateGrid(){
         for (List<Cell> list: myCells){
             for (Cell cell: list){
-                System.out.println(cell.getClass().toString());
                 cell.preUpdateCell();
             }
         }

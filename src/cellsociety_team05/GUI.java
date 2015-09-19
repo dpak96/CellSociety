@@ -28,7 +28,7 @@ public class GUI {
 	
 	private Stage myStage;
 	private BorderPane root;
-	private final String[] simulationTypes = {"Segregation", "Game of Life", "Predator-Prey"};
+	private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire"};
 	private Simulation mySimulation;
 	private long simulationSpeed;
 	private GridPane myGridPane;
@@ -58,8 +58,9 @@ public class GUI {
 	
 	public void loadSimulationValue(String letter){
 		System.out.println(letter);
-		//mySetup = new Setup(letter);
-		//mySimulation = new SegregationSimulation(mySetup);
+                Setup s = new Setup(letter,this,myGridPane);
+                System.out.println("Start");
+                mySimulation = s.getSimulation();
 	}
 	
 	public void startSimulation(){

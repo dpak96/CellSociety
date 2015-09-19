@@ -10,11 +10,11 @@ public class FireCell extends Cell {
     private double probCatch;
     
 
-    public FireCell (int xCoordinate, int yCoordinate, int startingState) {
+    public FireCell (int xCoordinate, int yCoordinate, int startingState,Simulation sim) {
         super(xCoordinate, yCoordinate, startingState);
         myColors = new Color[] {Color.WHITE, Color.GREEN, Color.RED};
         myPossibleStates = new String[] {"Empty", "Tree", "Burning"};
-        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
+        mySquare = new Rectangle(553/sim.getMyHeight(), 553/sim.getMyHeight(), myColors[startingState]);
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     
@@ -52,17 +52,4 @@ public class FireCell extends Cell {
             myNextState = 0;
         }
     }
-/*
-    @Override
-    public void setCell (int xCoordinate,
-                         int yCoordinate,
-                         int startingState,
-                         HashMap<String, Double> params,
-                         Grid grid) {
-        this.myXCoordinate = xCoordinate;
-        this.myYCoordinate = yCoordinate;
-        this.setCurrentState(startingState);
-        probCatch = params.get("probCatch");
-    }
-*/
 }

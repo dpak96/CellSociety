@@ -18,7 +18,7 @@ public class FireSimulation extends Simulation {
 
     @Override
     public Cell makeCell (int x, int y, int start, Grid g) {
-        FireCell c = new FireCell(x,y,start);
+        FireCell c = new FireCell(x,y,start,this);
         c.setProb(0.5);
         return c;
     }

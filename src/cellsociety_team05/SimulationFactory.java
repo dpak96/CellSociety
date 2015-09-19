@@ -22,6 +22,22 @@ public class SimulationFactory {
         myList = list;
     }
     
+    public String chooseFileFromUserInput(String simulation){
+        if (simulation.equals("Segregation")){
+            return "XMLFiles/test.xml";
+        }
+        else if (simulation.equals("Fire")){
+            return "XMLFiles/fire_test.xml";
+        }
+        else if (simulation.equals("PredatorPrey")){
+            return "XMLFiles/prey_test.xml";
+        }
+        else if (simulation.equals("GameOfLife")){
+            return "XMLFiles/life_test.xml";
+        }
+        else return null;
+    }
+    
     public Simulation makeSimulation(String simulation){
         if (simulation.equals("Segregation")){
             return new SegregationSimulation(myGridPane,myGUI,myMap,myList,myHeight,myWidth);

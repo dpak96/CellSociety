@@ -84,7 +84,7 @@ public class SegregationSimulation extends Simulation {
         map.put("similar", similar);
         map.put("ratio", ratio);
         map.put("empty", empty);
-        SegregationCell c = new SegregationCell(x,y,start,map,myGrid);
+        SegregationCell c = new SegregationCell(x,y,start,map,myGrid,this);
         return c;
     }
 
