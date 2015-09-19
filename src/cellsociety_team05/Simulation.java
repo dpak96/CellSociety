@@ -37,7 +37,7 @@ public abstract class Simulation {
                 System.out.println("2 PREY_REPRODUCTION_TIME: "+myParameters.get("preyreproductiontime"));
                 System.out.println("2 PREDATOR_REPRODUCTION_TIME: "+myParameters.get("predatorreproductiontime"));
                 System.out.println("2 PREDATOR_ENERGY: "+myParameters.get("energylimit"));
-                myGrid = new Grid(getMyHeight(), myWidth, this);
+                myGrid = new Grid(getMyHeight(), myWidth, this,myParameters);
                 readCellList(myInfoList);
 		animation = new Timeline();
 		myGUI = gui;
@@ -88,15 +88,15 @@ public abstract class Simulation {
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	}
-	
+	/*
 	public void restart(){
 		animation.stop();
-		myGrid = new Grid(getMyHeight(), myWidth,this);
+		myGrid = new Grid(getMyHeight(), myWidth,this,myParameters);
 		initializeGridPane();
 		animation = new Timeline();
 		start();
 	}
-
+*/
 	protected void initializeGridPane(){
 		for(List<Cell> listCell: myGrid.getCellMatrix()){
 			for(Cell cell: listCell){
@@ -111,11 +111,11 @@ public abstract class Simulation {
 	/*
 	public abstract void setCellType(Grid grid);
 	*/
-	public abstract ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height);
+	public abstract ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height,HashMap<String, Double> map);
 	
 	public void initGrid(){}
 	
-	public abstract Cell makeCell(int x, int y, int start, Grid g);
+	public abstract Cell makeCell(int x, int y, int start, Grid g,HashMap<String, Double> map);
     public int getMyHeight () {
         return myHeight;
     }

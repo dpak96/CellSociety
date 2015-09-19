@@ -18,9 +18,9 @@ public class Grid {
     List<List<Cell>> myCells;
     Simulation mySimulation;
     
-    public Grid(int width, int height, Simulation sim){
+    public Grid(int width, int height, Simulation sim,HashMap<String, Double> map){
         mySimulation = sim;
-        myCells = mySimulation.setUpCells(this, width, height);
+        myCells = mySimulation.setUpCells(this, width, height,map);
         //mySimulation.readCellList(list);
         initNeighbors();
     }
