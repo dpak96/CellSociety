@@ -37,11 +37,7 @@ public class GUI {
 	private final String[] simulationTypes = {"Segregation", "Game of Life", "Predator-Prey"};
 	private Simulation mySimulation;
 	private long simulationSpeed;
-	//private Button startButton;
 	private GridPane myGridPane;
-	private Grid myGrid;
-	private Timeline animation;
-	//private guiButtons myButtons;
 	private GuiBoxContainer myBoxContainer;
 	
 	public GUI(Stage primaryStage){
@@ -72,7 +68,8 @@ public class GUI {
 		dialog.showAndWait().ifPresent(letter -> loadSimulationValue(letter));
 	}
 
-	private void loadSimulationValue(String letter) {
+	private void loadSimulationValue(String letter){
+		System.out.println(letter);
 		//mySetup = new Setup(letter);
 		//mySimulation = new SegregationSimulation(mySetup);
 	}
@@ -88,11 +85,13 @@ public class GUI {
 		topMenu.prefWidthProperty().bind(myStage.widthProperty());
 		return topMenu;
 	}
+	
 	public void startSimulation(){
 		System.out.println("Start");
 		mySimulation = new FireSimulation(myGridPane, this, new HashMap<String, Double>(), 8, 8);
 		mySimulation.start();
 	}
+	
 	public void step(){
 	    mySimulation.step();
 	}
