@@ -37,11 +37,7 @@ public class GUI {
 	private final String[] simulationTypes = {"Segregation", "Game of Life", "Predator-Prey"};
 	private Simulation mySimulation;
 	private long simulationSpeed;
-	//private Button startButton;
 	private GridPane myGridPane;
-	private Grid myGrid;
-	private Timeline animation;
-	//private guiButtons myButtons;
 	private GuiBoxContainer myBoxContainer;
 	
 	public GUI(Stage primaryStage){
@@ -72,7 +68,8 @@ public class GUI {
 		dialog.showAndWait().ifPresent(letter -> loadSimulationValue(letter));
 	}
 
-	private void loadSimulationValue(String letter) {
+	private void loadSimulationValue(String letter){
+		System.out.println(letter);
 		//mySetup = new Setup(letter);
 		//mySimulation = new SegregationSimulation(mySetup);
 	}
