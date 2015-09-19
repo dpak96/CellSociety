@@ -1,10 +1,8 @@
 package toolsForGui;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cellsociety_team05.GUI;
-import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;

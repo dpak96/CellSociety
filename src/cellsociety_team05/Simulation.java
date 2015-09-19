@@ -2,11 +2,10 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import javafx.animation.Animation;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -53,11 +52,6 @@ public abstract class Simulation {
 	}
 
 	public void start(){
-	        for (List<Cell> list: myGrid.getCellMatrix()){
-	            for (Cell cell: list){
-	                System.out.println("("+cell.getX()+","+cell.getY()+") "+cell.getCurrentState());
-	            }
-	        }
 		KeyFrame frame = new KeyFrame(Duration.millis(1000),
 				e -> this.step());
 		animation.getKeyFrames().add(frame);
@@ -82,18 +76,21 @@ public abstract class Simulation {
 	
 	public void step(){
 	    System.out.println("step");
+	    System.out.println(myGUI.getCurrentSimulation().getClass());
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	}
-	/*
+	
 	public void restart(){
 		animation.stop();
-		myGrid = new Grid(getMyHeight(), myWidth,this,myParameters);
+		//myGrid = new Grid(getMyHeight(), myWidth,this,myParameters);
+		//System.out.println("restart");
+		//System.out.println(this.getClass());
 		initializeGridPane();
 		animation = new Timeline();
 		start();
 	}
-*/
+
 	protected void initializeGridPane(){
 		for(List<Cell> listCell: myGrid.getCellMatrix()){
 			for(Cell cell: listCell){
