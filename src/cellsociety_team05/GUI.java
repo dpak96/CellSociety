@@ -1,17 +1,8 @@
 package cellsociety_team05;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -45,7 +36,7 @@ public class GUI {
 		myStage.setResizable(false);
 		root = new BorderPane();
 		Scene scene = new Scene(root, 553, 640, Color.WHITE);
-		TopMenu myTopMenu = new TopMenu(myStage, simulationTypes);
+		TopMenu myTopMenu = new TopMenu(myStage, simulationTypes, this);
 		root.setTop(myTopMenu.getMenuBar());
 		myBoxContainer = new GuiBoxContainer(this, myStage);
 		root.setBottom(myBoxContainer.getVBox());
@@ -99,5 +90,12 @@ public class GUI {
 	
 	public long getSimulationSpeed() {
 		return simulationSpeed;
+	}
+	
+	public void startNewSimulation(String simulation){
+		if(mySimulation != null){
+			mySimulation.stopAnimation();
+		}
+		System.out.println(simulation);
 	}
 }
