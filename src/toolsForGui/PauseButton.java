@@ -11,8 +11,7 @@ public class PauseButton extends GuiButton{
 
 	public PauseButton(GUI gui) {
 		super(gui);
-		//myButton = new Button(myResources.getString("PauseButton"));
-		this.setButton(this.getResources().getString("NextButton"));
+		this.setButton(this.getResources().getString("PauseButton"));
 		paused = false;
 		this.implementAction();
 	}
@@ -27,10 +26,8 @@ public class PauseButton extends GuiButton{
 		paused = !paused;
 		if(paused){
 			updateButtonText(this.getResources().getString("PauseButton"));
-			//myButton.setText(myResources.getString("PauseButton"));
 		} else {
 			updateButtonText(this.getResources().getString("ResumeButton"));
-			//myButton.setText(myResources.getString("ResumeButton"));
 		}
 	}
 	
