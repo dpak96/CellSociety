@@ -6,12 +6,10 @@ import javafx.scene.input.MouseEvent;
 
 public class RestartButton extends GuiButton{
 	
-	private Button myButton;
-
 	public RestartButton(GUI gui) {
 		super(gui);
 		// TODO Auto-generated constructor stub
-		myButton = new Button("Restart");
+		myButton = new Button(myResources.getString("RestartButton"));
 		myGui = gui;
 		implementAction();
 	}
@@ -20,12 +18,6 @@ public class RestartButton extends GuiButton{
 	protected void implementAction() {
 		// TODO Auto-generated method stub
 		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> myGui.restartSimulation());
-	}
-
-	@Override
-	public Button getButton() {
-		// TODO Auto-generated method stub
-		return myButton;
 	}
 
 }
