@@ -9,15 +9,14 @@ public class RestartButton extends GuiButton{
 	public RestartButton(GUI gui) {
 		super(gui);
 		// TODO Auto-generated constructor stub
-		myButton = new Button(myResources.getString("RestartButton"));
-		myGui = gui;
+		this.setButton(this.getResources().getString("RestartButton"));
 		implementAction();
 	}
 
 	@Override
 	protected void implementAction() {
 		// TODO Auto-generated method stub
-		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> myGui.restartSimulation());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> this.getGui().restartSimulation());
 	}
 
 }
