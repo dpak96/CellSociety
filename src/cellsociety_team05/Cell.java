@@ -36,19 +36,12 @@ public abstract class Cell {
      * @param startingState
      */
     public Cell(int xCoordinate, int yCoordinate, int startingState){
-        //myGrid = grid;
         myXCoordinate = xCoordinate;
         myYCoordinate = yCoordinate;
         myCurrentState = startingState;
         myNextState = startingState;
-        //mySimulation = simulation;
-        //this works only for an 8x8 simulation
     }
-    /*
-    public abstract void setCell(int xCoordinate, int yCoordinate, 
-                            int startingState,
-                            HashMap<String, Double> params ,Grid grid);
-    */
+    
     public Rectangle getSquare(){
         return mySquare;
     }

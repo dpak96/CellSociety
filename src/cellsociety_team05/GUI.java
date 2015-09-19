@@ -53,10 +53,6 @@ public class GUI {
 	}
 	
 	public void startSimulation(){
-	    //String file = "XMLFiles/prey_test.xml";
-	    //Setup s = new Setup(file,this,myGridPane);
-		//System.out.println("Start");
-		//mySimulation = s.getSimulation();
 		mySimulation.start();
 	}
 	
@@ -66,12 +62,10 @@ public class GUI {
 	
 	public void restartSimulation(){
 		myGridPane.getChildren().clear();
-		//mySimulation.restart();
 	}
 	
 	public void updateSimulationSpeed(double speed){
 		System.out.println(speed);
-		//simulationSpeed = speed;
 		mySimulation.updateSpeed(speed);
 	}
 	

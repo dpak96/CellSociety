@@ -105,19 +105,18 @@ public abstract class Simulation {
 	public void stopAnimation(){
 	    animation.stop();
 	}
-	/*
-	public abstract void setCellType(Grid grid);
-	*/
+
 	public abstract ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height,HashMap<String, Double> map);
-	
+
 	public void initGrid(){}
-	
+
 	public abstract Cell makeCell(int x, int y, int start, Grid g,HashMap<String, Double> map);
-    public int getMyHeight () {
-        return myHeight;
-    }
-    public void setMyHeight (int myHeight) {
-        this.myHeight = myHeight;
-    }
-	
+
+	public int getMyHeight () {
+	    return myHeight;
+	}
+	public void setMyHeight (int myHeight) {
+	    this.myHeight = myHeight;
+	}
+
 }

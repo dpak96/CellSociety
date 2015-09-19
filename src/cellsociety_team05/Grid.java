@@ -21,17 +21,8 @@ public class Grid {
     public Grid(int width, int height, Simulation sim,HashMap<String, Double> map){
         mySimulation = sim;
         myCells = mySimulation.setUpCells(this, width, height,map);
-        //mySimulation.readCellList(list);
         initNeighbors();
     }
-    /*
-    public void linkGridPane(GridPane gp){
-        for (List<Cell> list: myCells){
-            for (Cell cell: list){
-                gp.getChildren().add(cell.getSquare());
-            }
-        }
-    }*/
     
     private void initNeighbors(){
         for (List<Cell> list: myCells){

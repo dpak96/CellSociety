@@ -33,24 +33,18 @@ public class SegregationCell extends Cell {
     @Override
     public void preUpdateCell() {
         mySatisfactionPercent = myParameters.get("similar");
-        System.out.println("Cell: ("+getX()+","+getY()+") "+myPossibleStates[myCurrentState]);
-        System.out.println(mySatisfactionPercent);
         myNextState = myCurrentState;
         if (myCurrentState!=2 && myDirty!=true){
             int sameNeighbors = 0;
             for (Cell neighbor: myNeighbors) {
-                System.out.println("Neighbor: ("+neighbor.getX()+","+neighbor.getY()+") "+myPossibleStates[neighbor.myCurrentState]);
                 if (neighbor.myCurrentState==myCurrentState){
                     sameNeighbors+=1;
                 }
             }
-            System.out.println(sameNeighbors+" "+myNeighbors.size());
             if (((double) sameNeighbors)/((double) myNeighbors.size())>=mySatisfactionPercent) {
                 myNextState = myCurrentState;
-                System.out.println("satsfied");
             }
             else {
-                System.out.println("unsatisfied");
                 List<Cell> empties = new ArrayList<Cell>();
                 for (List<Cell> list: myGrid.getCellMatrix()) {
                     for (Cell cell: list){
@@ -61,7 +55,6 @@ public class SegregationCell extends Cell {
                 }
                 System.out.println(empties.size());
                 if (empties.size()>0){
-                    System.out.println("switch");
                     int randomIndex = (int) Math.floor(Math.random()*empties.size());
                     Cell switchCell = empties.get(randomIndex);
                     switchCell.setNextState(myCurrentState);
@@ -72,7 +65,6 @@ public class SegregationCell extends Cell {
                 }
             }
         }
-        System.out.println("Next: "+myPossibleStates[myNextState]);
     }
     
     /**
