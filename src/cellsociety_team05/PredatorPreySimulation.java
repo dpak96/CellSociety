@@ -27,8 +27,11 @@ public class PredatorPreySimulation extends Simulation {
         map.put("preyreproductiontime", (double) PREY_REPRODUCTION_TIME);
         map.put("predatorreproductiontime", (double) PREDATOR_REPRODUCTION_TIME);
         map.put("energylimit", (double) PREDATOR_ENERGY);
-        PredatorPreyCell c = new PredatorPreyCell(x,y,start,map,myGrid);
-        System.out.println(" "+c.myParameters.get("reproductiontime"));
+        System.out.println("3 PREY_REPRODUCTION_TIME: "+PREY_REPRODUCTION_TIME);
+        System.out.println("3 PREDATOR_REPRODUCTION_TIME: "+PREDATOR_REPRODUCTION_TIME);
+        System.out.println("3 PREDATOR_ENERGY: "+PREDATOR_ENERGY);
+        PredatorPreyCell c = new PredatorPreyCell(x,y,start,map,myGrid,this);
+        //System.out.println(" "+c.myParameters.get("reproductiontime"));
         return c;
     }
 
@@ -41,7 +44,7 @@ public class PredatorPreySimulation extends Simulation {
                 int state = (int) Math.floor(Math.random()*3);
                 Cell newcell = makeCell(i, j, state, grid);
                 list.get(i).add(newcell);
-                System.out.println("  "+list.get(i).get(j).myParameters.get("reproductiontime"));
+                //System.out.println("  "+list.get(i).get(j).myParameters.get("reproductiontime"));
             }
         }
         return list;

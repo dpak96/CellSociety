@@ -15,63 +15,24 @@ public class Setup {
 	private int myHeight, myWidth;
 	private ArrayList<CellInfo> myCells;
 	
-	public Setup(String file, GUI gui, GridPane gp){
+	public Setup(String simulation, GUI gui, GridPane gp){
 		myGUI = gui; 
 		myGridPane = gp;
+		SimulationFactory sf = new SimulationFactory(myGridPane,myGUI,parameters,myCells,myHeight,myWidth);
+                String file = sf.chooseFileFromUserInput(simulation);
 		xml = new XMLReader(file);
 		xml.readFile();
 		parameters = xml.getParams();
 		myHeight = xml.getGridHeight();
                 myWidth = xml.getGridWidth();
                 myCells = xml.getCells();
-		SimulationFactory sf = new SimulationFactory(myGridPane,myGUI,parameters,myCells,myHeight,myWidth);
+                sf = new SimulationFactory(myGridPane,myGUI,parameters,myCells,myHeight,myWidth);
 		System.out.println(xml.getSimulationName());
 		mySimulation = sf.makeSimulation(xml.getSimulationName());
-	}
-	
-	public void reset(String file){
-		//Grid grid = initGrid();
-		//initSimulation(grid);
 	}
 	
 	public Simulation getSimulation(){
 		return mySimulation; 
 	}
 	
-        public void startPredatorPreySimulation(){
-            HashMap<String, Double> map = new HashMap<String, Double>();
-            map.put("preyreproductiontime", 5.0);
-            map.put("predatorreproductiontime", 5.0);
-            map.put("energy", 5.0);
-            mySimulation = new PredatorPreySimulation(myGridPane,myGUI,map,myCells,myHeight,myWidth);
-            //myGrid = new Grid(4,4,mySimulation);
-            //myGrid.linkGridPane(myGridPane);
-            mySimulation.start();
-        }
-	
-	public void startFireSimulation(){
-	    HashMap<String, Double> map = new HashMap<String, Double>();
-            map.put("probCatch", 0.5);
-	    mySimulation = new FireSimulation(myGridPane,myGUI,map,myCells,myHeight,myWidth);
-	}
-	
-	public void startGameOfLifeSimulation(){
-	    mySimulation = new GameOfLifeSimulation(myGridPane,myGUI,null,myCells,myHeight,myWidth);
-	    //myGrid = new Grid(4,4,mySimulation);
-	    //myGrid.linkGridPane(myGridPane);
-	    mySimulation.start();
-	}
-	
-	public void startSegregationSimulation(){
-	    System.out.println("Start");
-            HashMap<String, Double> map = new HashMap<String, Double>();
-            map.put("similar", 0.3);
-            map.put("ratio", 0.5);
-            map.put("empty", 0.2);
-            mySimulation = new SegregationSimulation(myGridPane,myGUI,map,myCells,myHeight,myWidth);
-            //myGrid = new Grid(4,4,mySimulation);
-            //mySimulation.initGrid();
-            //myGrid.linkGridPane(myGridPane);
-            mySimulation.start();
-	}
 }

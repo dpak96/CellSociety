@@ -19,30 +19,17 @@ public class SegregationCell extends Cell {
     
     public SegregationCell (int xCoordinate, int yCoordinate, 
                             int startingState,
-                            HashMap<String, Double> map,Grid grid) {
+                            HashMap<String, Double> map,Grid grid,Simulation sim) {
         super(xCoordinate, yCoordinate, startingState);
         mySatisfactionPercent = map.get("similar");
         myParameters = map;
         myGrid = grid;
         myDirty = false;
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
-        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
+        System.out.println("HEIGHT"+sim.myGridPane.getHeight()/sim.getMyHeight());
+        mySquare = new Rectangle(553/sim.getMyHeight(), 553/sim.getMyHeight(), myColors[startingState]);
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
-    /*
-    public SegregationCell(){
-    	this(0, 0, 0, 0, null);
-    }*/
-    /*
-    public void setCell(int xCoordinate, int yCoordinate, 
-            int startingState,
-            HashMap<String, Double> param,Grid grid){
-    	this.myXCoordinate = xCoordinate;
-    	this.myYCoordinate = yCoordinate;
-    	this.setCurrentState(startingState);
-    	mySatisfactionPercent = param.get("satisfaction");
-    	myGrid = grid;
-    }*/
     
     @Override
     public void preUpdateCell() {
