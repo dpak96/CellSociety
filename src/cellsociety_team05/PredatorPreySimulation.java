@@ -15,9 +15,9 @@ public class PredatorPreySimulation extends Simulation {
         PREY_REPRODUCTION_TIME = (int) Math.round(params.get("preyreproductiontime"));
         PREDATOR_REPRODUCTION_TIME = (int) Math.round(params.get("predatorreproductiontime"));
         PREDATOR_ENERGY = (int) Math.round(params.get("energylimit"));
-        System.out.println("1 PREY_REPRODUCTION_TIME: "+PREY_REPRODUCTION_TIME);
-        System.out.println("1 PREDATOR_REPRODUCTION_TIME: "+PREDATOR_REPRODUCTION_TIME);
-        System.out.println("1 PREDATOR_ENERGY: "+PREDATOR_ENERGY);
+        //System.out.println("1 PREY_REPRODUCTION_TIME: "+PREY_REPRODUCTION_TIME);
+        //System.out.println("1 PREDATOR_REPRODUCTION_TIME: "+PREDATOR_REPRODUCTION_TIME);
+        //System.out.println("1 PREDATOR_ENERGY: "+PREDATOR_ENERGY);
     }
     
     @Override
