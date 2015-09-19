@@ -1,17 +1,17 @@
 package toolsForGui;
+import java.util.ResourceBundle;
+
 import cellsociety_team05.GUI;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 public class PauseButton extends GuiButton{
 	
-	private Button myButton;
 	private boolean paused;
 
 	public PauseButton(GUI gui) {
 		super(gui);
-		myGui = gui;
-		myButton = new Button("Pause");
+		myButton = new Button(myResources.getString("PauseButton"));
 		paused = false;
 		this.implementAction();
 	}
@@ -21,18 +21,13 @@ public class PauseButton extends GuiButton{
 		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> myGui.changeSimulationFlow());
 		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> updateResumeButton());
 	}
-
-	@Override
-	public Button getButton() {
-		return myButton;
-	}
 	
 	private void updateResumeButton(){
 		paused = !paused;
 		if(paused){
-			myButton.setText("Resume");
+			myButton.setText(myResources.getString("PauseButton"));
 		} else {
-			myButton.setText("Pause");
+			myButton.setText(myResources.getString("ResumeButton"));
 		}
 	}
 	

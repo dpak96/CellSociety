@@ -1,17 +1,16 @@
 package toolsForGui;
 
+import java.util.ResourceBundle;
+
 import cellsociety_team05.GUI;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 public class NextStepButton extends GuiButton{
 
-	private Button myButton;
-
 	public NextStepButton(GUI gui) {
 		super(gui);
-		myGui = gui;
-		myButton = new Button("Next Step");
+		myButton = new Button(myResources.getString("NextButton"));
 		this.implementAction();
 	}
 
@@ -19,12 +18,4 @@ public class NextStepButton extends GuiButton{
 	protected void implementAction() {
 		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> myGui.step());
 	}
-
-	@Override
-	public Button getButton() {
-		return myButton;
-	}
-	
-	
-
 }
