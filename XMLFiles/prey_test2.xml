@@ -82,7 +82,7 @@
 	<cell>
 		<xcord>2</xcord>
 		<ycord>1</ycord>
-		<state>0</state>
+		<state>2</state>
 	</cell>
 		<cell>
 		<xcord>2</xcord>
@@ -97,7 +97,7 @@
 	<cell>
 		<xcord>3</xcord>
 		<ycord>0</ycord>
-		<state>1</state>
+		<state>2</state>
 	</cell>
 	<cell>
 		<xcord>3</xcord>
