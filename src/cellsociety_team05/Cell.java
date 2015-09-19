@@ -40,6 +40,7 @@ public abstract class Cell {
         myXCoordinate = xCoordinate;
         myYCoordinate = yCoordinate;
         myCurrentState = startingState;
+        myNextState = startingState;
         //mySimulation = simulation;
         //this works only for an 8x8 simulation
     }
@@ -102,6 +103,7 @@ public abstract class Cell {
      * Switches this cell's state from it's current to it's next state.
      */
     public void updateCell(){
+        System.out.println("cell: ("+getX()+","+getY()+") "+myPossibleStates[myCurrentState]+" "+myPossibleStates[myNextState]);
         myCurrentState = myNextState;
         mySquare.setFill(myColors[myCurrentState]);
     }
