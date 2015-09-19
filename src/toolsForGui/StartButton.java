@@ -10,18 +10,13 @@ public class StartButton extends GuiButton{
 
 	public StartButton(GUI gui) {
 		super(gui);
-		myButton = new Button(myResources.getString("StartButton"));
+		this.setButton(myResources.getString("StartButton"));
 		this.implementAction();
-		System.out.println("WHAt");
 	}
 
 	@Override
 	protected void implementAction() {
-		if(myGui != null){
-			System.out.println("HO");
-		}
-		
-		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> myGui.startSimulation());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> this.getGui().startSimulation());
 	}
 	
 }
