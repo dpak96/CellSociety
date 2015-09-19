@@ -34,9 +34,6 @@ public abstract class Simulation {
                 myInfoList = list;
                 myParameters = params;
                 myGridPane = gridPane;
-                System.out.println("2 PREY_REPRODUCTION_TIME: "+myParameters.get("preyreproductiontime"));
-                System.out.println("2 PREDATOR_REPRODUCTION_TIME: "+myParameters.get("predatorreproductiontime"));
-                System.out.println("2 PREDATOR_ENERGY: "+myParameters.get("energylimit"));
                 myGrid = new Grid(getMyHeight(), myWidth, this,myParameters);
                 readCellList(myInfoList);
 		animation = new Timeline();

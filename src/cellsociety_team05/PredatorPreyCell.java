@@ -19,14 +19,10 @@ public class PredatorPreyCell extends Cell {
         super(xCoordinate, yCoordinate, startingState);
         myParameters = param;
         myParameters.put("reproductiontime", 0.0);
-        System.out.println(myParameters.get("reproductiontime"));
-        //myParameters.put("energy", 0.0);
+        myParameters.put("energy", 0.0);
         PREY_REPRODUCTION_TIME = (int) Math.round(param.get("preyreproductiontime"));
         PREDATOR_REPRODUCTION_TIME = (int) Math.round(param.get("predatorreproductiontime"));
         PREDATOR_ENERGY = (int) Math.round(param.get("energylimit"));
-        System.out.println("4 PREY_REPRODUCTION_TIME: "+PREY_REPRODUCTION_TIME);
-        System.out.println("4 PREDATOR_REPRODUCTION_TIME: "+PREDATOR_REPRODUCTION_TIME);
-        System.out.println("4 PREDATOR_ENERGY: "+PREDATOR_ENERGY);
         myDirty = false;
         myGrid = g;
         myPossibleStates = new String[] {"Fish/Blue", "Shark/Red", "Empty"};
