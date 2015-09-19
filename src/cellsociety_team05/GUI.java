@@ -29,8 +29,6 @@ public class GUI {
 	public GUI(Stage primaryStage){
 		GuiChoiceDialog myGuiChoiceDialog = new GuiChoiceDialog(this, simulationTypes);
 		myResources = ResourceBundle.getBundle("resources.window");
-		myGuiChoiceDialog.display();
-		
 		myStage = primaryStage;
 		myStage.setTitle(myResources.getString("Title"));
 		myStage.setResizable(false);
@@ -42,7 +40,7 @@ public class GUI {
 		root.setBottom(myBoxContainer.getVBox());
 		myGridPane = new GridPane();
 		root.setCenter(myGridPane);
-		
+		myGuiChoiceDialog.display();
 		myStage.setScene(scene);
 		myStage.show();
 	}
@@ -55,11 +53,10 @@ public class GUI {
 	}
 	
 	public void startSimulation(){
-	    String file = "XMLFiles/prey_test.xml";
-	    Setup s = new Setup(file,this,myGridPane);
-
-		System.out.println("Start");
-		mySimulation = s.getSimulation();
+	    //String file = "XMLFiles/prey_test.xml";
+	    //Setup s = new Setup(file,this,myGridPane);
+		//System.out.println("Start");
+		//mySimulation = s.getSimulation();
 		mySimulation.start();
 	}
 	

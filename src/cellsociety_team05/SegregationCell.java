@@ -26,7 +26,6 @@ public class SegregationCell extends Cell {
         myGrid = grid;
         myDirty = false;
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
-        System.out.println("HEIGHT"+sim.myGridPane.getHeight()/sim.getMyHeight());
         mySquare = new Rectangle(553/sim.getMyHeight(), 553/sim.getMyHeight(), myColors[startingState]);
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
