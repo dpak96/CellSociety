@@ -34,7 +34,7 @@ public class GUI {
 		myStage.setResizable(false);
 		root = new BorderPane();
 		Scene scene = new Scene(root, 553, 640, Color.WHITE);
-		TopMenu myTopMenu = new TopMenu(myStage, simulationTypes);
+		TopMenu myTopMenu = new TopMenu(myStage, simulationTypes, this);
 		root.setTop(myTopMenu.getMenuBar());
 		myBoxContainer = new GuiBoxContainer(this, myStage);
 		root.setBottom(myBoxContainer.getVBox());
@@ -89,5 +89,12 @@ public class GUI {
 	
 	public long getSimulationSpeed() {
 		return simulationSpeed;
+	}
+	
+	public void startNewSimulation(String simulation){
+		if(mySimulation != null){
+			mySimulation.stopAnimation();
+		}
+		System.out.println(simulation);
 	}
 }
