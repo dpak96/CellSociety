@@ -87,7 +87,7 @@ public class GUI {
 	}
 	
 	public void startSimulation(){
-	        String file = "XMLFiles/prey_test.xml";
+	        String file = "XMLFiles/prey_test2.xml";
 	        Setup s = new Setup(file,this,myGridPane);
 		System.out.println("Start");
 		mySimulation = s.getSimulation();
