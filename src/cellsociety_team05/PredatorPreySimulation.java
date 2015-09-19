@@ -15,15 +15,18 @@ public class PredatorPreySimulation extends Simulation {
         PREY_REPRODUCTION_TIME = (int) Math.round(params.get("preyreproductiontime"));
         PREDATOR_REPRODUCTION_TIME = (int) Math.round(params.get("predatorreproductiontime"));
         PREDATOR_ENERGY = (int) Math.round(params.get("energylimit"));
-        System.out.println("1 PREY_REPRODUCTION_TIME: "+PREY_REPRODUCTION_TIME);
-        System.out.println("1 PREDATOR_REPRODUCTION_TIME: "+PREDATOR_REPRODUCTION_TIME);
-        System.out.println("1 PREDATOR_ENERGY: "+PREDATOR_ENERGY);
     }
     
     @Override
     public Cell makeCell (int x, int y, int start, Grid g, HashMap<String, Double> map) {
         myGrid = g;
-        PredatorPreyCell c = new PredatorPreyCell(x,y,start,map,myGrid,this);
+        HashMap<String, Double> params = new HashMap<String, Double>();
+        params.put("reproductiontime", map.get("reproductiontime"));
+        params.put("energy", map.get("energy"));
+        params.put("preyreproductiontime", map.get("preyreproductiontime"));
+        params.put("predatorreproductiontime", map.get("predatorreproductiontime"));
+        params.put("energylimit", map.get("energylimit"));
+        PredatorPreyCell c = new PredatorPreyCell(x,y,start,params,myGrid,this);
         //System.out.println(" "+c.myParameters.get("reproductiontime"));
         return c;
     }
