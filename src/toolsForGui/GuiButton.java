@@ -7,9 +7,9 @@ import javafx.scene.control.Button;
 
 public abstract class GuiButton{
 
-	protected GUI myGui;
+	private GUI myGui;
 	protected ResourceBundle myResources;
-	protected Button myButton;
+	private Button myButton;
 	
 	public GuiButton(GUI gui){
 		myGui = gui;
@@ -20,7 +20,17 @@ public abstract class GuiButton{
 		return myButton;
 	}
 	
+	public void setButton(String s){
+		myButton = new Button(s);
+	}
 	protected abstract void implementAction();
 	
+	public GUI getGui(){
+		return myGui;
+	}
+	
+	public ResourceBundle getResources(){
+		return myResources;
+	}
 	
 }

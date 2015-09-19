@@ -21,27 +21,23 @@ public class PredatorPreySimulation extends Simulation {
     }
     
     @Override
-    public Cell makeCell (int x, int y, int start, Grid g) {
+    public Cell makeCell (int x, int y, int start, Grid g, HashMap<String, Double> map) {
         myGrid = g;
-        HashMap<String, Double> map = new HashMap<String, Double>();
-        map.put("preyreproductiontime", (double) PREY_REPRODUCTION_TIME);
-        map.put("predatorreproductiontime", (double) PREDATOR_REPRODUCTION_TIME);
-        map.put("energylimit", (double) PREDATOR_ENERGY);
-        PredatorPreyCell c = new PredatorPreyCell(x,y,start,map,myGrid);
-        System.out.println(" "+c.myParameters.get("reproductiontime"));
+        PredatorPreyCell c = new PredatorPreyCell(x,y,start,map,myGrid,this);
+        //System.out.println(" "+c.myParameters.get("reproductiontime"));
         return c;
     }
 
     @Override
-    public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height) {
+    public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height,HashMap<String, Double> map) {
         ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
         for (int i=0;i<width;i++){
             list.add(new ArrayList<Cell>());
             for (int j=0;j<height;j++){
                 int state = (int) Math.floor(Math.random()*3);
-                Cell newcell = makeCell(i, j, state, grid);
+                Cell newcell = makeCell(i, j, state, grid,map);
                 list.get(i).add(newcell);
-                System.out.println("  "+list.get(i).get(j).myParameters.get("reproductiontime"));
+                //System.out.println("  "+list.get(i).get(j).myParameters.get("reproductiontime"));
             }
         }
         return list;

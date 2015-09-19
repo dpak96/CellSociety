@@ -1,5 +1,6 @@
 package toolsForGui;
 
+import java.awt.List;
 import java.util.ArrayList;
 
 import cellsociety_team05.GUI;
@@ -11,16 +12,17 @@ import javafx.stage.Stage;
 public class FlowControlBox extends HorizontalControlBoxes{
 	
 	private HBox myHBox;
-	private ArrayList<GuiButton> myButtons;
+	private ArrayList<Button> myButtons;
 	private GUI myGui;
 	
 	public FlowControlBox(GUI gui, Stage primaryStage){
 		myGui = gui;
-		myButtons = new ArrayList<GuiButton>();
+		myButtons = new ArrayList<Button>();
 		myHBox = new HBox();
 		myHBox.setPrefHeight(20);
 		myHBox.setSpacing(20.0);
 		myHBox.setAlignment(Pos.CENTER);
+		
 		StartButton s = new StartButton(myGui);
 		PauseButton p = new PauseButton(myGui);
 		NextStepButton n = new NextStepButton(gui);
@@ -33,11 +35,6 @@ public class FlowControlBox extends HorizontalControlBoxes{
 	
 	@Override
 	public HBox getBox(){
-		/*
-		for(GuiButton g: myButtons){
-			myHBox.getChildren().add(g.getButton());
-		}
-		*/
 		return myHBox;
 	}
 

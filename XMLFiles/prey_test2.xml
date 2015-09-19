@@ -11,7 +11,7 @@
 	
 	<parameters>
 		<name>preyreproductiontime</name>
-		<value>1000.0</value>
+		<value>5.0</value>
 	</parameters>
 	
 	<parameters>
@@ -37,7 +37,7 @@
 	<cell>
 		<xcord>0</xcord>
 		<ycord>0</ycord>
-		<state>2</state>
+		<state>0</state>
 	</cell>
 	<cell>
 		<xcord>0</xcord>
@@ -82,7 +82,7 @@
 	<cell>
 		<xcord>2</xcord>
 		<ycord>1</ycord>
-		<state>2</state>
+		<state>0</state>
 	</cell>
 		<cell>
 		<xcord>2</xcord>
@@ -97,7 +97,7 @@
 	<cell>
 		<xcord>3</xcord>
 		<ycord>0</ycord>
-		<state>2</state>
+		<state>1</state>
 	</cell>
 	<cell>
 		<xcord>3</xcord>
