@@ -11,8 +11,8 @@ public class SegregationSimulation extends Simulation {
 	private double ratio;
 	private double empty;
 	
-	public SegregationSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> param, int height, int width) {
-        super(gridPane, gui, param, height, width);
+	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param, int height, int width){
+		super(gridPane, gui, param, height, width);
 		similar = param.get("similar");
 		ratio = param.get("ratio");
 		empty = param.get("empty");

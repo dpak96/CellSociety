@@ -41,6 +41,12 @@ public abstract class Simulation {
 	public void setGrid(Grid g){
 	    myGrid = g;
 	}
+	
+	public void readCellList(ArrayList<CellInfo> list, Grid g){
+	    for (CellInfo cell: list){
+	        g.getCellMatrix().get(cell.getX()).get(cell.getY()).setCurrentState(cell.getState());
+	    }
+	}
 
 	public void start(){
 		KeyFrame frame = new KeyFrame(Duration.millis(1000),
@@ -72,7 +78,7 @@ public abstract class Simulation {
 	
 	public void restart(){
 		animation.stop();
-		myGrid = new Grid(myHeight, myWidth, this);
+		myGrid = new Grid(myHeight, myWidth,this);
 		initializeGridPane();
 		animation = new Timeline();
 		start();

@@ -22,23 +22,6 @@ public class Grid {
         myCells = sim.setUpCells(this, width, height);
         initNeighbors();
     }
-    /*
-    public Grid(int width, int height, List<Cell> list){
-        myCells = new ArrayList<List<Cell>>();
-        for (int i=0;i<width;i++){
-            myCells.add(new ArrayList<Cell>());
-            for (int j=0;j<height;j++){
-                int state = (int) Math.floor(Math.random()*2);
-                Cell newcell = new GameOfLifeCell(i,j,state);
-                myCells.get(i).add(newcell);
-            }
-        }
-        initNeighbors();
-        for (Cell cell: list){
-            myCells.get(cell.getX()).set(cell.getY(), cell);
-        }
-    }
-    */
     
     public void linkGridPane(GridPane gp){
         for (List<Cell> list: myCells){
