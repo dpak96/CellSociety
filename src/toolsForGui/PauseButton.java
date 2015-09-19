@@ -11,24 +11,31 @@ public class PauseButton extends GuiButton{
 
 	public PauseButton(GUI gui) {
 		super(gui);
-		myButton = new Button(myResources.getString("PauseButton"));
+		//myButton = new Button(myResources.getString("PauseButton"));
+		this.setButton(this.getResources().getString("NextButton"));
 		paused = false;
 		this.implementAction();
 	}
 
 	@Override
 	protected void implementAction() {
-		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> myGui.changeSimulationFlow());
-		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> updateResumeButton());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> this.getGui().changeSimulationFlow());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> updateResumeButton());
 	}
 	
 	private void updateResumeButton(){
 		paused = !paused;
 		if(paused){
-			myButton.setText(myResources.getString("PauseButton"));
+			updateButtonText(this.getResources().getString("PauseButton"));
+			//myButton.setText(myResources.getString("PauseButton"));
 		} else {
-			myButton.setText(myResources.getString("ResumeButton"));
+			updateButtonText(this.getResources().getString("ResumeButton"));
+			//myButton.setText(myResources.getString("ResumeButton"));
 		}
+	}
+	
+	private void updateButtonText(String s){
+		this.getButton().setText(s);
 	}
 	
 	

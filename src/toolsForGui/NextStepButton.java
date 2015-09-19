@@ -10,12 +10,13 @@ public class NextStepButton extends GuiButton{
 
 	public NextStepButton(GUI gui) {
 		super(gui);
-		myButton = new Button(myResources.getString("NextButton"));
+		//this.getButton() = new Button(this.getResources().getString("NextButton"));
+		this.setButton(this.getResources().getString("NextButton"));
 		this.implementAction();
 	}
 
 	@Override
 	protected void implementAction() {
-		myButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> myGui.step());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> this.getGui().step());
 	}
 }
