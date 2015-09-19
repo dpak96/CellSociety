@@ -15,7 +15,7 @@ public class GameOfLifeSimulation extends Simulation {
     @Override
     public Cell makeCell (int x, int y, int start, Grid g) {
         myGrid = g;
-        GameOfLifeCell c = new GameOfLifeCell(x,y,start);
+        GameOfLifeCell c = new GameOfLifeCell(x,y,start,this);
         return c;
     }
 

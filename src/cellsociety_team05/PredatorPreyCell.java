@@ -15,7 +15,7 @@ public class PredatorPreyCell extends Cell {
     int myReproductionTime = 0;
     int myEnergy = 0;
     
-    public PredatorPreyCell (int xCoordinate, int yCoordinate, int startingState, HashMap<String, Double> param, Grid g) {
+    public PredatorPreyCell (int xCoordinate, int yCoordinate, int startingState, HashMap<String, Double> param, Grid g,Simulation sim) {
         super(xCoordinate, yCoordinate, startingState);
         myParameters = param;
         myParameters.put("reproductiontime", 0.0);
@@ -28,7 +28,7 @@ public class PredatorPreyCell extends Cell {
         myGrid = g;
         myPossibleStates = new String[] {"Fish/Blue", "Shark/Red", "Empty"};
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
-        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
+        mySquare = new Rectangle(553/sim.getMyHeight(), 553/sim.getMyHeight(), myColors[startingState]);
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     

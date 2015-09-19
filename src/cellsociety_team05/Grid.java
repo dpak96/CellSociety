@@ -16,7 +16,6 @@ import javafx.scene.shape.Rectangle;
 public class Grid {
     
     List<List<Cell>> myCells;
-    GridPane myGridPane;
     Simulation mySimulation;
     
     public Grid(int width, int height, Simulation sim){

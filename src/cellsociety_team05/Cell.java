@@ -103,7 +103,7 @@ public abstract class Cell {
      * Switches this cell's state from it's current to it's next state.
      */
     public void updateCell(){
-        System.out.println("cell: ("+getX()+","+getY()+") "+myPossibleStates[myCurrentState]+" "+myPossibleStates[myNextState]);
+        //System.out.println("cell: ("+getX()+","+getY()+") "+myPossibleStates[myCurrentState]+" "+myPossibleStates[myNextState]);
         myCurrentState = myNextState;
         mySquare.setFill(myColors[myCurrentState]);
     }
