@@ -15,7 +15,7 @@ public class PredatorPreyCell extends Cell {
     int myReproductionTime = 0;
     int myEnergy = 0;
     
-    public PredatorPreyCell (int xCoordinate, int yCoordinate, int startingState, HashMap<String, Double> param, Grid g) {
+    public PredatorPreyCell (int xCoordinate, int yCoordinate, int startingState, HashMap<String, Double> param, Grid g,Simulation sim) {
         super(xCoordinate, yCoordinate, startingState);
         myParameters = param;
         myParameters.put("reproductiontime", 0.0);
@@ -24,11 +24,14 @@ public class PredatorPreyCell extends Cell {
         PREY_REPRODUCTION_TIME = (int) Math.round(param.get("preyreproductiontime"));
         PREDATOR_REPRODUCTION_TIME = (int) Math.round(param.get("predatorreproductiontime"));
         PREDATOR_ENERGY = (int) Math.round(param.get("energylimit"));
+        System.out.println("4 PREY_REPRODUCTION_TIME: "+PREY_REPRODUCTION_TIME);
+        System.out.println("4 PREDATOR_REPRODUCTION_TIME: "+PREDATOR_REPRODUCTION_TIME);
+        System.out.println("4 PREDATOR_ENERGY: "+PREDATOR_ENERGY);
         myDirty = false;
         myGrid = g;
         myPossibleStates = new String[] {"Fish/Blue", "Shark/Red", "Empty"};
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
-        mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
+        mySquare = new Rectangle(553/sim.getMyHeight(), 553/sim.getMyHeight(), myColors[startingState]);
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     
@@ -44,19 +47,23 @@ public class PredatorPreyCell extends Cell {
                     int yCoordinate = cell.getY()+y[i];
                     if(xCoordinate>=0 && yCoordinate>=0 && xCoordinate<myGrid.getCellMatrix().size() && yCoordinate<myGrid.getCellMatrix().get(0).size()){
                         neighbors.add(myGrid.getCellMatrix().get(xCoordinate).get(yCoordinate));
-                        //System.out.println("neighbor: ("+myCells.get(xCoordinate).get(yCoordinate).getX()+","+myCells.get(xCoordinate).get(yCoordinate).getY()+")");
+                        //System.out.println("neighbor: ("+myGrid.getCellMatrix().get(xCoordinate).get(yCoordinate).getX()+","+myGrid.getCellMatrix().get(xCoordinate).get(yCoordinate).getY()+")");
                     }
                     else if(xCoordinate>=myGrid.getCellMatrix().size()){
                         neighbors.add(myGrid.getCellMatrix().get(0).get(yCoordinate));
+                        //System.out.println("neighbor: ("+myGrid.getCellMatrix().get(0).get(yCoordinate).getX()+","+myGrid.getCellMatrix().get(0).get(yCoordinate).getY()+")");
                     }
                     else if(xCoordinate<0){
                         neighbors.add(myGrid.getCellMatrix().get(myGrid.getCellMatrix().size()-1).get(yCoordinate));
+                        //System.out.println("neighbor: ("+myGrid.getCellMatrix().get(myGrid.getCellMatrix().size()-1).get(yCoordinate).getX()+","+myGrid.getCellMatrix().get(myGrid.getCellMatrix().size()-1).get(yCoordinate).getY()+")");
                     }
                     else if(yCoordinate>=myGrid.getCellMatrix().get(0).size()){
                         neighbors.add(myGrid.getCellMatrix().get(xCoordinate).get(0));
+                        //System.out.println("neighbor: ("+myGrid.getCellMatrix().get(xCoordinate).get(0).getX()+","+myGrid.getCellMatrix().get(xCoordinate).get(0).getY()+")");
                     }
                     else if(yCoordinate<0){
                         neighbors.add(myGrid.getCellMatrix().get(xCoordinate).get(myGrid.getCellMatrix().get(0).size()-1));
+                        //System.out.println("neighbor: ("+myGrid.getCellMatrix().get(xCoordinate).get(myGrid.getCellMatrix().get(0).size()-1).getX()+","+myGrid.getCellMatrix().get(xCoordinate).get(myGrid.getCellMatrix().get(0).size()-1).getY()+")");
                     }
                 }
                 cell.setNeighbors(neighbors);
@@ -67,8 +74,10 @@ public class PredatorPreyCell extends Cell {
     private void moveTo(Cell prey){
         prey.myNextState = myCurrentState;
         prey.setCurrentState(prey.myNextState);
+        System.out.println("moved: "+myPossibleStates[prey.myCurrentState]+" "+myPossibleStates[prey.myNextState]);
         prey.myParameters.put("reproductiontime", (double) myReproductionTime);
         prey.myParameters.put("energy", (double) myEnergy);
+        prey.myDirty = true;
     }
     
     private void eat(Cell cell){
@@ -86,6 +95,7 @@ public class PredatorPreyCell extends Cell {
     }
     
     private void age(Cell cell){
+    	System.out.println("my energy: " + cell.myParameters.get("energy"));
         cell.myParameters.put("energy", cell.myParameters.get("energy")+1);
         cell.myParameters.put("reproductiontime", cell.myParameters.get("reproductiontime")+1);
     }
@@ -97,11 +107,23 @@ public class PredatorPreyCell extends Cell {
                 myReproductionTime=0;
                 myEnergy = 0;
             }
+            else{
+                myNextState = 2;
+                myReproductionTime = 0;
+                myEnergy = 0;
+            }
         }
         else if (myCurrentState==0){
             if (myReproductionTime>=PREY_REPRODUCTION_TIME){
                 myNextState = myCurrentState;
-                myReproductionTime=0;
+                myReproductionTime=-1;
+                myParameters.put("reproductiontime", -1.0);
+                myEnergy = 0;
+            }
+            else{
+                System.out.println("left");
+                myNextState = 2;
+                myReproductionTime = 0;
                 myEnergy = 0;
             }
         }
@@ -115,67 +137,70 @@ public class PredatorPreyCell extends Cell {
 
     @Override
     public void preUpdateCell (){
+        myNextState = myCurrentState;
         initNeighbors();
+        System.out.println("Cell: ("+getX()+","+getY()+")"+myPossibleStates[myCurrentState]+" "+myPossibleStates[myNextState]);
         myReproductionTime = (int) Math.round(myParameters.get("reproductiontime"));
         myEnergy = (int) Math.round(myParameters.get("energy"));
-        if(myCurrentState==1){
-            List<Cell> fish = new ArrayList<Cell>();
-            List<Cell> empties = new ArrayList<Cell>();
-            for (Cell cell: myNeighbors){
-                if (cell.getCurrentState()==0){
-                    fish.add(cell);
+        System.out.println(myPossibleStates[myCurrentState]);
+        System.out.println("Reproduction Time: "+myReproductionTime);
+        System.out.println("Energy: "+myEnergy);
+        System.out.println("PredatorReproductionTime: "+PREDATOR_REPRODUCTION_TIME);
+        System.out.println("PreyReproductionTime: "+PREY_REPRODUCTION_TIME);
+        if(!myDirty){
+            if(myCurrentState==1){
+                List<Cell> fish = new ArrayList<Cell>();
+                List<Cell> empties = new ArrayList<Cell>();
+                for (Cell cell: myNeighbors){
+                    if (cell.getCurrentState()==0){
+                        fish.add(cell);
+                        System.out.println("fish: ("+cell.getX()+","+cell.getY()+")");
+                    }
+                    else if (cell.getCurrentState()==2){
+                        empties.add(cell);
+                        System.out.println("empty: ("+cell.getX()+","+cell.getY()+")");
+                    }
                 }
-                else if (cell.getCurrentState()==2){
-                    empties.add(cell);
+                if (fish.size()>0){
+                    int ran = (int) Math.floor(Math.random()*fish.size());
+                    Cell eatCell = fish.get(ran);
+                    System.out.println("eat fish: ("+eatCell.getX()+","+eatCell.getY()+")");
+                    eat(eatCell);
+                    leave();
+                    checkDeath(eatCell);
+                }
+                else if (empties.size()>0){
+                    int ran = (int) Math.floor(Math.random()*empties.size());
+                    Cell moveCell = empties.get(ran);
+                    System.out.println("move empty: ("+moveCell.getX()+","+moveCell.getY()+")");
+                    moveTo(moveCell);
+                    leave();
+                    age(moveCell);
+                    checkDeath(moveCell);
                 }
             }
-            if (fish.size()>0){
-                int ran = (int) Math.floor(Math.random()*fish.size());
-                Cell eatCell = fish.get(ran);
-                eat(eatCell);
-                leave();
-                checkDeath(eatCell);
-            }
-            else if (empties.size()>0){
-                int ran = (int) Math.floor(Math.random()*empties.size());
-                Cell moveCell = empties.get(ran);
-                moveTo(moveCell);
-                leave();
-                age(moveCell);
-                checkDeath(moveCell);
+
+            else if(myCurrentState==0){
+                List<Cell> empties = new ArrayList<Cell>();
+                for (Cell cell: myNeighbors){
+                    if (cell.getCurrentState()==2){
+                        empties.add(cell);
+                        System.out.println("empty: ("+cell.getX()+","+cell.getY()+")");
+                    }
+                }
+                if (empties.size()>0){
+                    int ran = (int) Math.floor(Math.random()*empties.size());
+                    Cell moveCell = empties.get(ran);
+                    System.out.println("move empty: ("+moveCell.getX()+","+moveCell.getY()+")");
+                    moveTo(moveCell);
+                    if (myReproductionTime>=PREY_REPRODUCTION_TIME){               
+                        moveCell.myParameters.put("reproductiontime", -1.0);
+                    }
+                    leave();
+                    age(moveCell);
+                }
             }
         }
-        
-        else if(myCurrentState==0){
-            List<Cell> empties = new ArrayList<Cell>();
-            for (Cell cell: myNeighbors){
-                if (cell.getCurrentState()==2){
-                    empties.add(cell);
-                }
-            }
-            if (empties.size()>0){
-                int ran = (int) Math.floor(Math.random()*empties.size());
-                Cell moveCell = empties.get(ran);
-                moveTo(moveCell);
-                leave();
-                age(moveCell);
-            }
-        }
+        System.out.println("Cell exit: ("+getX()+","+getY()+")"+myPossibleStates[myCurrentState]+" "+myPossibleStates[myNextState]);
     }
-/*
-    @Override
-    public void setCell (int xCoordinate,
-                         int yCoordinate,
-                         int startingState,
-                         HashMap<String, Double> params,
-                         Grid grid) {
-        this.myXCoordinate = xCoordinate;
-        this.myYCoordinate = yCoordinate;
-        this.setCurrentState(startingState);
-        myReproductionTime = (int) Math.round(params.get("reproduction"));
-        myEnergy = (int) Math.round(params.get("energy"));
-        myGrid = grid;
-        
-    }
-*/
 }
