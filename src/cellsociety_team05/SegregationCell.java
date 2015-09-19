@@ -19,19 +19,21 @@ public class SegregationCell extends Cell {
     
     public SegregationCell (int xCoordinate, int yCoordinate, 
                             int startingState,
-                            double satisfaction,Grid grid) {
+                            HashMap<String, Double> map,Grid grid) {
         super(xCoordinate, yCoordinate, startingState);
-        mySatisfactionPercent = satisfaction;
+        mySatisfactionPercent = map.get("similar");
+        myParameters = map;
         myGrid = grid;
+        myDirty = false;
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
         mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
-    
+    /*
     public SegregationCell(){
     	this(0, 0, 0, 0, null);
-    }
-    
+    }*/
+    /*
     public void setCell(int xCoordinate, int yCoordinate, 
             int startingState,
             HashMap<String, Double> param,Grid grid){
@@ -40,26 +42,29 @@ public class SegregationCell extends Cell {
     	this.setCurrentState(startingState);
     	mySatisfactionPercent = param.get("satisfaction");
     	myGrid = grid;
-    }
+    }*/
     
     @Override
     public void preUpdateCell() {
-        System.out.println("Cell: ("+myXCoordinate+","+myYCoordinate+")"+myPossibleStates[myCurrentState]);
+        mySatisfactionPercent = myParameters.get("similar");
+        System.out.println("Cell: ("+getX()+","+getY()+") "+myPossibleStates[myCurrentState]);
+        System.out.println(mySatisfactionPercent);
+        myNextState = myCurrentState;
         if (myCurrentState!=2 && myDirty!=true){
             int sameNeighbors = 0;
             for (Cell neighbor: myNeighbors) {
+                System.out.println("Neighbor: ("+neighbor.getX()+","+neighbor.getY()+") "+myPossibleStates[neighbor.myCurrentState]);
                 if (neighbor.myCurrentState==myCurrentState){
                     sameNeighbors+=1;
-                    System.out.println("neighbor: ("+neighbor.myXCoordinate+","+neighbor.myYCoordinate+")");
                 }
             }
-            System.out.println(sameNeighbors);
+            System.out.println(sameNeighbors+" "+myNeighbors.size());
             if (((double) sameNeighbors)/((double) myNeighbors.size())>=mySatisfactionPercent) {
                 myNextState = myCurrentState;
-                System.out.println("satisfied");
+                System.out.println("satsfied");
             }
             else {
-                System.out.println("Unsatisfied");
+                System.out.println("unsatisfied");
                 List<Cell> empties = new ArrayList<Cell>();
                 for (List<Cell> list: myGrid.getCellMatrix()) {
                     for (Cell cell: list){
@@ -68,10 +73,11 @@ public class SegregationCell extends Cell {
                         }
                     }
                 }
+                System.out.println(empties.size());
                 if (empties.size()>0){
+                    System.out.println("switch");
                     int randomIndex = (int) Math.floor(Math.random()*empties.size());
                     Cell switchCell = empties.get(randomIndex);
-                    System.out.println("SwitchCell: ("+switchCell.myXCoordinate+","+switchCell.myYCoordinate+")");
                     switchCell.setNextState(myCurrentState);
                     switchCell.setCurrentState(myCurrentState);
                     switchCell.myDirty = true;
@@ -80,6 +86,7 @@ public class SegregationCell extends Cell {
                 }
             }
         }
+        System.out.println("Next: "+myPossibleStates[myNextState]);
     }
     
     /**

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <test>
 	<simulation> 
-		<name>Segregation</name>
+		<name>PredatorPrey</name>
 	</simulation>
 	
 	<grid>
@@ -10,18 +10,28 @@
 	</grid>
 	
 	<parameters>
-		<name>similar</name>
-		<value>0.3</value>
+		<name>preyreproductiontime</name>
+		<value>5.0</value>
 	</parameters>
 	
 	<parameters>
-		<name>ratio</name>
-		<value>0.5</value>
+		<name>predatorreproductiontime</name>
+		<value>5.0</value>
 	</parameters>
 	
 	<parameters>
-		<name>empty</name>
-		<value>0.1</value>
+		<name>energylimit</name>
+		<value>5.0</value>
+	</parameters>
+	
+	<parameters>
+		<name>reproductiontime</name>
+		<value>0.0</value>
+	</parameters>
+	
+	<parameters>
+		<name>energy</name>
+		<value>0.0</value>
 	</parameters>
 	
 	<cell>

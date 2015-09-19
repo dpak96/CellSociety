@@ -54,10 +54,4 @@ public class SimulationTester extends Simulation{
 			// TODO Auto-generated method stub
 			return null;
 		}
-
-		@Override
-		public void setSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> params) {
-			// TODO Auto-generated method stub
-			
-		}
 }
