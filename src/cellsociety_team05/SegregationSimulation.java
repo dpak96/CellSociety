@@ -78,25 +78,21 @@ public class SegregationSimulation extends Simulation {
 	}
 
     @Override
-    public Cell makeCell (int x, int y, int start, Grid g) {
+    public Cell makeCell (int x, int y, int start, Grid g, HashMap<String,Double> map) {
         myGrid = g;
-        HashMap<String, Double> map = new HashMap<String, Double>();
-        map.put("similar", similar);
-        map.put("ratio", ratio);
-        map.put("empty", empty);
         SegregationCell c = new SegregationCell(x,y,start,map,myGrid,this);
         return c;
     }
 
 
     @Override
-    public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height) {
+    public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height, HashMap<String,Double> map) {
         ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
         for (int i=0;i<width;i++){
             list.add(new ArrayList<Cell>());
             for (int j=0;j<height;j++){
                 int state = (int) Math.floor(Math.random()*2);
-                Cell newcell = makeCell(i, j, 1, grid);
+                Cell newcell = makeCell(i, j, 1, grid,map);
                 list.get(i).add(newcell);
             }
         }

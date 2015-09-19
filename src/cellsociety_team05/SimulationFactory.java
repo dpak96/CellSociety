@@ -30,7 +30,7 @@ public class SimulationFactory {
             return "XMLFiles/fire_test.xml";
         }
         else if (simulation.equals("PredatorPrey")){
-            return "XMLFiles/prey_test.xml";
+            return "XMLFiles/prey_test2.xml";
         }
         else if (simulation.equals("GameOfLife")){
             return "XMLFiles/life_test.xml";

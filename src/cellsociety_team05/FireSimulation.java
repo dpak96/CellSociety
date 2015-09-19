@@ -17,7 +17,7 @@ public class FireSimulation extends Simulation {
     }
 
     @Override
-    public Cell makeCell (int x, int y, int start, Grid g) {
+    public Cell makeCell (int x, int y, int start, Grid g, HashMap<String,Double> map) {
         FireCell c = new FireCell(x,y,start,this);
         c.setProb(0.5);
         return c;
@@ -29,13 +29,13 @@ public class FireSimulation extends Simulation {
     }
   */  
     @Override
-    public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height) {
+    public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height, HashMap<String,Double> map) {
         ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
         for (int i=0;i<width;i++){
             list.add(new ArrayList<Cell>());
             for (int j=0;j<height;j++){
                 int state = (int) (Math.random()*3);
-                Cell newcell = makeCell(i, j, state, grid);
+                Cell newcell = makeCell(i, j, state, grid,map);
                 list.get(i).add(newcell);
             }
         }
