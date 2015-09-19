@@ -15,11 +15,17 @@ public class PredatorPreyCell extends Cell {
     int myReproductionTime = 0;
     int myEnergy = 0;
     
-    public PredatorPreyCell (int xCoordinate, int yCoordinate, int startingState, HashMap<String, Double> param) {
+    public PredatorPreyCell (int xCoordinate, int yCoordinate, int startingState, HashMap<String, Double> param, Grid g) {
         super(xCoordinate, yCoordinate, startingState);
+        myParameters = param;
+        myParameters.put("reproductiontime", 0.0);
+        System.out.println(myParameters.get("reproductiontime"));
+        //myParameters.put("energy", 0.0);
         PREY_REPRODUCTION_TIME = (int) Math.round(param.get("preyreproductiontime"));
         PREDATOR_REPRODUCTION_TIME = (int) Math.round(param.get("predatorreproductiontime"));
-        PREDATOR_ENERGY = (int) Math.round(param.get("energy"));
+        PREDATOR_ENERGY = (int) Math.round(param.get("energylimit"));
+        myDirty = false;
+        myGrid = g;
         myPossibleStates = new String[] {"Fish/Blue", "Shark/Red", "Empty"};
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
         mySquare = new Rectangle(70.375, 70.375, myColors[startingState]);
@@ -109,6 +115,9 @@ public class PredatorPreyCell extends Cell {
 
     @Override
     public void preUpdateCell (){
+        initNeighbors();
+        myReproductionTime = (int) Math.round(myParameters.get("reproductiontime"));
+        myEnergy = (int) Math.round(myParameters.get("energy"));
         if(myCurrentState==1){
             List<Cell> fish = new ArrayList<Cell>();
             List<Cell> empties = new ArrayList<Cell>();
@@ -153,7 +162,7 @@ public class PredatorPreyCell extends Cell {
             }
         }
     }
-
+/*
     @Override
     public void setCell (int xCoordinate,
                          int yCoordinate,
@@ -168,5 +177,5 @@ public class PredatorPreyCell extends Cell {
         myGrid = grid;
         
     }
-
+*/
 }

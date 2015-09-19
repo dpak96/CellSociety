@@ -43,7 +43,7 @@ public class GameOfLifeCell extends Cell {
         System.out.println("my live neighbors: "+liveNeighbors);
         System.out.println("my next state: "+myPossibleStates[myNextState]);
     }
-
+/*
     @Override
     public void setCell (int xCoordinate,
                          int yCoordinate,
@@ -55,5 +55,5 @@ public class GameOfLifeCell extends Cell {
         this.setCurrentState(startingState);
         
     }
-
+*/
 }

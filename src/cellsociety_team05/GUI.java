@@ -73,7 +73,7 @@ public class GUI {
 		//mySetup = new Setup(letter);
 		//mySimulation = new SegregationSimulation(mySetup);
 	}
-	
+
 	//handle menu somewhere else
 	private MenuBar createTopMenu() {
 		MenuBar topMenu = new MenuBar();
@@ -87,8 +87,10 @@ public class GUI {
 	}
 	
 	public void startSimulation(){
+	        String file = "XMLFiles/prey_test.xml";
+	        Setup s = new Setup(file,this,myGridPane);
 		System.out.println("Start");
-		mySimulation = new FireSimulation(myGridPane, this, new HashMap<String, Double>(), 8, 8);
+		mySimulation = s.getSimulation();
 		mySimulation.start();
 	}
 	

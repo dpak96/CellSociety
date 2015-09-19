@@ -7,8 +7,8 @@ import javafx.scene.layout.GridPane;
 
 public class GameOfLifeSimulation extends Simulation {
 
-    public GameOfLifeSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params,int height, int width) {
-        super(gridPane, gui, params,height,width);
+    public GameOfLifeSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params,List<CellInfo> list,int height, int width) {
+        super(gridPane, gui, params,list,height,width);
 
     }
 
@@ -17,16 +17,6 @@ public class GameOfLifeSimulation extends Simulation {
         myGrid = g;
         GameOfLifeCell c = new GameOfLifeCell(x,y,start);
         return c;
-    }
-
-    @Override
-    public void setCellType (Grid grid) {
-        for (List<Cell> list: grid.getCellMatrix()){
-            for (Cell cell: list){
-                cell = new GameOfLifeCell(cell.myXCoordinate,cell.myYCoordinate,0);
-            }
-        }
-
     }
 
     @Override
@@ -42,5 +32,4 @@ public class GameOfLifeSimulation extends Simulation {
         }
         return list;
     }
-
 }
