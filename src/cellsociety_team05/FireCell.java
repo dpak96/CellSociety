@@ -1,7 +1,5 @@
 package cellsociety_team05;
 
-import java.util.HashMap;
-import java.util.List;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
