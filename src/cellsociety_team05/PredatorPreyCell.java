@@ -86,8 +86,9 @@ public class PredatorPreyCell extends Cell {
     }
     
     private void age(Cell cell){
-        cell.myParameters.put("energy", cell.myParameters.get("energy")+1);
-        cell.myParameters.put("reproductiontime", cell.myParameters.get("reproductiontime")+1);
+    	System.out.println("my energy: " + cell.myParameters.get("energy"));
+        //cell.myParameters.put("energy", cell.myParameters.get("energy")+1);
+        //cell.myParameters.put("reproductiontime", cell.myParameters.get("reproductiontime")+1);
     }
     
     private void leave(){
