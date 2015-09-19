@@ -60,7 +60,6 @@ public class Grid {
     public void preUpdateGrid(){
         for (List<Cell> list: myCells){
             for (Cell cell: list){
-                System.out.println(cell.getClass().toString());
                 cell.preUpdateCell();
             }
         }
