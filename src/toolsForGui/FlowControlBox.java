@@ -1,23 +1,17 @@
 package toolsForGui;
 
-import java.awt.List;
-import java.util.ArrayList;
-
 import cellsociety_team05.GUI;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class FlowControlBox extends HorizontalControlBoxes{
 	
 	private HBox myHBox;
-	private ArrayList<Button> myButtons;
 	private GUI myGui;
 	
 	public FlowControlBox(GUI gui, Stage primaryStage){
 		myGui = gui;
-		myButtons = new ArrayList<Button>();
 		myHBox = new HBox();
 		myHBox.setPrefHeight(20);
 		myHBox.setSpacing(20.0);
