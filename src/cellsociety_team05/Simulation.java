@@ -80,7 +80,6 @@ public abstract class Simulation {
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	}
-	
 	public void restart(){
 		animation.stop();
 		//myGrid = new Grid(getMyHeight(), myWidth,this,myParameters);
