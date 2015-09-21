@@ -85,7 +85,7 @@ public abstract class Simulation {
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	}
-	/*
+
 	public void restart(){
 		animation.stop();
 		myGrid = new Grid(getMyHeight(), myWidth,this,myParameters);
@@ -93,7 +93,7 @@ public abstract class Simulation {
 		animation = new Timeline();
 		start();
 	}
-*/
+
 	protected void initializeGridPane(){
 		for(List<Cell> listCell: myGrid.getCellMatrix()){
 			for(Cell cell: listCell){

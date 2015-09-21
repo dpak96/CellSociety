@@ -66,7 +66,7 @@ public class GUI {
 	
 	public void restartSimulation(){
 		myGridPane.getChildren().clear();
-		//mySimulation.restart();
+		mySimulation.restart();
 	}
 	
 	public void updateSimulationSpeed(double speed){
