@@ -13,6 +13,7 @@ public class GuiBoxContainer{
 	private VBox myVBox;
 	private ArrayList<HorizontalControlBoxes> myBoxes;
 	private Stage myStage;
+	private PopulationChartBox p;
 	
 	public GuiBoxContainer(GUI gui, Stage primaryStage){
 		myGui = gui;
@@ -27,16 +28,22 @@ public class GuiBoxContainer{
 		myVBox.setPrefHeight(50);
 		FlowControlBox f = new FlowControlBox(myGui, myStage);
 		SpeedControlBox s = new SpeedControlBox(5, myGui);
+		p = new PopulationChartBox(myGui, myStage);
 		myBoxes.add(f);
 		myBoxes.add(s);
+		myBoxes.add(p);
 	}
 
 	public VBox getVBox() {
+		myVBox.getChildren().add(new HBox());
 		for(HorizontalControlBoxes box: myBoxes){
 			myVBox.getChildren().add(box.getBox());
 		}
-		myVBox.getChildren().add(new HBox());
 		return myVBox;
+	}
+	
+	public PopulationChartBox getPCB(){
+		return p;
 	}
 
 }

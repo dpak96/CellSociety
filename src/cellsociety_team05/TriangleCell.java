@@ -35,19 +35,13 @@ public class TriangleCell {
         gc.setFill(Color.GOLD);
         gc.fillPolygon(new double[]{0, side ,0 },
         		new double[]{side, 0, side}, 3);
-        
+        GridPane.setConstraints(myTriangle, xCoordinate, yCoordinate);
         myGrid.add(myTriangle, xCoordinate, yCoordinate);
+        
 	}
 	
 	public void updateVisualCells(){
 		
-//		GraphicsContext gc = myTriangle.getGraphicsContext2D();
-//        gc.setFill(topCell.getCurrentColor());
-//        gc.fillPolygon(new double[]{0, side ,0 },
-//                new double[]{0, 0, side}, 3);
-//        gc.setFill(bottomCell.getCurrentColor());
-//        gc.fillPolygon(new double[]{0, side ,0 },
-//        		new double[]{side, 0, side}, 3);
 		updateCells();
 		GraphicsContext gc = myTriangle.getGraphicsContext2D();
         gc.setFill(topColor);
