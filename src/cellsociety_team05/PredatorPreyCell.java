@@ -12,7 +12,7 @@ public class PredatorPreyCell extends Cell {
     int PREY_REPRODUCTION_TIME;
     int PREDATOR_REPRODUCTION_TIME;
     int PREDATOR_ENERGY;
-    int myReproductionTime = 0;
+    private int myReproductionTime = 0;
     int myEnergy = 0;
     
     public PredatorPreyCell (int xCoordinate, int yCoordinate, int startingState, HashMap<String, Double> param, Grid g,Simulation sim) {
@@ -102,33 +102,37 @@ public class PredatorPreyCell extends Cell {
     
     private void leave(){
         if (myCurrentState==1){
-            if (myReproductionTime>=PREDATOR_REPRODUCTION_TIME){
+            if (myParameters.get("reproductiontime")>=PREDATOR_REPRODUCTION_TIME){
                 myNextState = myCurrentState;
                 myReproductionTime=0;
                 myEnergy = 0;
             }
             else{
                 myNextState = 2;
+                myParameters.put("reproductiontime", 0.0);
                 myReproductionTime = 0;
                 myEnergy = 0;
             }
         }
         else if (myCurrentState==0){
-            if (myReproductionTime>=PREY_REPRODUCTION_TIME){
+            if (myParameters.get("reproductiontime")>=PREY_REPRODUCTION_TIME){
                 myNextState = myCurrentState;
-                myReproductionTime=-1;
                 myParameters.put("reproductiontime", -1.0);
+                myReproductionTime=-1;
                 myEnergy = 0;
             }
             else{
                 //System.out.println("left");
                 myNextState = 2;
+                myParameters.put("reproductiontime", 0.0);
                 myReproductionTime = 0;
+                myParameters.put("energy", 0.0);
                 myEnergy = 0;
             }
         }
         else{
             myNextState = 2;
+            myParameters.put("reproductiontime", 0.0);
             myReproductionTime = 0;
             myEnergy = 0;
         }
@@ -174,8 +178,8 @@ public class PredatorPreyCell extends Cell {
                     Cell moveCell = empties.get(ran);
                     //System.out.println("move empty: ("+moveCell.getX()+","+moveCell.getY()+")");
                     moveTo(moveCell);
-                    leave();
                     age(moveCell);
+                    leave();
                     checkDeath(moveCell);
                 }
             }
@@ -193,11 +197,10 @@ public class PredatorPreyCell extends Cell {
                     Cell moveCell = empties.get(ran);
                     //System.out.println("move empty: ("+moveCell.getX()+","+moveCell.getY()+")");
                     moveTo(moveCell);
-                    if (myReproductionTime>=PREY_REPRODUCTION_TIME){               
+                    if (myParameters.get("reproductiontime")>=PREY_REPRODUCTION_TIME){               
                         moveCell.myParameters.put("reproductiontime", -1.0);
                     }
                     leave();
-                    age(moveCell);
                 }
             }
         }

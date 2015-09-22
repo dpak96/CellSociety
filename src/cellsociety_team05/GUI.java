@@ -111,6 +111,10 @@ public class GUI {
 	public void restartSimulation(){
 		loadSimulationValue(currentSimulationName);
 		startSimulation();
+		/**
+		 * myGridPane.getChildren().clear();
+		 * mySimulation.restart();
+		 */
 	}
 	
 	public void updateSimulationSpeed(double speed){
