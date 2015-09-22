@@ -25,6 +25,7 @@ public class GUI {
 	private GridPane myGridPane;
 	private GuiBoxContainer myBoxContainer;
 	private ResourceBundle myResources;
+	private String currentSimulationName;
 	
 	public GUI(Stage primaryStage){
 		GuiChoiceDialog myGuiChoiceDialog = new GuiChoiceDialog(this, simulationTypes);
@@ -47,9 +48,10 @@ public class GUI {
 	
 	public void loadSimulationValue(String letter){
 		System.out.println(letter);
-                Setup s = new Setup(letter,this,myGridPane);
-                System.out.println("Start");
-                mySimulation = s.getSimulation();
+		currentSimulationName = letter;
+        Setup s = new Setup(letter,this,myGridPane);
+        System.out.println("Start");
+        mySimulation = s.getSimulation();
 	}
 	
 	public void startSimulation(){
@@ -61,7 +63,8 @@ public class GUI {
 	}
 	
 	public void restartSimulation(){
-		myGridPane.getChildren().clear();
+		loadSimulationValue(currentSimulationName);
+		startSimulation();
 	}
 	
 	public void updateSimulationSpeed(double speed){
@@ -89,6 +92,6 @@ public class GUI {
 		if(mySimulation != null){
 			mySimulation.stopAnimation();
 		}
-		System.out.println(simulation);
+		//System.out.println(simulation);
 	}
 }

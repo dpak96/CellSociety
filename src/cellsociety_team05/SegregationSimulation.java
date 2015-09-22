@@ -1,9 +1,10 @@
 package cellsociety_team05;
 
 
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 import javafx.scene.layout.GridPane;
 
 public class SegregationSimulation extends Simulation {

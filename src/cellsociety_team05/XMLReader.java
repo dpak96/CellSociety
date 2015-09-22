@@ -89,11 +89,11 @@ public class XMLReader {
 
 					Element eElement = (Element) nNode;
 					int x = Integer.valueOf(eElement.getElementsByTagName("xcord").item(0).getTextContent());
-					System.out.print(x+",");
+					//System.out.print(x+",");
 					int y = Integer.valueOf(eElement.getElementsByTagName("ycord").item(0).getTextContent());
-					System.out.print(y+") ");
+					//System.out.print(y+") ");
 					int state = Integer.valueOf(eElement.getElementsByTagName("state").item(0).getTextContent());
-					System.out.println(state);
+					//System.out.println(state);
 					cells.add(new CellInfo(x,y,state));
 				}
 			}

@@ -154,6 +154,7 @@ public class PredatorPreyCell extends Cell {
                     }
                     leave();
                     age(moveCell);
+                    leave();
                     checkDeath(moveCell);
                 }
             }
@@ -173,7 +174,6 @@ public class PredatorPreyCell extends Cell {
                         mySim.myReproductionTimes[moveCell.getX()][moveCell.getY()]=0;
                     }
                     leave();
-                    age(moveCell);
                 }
             }
         }

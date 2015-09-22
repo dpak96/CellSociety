@@ -1,14 +1,10 @@
 package cellsociety_team05;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javafx.animation.Timeline;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
 
 /**
  * 

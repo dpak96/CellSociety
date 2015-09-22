@@ -53,7 +53,6 @@ public class SegregationCell extends Cell {
                         }
                     }
                 }
-                System.out.println(empties.size());
                 if (empties.size()>0){
                     int randomIndex = (int) Math.floor(Math.random()*empties.size());
                     Cell switchCell = empties.get(randomIndex);
