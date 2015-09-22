@@ -35,7 +35,18 @@ public class SegregationCell extends Cell {
         myGrid = grid;
         myDirty = false;
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
-        mySquare = new Rectangle(553/sim.getMyHeight(), 553/sim.getMyHeight(), myColors[startingState]);
+        
+        /**
+         * I added an event handler to the rectangle in the cell abstract class, since every cell will have this characteristic
+         * I use set square to allow for update 
+         * @author emanuele
+         */
+        this.setMySquare(new Rectangle(440/sim.getMyHeight(), 440/sim.getMyHeight(), myColors[startingState]));
+        //mySquare = new Rectangle(440/sim.getMyHeight(), 440/sim.getMyHeight(), myColors[startingState]);
+        /**
+         * end of changes
+         */
+        
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     

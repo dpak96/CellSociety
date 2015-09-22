@@ -3,6 +3,7 @@ package cellsociety_team05;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -197,9 +198,18 @@ public abstract class Cell {
 
     /**
      * @param mySquare the mySquare to set
+     * 
+     * @author emanuele
+     * I modified setMySquare, as well as adding another method to allow for update of the cell status 
      */
     public void setMySquare (Rectangle mySquare) {
         this.mySquare = mySquare;
+        mySquare.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> nextState());
+    }
+    
+    private void nextState(){
+    	myNextState = (myCurrentState + 1)%myColors.length;
+    	updateCell();
     }
 
     /**

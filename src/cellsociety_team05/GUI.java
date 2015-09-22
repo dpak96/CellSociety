@@ -43,7 +43,6 @@ public class GUI {
 		Scene scene = new Scene(root, 720, 480, Color.WHITE);
 		TopMenu myTopMenu = new TopMenu(myStage, simulationTypes, this);
 		root.setTop(myTopMenu.getMenuBar());
-		myGuiChoiceDialog.display();
 		
 		//different layout
 		HBox h = new HBox();
@@ -56,6 +55,7 @@ public class GUI {
 		myBoxContainer = new GuiBoxContainer(this, myStage);
 		h.getChildren().add(myBoxContainer.getVBox());
 		root.setCenter(h);
+		myGuiChoiceDialog.display();
 		
 		myStage.setScene(scene);
 		myStage.show();
@@ -68,19 +68,14 @@ public class GUI {
 		*/
 	}
 	
-	/**
-	 * this class is currently not implemented so we can test 
-	 * the triangle layout 
-	 */ 
 	
 	public void loadSimulationValue(String letter){
-		/*
-		System.out.println(letter);
+		myGridPane.getChildren().clear();
+		System.out.println(letter + "Sim type");
 		currentSimulationName = letter;
         Setup setup = new Setup(letter,this,myGridPane);
         System.out.println("Start");
         mySimulation = setup.getSimulation();
-        */
 	}
 	
 	/**
@@ -88,19 +83,25 @@ public class GUI {
 	 */
 	
 	public void startSimulation(){
-		//mySimulation.start();
+		mySimulation.start();
 
-		//test method
+		/**
+		 * If you want to test the triangle grid, choose one of the following
+		 * (Only one at the time)
+		 */
 		//testUpdateTriangle();
-		testRowTriangle();
-		//mySimulation.start();
+		//testRowTriangle();
 	}
 	
 	public void step(){
-	    //mySimulation.step();
-		stepCells();
-		myBoxContainer.getPCB().AddToQueue();
-		myBoxContainer.getPCB().addDataToSeries();
+	    mySimulation.step();
+		
+		/**
+		 * The following allows to show how the graph chart works 
+		 */
+//		stepCells();
+//		myBoxContainer.getPCB().AddToQueue();
+//		myBoxContainer.getPCB().addDataToSeries();
 		
 	}
 	
@@ -142,7 +143,8 @@ public class GUI {
 	
 	
 	/**
-	 *	Testing the triangle grid
+	 *	The following methods show the functionality of two 
+	 *  different triangle grids 
 	 */
 	
 	private ArrayList<TriangleCell> myTriangleCells = new ArrayList<>();
