@@ -9,9 +9,13 @@ public class PredatorPreySimulation extends Simulation {
     int PREY_REPRODUCTION_TIME;
     int PREDATOR_REPRODUCTION_TIME;
     int PREDATOR_ENERGY;
+    int[][] myReproductionTimes;
+    int[][] myEnergies;
 
     public PredatorPreySimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params, List<CellInfo> list, int height, int width) {
         super(gridPane, gui, params,list, height, width);
+        myReproductionTimes = new int[width][height];
+        myEnergies = new int[width][height];
         PREY_REPRODUCTION_TIME = (int) Math.round(params.get("preyreproductiontime"));
         PREDATOR_REPRODUCTION_TIME = (int) Math.round(params.get("predatorreproductiontime"));
         PREDATOR_ENERGY = (int) Math.round(params.get("energylimit"));
@@ -21,8 +25,6 @@ public class PredatorPreySimulation extends Simulation {
     public Cell makeCell (int x, int y, int start, Grid g, HashMap<String, Double> map) {
         myGrid = g;
         HashMap<String, Double> params = new HashMap<String, Double>();
-        params.put("reproductiontime", map.get("reproductiontime"));
-        params.put("energy", map.get("energy"));
         params.put("preyreproductiontime", map.get("preyreproductiontime"));
         params.put("predatorreproductiontime", map.get("predatorreproductiontime"));
         params.put("energylimit", map.get("energylimit"));

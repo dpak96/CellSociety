@@ -13,7 +13,6 @@ public class FireSimulation extends Simulation {
     public FireSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params, List<CellInfo> list, int height, int width) {
         super(gridPane, gui, params, list, height, width);
         probCatch = params.get("probCatch");
-        //initializeGridPane();
     }
 
     @Override
@@ -22,12 +21,7 @@ public class FireSimulation extends Simulation {
         c.setProb(0.5);
         return c;
     }
-/*
-    @Override
-    public void setCellType (Grid grid) {
 
-    }
-  */  
     @Override
     public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height, HashMap<String,Double> map) {
         ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();

@@ -16,7 +16,6 @@ import javafx.scene.paint.Color;
  *
  */
 public abstract class Cell {
-    // Default Cell class could implement game of life for testing?
     protected List<Cell> myNeighbors;
     protected int myXCoordinate;
     protected int myYCoordinate;
@@ -96,7 +95,6 @@ public abstract class Cell {
      * Switches this cell's state from it's current to it's next state.
      */
     public void updateCell(){
-        //System.out.println("cell: ("+getX()+","+getY()+") "+myPossibleStates[myCurrentState]+" "+myPossibleStates[myNextState]);
         myCurrentState = myNextState;
         mySquare.setFill(myColors[myCurrentState]);
     }

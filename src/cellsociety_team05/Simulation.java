@@ -43,7 +43,6 @@ public abstract class Simulation {
 	
 	public void readCellList(List<CellInfo> list){
 	    if (list!=null){
-	        System.out.println("HIT");
 	        for (CellInfo cell: list){
 	            Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
 	            thisCell.setCurrentState(cell.getState());
@@ -53,11 +52,6 @@ public abstract class Simulation {
 	}
 
 	public void start(){
-	        for (List<Cell> list: myGrid.getCellMatrix()){
-	            for (Cell cell: list){
-	                System.out.println("("+cell.getX()+","+cell.getY()+") "+cell.getCurrentState());
-	            }
-	        }
 		KeyFrame frame = new KeyFrame(Duration.millis(1000),
 				e -> this.step());
 		animation.getKeyFrames().add(frame);
@@ -81,19 +75,10 @@ public abstract class Simulation {
 	}
 	
 	public void step(){
-	    System.out.println("step");
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	}
-	/*
-	public void restart(){
-		animation.stop();
-		myGrid = new Grid(getMyHeight(), myWidth,this,myParameters);
-		initializeGridPane();
-		animation = new Timeline();
-		start();
-	}
-*/
+
 	protected void initializeGridPane(){
 		for(List<Cell> listCell: myGrid.getCellMatrix()){
 			for(Cell cell: listCell){
