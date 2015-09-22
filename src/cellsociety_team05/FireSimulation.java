@@ -9,24 +9,33 @@ import javafx.scene.layout.GridPane;
 public class FireSimulation extends Simulation {
     private double probCatch;
     
+    /**
+     * constructor for fire simulation class
+     * @param gridPane
+     * @param gui
+     * @param params
+     * @param list
+     * @param height
+     * @param width
+     */
     public FireSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params, List<CellInfo> list, int height, int width) {
         super(gridPane, gui, params, list, height, width);
         probCatch = params.get("probCatch");
-        //initializeGridPane();
     }
 
+    /**
+     * overrides super class method
+     */
     @Override
     public Cell makeCell (int x, int y, int start, Grid g, HashMap<String,Double> map) {
         FireCell c = new FireCell(x,y,start,this);
         c.setProb(0.5);
         return c;
     }
-/*
-    @Override
-    public void setCellType (Grid grid) {
 
-    }
-  */  
+    /**
+     * overrides super class method
+     */
     @Override
     public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height, HashMap<String,Double> map) {
         ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
@@ -40,5 +49,4 @@ public class FireSimulation extends Simulation {
         }
         return list;
     }
-
 }

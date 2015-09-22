@@ -27,6 +27,15 @@ public abstract class Simulation {
 	private int myHeight;
 	private List<CellInfo> myInfoList;
 
+	/**
+	 * constructor for simulation class
+	 * @param gridPane
+	 * @param gui
+	 * @param params
+	 * @param list
+	 * @param height
+	 * @param width
+	 */
 	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params,List<CellInfo> list, int height, int width){
 		myWidth = width;
 		setMyHeight(height);
@@ -40,19 +49,25 @@ public abstract class Simulation {
 		initializeGridPane();
 	}
 	
+	/**
+	 * reads in list of cells specified in xml file and initializes grid
+	 * @param list
+	 */
 	public void readCellList(List<CellInfo> list){
 	    if (list!=null){
-	        System.out.println("HIT");
 	        for (CellInfo cell: list){
 	            Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
-	            thisCell.setCurrentState(cell.getState());
-	            thisCell.mySquare.setFill(thisCell.myColors[thisCell.getCurrentState()]);
+	            thisCell.setMyCurrentState(cell.getState());
+	            thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
 	        }
 	    }
 	}
 
+	/**
+	 * begins animation
+	 */
 	public void start(){
-		KeyFrame frame = new KeyFrame(Duration.millis(1000),
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> this.step());
 		animation.getKeyFrames().add(frame);
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -60,6 +75,9 @@ public abstract class Simulation {
 		paused = false;
 	}
 
+	/**
+	 * pauses/resumes animation
+	 */
 	public void changeFlow(){
 		if(paused){
 			animation.play();
@@ -69,51 +87,72 @@ public abstract class Simulation {
 		paused = !paused;
 	}
 
+	/**
+	 * changes speed of animation
+	 * @param speed
+	 */
 	public void updateSpeed(double speed){
 		mySpeed = speed;	
 		animation.setRate(2*(speed/10));
 	}
 	
+	/**
+	 * performs single step of simulation
+	 */
 	public void step(){
-	    System.out.println("step");
-	    System.out.println(myGUI.getCurrentSimulation().getClass());
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	}
-	public void restart(){
-		animation.stop();
-		//myGrid = new Grid(getMyHeight(), myWidth,this,myParameters);
-		//System.out.println("restart");
-		//System.out.println(this.getClass());
-		initializeGridPane();
-		animation = new Timeline();
-		start();
-	}
 
+	/**
+	 * connects grid of cells to GUI
+	 */
 	protected void initializeGridPane(){
 		for(List<Cell> listCell: myGrid.getCellMatrix()){
 			for(Cell cell: listCell){
-                            myGridPane.getChildren().add(cell.getSquare());
+                            myGridPane.getChildren().add(cell.getMySquare());
 			}
 		}
 	}
 	
+	/**
+	 * stops animation
+	 */
 	public void stopAnimation(){
 	    animation.stop();
 	}
-	/*
-	public abstract void setCellType(Grid grid);
-	*/
+
+	/**
+	 * initializes cells of appropriate type for given simulation
+	 * @param grid
+	 * @param width
+	 * @param height
+	 * @param map
+	 * @return
+	 */
 	public abstract ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height,HashMap<String, Double> map);
-	
+
+	/**
+	 * initializes grid with randomized cell states
+	 */
 	public void initGrid(){}
-	
+
+	/**
+	 * initializes cell of specific type for given simulation
+	 * @param x
+	 * @param y
+	 * @param start
+	 * @param g
+	 * @param map
+	 * @return
+	 */
 	public abstract Cell makeCell(int x, int y, int start, Grid g,HashMap<String, Double> map);
-    public int getMyHeight () {
-        return myHeight;
-    }
-    public void setMyHeight (int myHeight) {
-        this.myHeight = myHeight;
-    }
-	
+
+	public int getMyHeight () {
+	    return myHeight;
+	}
+	public void setMyHeight (int myHeight) {
+	    this.myHeight = myHeight;
+	}
+
 }

@@ -93,6 +93,7 @@ public class GUI {
 		//test method
 		//testUpdateTriangle();
 		testRowTriangle();
+		//mySimulation.start();
 	}
 	
 	public void step(){
@@ -111,15 +112,10 @@ public class GUI {
 	public void restartSimulation(){
 		loadSimulationValue(currentSimulationName);
 		startSimulation();
-		/**
-		 * myGridPane.getChildren().clear();
-		 * mySimulation.restart();
-		 */
 	}
 	
 	public void updateSimulationSpeed(double speed){
 		System.out.println(speed);
-		//simulationSpeed = speed;
 		mySimulation.updateSpeed(speed);
 	}
 	
