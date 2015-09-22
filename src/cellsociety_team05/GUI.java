@@ -1,11 +1,19 @@
 package cellsociety_team05;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.TriangleMesh;
 import javafx.stage.Stage;
 import toolsForGui.GuiBoxContainer;
 import toolsForGui.GuiChoiceDialog;
@@ -26,6 +34,7 @@ public class GUI {
 	private GuiBoxContainer myBoxContainer;
 	private ResourceBundle myResources;
 	private String currentSimulationName;
+	private Canvas testCanvas;
 	
 	public GUI(Stage primaryStage){
 		GuiChoiceDialog myGuiChoiceDialog = new GuiChoiceDialog(this, simulationTypes);
@@ -34,6 +43,7 @@ public class GUI {
 		myStage.setTitle(myResources.getString("Title"));
 		myStage.setResizable(false);
 		root = new BorderPane();
+		
 		Scene scene = new Scene(root, 553, 640, Color.WHITE);
 		TopMenu myTopMenu = new TopMenu(myStage, simulationTypes, this);
 		root.setTop(myTopMenu.getMenuBar());
@@ -46,34 +56,45 @@ public class GUI {
 		myStage.show();
 	}
 	
+	/**
+	 * this class is currently not implemented so we can test 
+	 * the triangle layout 
+	 */ 
+	
 	public void loadSimulationValue(String letter){
+		/*
 		System.out.println(letter);
 		currentSimulationName = letter;
-        Setup s = new Setup(letter,this,myGridPane);
+        Setup setup = new Setup(letter,this,myGridPane);
         System.out.println("Start");
-        mySimulation = s.getSimulation();
+        mySimulation = setup.getSimulation();
+        */
 	}
 	
+	/**
+	 * The following two methods have been modified to show how the triangle display. 
+	 */
+	
 	public void startSimulation(){
-	    //String file = "XMLFiles/prey_test.xml";
-	    //Setup s = new Setup(file,this,myGridPane);
-		//System.out.println("Start");
-		//mySimulation = s.getSimulation();
-		mySimulation.start();
+		//mySimulation.start();
+
+		//test method
+		testUpdateTriangle();
 	}
 	
 	public void step(){
-	    mySimulation.step();
+	    //mySimulation.step();
+		stepCells();
 	}
+	
+	/**
+	 * End of modifications
+	 */
+	
 	
 	public void restartSimulation(){
 		loadSimulationValue(currentSimulationName);
 		startSimulation();
-		/**
-		 * myGridPane.getChildren().clear();
-		 * mySimulation.restart();
-		 */
-		
 	}
 	
 	public void updateSimulationSpeed(double speed){
@@ -99,9 +120,29 @@ public class GUI {
 	}
 	
 	public void startNewSimulation(String simulation){
-		if(mySimulation != null){
-			mySimulation.stopAnimation();
+		loadSimulationValue(currentSimulationName);
+		startSimulation();
+	}
+	
+	
+	/**
+	 * Testing the triangle grid
+	 */
+	
+	private ArrayList<TriangleCell> myTriangleCells = new ArrayList<>();
+	
+	public void testUpdateTriangle(){
+		for(int i=0; i < 8; i++){
+			for(int k=0; k<8; k++){
+				TriangleCell current = new TriangleCell(i, k, myGridPane, myGridPane.getHeight() / 8);
+				myTriangleCells.add(current);
+			}
 		}
-		//System.out.println(simulation);
+	}
+	
+	public void stepCells(){
+		for(TriangleCell t: myTriangleCells){
+			t.updateVisualCells();
+		}
 	}
 }
