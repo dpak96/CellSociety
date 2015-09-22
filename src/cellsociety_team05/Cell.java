@@ -37,50 +37,22 @@ public abstract class Cell {
         myNextState = startingState;
     }
     
-    public Rectangle getSquare(){
-        return mySquare;
-    }
-    
+    /**
+     * sets value in parameter map
+     * @param name string of key in parameter map
+     * @param value to be stored at name
+     */
     public void setParameter(String name, double value){
         myParameters.put(name, value);
     }
     
     /**
-     * Gets this cells neighbors.
-     * @return A list of this cell's neighbors
+     * 
+     * @return current color of this cell
      */
-    public List<Cell> getNeighbors(){
-        return myNeighbors;
-    }
-    
-    public void setNeighbors(List<Cell> list){
-        myNeighbors = list;
-    }
-    
-    /**
-     * Gets this cell's current state.
-     * @return An integer representing this cell's current state
-     */
-    public int getCurrentState(){
-        return myCurrentState;
-    }
-    
     public Color getCurrentColor(){
         return myColors[myCurrentState];
     }
-    
-    /**
-     * Sets this cell's next state. 
-     * @param state An integer representing the state this cell should be next
-     */
-    public void setNextState(int state) {
-        myNextState = state;
-    }
-    
-    public void setCurrentState(int state) {
-        myCurrentState = state;
-    }
-    
     
      /**
       * Determines this cell's next state based on rules of simulation.
@@ -97,20 +69,150 @@ public abstract class Cell {
  
     
     /**
-     * returns the x coordinate of the cell
+     * @return the x coordinate of the cell
      */
     public int getX(){
         return myXCoordinate;
     }
     
     /**
-     * returns the y coordinate of the cell 
+     * @return the y coordinate of the cell 
      */
     public int getY(){
         return myYCoordinate;
     }
 
+    /**
+     * 
+     * @return array of cell's possible state names 
+     */
     public String[] getPossibleStates () {
         return myPossibleStates;
+    }
+
+    /**
+     * @return the myNeighbors
+     */
+    public List<Cell> getMyNeighbors () {
+        return myNeighbors;
+    }
+
+    /**
+     * @param myNeighbors the myNeighbors to set
+     */
+    public void setMyNeighbors (List<Cell> myNeighbors) {
+        this.myNeighbors = myNeighbors;
+    }
+
+    /**
+     * @param myXCoordinate the myXCoordinate to set
+     */
+    public void setMyXCoordinate (int myXCoordinate) {
+        this.myXCoordinate = myXCoordinate;
+    }
+
+    /**
+     * @param myYCoordinate the myYCoordinate to set
+     */
+    public void setMyYCoordinate (int myYCoordinate) {
+        this.myYCoordinate = myYCoordinate;
+    }
+
+    /**
+     * @return the myCurrentState
+     */
+    public int getMyCurrentState () {
+        return myCurrentState;
+    }
+
+    /**
+     * @param myCurrentState the myCurrentState to set
+     */
+    public void setMyCurrentState (int myCurrentState) {
+        this.myCurrentState = myCurrentState;
+    }
+
+    /**
+     * @return the myNextState
+     */
+    public int getMyNextState () {
+        return myNextState;
+    }
+
+    /**
+     * @param myNextState the myNextState to set
+     */
+    public void setMyNextState (int myNextState) {
+        this.myNextState = myNextState;
+    }
+
+    /**
+     * @return the myPossibleStates
+     */
+    public String[] getMyPossibleStates () {
+        return myPossibleStates;
+    }
+
+    /**
+     * @param myPossibleStates the myPossibleStates to set
+     */
+    public void setMyPossibleStates (String[] myPossibleStates) {
+        this.myPossibleStates = myPossibleStates;
+    }
+
+    /**
+     * @return the myColors
+     */
+    public Color[] getMyColors () {
+        return myColors;
+    }
+
+    /**
+     * @param myColors the myColors to set
+     */
+    public void setMyColors (Color[] myColors) {
+        this.myColors = myColors;
+    }
+
+    /**
+     * @return the myDirty
+     */
+    public boolean isMyDirty () {
+        return myDirty;
+    }
+
+    /**
+     * @param myDirty the myDirty to set
+     */
+    public void setMyDirty (boolean myDirty) {
+        this.myDirty = myDirty;
+    }
+
+    /**
+     * @return the mySquare
+     */
+    public Rectangle getMySquare () {
+        return mySquare;
+    }
+
+    /**
+     * @param mySquare the mySquare to set
+     */
+    public void setMySquare (Rectangle mySquare) {
+        this.mySquare = mySquare;
+    }
+
+    /**
+     * @return the myParameters
+     */
+    public HashMap<String, Double> getMyParameters () {
+        return myParameters;
+    }
+
+    /**
+     * @param myParameters the myParameters to set
+     */
+    public void setMyParameters (HashMap<String, Double> myParameters) {
+        this.myParameters = myParameters;
     }
 }   

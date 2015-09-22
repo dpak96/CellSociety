@@ -17,6 +17,15 @@ public class SegregationCell extends Cell {
     private double mySatisfactionPercent;
     private Grid myGrid;
     
+    /**
+     * constructor for segregation cell
+     * @param xCoordinate
+     * @param yCoordinate
+     * @param startingState
+     * @param map
+     * @param grid
+     * @param sim
+     */
     public SegregationCell (int xCoordinate, int yCoordinate, 
                             int startingState,
                             HashMap<String, Double> map,Grid grid,Simulation sim) {
@@ -30,6 +39,9 @@ public class SegregationCell extends Cell {
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     
+    /**
+     * overrides super class method
+     */
     @Override
     public void preUpdateCell() {
         mySatisfactionPercent = myParameters.get("similar");
@@ -56,21 +68,13 @@ public class SegregationCell extends Cell {
                 if (empties.size()>0){
                     int randomIndex = (int) Math.floor(Math.random()*empties.size());
                     Cell switchCell = empties.get(randomIndex);
-                    switchCell.setNextState(myCurrentState);
-                    switchCell.setCurrentState(myCurrentState);
+                    switchCell.setMyNextState(myCurrentState);
+                    switchCell.setMyCurrentState(myCurrentState);
                     switchCell.myDirty = true;
                     myNextState = 2;
                     myCurrentState = 2;
                 }
             }
         }
-    }
-    
-    /**
-     * returns the color of the cell
-     * @Emanuele
-     */
-    public Color getColor(){
-    	return myColors[myCurrentState];
     }
 }

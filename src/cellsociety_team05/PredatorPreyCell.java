@@ -14,6 +14,15 @@ public class PredatorPreyCell extends Cell {
     int PREDATOR_ENERGY;
     PredatorPreySimulation mySim;
     
+    /**
+     * constructor for predator prey cell
+     * @param xCoordinate
+     * @param yCoordinate
+     * @param startingState
+     * @param param
+     * @param g
+     * @param sim
+     */
     public PredatorPreyCell (int xCoordinate, int yCoordinate, int startingState, HashMap<String, Double> param, Grid g, PredatorPreySimulation sim) {
         super(xCoordinate, yCoordinate, startingState);
         PREY_REPRODUCTION_TIME = (int) Math.round(param.get("preyreproductiontime"));
@@ -28,6 +37,9 @@ public class PredatorPreyCell extends Cell {
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     
+    /**
+     * initializes neighbors for toroidal grid
+     */
     public void initNeighbors(){
         for (List<Cell> list: myGrid.getCellMatrix()){
             for (Cell cell: list){
@@ -53,25 +65,37 @@ public class PredatorPreyCell extends Cell {
                         neighbors.add(myGrid.getCellMatrix().get(xCoordinate).get(myGrid.getCellMatrix().get(0).size()-1));
                     }
                 }
-                cell.setNeighbors(neighbors);
+                cell.setMyNeighbors(neighbors);
             }
         }
     }
     
-    private void moveTo(Cell prey){
-        prey.myNextState = myCurrentState;
-        prey.setCurrentState(prey.myNextState);
-        mySim.myReproductionTimes[prey.getX()][prey.getY()]=mySim.myReproductionTimes[getX()][getY()];
-        mySim.myEnergies[prey.getX()][prey.getY()]=mySim.myEnergies[getX()][getY()];
-        prey.myDirty = true;
+    /**
+     * transfers state of this cell to new cell
+     * @param cell
+     */
+    private void moveTo(Cell cell){
+        cell.myNextState = myCurrentState;
+        cell.setMyCurrentState(cell.myNextState);
+        mySim.myReproductionTimes[cell.getX()][cell.getY()]=mySim.myReproductionTimes[getX()][getY()];
+        mySim.myEnergies[cell.getX()][cell.getY()]=mySim.myEnergies[getX()][getY()];
+        cell.myDirty = true;
     }
     
-    private void eat(Cell cell){
-        moveTo(cell);
-        mySim.myEnergies[cell.getX()][cell.getY()]=0;
-        age(cell);
+    /**
+     * transfers state of this cell to prey and resets energy
+     * @param prey
+     */
+    private void eat(Cell prey){
+        moveTo(prey);
+        mySim.myEnergies[prey.getX()][prey.getY()]=0;
+        age(prey);
     }
     
+    /**
+     * checks if given cell is out of energy
+     * @param cell
+     */
     private void checkDeath(Cell cell){
         if (mySim.myEnergies[cell.getX()][cell.getY()]>=PREDATOR_ENERGY+1){
             cell.myNextState = 2;
@@ -81,11 +105,18 @@ public class PredatorPreyCell extends Cell {
         }
     }
     
+    /**
+     * increments cell's energy and reproduction timer by one
+     * @param cell
+     */
     private void age(Cell cell){
         mySim.myEnergies[cell.getX()][cell.getY()]=mySim.myEnergies[cell.getX()][cell.getY()]+1;
         mySim.myReproductionTimes[cell.getX()][cell.getY()]=mySim.myReproductionTimes[cell.getX()][cell.getY()]+1;
     }
     
+    /**
+     * clears state of current cell
+     */
     private void leave(){
         if (myCurrentState==1){
             if (mySim.myReproductionTimes[getX()][getY()]>=PREDATOR_REPRODUCTION_TIME){
@@ -119,6 +150,9 @@ public class PredatorPreyCell extends Cell {
         myCurrentState = myNextState;
     }
 
+    /**
+     * overrides super class method
+     */
     @Override
     public void preUpdateCell (){
         myNextState = myCurrentState;
@@ -128,10 +162,10 @@ public class PredatorPreyCell extends Cell {
                 List<Cell> fish = new ArrayList<Cell>();
                 List<Cell> empties = new ArrayList<Cell>();
                 for (Cell cell: myNeighbors){
-                    if (cell.getCurrentState()==0){
+                    if (cell.getMyCurrentState()==0){
                         fish.add(cell);
                     }
-                    else if (cell.getCurrentState()==2){
+                    else if (cell.getMyCurrentState()==2){
                         empties.add(cell);
                     }
                 }
@@ -162,7 +196,7 @@ public class PredatorPreyCell extends Cell {
             else if(myCurrentState==0){
                 List<Cell> empties = new ArrayList<Cell>();
                 for (Cell cell: myNeighbors){
-                    if (cell.getCurrentState()==2){
+                    if (cell.getMyCurrentState()==2){
                         empties.add(cell);
                     }
                 }

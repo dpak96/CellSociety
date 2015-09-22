@@ -12,6 +12,15 @@ public class PredatorPreySimulation extends Simulation {
     int[][] myReproductionTimes;
     int[][] myEnergies;
 
+    /**
+     * constructor for predator prey simulation
+     * @param gridPane
+     * @param gui
+     * @param params
+     * @param list
+     * @param height
+     * @param width
+     */
     public PredatorPreySimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params, List<CellInfo> list, int height, int width) {
         super(gridPane, gui, params,list, height, width);
         myReproductionTimes = new int[width][height];
@@ -21,6 +30,9 @@ public class PredatorPreySimulation extends Simulation {
         PREDATOR_ENERGY = (int) Math.round(params.get("energylimit"));
     }
     
+    /**
+     * overrides super class method
+     */
     @Override
     public Cell makeCell (int x, int y, int start, Grid g, HashMap<String, Double> map) {
         myGrid = g;
@@ -32,6 +44,9 @@ public class PredatorPreySimulation extends Simulation {
         return c;
     }
 
+    /**
+     * overrides super class method
+     */
     @Override
     public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height,HashMap<String, Double> map) {
         ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
@@ -45,5 +60,4 @@ public class PredatorPreySimulation extends Simulation {
         }
         return list;
     }
-
 }

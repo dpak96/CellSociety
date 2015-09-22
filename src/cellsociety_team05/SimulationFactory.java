@@ -12,7 +12,15 @@ public class SimulationFactory {
     private int myWidth;
     private List<CellInfo> myList;
     
-
+    /**
+     * constructor for simulation factory
+     * @param grid
+     * @param gui
+     * @param map
+     * @param list
+     * @param height
+     * @param width
+     */
     public SimulationFactory (GridPane grid, GUI gui, HashMap<String, Double> map,List<CellInfo> list, int height, int width) {
         myGridPane = grid;
         myGUI = gui;
@@ -22,6 +30,11 @@ public class SimulationFactory {
         myList = list;
     }
     
+    /**
+     * converts string for name of simulation into string for name of xml file to initialize given simulation
+     * @param simulation
+     * @return
+     */
     public String chooseFileFromUserInput(String simulation){
         if (simulation.equals("Segregation")){
             return "XMLFiles/test.xml";
@@ -38,6 +51,11 @@ public class SimulationFactory {
         else return null;
     }
     
+    /**
+     * initializes simulation specified by input string
+     * @param simulation
+     * @return
+     */
     public Simulation makeSimulation(String simulation){
         if (simulation.equals("Segregation")){
             return new SegregationSimulation(myGridPane,myGUI,myMap,myList,myHeight,myWidth);

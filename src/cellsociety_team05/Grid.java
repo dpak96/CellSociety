@@ -10,16 +10,25 @@ import java.util.List;
  *
  */
 public class Grid {
-    
     List<List<Cell>> myCells;
     Simulation mySimulation;
     
+    /**
+     * constructor for grid class
+     * @param width
+     * @param height
+     * @param sim
+     * @param map
+     */
     public Grid(int width, int height, Simulation sim,HashMap<String, Double> map){
         mySimulation = sim;
         myCells = mySimulation.setUpCells(this, width, height,map);
         initNeighbors();
     }
     
+    /**
+     * initializes neighbors of cells in grid
+     */
     private void initNeighbors(){
         for (List<Cell> list: myCells){
             for (Cell cell: list){
@@ -35,7 +44,7 @@ public class Grid {
                        
                     }
                 }
-                cell.setNeighbors(neighbors);
+                cell.setMyNeighbors(neighbors);
             }
         }
     }
@@ -56,6 +65,9 @@ public class Grid {
         }
     }
     
+    /**
+     * prints type of cells FOR DEBUGGING
+     */
     public void printType(){
         System.out.println(myCells.get(0).get(0).getClass().toString());
     }
@@ -78,5 +90,4 @@ public class Grid {
     public List<List<Cell>> getCellMatrix(){
         return myCells;
     }
-
 }

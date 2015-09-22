@@ -7,8 +7,14 @@ import javafx.scene.shape.Rectangle;
 public class FireCell extends Cell {
     private double probCatch;
     
-
-    public FireCell (int xCoordinate, int yCoordinate, int startingState,Simulation sim) {
+    /**
+     * FireCell Constructor
+     * @param xCoordinate
+     * @param yCoordinate
+     * @param startingState
+     * @param sim
+     */
+    public FireCell (int xCoordinate, int yCoordinate, int startingState, Simulation sim) {
         super(xCoordinate, yCoordinate, startingState);
         myColors = new Color[] {Color.WHITE, Color.GREEN, Color.RED};
         myPossibleStates = new String[] {"Empty", "Tree", "Burning"};
@@ -16,10 +22,18 @@ public class FireCell extends Cell {
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     
+    /**
+     * Sets probability for tree to catch fire
+     * @param prob
+     */
     public void setProb(double prob){
         probCatch = prob;
     }
     
+    /**
+     * checks if neighbor is burning
+     * @return true if neighbor cell's current state is burning
+     */
     private boolean neighborIsBurning(){
         boolean result = false;
         for (Cell cell: myNeighbors){
@@ -30,6 +44,9 @@ public class FireCell extends Cell {
         return result;
     }
 
+    /**
+     * overrides super class method
+     */
     @Override
     public void preUpdateCell () {
         if (myCurrentState==1){
