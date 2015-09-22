@@ -83,14 +83,14 @@ public class GUI {
 	 */
 	
 	public void startSimulation(){
-		mySimulation.start();
+		//mySimulation.start();
 
 		/**
 		 * If you want to test the triangle grid, choose one of the following
 		 * (Only one at the time)
 		 */
 		//testUpdateTriangle();
-		//testRowTriangle();
+		testRowTriangle();
 	}
 	
 	public void step(){
@@ -146,24 +146,6 @@ public class GUI {
 	 *	The following methods show the functionality of two 
 	 *  different triangle grids 
 	 */
-	
-	private ArrayList<TriangleCell> myTriangleCells = new ArrayList<>();
-	
-	public void testUpdateTriangle(){
-		myGridPane.getChildren().clear();
-		for(int i=0; i < 8; i++){
-			for(int k=0; k<8; k++){
-				TriangleCell current = new TriangleCell(i, k, myGridPane, myGridPane.getHeight() / 8);
-				myTriangleCells.add(current);
-			}
-		}
-	}
-	
-	public void stepCells(){
-		for(TriangleCell t: myTriangleCells){
-			t.updateVisualCells();
-		}
-	}
 	
 	private void initializeEmptyGridPane(int height, int length){
 		Rectangle size = new Rectangle(height, length);
