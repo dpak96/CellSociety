@@ -72,10 +72,10 @@ public class PopulationChartBox extends HorizontalControlBoxes{
 		return sc;
    }
 
-    public void AddToQueue() {
-        dataQ1.add(Math.random());
-        dataQ2.add(Math.random());
-        dataQ3.add(Math.random());
+    public void AddToQueue(int[] data) {
+        dataQ1.add(data[0]);
+        dataQ2.add(data[1]);
+        dataQ3.add(data[2]);
     }
 
     public void addDataToSeries() {
