@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import javafx.scene.layout.GridPane;
 
+
 public class SimulationFactory {
     private GridPane myGridPane;
     private GUI myGUI;
@@ -51,6 +52,7 @@ public class SimulationFactory {
         else return null;
     }
     
+
     /**
      * initializes simulation specified by input string
      * @param simulation
