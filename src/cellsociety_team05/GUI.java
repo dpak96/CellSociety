@@ -99,9 +99,8 @@ public class GUI {
 		/**
 		 * The following allows to show how the graph chart works 
 		 */
-//		stepCells();
-//		myBoxContainer.getPCB().AddToQueue();
-//		myBoxContainer.getPCB().addDataToSeries();
+		myBoxContainer.getPCB().AddToQueue();
+		myBoxContainer.getPCB().addDataToSeries();
 		
 	}
 	
