@@ -26,6 +26,7 @@ public abstract class Simulation {
 	private int myWidth;
 	private int myHeight;
 	private List<CellInfo> myInfoList;
+	int[] myStats;
 
 	/**
 	 * constructor for simulation class
@@ -42,7 +43,7 @@ public abstract class Simulation {
                 myInfoList = list;
                 myParameters = params;
                 myGridPane = gridPane;
-                myGrid = new Grid(getMyHeight(), myWidth, this,myParameters);
+                myGrid = new Grid(getMyHeight(), myWidth, this, myParameters);
                 readCellList(myInfoList);
 		animation = new Timeline();
 		myGUI = gui;
@@ -102,6 +103,12 @@ public abstract class Simulation {
 	public void step(){
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
+	    myStats = myGrid.getStats();
+	    myGUI.updateGraph();
+	}
+	
+	public int[] getStats(){
+	    return myStats;
 	}
 
 	/**
