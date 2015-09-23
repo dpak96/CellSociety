@@ -90,4 +90,24 @@ public class Grid {
     public List<List<Cell>> getCellMatrix(){
         return myCells;
     }
+    
+    public int getNumberOfStates(){
+        return myCells.get(0).get(0).getMyColors().length;
+    }
+    
+    public int[] getStats(){
+        int[] stats = new int[3];
+        for (int i=0;i<3;i++){
+            int numberOfCells = 0;
+            for (List<Cell> list:myCells){
+                for (Cell cell:list){
+                    if (cell.getMyCurrentState()==i){
+                        numberOfCells+=1;
+                    }
+                }
+            }
+            stats[i]=numberOfCells;
+        }
+        return stats;
+    }
 }
