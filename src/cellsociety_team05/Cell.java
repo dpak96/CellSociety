@@ -3,6 +3,7 @@ package cellsociety_team05;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -12,113 +13,217 @@ import javafx.scene.shape.Rectangle;
  *
  */
 public abstract class Cell {
-	// Default Cell class could implement game of life for testing?
-	protected List<Cell> myNeighbors;
-	protected int myXCoordinate;
-	protected int myYCoordinate;
-	protected int myCurrentState;
-	protected int myNextState;
-	protected String[] myPossibleStates;
-	protected Color[] myColors;
-	protected boolean hasRun;
-	protected Rectangle mySquare;
-	protected HashMap<String, Double> myParameters;
 
-	/**
-	 * Cell constructor
-	 * @param grid
-	 * @param xCoordinate
-	 * @param yCoordinate
-	 * @param startingState
-	 */
-	public Cell(int xCoordinate, int yCoordinate, int startingState){
-		//myGrid = grid;
-		myXCoordinate = xCoordinate;
-		myYCoordinate = yCoordinate;
-		myCurrentState = startingState;
-		myNextState = startingState;
-		//mySimulation = simulation;
-		//this works only for an 8x8 simulation
-	}
-	/*
-    public abstract void setCell(int xCoordinate, int yCoordinate, 
-                            int startingState,
-                            HashMap<String, Double> params ,Grid grid);
-	 */
-	public Rectangle getSquare(){
-		return mySquare;
-	}
+    protected List<Cell> myNeighbors;
+    protected int myXCoordinate;
+    protected int myYCoordinate;
+    protected int myCurrentState;
+    protected int myNextState;
+    protected String[] myPossibleStates;
+    protected Color[] myColors;
+    protected boolean myDirty;
+    protected Rectangle mySquare;
+    protected HashMap<String, Double> myParameters;
+    
+    /**
+     * Cell constructor
+     * @param grid
+     * @param xCoordinate
+     * @param yCoordinate
+     * @param startingState
+     */
+    public Cell(int xCoordinate, int yCoordinate, int startingState){
+        myXCoordinate = xCoordinate;
+        myYCoordinate = yCoordinate;
+        myCurrentState = startingState;
+        myNextState = startingState;
+    }
+    
+    /**
+     * sets value in parameter map
+     * @param name string of key in parameter map
+     * @param value to be stored at name
+     */
+    public void setParameter(String name, double value){
+        myParameters.put(name, value);
+    }
+    
+    /**
+     * 
+     * @return current color of this cell
+     */
+    public Color getCurrentColor(){
+        return myColors[myCurrentState];
+    }
+    
+     /**
+      * Determines this cell's next state based on rules of simulation.
+      */
+    public abstract void preUpdateCell();
+    
+    /**
+     * Switches this cell's state from it's current to it's next state.
+     */
+    public void updateCell(){
+        myCurrentState = myNextState;
+        mySquare.setFill(myColors[myCurrentState]);
+    }
+ 
+    
+    /**
+     * @return the x coordinate of the cell
+     */
+    public int getX(){
+        return myXCoordinate;
+    }
+    
+    /**
+     * @return the y coordinate of the cell 
+     */
+    public int getY(){
+        return myYCoordinate;
+    }
 
-	public void setParameter(String name, double value){
-		myParameters.put(name, value);
-	}
+    /**
+     * 
+     * @return array of cell's possible state names 
+     */
+    public String[] getPossibleStates () {
+        return myPossibleStates;
+    }
 
-	/**
-	 * Gets this cells neighbors.
-	 * @return A list of this cell's neighbors
-	 */
-	public List<Cell> getNeighbors(){
-		return myNeighbors;
-	}
+    /**
+     * @return the myNeighbors
+     */
+    public List<Cell> getMyNeighbors () {
+        return myNeighbors;
+    }
 
-	public void setNeighbors(List<Cell> list){
-		myNeighbors = list;
-	}
+    /**
+     * @param myNeighbors the myNeighbors to set
+     */
+    public void setMyNeighbors (List<Cell> myNeighbors) {
+        this.myNeighbors = myNeighbors;
+    }
 
-	/**
-	 * Gets this cell's current state.
-	 * @return An integer representing this cell's current state
-	 */
-	public int getCurrentState(){
-		return myCurrentState;
-	}
+    /**
+     * @param myXCoordinate the myXCoordinate to set
+     */
+    public void setMyXCoordinate (int myXCoordinate) {
+        this.myXCoordinate = myXCoordinate;
+    }
 
-	public Color getCurrentColor(){
-		return myColors[myCurrentState];
-	}
+    /**
+     * @param myYCoordinate the myYCoordinate to set
+     */
+    public void setMyYCoordinate (int myYCoordinate) {
+        this.myYCoordinate = myYCoordinate;
+    }
 
-	/**
-	 * Sets this cell's next state. 
-	 * @param state An integer representing the state this cell should be next
-	 */
-	public void setNextState(int state) {
-		myNextState = state;
-	}
+    /**
+     * @return the myCurrentState
+     */
+    public int getMyCurrentState () {
+        return myCurrentState;
+    }
 
-	public void setCurrentState(int state) {
-		myCurrentState = state;
-	}
+    /**
+     * @param myCurrentState the myCurrentState to set
+     */
+    public void setMyCurrentState (int myCurrentState) {
+        this.myCurrentState = myCurrentState;
+    }
 
+    /**
+     * @return the myNextState
+     */
+    public int getMyNextState () {
+        return myNextState;
+    }
 
-	/**
-	 * Determines this cell's next state based on rules of simulation.
-	 */
-	public abstract void preUpdateCell();
+    /**
+     * @param myNextState the myNextState to set
+     */
+    public void setMyNextState (int myNextState) {
+        this.myNextState = myNextState;
+    }
 
-	/**
-	 * Switches this cell's state from it's current to it's next state.
-	 */
-	public void updateCell(){
-		myCurrentState = myNextState;
-		mySquare.setFill(myColors[myCurrentState]);
-	}
+    /**
+     * @return the myPossibleStates
+     */
+    public String[] getMyPossibleStates () {
+        return myPossibleStates;
+    }
 
+    /**
+     * @param myPossibleStates the myPossibleStates to set
+     */
+    public void setMyPossibleStates (String[] myPossibleStates) {
+        this.myPossibleStates = myPossibleStates;
+    }
 
-	/**
-	 * returns the x coordinate of the cell
-	 */
-	public int getX(){
-		return myXCoordinate;
-	}
+    /**
+     * @return the myColors
+     */
+    public Color[] getMyColors () {
+        return myColors;
+    }
 
-	/**
-	 * returns the y coordinate of the cell 
-	 */
-	public int getY(){
-		return myYCoordinate;
-	}
+    /**
+     * @param myColors the myColors to set
+     */
+    public void setMyColors (Color[] myColors) {
+        this.myColors = myColors;
+    }
 
-	public String[] getPossibleStates () {
-		return myPossibleStates;
-	}
+    /**
+     * @return the myDirty
+     */
+    public boolean isMyDirty () {
+        return myDirty;
+    }
+
+    /**
+     * @param myDirty the myDirty to set
+     */
+    public void setMyDirty (boolean myDirty) {
+        this.myDirty = myDirty;
+    }
+
+    /**
+     * @return the mySquare
+     */
+    public Rectangle getMySquare () {
+        return mySquare;
+    }
+
+    /**
+     * @param mySquare the mySquare to set
+     * 
+     * @author emanuele
+     * I modified setMySquare, as well as adding another method to allow for update of the cell status 
+     */
+    public void setMySquare (Rectangle mySquare) {
+        this.mySquare = mySquare;
+        mySquare.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> nextState());
+    }
+    
+    private void nextState(){
+    	myNextState = (myCurrentState + 1)%myColors.length;
+    	updateCell();
+    }
+
+    /**
+     * @return the myParameters
+     */
+    public HashMap<String, Double> getMyParameters () {
+        return myParameters;
+    }
+
+    /**
+     * @param myParameters the myParameters to set
+     */
+    public void setMyParameters (HashMap<String, Double> myParameters) {
+        this.myParameters = myParameters;
+    }
 }   

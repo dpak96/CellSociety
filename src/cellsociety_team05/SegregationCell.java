@@ -19,7 +19,7 @@ public class SegregationCell extends Cell {
     private static String SIMILAR = "similar";
     
     /**
-     * Constructs a new SegregationCell to be used in a Segregation Simulation
+     * constructor for segregation cell
      * @param xCoordinate
      * @param yCoordinate
      * @param startingState
@@ -34,19 +34,31 @@ public class SegregationCell extends Cell {
         mySatisfactionPercent = map.get(SIMILAR);
         myParameters = map;
         myGrid = grid;
-        hasRun = false;
+        myDirty = false;
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
-        mySquare = new Rectangle(553/sim.getMyHeight(), 553/sim.getMyHeight(), myColors[startingState]);
+        
+        /**
+         * I added an event handler to the rectangle in the cell abstract class, since every cell will have this characteristic
+         * I use set square to allow for update 
+         * @author emanuele
+         */
+        this.setMySquare(new Rectangle(440/sim.getMyHeight(), 440/sim.getMyHeight(), myColors[startingState]));
+        //mySquare = new Rectangle(440/sim.getMyHeight(), 440/sim.getMyHeight(), myColors[startingState]);
+        /**
+         * end of changes
+         */
+        
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
+    
     /**
-     * 
+     * overrides super class method
      */
     @Override
     public void preUpdateCell() {
-        mySatisfactionPercent = myParameters.get(SIMILAR);
+        mySatisfactionPercent = myParameters.get("similar");
         myNextState = myCurrentState;
-        if (myCurrentState!=EMPTY && !hasRun){
+        if (myCurrentState!=EMPTY && !myDirty){
             int sameNeighbors = 0;
             for (Cell neighbor: myNeighbors) {
                 if (neighbor.myCurrentState==myCurrentState){
@@ -73,9 +85,9 @@ public class SegregationCell extends Cell {
                     int randomIndex = (int)Math.random()*empties.size();
                     //Empty cell that this cell will move to. 
                     Cell switchCell = empties.get(randomIndex);
-                    switchCell.setNextState(myCurrentState);
-                    switchCell.setCurrentState(myCurrentState);
-                    switchCell.hasRun = true;
+                    switchCell.setMyNextState(myCurrentState);
+                    switchCell.setMyCurrentState(myCurrentState);
+                    switchCell.myDirty = true;
                     myNextState = EMPTY;
                     myCurrentState = EMPTY;
                 }

@@ -7,63 +7,70 @@ import java.util.List;
 import javafx.scene.layout.GridPane;
 
 public class SegregationSimulation extends Simulation {
-	private double similar; 
-	private double ratio;
-	private double empty;
-	private static String SIMILAR = "similar";
-	private static String RATIO = "ratio";
-	private static String EMPTY = "empty";
-	
-	public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param, List<CellInfo> list, int height, int width){
-		super(gridPane, gui, param, list, height, width);
-		similar = param.get(SIMILAR);
-		ratio = param.get(RATIO);
-		empty = param.get(EMPTY);
-		//Set random grid?
-		if (list==null){
-		    initGrid();
-		}
-	}
 
-	/**
-	 * Set the similarity percentage
-	 * @param x
-	 */
-	public void setSimilar(double x){
-		similar = x;
-	}
-	/**
-	 * Initialization of grid with random setup
-	 * 
-	 */
-	public void initGrid(){
-	    int cellCount  = myGrid.getCellMatrix().size()*myGrid.getCellMatrix().get(0).size();
-	    ArrayList<Integer> cellTypes = new ArrayList<Integer>();
-	    int numEmpty = (int)(((double)cellCount )*empty);
-	    cellCount -= numEmpty;
-	    int numType1 = (int)(((double)cellCount )*ratio);
-	    int numType2 = cellCount  - numType1;
-	    for (int i=0;i<numEmpty;i++){
-	        cellTypes.add(2);
-	    }
-	    for (int i=0;i<numType1;i++){
-	        cellTypes.add(0);
-	    }
-	    for (int i=0;i<numType2;i++){
-	        cellTypes.add(1);
-	    }
-	    for (List<Cell> cells: myGrid.getCellMatrix()){
-                for (Cell cell: cells){
-                    int ran = (int)(Math.random()*cellTypes.size());
-                    cell.setParameter(SIMILAR,similar);
-                    cell.setCurrentState(cellTypes.remove(ran));
-                    cell.getSquare().setFill(cell.myColors[cell.getCurrentState()]);
-                }
-	    }
-	}
-	/**
-	 *Make a new SimulationCell
-	 */
+    private double similar; 
+    private double ratio;
+    private double empty;
+
+    /**
+     * constructor for segregation simulation
+     * @param gridPane
+     * @param gui
+     * @param param
+     * @param list
+     * @param height
+     * @param width
+     */
+    public SegregationSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> param, List<CellInfo> list, int height, int width){
+        super(gridPane, gui, param, list, height, width);
+        similar = param.get("similar");
+        ratio = param.get("ratio");
+        empty = param.get("empty");
+        if (list==null){
+            initGrid();
+        }
+    }
+
+    /**
+     * sets parameter for percent of similar neighbors required for satisfaction
+     * @param x
+     */
+    public void setSimilar(double x){
+        similar = x;
+    }
+
+    /**
+     * initializes grid with appropriate number of blue, red, and empty cells
+     */
+    public void initGrid(){
+        int num = myGrid.getCellMatrix().size()*myGrid.getCellMatrix().get(0).size();
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        int numEmpty = (int) Math.floor(((double)num)*empty);
+        num-= numEmpty;
+        int num1 = (int) Math.floor(((double)num)*ratio);
+        int num2 = num - num1;
+        for (int i=0;i<numEmpty;i++){
+            list.add(2);
+        }
+        for (int i=0;i<num1;i++){
+            list.add(0);
+        }
+        for (int i=0;i<num2;i++){
+            list.add(1);
+        }
+        for (List<Cell> cells: myGrid.getCellMatrix()){
+            for (Cell cell: cells){
+                int ran = (int) Math.floor(Math.random()*list.size());
+                cell.setParameter("similar",similar);
+                cell.setMyCurrentState(list.remove(ran));
+                cell.getMySquare().setFill(cell.myColors[cell.getMyCurrentState()]);
+            }
+        }
+    }
+
+    /**
+     * overrides super class method
+     */
     @Override
     public Cell makeCell (int x, int y, int start, Grid g, HashMap<String,Double> map) {
         myGrid = g;
@@ -84,7 +91,6 @@ public class SegregationSimulation extends Simulation {
                 list.get(i).add(newcell);
             }
         }
-        return list;       
+        return list;
     }
-
 }

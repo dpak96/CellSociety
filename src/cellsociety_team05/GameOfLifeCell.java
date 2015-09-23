@@ -6,6 +6,13 @@ import javafx.scene.shape.Rectangle;
 
 public class GameOfLifeCell extends Cell {
 
+    /**
+     * constructor for game of life cell
+     * @param xCoordinate
+     * @param yCoordinate
+     * @param startingState
+     * @param sim
+     */
     public GameOfLifeCell (int xCoordinate, int yCoordinate, int startingState,Simulation sim) {
         super(xCoordinate, yCoordinate, startingState);
         myColors = new Color[] {Color.BLACK, Color.WHITE};
@@ -14,6 +21,9 @@ public class GameOfLifeCell extends Cell {
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
 
+    /**
+     * overrides super class method
+     */
     @Override
     public void preUpdateCell () {
         int liveNeighbors = 0;
@@ -38,21 +48,5 @@ public class GameOfLifeCell extends Cell {
                 myNextState=0;
             }
         }
-        //System.out.println("my current state: "+myPossibleStates[myCurrentState]);
-        //System.out.println("my live neighbors: "+liveNeighbors);
-        //System.out.println("my next state: "+myPossibleStates[myNextState]);
     }
-/*
-    @Override
-    public void setCell (int xCoordinate,
-                         int yCoordinate,
-                         int startingState,
-                         HashMap<String, Double> params,
-                         Grid grid) {
-        this.myXCoordinate = xCoordinate;
-        this.myYCoordinate = yCoordinate;
-        this.setCurrentState(startingState);
-        
-    }
-*/
 }
