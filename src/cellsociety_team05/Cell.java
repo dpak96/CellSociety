@@ -13,6 +13,7 @@ import javafx.scene.shape.Rectangle;
  *
  */
 public abstract class Cell {
+
     protected List<Cell> myNeighbors;
     protected int myXCoordinate;
     protected int myYCoordinate;
