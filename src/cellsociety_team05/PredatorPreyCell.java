@@ -33,7 +33,7 @@ public class PredatorPreyCell extends Cell {
         myGrid = g;
         myPossibleStates = new String[] {"Fish/Blue", "Shark/Red", "Empty"};
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
-        mySquare = new Rectangle(553/sim.getMyHeight(), 553/sim.getMyHeight(), myColors[startingState]);
+        this.setMySquare(new Rectangle(440/sim.getMyHeight(), 440/sim.getMyHeight(), myColors[startingState]));
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
     
@@ -97,6 +97,7 @@ public class PredatorPreyCell extends Cell {
      * @param cell
      */
     private void checkDeath(Cell cell){
+        System.out.println(mySim.myEnergies[cell.getX()][cell.getY()]);
         if (mySim.myEnergies[cell.getX()][cell.getY()]>=PREDATOR_ENERGY+1){
             cell.myNextState = 2;
             cell.myCurrentState=2;
@@ -188,7 +189,6 @@ public class PredatorPreyCell extends Cell {
                     }
                     leave();
                     age(moveCell);
-                    leave();
                     checkDeath(moveCell);
                 }
             }
@@ -208,6 +208,7 @@ public class PredatorPreyCell extends Cell {
                         mySim.myReproductionTimes[moveCell.getX()][moveCell.getY()]=0;
                     }
                     leave();
+                    age(moveCell);
                 }
             }
         }

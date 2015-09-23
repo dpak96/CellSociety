@@ -94,14 +94,14 @@ public class GUI {
 	}
 	
 	public void step(){
-	    mySimulation.step();
+	    //mySimulation.step();
 		
 		/**
 		 * The following allows to show how the graph chart works 
 		 */
-//		stepCells();
-//		myBoxContainer.getPCB().AddToQueue();
-//		myBoxContainer.getPCB().addDataToSeries();
+		stepCells();
+		myBoxContainer.getPCB().AddToQueue();
+		myBoxContainer.getPCB().addDataToSeries();
 		
 	}
 	
@@ -137,7 +137,7 @@ public class GUI {
 	}
 	
 	public void startNewSimulation(String simulation){
-		loadSimulationValue(currentSimulationName);
+		loadSimulationValue(simulation);
 		startSimulation();
 	}
 	
@@ -146,24 +146,6 @@ public class GUI {
 	 *	The following methods show the functionality of two 
 	 *  different triangle grids 
 	 */
-	
-	private ArrayList<TriangleCell> myTriangleCells = new ArrayList<>();
-	
-	public void testUpdateTriangle(){
-		myGridPane.getChildren().clear();
-		for(int i=0; i < 8; i++){
-			for(int k=0; k<8; k++){
-				TriangleCell current = new TriangleCell(i, k, myGridPane, myGridPane.getHeight() / 8);
-				myTriangleCells.add(current);
-			}
-		}
-	}
-	
-	public void stepCells(){
-		for(TriangleCell t: myTriangleCells){
-			t.updateVisualCells();
-		}
-	}
 	
 	private void initializeEmptyGridPane(int height, int length){
 		Rectangle size = new Rectangle(height, length);
