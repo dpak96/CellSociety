@@ -60,7 +60,7 @@ public class Grid {
         }
         for (List<Cell> list: myCells){
             for (Cell cell: list){
-                cell.myDirty = false;
+                cell.hasRun = false;
             }
         }
     }

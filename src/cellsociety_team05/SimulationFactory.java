@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import javafx.scene.layout.GridPane;
 
+
 public class SimulationFactory {
     private GridPane myGridPane;
     private GUI myGUI;
@@ -12,6 +13,10 @@ public class SimulationFactory {
     private int myWidth;
     private List<CellInfo> myList;
     
+    
+    /***
+     * Simulation Factory takes in the grid, gui, map of parameters, list of cell information, and the height/width of the grid
+     */
 
     public SimulationFactory (GridPane grid, GUI gui, HashMap<String, Double> map,List<CellInfo> list, int height, int width) {
         myGridPane = grid;
@@ -22,6 +27,11 @@ public class SimulationFactory {
         myList = list;
     }
     
+    /**
+     * Takes in the simulation name from XML file and returns which file to run
+     * @param simulation
+     * @return which file to run
+     */
     public String chooseFileFromUserInput(String simulation){
         if (simulation.equals("Segregation")){
             return "XMLFiles/test.xml";
@@ -38,6 +48,11 @@ public class SimulationFactory {
         else return null;
     }
     
+   /**
+    * Takes in the simulation name and creates a new simulation. 
+    * @param simulation
+    * @return
+    */
     public Simulation makeSimulation(String simulation){
         if (simulation.equals("Segregation")){
             return new SegregationSimulation(myGridPane,myGUI,myMap,myList,myHeight,myWidth);

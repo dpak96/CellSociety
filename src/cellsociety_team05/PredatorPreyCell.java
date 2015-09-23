@@ -27,7 +27,7 @@ public class PredatorPreyCell extends Cell {
         //System.out.println("4 PREY_REPRODUCTION_TIME: "+PREY_REPRODUCTION_TIME);
         //System.out.println("4 PREDATOR_REPRODUCTION_TIME: "+PREDATOR_REPRODUCTION_TIME);
         //System.out.println("4 PREDATOR_ENERGY: "+PREDATOR_ENERGY);
-        myDirty = false;
+        hasRun = false;
         myGrid = g;
         myPossibleStates = new String[] {"Fish/Blue", "Shark/Red", "Empty"};
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
@@ -77,7 +77,7 @@ public class PredatorPreyCell extends Cell {
         //System.out.println("moved: "+myPossibleStates[prey.myCurrentState]+" "+myPossibleStates[prey.myNextState]);
         prey.myParameters.put("reproductiontime", (double) myReproductionTime);
         prey.myParameters.put("energy", (double) myEnergy);
-        prey.myDirty = true;
+        prey.hasRun = true;
     }
     
     private void eat(Cell cell){
@@ -151,7 +151,7 @@ public class PredatorPreyCell extends Cell {
         //System.out.println("Energy: "+myEnergy);
         //System.out.println("PredatorReproductionTime: "+PREDATOR_REPRODUCTION_TIME);
         //System.out.println(""+ getX()+","+getY()+")" + "PreyReproductionTime: "+PREY_REPRODUCTION_TIME);
-        if(!myDirty){
+        if(!hasRun){
             if(myCurrentState==1){
                 List<Cell> fish = new ArrayList<Cell>();
                 List<Cell> empties = new ArrayList<Cell>();

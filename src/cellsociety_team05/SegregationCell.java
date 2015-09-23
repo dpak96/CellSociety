@@ -13,66 +13,74 @@ import javafx.scene.shape.Rectangle;
  *
  */
 public class SegregationCell extends Cell {
-    private final String[] myPossibleStates = {"X/Blue", "O/Red", "Empty"};
     private double mySatisfactionPercent;
     private Grid myGrid;
+    private static int EMPTY = 2;
+    private static String SIMILAR = "similar";
     
+    /**
+     * Constructs a new SegregationCell to be used in a Segregation Simulation
+     * @param xCoordinate
+     * @param yCoordinate
+     * @param startingState
+     * @param map
+     * @param grid
+     * @param sim
+     */
     public SegregationCell (int xCoordinate, int yCoordinate, 
                             int startingState,
                             HashMap<String, Double> map,Grid grid,Simulation sim) {
         super(xCoordinate, yCoordinate, startingState);
-        mySatisfactionPercent = map.get("similar");
+        mySatisfactionPercent = map.get(SIMILAR);
         myParameters = map;
         myGrid = grid;
-        myDirty = false;
+        hasRun = false;
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
         mySquare = new Rectangle(553/sim.getMyHeight(), 553/sim.getMyHeight(), myColors[startingState]);
         GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
     }
-    
+    /**
+     * 
+     */
     @Override
     public void preUpdateCell() {
-        mySatisfactionPercent = myParameters.get("similar");
-        //System.out.println("Cell: ("+getX()+","+getY()+") "+myPossibleStates[myCurrentState]);
-        //System.out.println(mySatisfactionPercent);
+        mySatisfactionPercent = myParameters.get(SIMILAR);
         myNextState = myCurrentState;
-        if (myCurrentState!=2 && myDirty!=true){
+        if (myCurrentState!=EMPTY && !hasRun){
             int sameNeighbors = 0;
             for (Cell neighbor: myNeighbors) {
-                //System.out.println("Neighbor: ("+neighbor.getX()+","+neighbor.getY()+") "+myPossibleStates[neighbor.myCurrentState]);
                 if (neighbor.myCurrentState==myCurrentState){
-                    sameNeighbors+=1;
+                    sameNeighbors++;
                 }
             }
-            //System.out.println(sameNeighbors+" "+myNeighbors.size());
+            //Satisfied
             if (((double) sameNeighbors)/((double) myNeighbors.size())>=mySatisfactionPercent) {
                 myNextState = myCurrentState;
-                //System.out.println("satsfied");
             }
+            //Unsatisfied
+            //Maybe try to find more efficient way to collect empty cells? Wherever simulation is being run.. Then can remove grid.
             else {
-                //System.out.println("unsatisfied");
                 List<Cell> empties = new ArrayList<Cell>();
                 for (List<Cell> list: myGrid.getCellMatrix()) {
                     for (Cell cell: list){
-                        if (cell.myCurrentState==2){
+                        if (cell.myCurrentState==EMPTY){
                             empties.add(cell);
                         }
                     }
                 }
-                //System.out.println(empties.size());
                 if (empties.size()>0){
                     System.out.println("switch");
-                    int randomIndex = (int) Math.floor(Math.random()*empties.size());
+                    int randomIndex = (int)Math.random()*empties.size();
+                    //Empty cell that this cell will move to. 
                     Cell switchCell = empties.get(randomIndex);
                     switchCell.setNextState(myCurrentState);
                     switchCell.setCurrentState(myCurrentState);
-                    switchCell.myDirty = true;
-                    myNextState = 2;
-                    myCurrentState = 2;
+                    switchCell.hasRun = true;
+                    myNextState = EMPTY;
+                    myCurrentState = EMPTY;
                 }
             }
         }
-        //System.out.println("Next: "+myPossibleStates[myNextState]);
     }
     
     /**
