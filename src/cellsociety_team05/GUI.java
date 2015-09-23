@@ -83,14 +83,14 @@ public class GUI {
 	 */
 	
 	public void startSimulation(){
-		//mySimulation.start();
+		mySimulation.start();
 
 		/**
 		 * If you want to test the triangle grid, choose one of the following
 		 * (Only one at the time)
 		 */
 		//testUpdateTriangle();
-		testRowTriangle();
+		//testRowTriangle();
 	}
 	
 	public void step(){
@@ -137,7 +137,7 @@ public class GUI {
 	}
 	
 	public void startNewSimulation(String simulation){
-		loadSimulationValue(currentSimulationName);
+		loadSimulationValue(simulation);
 		startSimulation();
 	}
 	
