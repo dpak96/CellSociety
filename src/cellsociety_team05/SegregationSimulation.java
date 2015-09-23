@@ -4,10 +4,10 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import javafx.scene.layout.GridPane;
 
 public class SegregationSimulation extends Simulation {
+
     private double similar; 
     private double ratio;
     private double empty;
@@ -49,7 +49,6 @@ public class SegregationSimulation extends Simulation {
         num-= numEmpty;
         int num1 = (int) Math.floor(((double)num)*ratio);
         int num2 = num - num1;
-        int k = 0;
         for (int i=0;i<numEmpty;i++){
             list.add(2);
         }
@@ -80,7 +79,7 @@ public class SegregationSimulation extends Simulation {
     }
 
     /**
-     * overrides super class method
+     * Initiate the grid with preset cells. 
      */
     @Override
     public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height, HashMap<String,Double> map) {
@@ -88,7 +87,6 @@ public class SegregationSimulation extends Simulation {
         for (int i=0;i<width;i++){
             list.add(new ArrayList<Cell>());
             for (int j=0;j<height;j++){
-                int state = (int) Math.floor(Math.random()*2);
                 Cell newcell = makeCell(i, j, 1, grid,map);
                 list.get(i).add(newcell);
             }
