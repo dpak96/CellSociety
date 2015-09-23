@@ -94,14 +94,14 @@ public class GUI {
 	}
 	
 	public void step(){
-	    mySimulation.step();
+	    //mySimulation.step();
 		
 		/**
 		 * The following allows to show how the graph chart works 
 		 */
-//		stepCells();
-//		myBoxContainer.getPCB().AddToQueue();
-//		myBoxContainer.getPCB().addDataToSeries();
+		stepCells();
+		myBoxContainer.getPCB().AddToQueue();
+		myBoxContainer.getPCB().addDataToSeries();
 		
 	}
 	
