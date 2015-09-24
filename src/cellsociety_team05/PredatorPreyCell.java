@@ -9,10 +9,10 @@ import javafx.scene.shape.Rectangle;
 
 public class PredatorPreyCell extends Cell {
     private Grid myGrid;
-    int PREY_REPRODUCTION_TIME;
-    int PREDATOR_REPRODUCTION_TIME;
-    int PREDATOR_ENERGY;
-    PredatorPreySimulation mySim;
+    private int PREY_REPRODUCTION_TIME;
+    private int PREDATOR_REPRODUCTION_TIME;
+    private int PREDATOR_ENERGY;
+    private PredatorPreySimulation mySim;
     
     /**
      * constructor for predator prey cell
