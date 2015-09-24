@@ -36,5 +36,7 @@ public class AntCell extends Cell {
 			mySquare.setFill(myColors[0]);
 		}
 	}
+	
+	public void receuveAnt()
 
 }

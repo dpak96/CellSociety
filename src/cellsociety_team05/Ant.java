@@ -30,8 +30,8 @@ public class Ant {
 		
 	}
 	
-	private void moveInDirection(int xDirection, int yDirection){
-		
+	private int[] moveInDirection(int xDirection, int yDirection){
+		return 
 	}
 	
 	
