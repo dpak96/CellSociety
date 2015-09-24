@@ -3,7 +3,9 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.scene.layout.GridPane;
+
 
 public class SugarSimulation extends Simulation {
     int[][] myAgentSugars;
@@ -16,8 +18,12 @@ public class SugarSimulation extends Simulation {
     int myInterval;
     int myRate;
 
-    public SugarSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params,
-                            List<CellInfo> list, int height, int width) {
+    public SugarSimulation (GridPane gridPane,
+                            GUI gui,
+                            Map<String, Double> params,
+                            List<CellInfo> list,
+                            int height,
+                            int width) {
         super(gridPane, gui, params, list, height, width);
         myAgentSugars = new int[width][height];
         mySugars = new int[width][height];
@@ -29,12 +35,12 @@ public class SugarSimulation extends Simulation {
     }
 
     @Override
-    public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height, HashMap<String, Double> map) {
-        ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
-        for (int i=0;i<width;i++){
+    public List<List<Cell>> setUpCells (Grid grid, int width, int height, Map<String, Double> map) {
+        List<List<Cell>> list = new ArrayList<List<Cell>>();
+        for (int i = 0; i < width; i++) {
             list.add(new ArrayList<Cell>());
-            for (int j=0;j<height;j++){
-                int state = (int) Math.floor(Math.random()*3);
+            for (int j = 0; j < height; j++) {
+                int state = (int) Math.floor(Math.random() * 3);
                 Cell newcell = makeCell(i, j, state, grid, map);
                 list.get(i).add(newcell);
             }
@@ -43,9 +49,9 @@ public class SugarSimulation extends Simulation {
     }
 
     @Override
-    public Cell makeCell (int x, int y, int start, Grid g, HashMap<String, Double> map) {
+    public Cell makeCell (int x, int y, int start, Grid g, Map<String, Double> map) {
         myGrid = g;
-        SugarCell c = new SugarCell(x,y,start,g,this);
+        SugarCell c = new SugarCell(x, y, start, g, this);
         return c;
     }
 
