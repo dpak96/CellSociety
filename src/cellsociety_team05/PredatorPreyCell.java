@@ -28,7 +28,6 @@ public class PredatorPreyCell extends Cell {
         PREY_REPRODUCTION_TIME = (int) Math.round(param.get("preyreproductiontime"));
         PREDATOR_REPRODUCTION_TIME = (int) Math.round(param.get("predatorreproductiontime"));
         PREDATOR_ENERGY = (int) Math.round(param.get("energylimit"));
-        myDirty = false;
         mySim = sim;
         myGrid = g;
         myPossibleStates = new String[] {"Fish/Blue", "Shark/Red", "Empty"};
@@ -158,16 +157,8 @@ public class PredatorPreyCell extends Cell {
         myNextState = myCurrentState;
         if(!myDirty){
             if(myCurrentState==1){
-                List<Cell> fish = new ArrayList<Cell>();
-                List<Cell> empties = new ArrayList<Cell>();
-                for (Cell cell: myNeighbors){
-                    if (cell.getMyCurrentState()==0){
-                        fish.add(cell);
-                    }
-                    else if (cell.getMyCurrentState()==2){
-                        empties.add(cell);
-                    }
-                }
+                List<Cell> fish = getStateNeighbors(0);
+                List<Cell> empties = getStateNeighbors(2);
                 if (fish.size()>0){
                     int ran = (int) Math.floor(Math.random()*fish.size());
                     Cell eatCell = fish.get(ran);

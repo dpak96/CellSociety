@@ -34,7 +34,6 @@ public class SegregationCell extends Cell {
         mySatisfactionPercent = map.get(SIMILAR);
         myParameters = map;
         myGrid = grid;
-        myDirty = false;
         myColors = new Color[] {Color.BLUE, Color.RED, Color.WHITE};
         
         /**
