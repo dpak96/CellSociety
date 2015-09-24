@@ -1,5 +1,6 @@
 package toolsForGui;
 import cellsociety_team05.GUI;
+import cellsociety_team05.Simulation;
 import javafx.scene.input.MouseEvent;
 
 public class PauseButton extends GuiButton{
@@ -15,7 +16,6 @@ public class PauseButton extends GuiButton{
 
 	@Override
 	protected void implementAction() {
-		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> this.getGui().changeSimulationFlow());
 		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> updateResumeButton());
 	}
 	
