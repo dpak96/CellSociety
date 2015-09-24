@@ -6,8 +6,8 @@ import java.util.List;
 
 public class FiniteGrid extends Grid {
 
-    public FiniteGrid (int width, int height, Simulation sim, HashMap<String, Double> map) {
-        super(width, height, sim, map);
+    public FiniteGrid (int width, int height, Simulation sim, HashMap<String, Double> map, int randomMultiplier) {
+        super(width, height, sim, map,randomMultiplier);
     }
     
     @Override
@@ -22,8 +22,7 @@ public class FiniteGrid extends Grid {
                     int xCoordinate = cell.getX()+x[i];
                     int yCoordinate = cell.getY()+y[i];
                     if(xCoordinate>=0 && yCoordinate>=0 && xCoordinate<myCells.size() && yCoordinate<myCells.get(0).size()){
-                        neighbors.add(myCells.get(xCoordinate).get(yCoordinate));
-                       
+                        neighbors.add(myCells.get(xCoordinate).get(yCoordinate));    
                     }
                 }
                 cell.setMyNeighbors(neighbors);

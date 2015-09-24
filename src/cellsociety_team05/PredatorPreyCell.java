@@ -121,34 +121,34 @@ public class PredatorPreyCell extends Cell {
         if (myCurrentState==1){
             if (mySim.getMyReproductionTimes()[getX()][getY()]>=PREDATOR_REPRODUCTION_TIME){
                 myNextState = myCurrentState;
-                mySim.getMyReproductionTimes()[getX()][getY()]=0;
-                mySim.getMyEnergies()[getX()][getY()]=0;
+                updateReproductionTimesAndEnergies();
             }
             else{
                 myNextState = 2;
-                mySim.getMyReproductionTimes()[getX()][getY()]=0;
-                mySim.getMyEnergies()[getX()][getY()]=0;
+                updateReproductionTimesAndEnergies();
             }
         }
         else if (myCurrentState==0){
             if (mySim.getMyReproductionTimes()[getX()][getY()]>=PREY_REPRODUCTION_TIME){
                 myNextState = myCurrentState;
-                mySim.getMyReproductionTimes()[getX()][getY()]=0;
-                mySim.getMyEnergies()[getX()][getY()]=0;
+                updateReproductionTimesAndEnergies();
             }
             else{
                 myNextState = 2;
-                mySim.getMyReproductionTimes()[getX()][getY()]=0;
-                mySim.getMyEnergies()[getX()][getY()]=0;
+                updateReproductionTimesAndEnergies();
             }
         }
         else{
             myNextState = 2;
-            mySim.getMyReproductionTimes()[getX()][getY()]=0;
-            mySim.getMyEnergies()[getX()][getY()]=0;
+            updateReproductionTimesAndEnergies();
         }
         myCurrentState = myNextState;
     }
+
+	private void updateReproductionTimesAndEnergies() {
+		mySim.getMyReproductionTimes()[getX()][getY()]=0;
+		mySim.getMyEnergies()[getX()][getY()]=0;
+	}
 
     /**
      * overrides super class method

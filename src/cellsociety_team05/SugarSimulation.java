@@ -29,7 +29,7 @@ public class SugarSimulation extends Simulation {
     }
 
     @Override
-    public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height, HashMap<String, Double> map) {
+    public ArrayList<List<Cell>> setUpCells2 (Grid grid, int width, int height, HashMap<String, Double> map) {
         ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
         for (int i=0;i<width;i++){
             list.add(new ArrayList<Cell>());

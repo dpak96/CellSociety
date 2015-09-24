@@ -137,7 +137,7 @@ public abstract class Simulation {
 	 * @param map
 	 * @return
 	 */
-	public abstract ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height,HashMap<String, Double> map);
+	public abstract ArrayList<List<Cell>> setUpCells2(Grid grid, int width, int height,HashMap<String, Double> map);
 
 	/**
 	 * initializes grid with randomized cell states
@@ -161,5 +161,18 @@ public abstract class Simulation {
 	public void setMyHeight (int myHeight) {
 	    this.myHeight = myHeight;
 	}
+	
+    public ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height, HashMap<String, Double> map, int randomMultiplier) {
+        ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
+        for (int i=0;i<width;i++){
+            list.add(new ArrayList<Cell>());
+            for (int j=0;j<height;j++){
+                int state = (int) Math.floor(Math.random()*randomMultiplier);
+                Cell newcell = makeCell(i, j, state, grid, map);
+                list.get(i).add(newcell);
+            }
+        }
+        return list;
+    }
 
 }

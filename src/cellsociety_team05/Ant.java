@@ -31,7 +31,7 @@ public class Ant {
 	}
 	
 	private int[] moveInDirection(int xDirection, int yDirection){
-		return 
+		return new int[]{0,2};
 	}
 	
 	

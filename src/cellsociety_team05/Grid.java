@@ -20,9 +20,9 @@ public abstract class Grid {
      * @param sim
      * @param map
      */
-    public Grid(int width, int height, Simulation sim,HashMap<String, Double> map){
+    public Grid(int width, int height, Simulation sim,HashMap<String, Double> map, int randomMultiplier){
         mySimulation = sim;
-        myCells = mySimulation.setUpCells(this, width, height,map);
+        myCells = mySimulation.setUpCells(this, width, height,map, randomMultiplier);
         initNeighbors();
     }
     
@@ -92,4 +92,5 @@ public abstract class Grid {
         }
         return stats;
     }
+   
 }
