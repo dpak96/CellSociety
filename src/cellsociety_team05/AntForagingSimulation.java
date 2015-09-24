@@ -14,6 +14,7 @@ public class AntForagingSimulation extends Simulation{
 			int width) {
 		super(gridPane, gui, params, list, height, width);
 		// TODO Auto-generated constructor stub
+		AntGrid myGrid = new AntGrid(width, height, this, params);
 	}
 
 

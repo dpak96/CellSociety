@@ -37,6 +37,8 @@ public class AntCell extends Cell {
 		}
 	}
 	
-	public void receuveAnt()
+	public void AntArrives(){
+		this.setMyCurrentState(hasAnt);
+	}
 
 }

@@ -1,10 +1,14 @@
 package cellsociety_team05;
 
+import com.sun.org.apache.xml.internal.resolver.readers.XCatalogReader;
+
 public class Ant {
 	
 	private int[] orientation;
 	private boolean hasFoodItem;
 	private boolean atNest;
+	private int xCoordinate; 
+	private int yCoordinate;
 	
 	public void forage(){
 		if(hasFoodItem){
@@ -31,7 +35,7 @@ public class Ant {
 	}
 	
 	private int[] moveInDirection(int xDirection, int yDirection){
-		return 
+		return new int[]{xCoordinate + xDirection, yCoordinate + yDirection};
 	}
 	
 	
