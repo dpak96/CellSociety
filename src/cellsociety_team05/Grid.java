@@ -10,8 +10,8 @@ import java.util.List;
  *
  */
 public abstract class Grid {
-    List<List<Cell>> myCells;
-    Simulation mySimulation;
+    protected List<List<Cell>> myCells;
+    protected Simulation mySimulation;
     
     /**
      * constructor for grid class

@@ -8,7 +8,6 @@ public class ToroidGrid extends Grid {
 
     public ToroidGrid (int width, int height, Simulation sim, HashMap<String, Double> map) {
         super(width, height, sim, map);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
