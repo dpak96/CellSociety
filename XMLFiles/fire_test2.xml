@@ -4,11 +4,6 @@
 		<name>Fire</name>
 	</simulation>
 	
-	<grid>
-		<width>8</width>
-		<height>8</height>
-	</grid>
-	
 	<parameters>
 		<name>probCatch</name>
 		<value>0.5</value>
