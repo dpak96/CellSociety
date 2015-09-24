@@ -23,7 +23,7 @@ public abstract class Cell {
     protected Color[] myColors;
     protected boolean myDirty;
     protected Rectangle mySquare;
-    protected HashMap<String, Double> myParameters;
+    protected Map<String, Double> myParameters;
     
     /**
      * Cell constructor

@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 
 public class AntForagingSimulation extends Simulation{
 	
-	private ArrayList<Ant> myAnts;
+	private List<Ant> myAnts;
 
 	public AntForagingSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> params, List<CellInfo> list, int height,
 			int width) {
