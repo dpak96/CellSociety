@@ -18,7 +18,7 @@ public class AntForagingSimulation extends Simulation{
 
 
 	@Override
-	public Cell makeCell (int x, int y, int start, Grid g, HashMap<String,Double> map) {
+	public AntCell makeCell (int x, int y, int start, Grid g, HashMap<String,Double> map) {
 	        //myGrid = g;
 	        AntCell c = new AntCell(x,y,start,map,myGrid,this);
 	        return c;
@@ -30,7 +30,7 @@ public class AntForagingSimulation extends Simulation{
 	    for (int i=0;i<width;i++){
 	        list.add(new ArrayList<Cell>());
 	        for (int j=0;j<height;j++){
-	            Cell newcell = makeCell(i, j, 1, grid,map);
+	            AntCell newcell = makeCell(i, j, 1, grid,map);
 	            list.get(i).add(newcell);
 	        }
 	    }
@@ -41,6 +41,10 @@ public class AntForagingSimulation extends Simulation{
 		for(Ant ant: myAnts){
 			ant.forage();
 		}
+	}
+	
+	private void generateNewAnts(){
+		
 	}
 
 }

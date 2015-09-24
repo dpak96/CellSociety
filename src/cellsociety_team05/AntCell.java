@@ -8,9 +8,10 @@ import javafx.scene.shape.Rectangle;
 public class AntCell extends Cell {
 	
 	//three possible states: 0 = nothing, 1 = isNest, 2 = isFood, 3 = hasAnt;
-	private boolean isNest;
-	private boolean isFood;
-	private boolean hasAnt;
+	
+	public final int  isNest = 1;
+	public final int  isFood = 2;
+	public final int  hasAnt = 3;
 	private AntForagingSimulation mySimulation;
 	
 	public AntCell(int xCoordinate, int yCoordinate, int startingState, 
@@ -25,8 +26,15 @@ public class AntCell extends Cell {
 	@Override
 	public void preUpdateCell() {
 		// TODO Auto-generated method stub
-		mySimulation.moveAntsAround();
-
+		if(this.getMyCurrentState() == hasAnt){
+			mySquare.setFill(myColors[hasAnt]);
+		} else if (this.getMyCurrentState() == isNest){
+			mySquare.setFill(myColors[isNest]);
+		} else if (this.getMyCurrentState() == isFood){
+			mySquare.setFill(myColors[isFood]);
+		} else {
+			mySquare.setFill(myColors[0]);
+		}
 	}
 
 }
