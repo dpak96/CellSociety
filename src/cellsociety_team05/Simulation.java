@@ -26,7 +26,7 @@ public abstract class Simulation {
 	private int myWidth;
 	private int myHeight;
 	private List<CellInfo> myInfoList;
-	int[] myStats;
+	private int[] myStats;
 
 	/**
 	 * constructor for simulation class
@@ -43,7 +43,7 @@ public abstract class Simulation {
                 myInfoList = list;
                 myParameters = params;
                 myGridPane = gridPane;
-                myGrid = new Grid(getMyHeight(), myWidth, this, myParameters);
+                myGrid = new ToroidGrid(getMyHeight(), myWidth, this, myParameters);
                 readCellList(myInfoList);
 		animation = new Timeline();
 		myGUI = gui;
