@@ -43,7 +43,7 @@ public abstract class Simulation {
                 myInfoList = list;
                 myParameters = params;
                 myGridPane = gridPane;
-                myGrid = new Grid(getMyHeight(), myWidth, this, myParameters);
+                myGrid = new ToroidGrid(getMyHeight(), myWidth, this, myParameters);
                 readCellList(myInfoList);
 		animation = new Timeline();
 		myGUI = gui;

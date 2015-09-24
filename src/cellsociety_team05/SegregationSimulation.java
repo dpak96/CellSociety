@@ -40,7 +40,7 @@ public class SegregationSimulation extends Simulation {
     }
 
     /**
-     * initializes grid with appropriate number of blue, red, and empty cells
+     * initializes grid randomly with appropriate number of blue, red, and empty cells
      */
     public void initGrid(){
         int num = myGrid.getCellMatrix().size()*myGrid.getCellMatrix().get(0).size();

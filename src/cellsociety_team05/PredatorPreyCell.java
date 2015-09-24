@@ -97,7 +97,6 @@ public class PredatorPreyCell extends Cell {
      * @param cell
      */
     private void checkDeath(Cell cell){
-        System.out.println(mySim.getMyEnergies()[cell.getX()][cell.getY()]);
         if (mySim.getMyEnergies()[cell.getX()][cell.getY()]>=PREDATOR_ENERGY+1){
             cell.myNextState = 2;
             cell.myCurrentState=2;
@@ -157,7 +156,6 @@ public class PredatorPreyCell extends Cell {
     @Override
     public void preUpdateCell (){
         myNextState = myCurrentState;
-        initNeighbors();
         if(!myDirty){
             if(myCurrentState==1){
                 List<Cell> fish = new ArrayList<Cell>();
