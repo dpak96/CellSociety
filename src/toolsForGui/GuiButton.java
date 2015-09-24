@@ -3,6 +3,7 @@ package toolsForGui;
 import java.util.ResourceBundle;
 
 import cellsociety_team05.GUI;
+import cellsociety_team05.Simulation;
 import javafx.scene.control.Button;
 
 public abstract class GuiButton{

@@ -41,7 +41,6 @@ public class GUI {
         TopMenu myTopMenu = new TopMenu(myStage, simulationTypes, this);
         root.setTop(myTopMenu.getMenuBar());
 
-        //different layout
         HBox h = new HBox();
         int height = 440;
         int length = 440;
@@ -49,7 +48,7 @@ public class GUI {
         myGridPane.setMaxSize(440, 440);
         initializeEmptyGridPane(height, length);
         h.getChildren().add(myGridPane);
-        myBoxContainer = new GuiBoxContainer(this, myStage);
+        myBoxContainer = new GuiBoxContainer(this, myStage, mySimulation);
         h.getChildren().add(myBoxContainer.getVBox());
         root.setCenter(h);
         myGuiChoiceDialog.display();
@@ -66,7 +65,6 @@ public class GUI {
         Setup setup = new Setup(letter,this,myGridPane);
         System.out.println("Start");
         mySimulation = setup.getSimulation();
-
     }
 
     /**
