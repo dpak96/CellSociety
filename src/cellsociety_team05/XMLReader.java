@@ -11,6 +11,8 @@ import org.w3c.dom.Element;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class XMLReader {
@@ -95,10 +97,10 @@ public class XMLReader {
 			}
 		}
 	}
-	public HashMap<String, Double> getParams(){
+	public Map<String, Double> getParams(){
 		return parameters;
 	}
-	public ArrayList<CellInfo> getCells(){
+	public List<CellInfo> getCells(){
 		return cells;
 	}
 	public String getSimulationName(){

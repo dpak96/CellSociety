@@ -1,8 +1,10 @@
 package cellsociety_team05;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -37,6 +39,7 @@ public abstract class Cell {
         myYCoordinate = yCoordinate;
         myCurrentState = startingState;
         myNextState = startingState;
+        myDirty = false;
     }
     
     /**
@@ -226,4 +229,21 @@ public abstract class Cell {
     public void setMyParameters (HashMap<String, Double> myParameters) {
         this.myParameters = myParameters;
     }
+    
+    
+    /**
+     * Get neighbors of specified state.
+     * @param state
+     * @return
+     */
+    public List<Cell> getStateNeighbors(int state){
+    	List<Cell> temp = new ArrayList<Cell>();
+    	for(Cell c: this.myNeighbors){
+    		if(c.getMyCurrentState()==state){
+    			temp.add(c);
+    		}
+    	}
+    	return temp;
+    }
+    
 }   
