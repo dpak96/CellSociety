@@ -26,7 +26,7 @@ public abstract class Simulation {
 	private int myWidth;
 	private int myHeight;
 	private List<CellInfo> myInfoList;
-	int[] myStats;
+	private int[] myStats;
 
 	/**
 	 * constructor for simulation class

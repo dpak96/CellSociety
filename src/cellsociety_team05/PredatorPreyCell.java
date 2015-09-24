@@ -77,8 +77,8 @@ public class PredatorPreyCell extends Cell {
     private void moveTo(Cell cell){
         cell.myNextState = myCurrentState;
         cell.setMyCurrentState(cell.myNextState);
-        mySim.myReproductionTimes[cell.getX()][cell.getY()]=mySim.myReproductionTimes[getX()][getY()];
-        mySim.myEnergies[cell.getX()][cell.getY()]=mySim.myEnergies[getX()][getY()];
+        mySim.getMyReproductionTimes()[cell.getX()][cell.getY()]=mySim.getMyReproductionTimes()[getX()][getY()];
+        mySim.getMyEnergies()[cell.getX()][cell.getY()]=mySim.getMyEnergies()[getX()][getY()];
         cell.myDirty = true;
     }
     
@@ -88,7 +88,7 @@ public class PredatorPreyCell extends Cell {
      */
     private void eat(Cell prey){
         moveTo(prey);
-        mySim.myEnergies[prey.getX()][prey.getY()]=0;
+        mySim.getMyEnergies()[prey.getX()][prey.getY()]=0;
         age(prey);
     }
     
@@ -97,12 +97,12 @@ public class PredatorPreyCell extends Cell {
      * @param cell
      */
     private void checkDeath(Cell cell){
-        System.out.println(mySim.myEnergies[cell.getX()][cell.getY()]);
-        if (mySim.myEnergies[cell.getX()][cell.getY()]>=PREDATOR_ENERGY+1){
+        System.out.println(mySim.getMyEnergies()[cell.getX()][cell.getY()]);
+        if (mySim.getMyEnergies()[cell.getX()][cell.getY()]>=PREDATOR_ENERGY+1){
             cell.myNextState = 2;
             cell.myCurrentState=2;
-            mySim.myReproductionTimes[cell.getX()][cell.getY()]=0;
-            mySim.myEnergies[cell.getX()][cell.getY()]=0;
+            mySim.getMyReproductionTimes()[cell.getX()][cell.getY()]=0;
+            mySim.getMyEnergies()[cell.getX()][cell.getY()]=0;
         }
     }
     
@@ -111,8 +111,8 @@ public class PredatorPreyCell extends Cell {
      * @param cell
      */
     private void age(Cell cell){
-        mySim.myEnergies[cell.getX()][cell.getY()]=mySim.myEnergies[cell.getX()][cell.getY()]+1;
-        mySim.myReproductionTimes[cell.getX()][cell.getY()]=mySim.myReproductionTimes[cell.getX()][cell.getY()]+1;
+        mySim.getMyEnergies()[cell.getX()][cell.getY()]=mySim.getMyEnergies()[cell.getX()][cell.getY()]+1;
+        mySim.getMyReproductionTimes()[cell.getX()][cell.getY()]=mySim.getMyReproductionTimes()[cell.getX()][cell.getY()]+1;
     }
     
     /**
@@ -120,33 +120,33 @@ public class PredatorPreyCell extends Cell {
      */
     private void leave(){
         if (myCurrentState==1){
-            if (mySim.myReproductionTimes[getX()][getY()]>=PREDATOR_REPRODUCTION_TIME){
+            if (mySim.getMyReproductionTimes()[getX()][getY()]>=PREDATOR_REPRODUCTION_TIME){
                 myNextState = myCurrentState;
-                mySim.myReproductionTimes[getX()][getY()]=0;
-                mySim.myEnergies[getX()][getY()]=0;
+                mySim.getMyReproductionTimes()[getX()][getY()]=0;
+                mySim.getMyEnergies()[getX()][getY()]=0;
             }
             else{
                 myNextState = 2;
-                mySim.myReproductionTimes[getX()][getY()]=0;
-                mySim.myEnergies[getX()][getY()]=0;
+                mySim.getMyReproductionTimes()[getX()][getY()]=0;
+                mySim.getMyEnergies()[getX()][getY()]=0;
             }
         }
         else if (myCurrentState==0){
-            if (mySim.myReproductionTimes[getX()][getY()]>=PREY_REPRODUCTION_TIME){
+            if (mySim.getMyReproductionTimes()[getX()][getY()]>=PREY_REPRODUCTION_TIME){
                 myNextState = myCurrentState;
-                mySim.myReproductionTimes[getX()][getY()]=0;
-                mySim.myEnergies[getX()][getY()]=0;
+                mySim.getMyReproductionTimes()[getX()][getY()]=0;
+                mySim.getMyEnergies()[getX()][getY()]=0;
             }
             else{
                 myNextState = 2;
-                mySim.myReproductionTimes[getX()][getY()]=0;
-                mySim.myEnergies[getX()][getY()]=0;
+                mySim.getMyReproductionTimes()[getX()][getY()]=0;
+                mySim.getMyEnergies()[getX()][getY()]=0;
             }
         }
         else{
             myNextState = 2;
-            mySim.myReproductionTimes[getX()][getY()]=0;
-            mySim.myEnergies[getX()][getY()]=0;
+            mySim.getMyReproductionTimes()[getX()][getY()]=0;
+            mySim.getMyEnergies()[getX()][getY()]=0;
         }
         myCurrentState = myNextState;
     }
@@ -174,8 +174,8 @@ public class PredatorPreyCell extends Cell {
                     int ran = (int) Math.floor(Math.random()*fish.size());
                     Cell eatCell = fish.get(ran);
                     eat(eatCell);
-                    if (mySim.myReproductionTimes[getX()][getY()]>=PREDATOR_REPRODUCTION_TIME){
-                        mySim.myReproductionTimes[eatCell.getX()][eatCell.getY()]=0;
+                    if (mySim.getMyReproductionTimes()[getX()][getY()]>=PREDATOR_REPRODUCTION_TIME){
+                        mySim.getMyReproductionTimes()[eatCell.getX()][eatCell.getY()]=0;
                     }
                     leave();
                     checkDeath(eatCell);
@@ -184,8 +184,8 @@ public class PredatorPreyCell extends Cell {
                     int ran = (int) Math.floor(Math.random()*empties.size());
                     Cell moveCell = empties.get(ran);
                     moveTo(moveCell);
-                    if (mySim.myReproductionTimes[getX()][getY()]>=PREDATOR_REPRODUCTION_TIME){
-                        mySim.myReproductionTimes[moveCell.getX()][moveCell.getY()]=0;
+                    if (mySim.getMyReproductionTimes()[getX()][getY()]>=PREDATOR_REPRODUCTION_TIME){
+                        mySim.getMyReproductionTimes()[moveCell.getX()][moveCell.getY()]=0;
                     }
                     leave();
                     age(moveCell);
@@ -204,8 +204,8 @@ public class PredatorPreyCell extends Cell {
                     int ran = (int) Math.floor(Math.random()*empties.size());
                     Cell moveCell = empties.get(ran);
                     moveTo(moveCell);
-                    if (mySim.myReproductionTimes[getX()][getY()]>=PREY_REPRODUCTION_TIME){
-                        mySim.myReproductionTimes[moveCell.getX()][moveCell.getY()]=0;
+                    if (mySim.getMyReproductionTimes()[getX()][getY()]>=PREY_REPRODUCTION_TIME){
+                        mySim.getMyReproductionTimes()[moveCell.getX()][moveCell.getY()]=0;
                     }
                     leave();
                     age(moveCell);
