@@ -63,7 +63,6 @@ public class GUI {
         System.out.println(letter + "Sim type");
         currentSimulationName = letter;
         Setup setup = new Setup(letter,this,myGridPane);
-        System.out.println("Start");
         mySimulation = setup.getSimulation();
     }
 
