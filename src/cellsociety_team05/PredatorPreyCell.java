@@ -97,7 +97,7 @@ public class PredatorPreyCell extends Cell {
      * @param cell
      */
     private void checkDeath(Cell cell){
-        System.out.println(mySim.myEnergies[cell.getX()][cell.getY()]);
+        //System.out.println(mySim.myEnergies[cell.getX()][cell.getY()]);
         if (mySim.myEnergies[cell.getX()][cell.getY()]>=PREDATOR_ENERGY+1){
             cell.myNextState = 2;
             cell.myCurrentState=2;
