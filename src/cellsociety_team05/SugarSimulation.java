@@ -29,6 +29,7 @@ public class SugarSimulation extends Simulation {
         myVision = (int) Math.round(params.get("vision"));
         myMetabolism = (int) Math.round(params.get("metabolism"));
         myInterval = (int) Math.round(params.get("interval"));
+        myRate = (int) Math.round(params.get("rate"));
         myTimes = new int[width][height];
     }
 

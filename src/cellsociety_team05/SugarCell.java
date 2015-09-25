@@ -10,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 public class SugarCell extends Cell {
     private Grid myGrid;
     private SugarSimulation mySim;
+    private int mySugarLimit;
 
     public SugarCell (int xCoordinate,
                       int yCoordinate,
@@ -27,34 +28,52 @@ public class SugarCell extends Cell {
 
     @Override
     public void preUpdateCell () {
+        if(mySim.myTimes[getX()][getY()]==0){
+            if(myCurrentState==5){
+                mySim.myAgentSugars[getX()][getY()]=4;
+                mySugarLimit=4;
+            }
+            else{
+                mySugarLimit = myCurrentState;
+            }
+        }
         initNeighbors(mySim.myVision);
         if (myCurrentState==5 && myDirty==false){
-            int maxSugar = 0;
-            Cell moveCell = null;
-            for (Cell cell: myNeighbors){
-                if (cell.getMyCurrentState()!=5){
-                    int x = cell.getX();
-                    int y = cell.getY();
-                    if (mySim.mySugars[x][y] > maxSugar) {
-                        maxSugar = mySim.mySugars[x][y];
-                        moveCell = myGrid.getCellMatrix().get(x).get(y);
+            if (mySim.myAgentSugars[getX()][getY()]==0){
+                setMyNextState(0);
+            }
+            else {
+                int maxSugar = 0;
+                Cell moveCell = null;
+                for (Cell cell: myNeighbors){
+                    if (cell.getMyCurrentState()!=5){
+                        int x = cell.getX();
+                        int y = cell.getY();
+                        if (mySim.mySugars[x][y] > maxSugar) {
+                            maxSugar = mySim.mySugars[x][y];
+                            moveCell = myGrid.getCellMatrix().get(x).get(y);
+                        }
                     }
                 }
+                if (moveCell==null){
+                    int ran = (int) Math.floor(Math.random()*myNeighbors.size());
+                    moveCell = myNeighbors.get(ran);
+                }
+                System.out.println("("+moveCell.getX()+","+moveCell.getY()+") "+mySim.mySugars[moveCell.getX()][moveCell.getY()]);
+                int x = moveCell.getX();
+                int y = moveCell.getY();
+                mySim.myAgentSugars[getX()][getY()]+=mySim.mySugars[x][y];
+                mySim.mySugars[x][y]=0;
+                mySim.mySugars[getX()][getY()]=0;
+                setMyNextState(0);
+                moveCell.setMyNextState(5);
+                mySim.myAgentSugars[moveCell.getX()][moveCell.getY()]=mySim.myAgentSugars[getX()][getY()]-mySim.myMetabolism;
+                moveCell.setMyDirty(true);
             }
-            int x = moveCell.getX();
-            int y = moveCell.getY();
-            mySim.myAgentSugars[getX()][getY()]+=mySim.mySugars[x][y];
-            mySim.mySugars[x][y]=0;
-            moveCell.setMyNextState(5);
-            mySim.myAgentSugars[moveCell.getX()][moveCell.getY()]=mySim.myAgentSugars[getX()][getY()]-mySim.myMetabolism;
-            moveCell.setMyDirty(true);
-            myNextState = 0;
         }
-        else{
-            setMyCurrentState(mySim.mySugars[getX()][getY()]);
-        }
-        if (mySim.myTimes[getX()][getY()] % mySim.myInterval == 0) {
+        if (mySim.myTimes[getX()][getY()] % mySim.myInterval == 0 && mySim.mySugars[getX()][getY()]<mySugarLimit && myNextState!=5) {
             mySim.mySugars[getX()][getY()] += mySim.myRate;
+            setMyNextState(mySim.mySugars[getX()][getY()]);
         }
         mySim.myTimes[getX()][getY()] += 1;
     }
