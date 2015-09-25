@@ -21,7 +21,7 @@ public class GUI {
 
     private Stage myStage;
     private BorderPane root;
-    private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire"};
+    private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire", "AntForaging"};
     private Simulation mySimulation;
     private long simulationSpeed;
     private GridPane myGridPane;
@@ -58,12 +58,21 @@ public class GUI {
     }
 
 
+    /**
+     * Modified to test ant foraging 
+     * @param letter
+     */
+    
     public void loadSimulationValue(String letter){
         myGridPane.getChildren().clear();
-        System.out.println(letter + "Sim type");
-        currentSimulationName = letter;
-        Setup setup = new Setup(letter,this,myGridPane);
-        mySimulation = setup.getSimulation();
+        if(letter.equals("AntForaging")){
+        	mySimulation = new AntForagingSimulation(myGridPane, this, null, null, 40, 40);
+        } else {
+            System.out.println(letter + "Sim type");
+            currentSimulationName = letter;
+            Setup setup = new Setup(letter,this,myGridPane);
+            mySimulation = setup.getSimulation();        
+        }
     }
 
     /**
