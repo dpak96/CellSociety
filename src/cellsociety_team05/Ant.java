@@ -5,11 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import com.sun.org.apache.xml.internal.resolver.readers.XCatalogReader;
-
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
-
 public class Ant {
 	
 	private int[] orientation;
@@ -19,6 +14,8 @@ public class Ant {
 	private int yCoordinate;
 	private AntCell currentCell;
 	private boolean hasMoved;
+	private int foodPheromones;
+	private int homePheromones;
 	
 	public Ant(AntCell startingCell){
 		currentCell = startingCell;
@@ -26,6 +23,7 @@ public class Ant {
 		hasFoodItem = false;
 		forage();
 		hasMoved = false;
+		homePheromones = 1000;
 	}
 	
 	
@@ -73,12 +71,12 @@ public class Ant {
 		System.out.println(Arrays.toString(orientation));
 		currentCell = bestDirection;
 		currentCell.AntArrives(this);
+		dropFoodPheromones();
 	}
 	
 	private void findFoodSource(){
 		
 		//what to do when there are no possible directions?? 
-		
 		
 		int max = 0;
 		AntCell bestDirection;
@@ -115,7 +113,7 @@ public class Ant {
 		currentCell.antLeaves();
 		currentCell = bestDirection;
 		currentCell.AntArrives(this);
-		System.out.println("I made a movement to " + currentCell.getX() + " " + currentCell.getY() );
+		dropHomePheromones();
 	}
 	
 	private boolean isInOrientation(AntCell cell){
@@ -130,12 +128,34 @@ public class Ant {
 		return new int[]{xChange, yChange};
 	}
 	
-	private void dropHomePheromones(){
-		
+	private void dropFoodPheromones(){
+		int max = 0;
+		for(Cell cell: currentCell.getMyNeighbors()){
+			AntCell neighbor = (AntCell) cell;
+			if(neighbor.getFoodPheromones() > max){
+				max = neighbor.getFoodPheromones();
+			}
+		}
+		int DES = max - 2;
+		int D = DES - currentCell.getFoodPheromones();
+		if(D > 0){
+			currentCell.addFoodPheromones(D);
+		}
 	}
 	
-	private void dropFoodPheromones(){
-		
+	private void dropHomePheromones(){
+		int max = 0;
+		for(Cell cell: currentCell.getMyNeighbors()){
+			AntCell neighbor = (AntCell) cell;
+			if(neighbor.getHomePheromones() > max){
+				max = neighbor.getHomePheromones();
+			}
+		}
+		int DES = max - 2;
+		int D = DES - currentCell.getHomePheromones();
+		if(D > 0){
+			currentCell.addHomePheromones(D);
+		}
 	}
 	
 	private void moveInDirection(int xDirection, int yDirection){

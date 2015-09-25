@@ -16,6 +16,7 @@ public class AntCell extends Cell {
 	public final int  hasAnt = 2;
 	private int foodPheromones;
 	private int homePheromones;
+	private int MAX_PHEROMONES = 1000;
 	private AntForagingSimulation mySimulation;
 	private Ant currentAnt;
 	
@@ -26,7 +27,14 @@ public class AntCell extends Cell {
 		mySimulation = sim;
 		myColors = new Color[] {Color.WHITE, Color.BROWN, Color.BLACK, Color.RED};
         myPossibleStates = new String[] {"Nothing", "isNest", "isFood", "hasAnt"};
-        
+        if(startingState == isNest){
+        	homePheromones = 1000;
+        } else if (startingState == isFood){
+        	foodPheromones = 1000;
+        } else {
+        	homePheromones = 0;
+        	foodPheromones = 0;
+        }
         //hardcoded height, we'll have to pass in the parameters
 		this.setMySquare(new Rectangle(440/sim.getMyHeight(), 440/sim.getMyHeight(),myColors[startingState]));
 		GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
@@ -64,6 +72,14 @@ public class AntCell extends Cell {
 			this.setMyNextState(0);
 			currentAnt  = null;
 		}
+	}
+	
+	public void addHomePheromones(int value){
+		homePheromones += value;
+	}
+	
+	public void addFoodPheromones(int value){
+		foodPheromones += value;
 	}
 	
 	public int getHomePheromones(){
