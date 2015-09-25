@@ -16,7 +16,7 @@
 	
 	<parameters>
 		<name>energylimit</name>
-		<value>5.0</value>
+		<value>4.0</value>
 	</parameters>
 	
 	<parameters>

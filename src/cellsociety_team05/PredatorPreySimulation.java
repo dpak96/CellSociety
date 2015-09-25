@@ -6,11 +6,11 @@ import java.util.List;
 import javafx.scene.layout.GridPane;
 
 public class PredatorPreySimulation extends Simulation {
-    int PREY_REPRODUCTION_TIME;
-    int PREDATOR_REPRODUCTION_TIME;
-    int PREDATOR_ENERGY;
-    int[][] myReproductionTimes;
-    int[][] myEnergies;
+    private int PREY_REPRODUCTION_TIME;
+    private int PREDATOR_REPRODUCTION_TIME;
+    private int PREDATOR_ENERGY;
+    private int[][] myReproductionTimes;
+    private int[][] myEnergies;
 
     /**
      * constructor for predator prey simulation
@@ -49,15 +49,76 @@ public class PredatorPreySimulation extends Simulation {
      */
     @Override
     public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height,HashMap<String, Double> map) {
-        ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
-        for (int i=0;i<width;i++){
-            list.add(new ArrayList<Cell>());
-            for (int j=0;j<height;j++){
-                int state = (int) Math.floor(Math.random()*3);
-                Cell newcell = makeCell(i, j, state, grid,map);
-                list.get(i).add(newcell);
-            }
-        }
-        return list;
+        return setUpRandomCells(grid,width,height,map,3);
+    }
+
+    /**
+     * @return the prey reproduction time
+     */
+    public int getPreyReproductionTime () {
+        return PREY_REPRODUCTION_TIME;
+    }
+
+    /**
+     * @param pREY_REPRODUCTION_TIME the pREY_REPRODUCTION_TIME to set
+     */
+    public void setPreyReproductionTime (int time) {
+        PREY_REPRODUCTION_TIME = time;
+    }
+
+    /**
+     * @return the pREDATOR_REPRODUCTION_TIME
+     */
+    public int getPredatorReproductionTime () {
+        return PREDATOR_REPRODUCTION_TIME;
+    }
+
+    /**
+     * @param pREDATOR_REPRODUCTION_TIME the pREDATOR_REPRODUCTION_TIME to set
+     */
+    public void setPredatorReproductionTime (int time) {
+        PREDATOR_REPRODUCTION_TIME = time;
+    }
+
+    /**
+     * @return the pREDATOR_ENERGY
+     */
+    public int getPredatorEnergy () {
+        return PREDATOR_ENERGY;
+    }
+
+    /**
+     * @param pREDATOR_ENERGY the pREDATOR_ENERGY to set
+     */
+    public void setPredatorEnergy (int energy) {
+        PREDATOR_ENERGY = energy;
+    }
+
+    /**
+     * @return the myReproductionTimes
+     */
+    public int[][] getMyReproductionTimes () {
+        return myReproductionTimes;
+    }
+
+    /**
+     * @param myReproductionTimes the myReproductionTimes to set
+     */
+    public void setMyReproductionTimes (int[][] myReproductionTimes) {
+        this.myReproductionTimes = myReproductionTimes;
+    }
+
+    /**
+     * @return the myEnergies
+     */
+    public int[][] getMyEnergies () {
+        return myEnergies;
+    }
+
+    /**
+     * @param myEnergies the myEnergies to set
+     */
+    public void setMyEnergies (int[][] myEnergies) {
+        this.myEnergies = myEnergies;
     }
 }

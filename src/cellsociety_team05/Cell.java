@@ -2,7 +2,7 @@ package cellsociety_team05;
 
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -216,7 +216,7 @@ public abstract class Cell {
     /**
      * @return the myParameters
      */
-    public HashMap<String, Double> getMyParameters () {
+    public Map<String, Double> getMyParameters () {
         return myParameters;
     }
 

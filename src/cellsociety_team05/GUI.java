@@ -1,11 +1,8 @@
 package cellsociety_team05;
 
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -44,7 +41,6 @@ public class GUI {
         TopMenu myTopMenu = new TopMenu(myStage, simulationTypes, this);
         root.setTop(myTopMenu.getMenuBar());
 
-        //different layout
         HBox h = new HBox();
         int height = 440;
         int length = 440;
@@ -52,20 +48,13 @@ public class GUI {
         myGridPane.setMaxSize(440, 440);
         initializeEmptyGridPane(height, length);
         h.getChildren().add(myGridPane);
-        myBoxContainer = new GuiBoxContainer(this, myStage);
+        myBoxContainer = new GuiBoxContainer(this, myStage, mySimulation);
         h.getChildren().add(myBoxContainer.getVBox());
         root.setCenter(h);
         myGuiChoiceDialog.display();
 
         myStage.setScene(scene);
         myStage.show();
-
-        /** Alternative design - Second choice for now
-         * myBoxContainer = new GuiBoxContainer(this, myStage);
-         * root.setBottom(myBoxContainer.getVBox());
-         * myGridPane = new GridPane();
-         * root.setCenter(myGridPane);
-         */
     }
 
 
@@ -74,7 +63,6 @@ public class GUI {
         System.out.println(letter + "Sim type");
         currentSimulationName = letter;
         Setup setup = new Setup(letter,this,myGridPane);
-        System.out.println("Start");
         mySimulation = setup.getSimulation();
     }
 
@@ -120,10 +108,6 @@ public class GUI {
         mySimulation.updateSpeed(speed);
     }
 
-    public void nextStep() {
-        mySimulation.step();
-    }
-
     public Simulation getCurrentSimulation(){
         return mySimulation;
     }
@@ -158,4 +142,5 @@ public class GUI {
             TriangleRow t = new TriangleRow(i, myGridPane, 8, 440);
         }
     }
+
 }

@@ -9,9 +9,9 @@ import java.util.List;
  * @author Lucas Donaldson
  *
  */
-public class Grid {
-    List<List<Cell>> myCells;
-    Simulation mySimulation;
+public abstract class Grid {
+    protected List<List<Cell>> myCells;
+    protected Simulation mySimulation;
     
     /**
      * constructor for grid class
@@ -29,25 +29,7 @@ public class Grid {
     /**
      * initializes neighbors of cells in grid
      */
-    private void initNeighbors(){
-        for (List<Cell> list: myCells){
-            for (Cell cell: list){
-                cell.myParameters = mySimulation.myParameters;
-                List<Cell> neighbors = new ArrayList<Cell>();
-                int[] x = {0,0,1,1,1,-1,-1,-1};
-                int[] y = {1,-1,0,1,-1,0,1,-1};
-                for (int i=0;i<x.length;i++){
-                    int xCoordinate = cell.getX()+x[i];
-                    int yCoordinate = cell.getY()+y[i];
-                    if(xCoordinate>=0 && yCoordinate>=0 && xCoordinate<myCells.size() && yCoordinate<myCells.get(0).size()){
-                        neighbors.add(myCells.get(xCoordinate).get(yCoordinate));
-                       
-                    }
-                }
-                cell.setMyNeighbors(neighbors);
-            }
-        }
-    }
+    protected abstract void initNeighbors();
     
     /**
      * Sets the next state of each cell in the grid.

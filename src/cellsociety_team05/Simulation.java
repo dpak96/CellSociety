@@ -26,7 +26,7 @@ public abstract class Simulation {
 	private int myWidth;
 	private int myHeight;
 	private List<CellInfo> myInfoList;
-	int[] myStats;
+	private int[] myStats;
 
 	/**
 	 * constructor for simulation class
@@ -43,7 +43,7 @@ public abstract class Simulation {
                 myInfoList = list;
                 myParameters = params;
                 myGridPane = gridPane;
-                myGrid = new Grid(getMyHeight(), myWidth, this, myParameters);
+                myGrid = new ToroidGrid(getMyHeight(), myWidth, this, myParameters);
                 readCellList(myInfoList);
 		animation = new Timeline();
 		myGUI = gui;
@@ -162,4 +162,16 @@ public abstract class Simulation {
 	    this.myHeight = myHeight;
 	}
 
+	public ArrayList<List<Cell>> setUpRandomCells (Grid grid, int width, int height, HashMap<String, Double> map, int states) {
+	    ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
+	    for (int i=0;i<width;i++){
+	        list.add(new ArrayList<Cell>());
+	        for (int j=0;j<height;j++){
+	            int state = (int) Math.floor(Math.random()*states);
+	            Cell newcell = makeCell(i, j, state, grid, map);
+	            list.get(i).add(newcell);
+	        }
+	    }
+	    return list;
+	}
 }

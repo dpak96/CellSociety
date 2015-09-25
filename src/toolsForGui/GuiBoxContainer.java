@@ -3,6 +3,7 @@ package toolsForGui;
 import java.util.ArrayList;
 
 import cellsociety_team05.GUI;
+import cellsociety_team05.Simulation;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -14,11 +15,13 @@ public class GuiBoxContainer{
 	private ArrayList<HorizontalControlBoxes> myBoxes;
 	private Stage myStage;
 	private PopulationChartBox p;
+	private Simulation mySimulation;
 	
-	public GuiBoxContainer(GUI gui, Stage primaryStage){
+	public GuiBoxContainer(GUI gui, Stage primaryStage, Simulation sim){
 		myGui = gui;
 		createBoxContainer();
 		myStage = primaryStage;
+		mySimulation = sim;
 	}
 	
 	private void createBoxContainer(){
@@ -26,7 +29,7 @@ public class GuiBoxContainer{
 		myBoxes = new ArrayList<HorizontalControlBoxes>();
 		myVBox.setSpacing(10.0);
 		myVBox.setPrefHeight(50);
-		FlowControlBox f = new FlowControlBox(myGui, myStage);
+		FlowControlBox f = new FlowControlBox(myGui, myStage, mySimulation);
 		SpeedControlBox s = new SpeedControlBox(5, myGui);
 		p = new PopulationChartBox(myGui, myStage);
 		myBoxes.add(f);
