@@ -17,7 +17,7 @@ public class Setup {
     private int myHeight, myWidth;
     private List<CellInfo> myCells;
 
-    public Setup (String simulation, GUI gui, GridPane gp) {
+    public Setup (String simulation, GUI gui, GridPane gp) throws SimulationException {
         myGUI = gui;
         myGridPane = gp;
         SimulationFactory sf =
@@ -33,6 +33,7 @@ public class Setup {
         System.out.println(xml.getSimulationName());
         mySimulation = sf.makeSimulation(xml.getSimulationName());
     }
+   
 
     public Simulation getSimulation () {
         return mySimulation;

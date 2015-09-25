@@ -52,8 +52,6 @@ public class SegregationCell extends Cell {
          */
         this.setMySquare(new Rectangle(440 / sim.getMyHeight(), 440 / sim.getMyHeight(),
                                        myColors[startingState]));
-                                       // mySquare = new Rectangle(440/sim.getMyHeight(),
-                                       // 440/sim.getMyHeight(), myColors[startingState]);
                                        /**
                                         * end of changes
                                         */
@@ -79,9 +77,6 @@ public class SegregationCell extends Cell {
             if (((double) sameNeighbors) / ((double) myNeighbors.size()) >= mySatisfactionPercent) {
                 myNextState = myCurrentState;
             }
-            // Unsatisfied
-            // Maybe try to find more efficient way to collect empty cells? Wherever simulation is
-            // being run.. Then can remove grid.
             else {
                 List<Cell> empties = new ArrayList<Cell>();
                 for (List<Cell> list : myGrid.getCellMatrix()) {
