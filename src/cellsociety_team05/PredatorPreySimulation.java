@@ -70,45 +70,45 @@ public class PredatorPreySimulation extends Simulation {
     }
 
     /**
-     * @return the prey reproduction time
+     * @return the pREY_REPRODUCTION_TIME
      */
-    public int getPreyReproductionTime () {
+    public int getPREY_REPRODUCTION_TIME () {
         return PREY_REPRODUCTION_TIME;
     }
 
     /**
      * @param pREY_REPRODUCTION_TIME the pREY_REPRODUCTION_TIME to set
      */
-    public void setPreyReproductionTime (int time) {
-        PREY_REPRODUCTION_TIME = time;
+    public void setPREY_REPRODUCTION_TIME (int pREY_REPRODUCTION_TIME) {
+        PREY_REPRODUCTION_TIME = pREY_REPRODUCTION_TIME;
     }
 
     /**
      * @return the pREDATOR_REPRODUCTION_TIME
      */
-    public int getPredatorReproductionTime () {
+    public int getPREDATOR_REPRODUCTION_TIME () {
         return PREDATOR_REPRODUCTION_TIME;
     }
 
     /**
      * @param pREDATOR_REPRODUCTION_TIME the pREDATOR_REPRODUCTION_TIME to set
      */
-    public void setPredatorReproductionTime (int time) {
-        PREDATOR_REPRODUCTION_TIME = time;
+    public void setPREDATOR_REPRODUCTION_TIME (int pREDATOR_REPRODUCTION_TIME) {
+        PREDATOR_REPRODUCTION_TIME = pREDATOR_REPRODUCTION_TIME;
     }
 
     /**
      * @return the pREDATOR_ENERGY
      */
-    public int getPredatorEnergy () {
+    public int getPREDATOR_ENERGY () {
         return PREDATOR_ENERGY;
     }
 
     /**
      * @param pREDATOR_ENERGY the pREDATOR_ENERGY to set
      */
-    public void setPredatorEnergy (int energy) {
-        PREDATOR_ENERGY = energy;
+    public void setPREDATOR_ENERGY (int pREDATOR_ENERGY) {
+        PREDATOR_ENERGY = pREDATOR_ENERGY;
     }
 
     /**

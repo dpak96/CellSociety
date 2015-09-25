@@ -58,8 +58,10 @@ public class SimulationFactory {
         else if (simulation.equals("GameOfLife")) {
             return "XMLFiles/life_test.xml";
         }
-        else
-            return null;
+        else if (simulation.equals("Sugar")){
+            return "XMLFiles/sugar_test.xml";
+        }
+        else return null;
     }
 
     /**
@@ -81,8 +83,10 @@ public class SimulationFactory {
         else if (simulation.equals("GameOfLife")) {
             return new GameOfLifeSimulation(myGridPane, myGUI, myMap, myList, myHeight, myWidth);
         }
-        else
-            return null;
+        else if (simulation.equals("Sugar")){
+            return new SugarSimulation(myGridPane,myGUI,myMap,myList,myHeight,myWidth);
+        }
+        else return null;
     }
 
 }

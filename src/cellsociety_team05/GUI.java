@@ -21,8 +21,7 @@ public class GUI {
 
     private Stage myStage;
     private BorderPane root;
-    private final String[] simulationTypes =
-            { "Segregation", "GameOfLife", "PredatorPrey", "Fire" };
+    private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire","Sugar"};
     private Simulation mySimulation;
     private long simulationSpeed;
     private GridPane myGridPane;
