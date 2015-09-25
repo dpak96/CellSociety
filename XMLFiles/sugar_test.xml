@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<test>
+	<simulation> 
+		<name>Sugar</name>
+	</simulation>
+	
+	<parameters>
+		<name>sugarlimit</name>
+		<value>4.0</value>
+	</parameters>
+	
+	<parameters>
+		<name>vision</name>
+		<value>1.0</value>
+	</parameters>
+	
+	<parameters>
+		<name>metabolism</name>
+		<value>1.0</value>
+	</parameters>
+	
+	<parameters>
+		<name>interval</name>
+		<value>2.0</value>
+	</parameters>
+	
+<row><values>4,4,4,4,4,4,4,4,4</values></row>
+<row><values>4,3,3,3,3,3,3,3,4</values></row>
+<row><values>4,3,2,2,2,2,2,3,4</values></row>
+<row><values>4,3,2,1,1,1,2,3,4</values></row>
+<row><values>4,3,2,1,5,1,2,3,4</values></row>
+<row><values>4,3,2,1,1,1,2,3,4</values></row>
+<row><values>4,3,2,2,2,2,2,3,4</values></row>
+<row><values>4,3,3,3,3,3,3,3,4</values></row>
+<row><values>4,4,4,4,4,4,4,4,4</values></row>
+
+</test>

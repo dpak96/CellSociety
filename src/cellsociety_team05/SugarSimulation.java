@@ -8,23 +8,21 @@ import javafx.scene.layout.GridPane;
 public class SugarSimulation extends Simulation {
     int[][] myAgentSugars;
     int[][] mySugars;
-    int[][] mySugarLimits;
-    int[][] myVisions;
-    int[][] myMetabolisms;
-    int[][] myIntervals;
-    int[][] myTimes;
+    int mySugarLimit;
+    int myVision;
+    int myMetabolism;
     int myInterval;
+    int[][] myTimes;
     int myRate;
 
     public SugarSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params,
                             List<CellInfo> list, int height, int width) {
         super(gridPane, gui, params, list, height, width);
         myAgentSugars = new int[width][height];
-        mySugars = new int[width][height];
-        mySugarLimits = new int[width][height];
-        myVisions = new int[width][height];
-        myMetabolisms = new int[width][height];
-        myIntervals = new int[width][height];
+        mySugarLimit = (int) Math.round(params.get("sugarlimit"));
+        myVision = (int) Math.round(params.get("vision"));
+        myMetabolism = (int) Math.round(params.get("metabolism"));
+        myInterval = (int) Math.round(params.get("interval"));
         myTimes = new int[width][height];
     }
 
@@ -38,6 +36,39 @@ public class SugarSimulation extends Simulation {
         myGrid = g;
         SugarCell c = new SugarCell(x,y,start,g,this);
         return c;
+    }
+    
+    /**
+     * reads in list of cells specified in xml file and initializes grid
+     * @param list
+     */
+    @Override
+    public void readCellList(List<CellInfo> list){
+        if (list!=null){
+            int width = 0;
+            int height = 0;
+            for (CellInfo c:list){
+                if (c.getX()>width){
+                    width = c.getX();
+                }
+                if (c.getY()>height){
+                    height = c.getY();
+                }
+            }
+            mySugars = new int[width+1][height+1];
+            for (CellInfo cell: list){
+                Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
+                thisCell.setMyCurrentState(cell.getState());
+                thisCell.setMyNextState(cell.getState());
+                thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
+                if (thisCell.getMyCurrentState()!=5){
+                    mySugars[thisCell.getX()][thisCell.getY()]=thisCell.getMyCurrentState();
+                }
+                else {
+                    mySugars[thisCell.getX()][thisCell.getY()]=0;
+                }
+            }
+        }
     }
 
 }
