@@ -131,6 +131,7 @@ public abstract class Cell {
 
     /**
      * @param myCurrentState the myCurrentState to set
+     * @throws SimulationException 
      */
     public void setMyCurrentState (int myCurrentState) {
         this.myCurrentState = myCurrentState;
