@@ -6,11 +6,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+
 public class SugarCell extends Cell {
     private Grid myGrid;
     private SugarSimulation mySim;
 
-    public SugarCell (int xCoordinate, int yCoordinate, int startingState, Grid grid, SugarSimulation sim) {
+    public SugarCell (int xCoordinate,
+                      int yCoordinate,
+                      int startingState,
+                      Grid grid,
+                      SugarSimulation sim) {
         super(xCoordinate, yCoordinate, startingState);
         myGrid = grid;
         mySim = sim;
@@ -30,7 +35,7 @@ public class SugarCell extends Cell {
                 if (cell.getMyCurrentState()!=5){
                     int x = cell.getX();
                     int y = cell.getY();
-                    if (mySim.mySugars[x][y]>maxSugar){
+                    if (mySim.mySugars[x][y] > maxSugar) {
                         maxSugar = mySim.mySugars[x][y];
                         moveCell = myGrid.getCellMatrix().get(x).get(y);
                     }
@@ -48,18 +53,18 @@ public class SugarCell extends Cell {
         else{
             setMyCurrentState(mySim.mySugars[getX()][getY()]);
         }
-        if(mySim.myTimes[getX()][getY()]%mySim.myInterval==0){
-            mySim.mySugars[getX()][getY()]+=mySim.myRate;
+        if (mySim.myTimes[getX()][getY()] % mySim.myInterval == 0) {
+            mySim.mySugars[getX()][getY()] += mySim.myRate;
         }
-        mySim.myTimes[getX()][getY()]+=1;
+        mySim.myTimes[getX()][getY()] += 1;
     }
-    
+
     /**
      * initializes neighbors for four compass direction
      */
-    public void initNeighbors(int vision){
-        for (List<Cell> list: myGrid.getCellMatrix()){
-            for (Cell cell: list){
+    public void initNeighbors (int vision) {
+        for (List<Cell> list : myGrid.getCellMatrix()) {
+            for (Cell cell : list) {
                 List<Cell> neighbors = new ArrayList<Cell>();
                 for (int j=1;j<vision+1;j++){
                     int[] x = {0,0,j,-j};

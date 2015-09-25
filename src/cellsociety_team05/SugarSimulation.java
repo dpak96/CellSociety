@@ -3,7 +3,9 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.scene.layout.GridPane;
+
 
 public class SugarSimulation extends Simulation {
     int[][] myAgentSugars;
@@ -15,8 +17,12 @@ public class SugarSimulation extends Simulation {
     int[][] myTimes;
     int myRate;
 
-    public SugarSimulation (GridPane gridPane, GUI gui, HashMap<String, Double> params,
-                            List<CellInfo> list, int height, int width) {
+    public SugarSimulation (GridPane gridPane,
+                            GUI gui,
+                            Map<String, Double> params,
+                            List<CellInfo> list,
+                            int height,
+                            int width) {
         super(gridPane, gui, params, list, height, width);
         myAgentSugars = new int[width][height];
         mySugarLimit = (int) Math.round(params.get("sugarlimit"));
@@ -27,14 +33,14 @@ public class SugarSimulation extends Simulation {
     }
 
     @Override
-    public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height, HashMap<String, Double> map) {
+    public List<List<Cell>> setUpCells (Grid grid, int width, int height, Map<String, Double> map) {
         return setUpRandomCells(grid,width,height,map,3);
     }
 
     @Override
-    public Cell makeCell (int x, int y, int start, Grid g, HashMap<String, Double> map) {
+    public Cell makeCell (int x, int y, int start, Grid g, Map<String, Double> map) {
         myGrid = g;
-        SugarCell c = new SugarCell(x,y,start,g,this);
+        SugarCell c = new SugarCell(x, y, start, g, this);
         return c;
     }
     
