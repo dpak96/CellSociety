@@ -29,7 +29,7 @@ public class GUI {
     private ResourceBundle myResources;
     private String currentSimulationName;
 
-    public GUI (Stage primaryStage) {
+    public GUI (Stage primaryStage) throws SimulationException {
         GuiChoiceDialog myGuiChoiceDialog = new GuiChoiceDialog(this, simulationTypes);
         myResources = ResourceBundle.getBundle("resources.window");
         myStage = primaryStage;
@@ -61,8 +61,14 @@ public class GUI {
         myGridPane.getChildren().clear();
         System.out.println(letter + "Sim type");
         currentSimulationName = letter;
+        try{
         Setup setup = new Setup(letter, this, myGridPane);
         mySimulation = setup.getSimulation();
+
+        }
+        catch(SimulationException e){
+        	e.printStackTrace();; 
+        }
     }
 
     /**
@@ -94,6 +100,7 @@ public class GUI {
 
     /**
      * End of modifications
+     * @throws SimulationException 
      */
 
     public void restartSimulation () {

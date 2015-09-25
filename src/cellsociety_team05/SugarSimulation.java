@@ -48,9 +48,10 @@ public class SugarSimulation extends Simulation {
     /**
      * reads in list of cells specified in xml file and initializes grid
      * @param list
+     * @throws SimulationException 
      */
     @Override
-    public void readCellList(List<CellInfo> list){
+    public void readCellList(List<CellInfo> list) throws SimulationException{
         if (list!=null){
             int width = 0;
             int height = 0;
