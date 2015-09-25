@@ -168,4 +168,16 @@ public abstract class Simulation {
 		myStats = myGrid.getStats();
 	}
 
+	public ArrayList<List<Cell>> setUpRandomCells (Grid grid, int width, int height, HashMap<String, Double> map, int states) {
+	    ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
+	    for (int i=0;i<width;i++){
+	        list.add(new ArrayList<Cell>());
+	        for (int j=0;j<height;j++){
+	            int state = (int) Math.floor(Math.random()*states);
+	            Cell newcell = makeCell(i, j, state, grid, map);
+	            list.get(i).add(newcell);
+	        }
+	    }
+	    return list;
+	}
 }

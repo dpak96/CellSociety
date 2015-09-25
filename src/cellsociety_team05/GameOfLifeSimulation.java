@@ -36,15 +36,6 @@ public class GameOfLifeSimulation extends Simulation {
      */
     @Override
     public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height, HashMap<String,Double> map) {
-        ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
-        for (int i=0;i<width;i++){
-            list.add(new ArrayList<Cell>());
-            for (int j=0;j<height;j++){
-                int state = (int) Math.floor(Math.random()*2);
-                Cell newcell = makeCell(i, j, state, grid,map);
-                list.get(i).add(newcell);
-            }
-        }
-        return list;
+        return setUpRandomCells(grid,width,height,map,2);
     }
 }
