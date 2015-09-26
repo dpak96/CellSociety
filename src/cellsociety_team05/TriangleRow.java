@@ -8,8 +8,8 @@ import javafx.scene.paint.Color;
 public class TriangleRow {
 	public Canvas myTriangles;
 	private double height;
-	public Cell topCell;
-	public Cell bottomCell;
+	private Cell topCell;
+	private Cell bottomCell;
 	private double side;
 	private Color topColor;
 	private Color bottomColor;

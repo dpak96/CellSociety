@@ -37,13 +37,15 @@ public abstract class Simulation {
 	 * @param height
 	 * @param width
 	 */
-	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params,List<CellInfo> list, int height, int width){
+	public Simulation(GridPane gridPane, GUI gui, HashMap<String, Double> params,
+			List<CellInfo> list, int height, int width){
 		myWidth = width;
 		setMyHeight(height);
                 myInfoList = list;
                 myParameters = params;
                 myGridPane = gridPane;
-                myGrid = new ToroidGrid(getMyHeight(), myWidth, this, myParameters);
+                //myGrid = new ToroidGrid(getMyHeight(), myWidth, this, myParameters);
+                myGrid = new FiniteGrid(width, height, this, params);
                 readCellList(myInfoList);
 		animation = new Timeline();
 		myGUI = gui;
@@ -160,6 +162,10 @@ public abstract class Simulation {
 	}
 	public void setMyHeight (int myHeight) {
 	    this.myHeight = myHeight;
+	}
+	
+	public void updateStats(){
+		myStats = myGrid.getStats();
 	}
 
 	public ArrayList<List<Cell>> setUpRandomCells (Grid grid, int width, int height, HashMap<String, Double> map, int states) {

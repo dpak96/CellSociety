@@ -9,8 +9,8 @@ public class TriangleCell {
 	
 	public Canvas myTriangle;
 	private int a, b, c, d;
-	public Cell topCell;
-	public Cell bottomCell;
+	private Cell topCell;
+	private Cell bottomCell;
 	private double side;
 	private Color topColor;
 	private Color bottomColor;
