@@ -17,6 +17,7 @@ import javafx.util.Duration;
  */
 
 public abstract class Simulation {
+
     protected Grid myGrid;
     protected double mySpeed;
     protected GridPane myGridPane;
@@ -28,7 +29,7 @@ public abstract class Simulation {
     private int myWidth;
     private int myHeight;
     private List<CellInfo> myInfoList;
-    private int[] myStats;
+    protected int[] myStats;
 
     /**
      * constructor for simulation class
@@ -52,7 +53,12 @@ public abstract class Simulation {
         myParameters = params;
         myGridPane = gridPane;
         myGrid = new ToroidGrid(getMyHeight(), myWidth, this, myParameters);
-        readCellList(myInfoList);
+        try {
+            readCellList(myInfoList);
+        }
+        catch (SimulationException e) {
+            e.printStackTrace();
+        }
         animation = new Timeline();
         myGUI = gui;
         initializeGridPane();
@@ -62,12 +68,14 @@ public abstract class Simulation {
      * reads in list of cells specified in xml file and initializes grid
      * 
      * @param list
+     * @throws SimulationException 
      */
-    public void readCellList (List<CellInfo> list) {
+    public void readCellList (List<CellInfo> list) throws SimulationException{
         if (list != null) {
             for (CellInfo cell : list) {
                 Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
                 thisCell.setMyCurrentState(cell.getState());
+                System.out.println(thisCell.getMyCurrentState());
                 thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
             }
         }
