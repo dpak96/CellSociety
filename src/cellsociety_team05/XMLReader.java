@@ -19,9 +19,9 @@ public class XMLReader {
 	private String fileName;
 	private String simulation;
 	private List<CellInfo> cells;
-	private static String SIMNAME = "simulation";
-	private static String TAGNAME = "row";
-	private static String PARAM = "parameters";
+	private final static String SIMNAME = "simulation";
+	private final static String TAGNAME = "row";
+	private final static String PARAM = "parameters";
 	private Map<String, Double> parameters;
 	private int width;
 	private int height;
