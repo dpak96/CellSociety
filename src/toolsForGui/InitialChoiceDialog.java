@@ -22,6 +22,7 @@ public class InitialChoiceDialog {
 	private int noOfCells;
 	private String cellShape;
 	private String[] myCellShapes = {"rectangle", "circle"};
+	private String myGridType;
 	
 	public InitialChoiceDialog(GUI gui, String[] simulationTypes){
 		myGui = gui;
@@ -34,6 +35,7 @@ public class InitialChoiceDialog {
 		random = false;
 		currentSimulation = mySimulationTypes[0];
 		cellShape = myCellShapes[0];
+		myGridType = "Normal";
 	}
 	
 	public void display(){
@@ -67,7 +69,7 @@ public class InitialChoiceDialog {
 	
 	private void loadSimulation(){
 		if(personalized){
-			myGui.loadPersonalizedSimulation(random, noOfCells, currentSimulation, cellShape); 
+			myGui.loadPersonalizedSimulation(random, noOfCells, currentSimulation, cellShape, myGridType); 
 		} else {
 			myGui.loadSimulationValue(currentSimulation);
 		}
@@ -104,9 +106,9 @@ public class InitialChoiceDialog {
 			addPersonalizationOption(randomOption, 3);
 			ShapeOption shapeOption = new ShapeOption(this, myCellShapes);
 			addPersonalizationOption(shapeOption, 4);	
-			
+			GridTypeOption gridTypeOption = new GridTypeOption(this);
+			addPersonalizationOption(gridTypeOption, 5);
 			myDialog.getDialogPane().setContent(myGrid);
-			
 			personalized = true;
 			
 		} else {
@@ -137,5 +139,9 @@ public class InitialChoiceDialog {
 
 	public void setSimulation(String newSimulation) {
 		currentSimulation = newSimulation;
+	}
+
+	public void setGridType(String string) {
+		myGridType = string;
 	}
 }
