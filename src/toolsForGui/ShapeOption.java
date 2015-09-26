@@ -4,11 +4,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Control;
 
 public class ShapeOption extends PersonalizationOption{
 	
-	private Control myControl;
 	private InitialChoiceDialog myDialog; 
 	private String[] myCellShapes;
 	
@@ -22,7 +20,6 @@ public class ShapeOption extends PersonalizationOption{
 	private void initializeOption(){
 		ChoiceBox<String> cellShapesBox= new ChoiceBox<String>(FXCollections.observableArrayList(myCellShapes));
 		cellShapesBox.getSelectionModel().selectFirst();
-		
 		cellShapesBox.getSelectionModel().selectedIndexProperty().addListener(
 				new ChangeListener<Number>(){
 					@Override
@@ -31,13 +28,8 @@ public class ShapeOption extends PersonalizationOption{
 					}
 				}
 		);
-		myControl = cellShapesBox;
+		this.setControl(cellShapesBox);
 	}
 
-	@Override
-	public Control getControl() {
-		
-		return myControl;
-	}
 
 }

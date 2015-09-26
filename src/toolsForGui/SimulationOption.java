@@ -4,11 +4,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Control;
 
 public class SimulationOption extends PersonalizationOption{
-	
-	private Control myControl;
+
 	private InitialChoiceDialog myDialog; 
 	private String[] mySimulationTypes;
 	
@@ -30,12 +28,7 @@ public class SimulationOption extends PersonalizationOption{
 					}
 				}
 		);
-		myControl = myChoiceBox;
+		this.setControl(myChoiceBox);
 	}
 
-	@Override
-	public Control getControl() {
-		
-		return myControl;
-	}
 }

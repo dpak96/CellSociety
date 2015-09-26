@@ -6,11 +6,8 @@ import cellsociety_team05.GUI;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 public class InitialChoiceDialog {
@@ -36,26 +33,33 @@ public class InitialChoiceDialog {
 	}
 	
 	public void display(){
-		ResourceBundle myResources = ResourceBundle.getBundle("resources.window");
-		myDialog = new Dialog<>();
-		myGrid = new GridPane();
-		myGrid.setPrefSize(300, 200);
-		myGrid.setHgap(30);
-		myGrid.setVgap(10);
-		myDialog.setDialogPane(new DialogPane());
-		myDialog.getDialogPane().getButtonTypes().add(cancelButton());
-		myDialog.getDialogPane().getButtonTypes().add(okButton());
 		
 		initializeGrid();
+		initializeDialog();
+		initializeBasicOptions();
+		myDialog.showAndWait();
 		
+	}
+
+	private void initializeDialog() {
+		ResourceBundle myResources = ResourceBundle.getBundle("resources.window");
+		myDialog = new Dialog<>();
+		myDialog.setDialogPane(new DialogPane());
 		myDialog.setTitle(myResources.getString("Title"));
 		myDialog.setHeaderText(myResources.getString("ChoiceDialogHeader"));
+		myDialog.getDialogPane().getButtonTypes().add(cancelButton());
+		myDialog.getDialogPane().getButtonTypes().add(okButton());
 		Node endApplication = myDialog.getDialogPane().lookupButton(ButtonType.CANCEL);
 		endApplication.addEventFilter(ActionEvent.ACTION, event -> System.exit(0));
 		Node startApplication = myDialog.getDialogPane().lookupButton(ButtonType.OK);
 		startApplication.addEventFilter(ActionEvent.ACTION, event -> loadSimulation());
-		myDialog.showAndWait();
-		
+	}
+
+	private void initializeGrid() {
+		myGrid = new GridPane();
+		myGrid.setPrefSize(300, 200);
+		myGrid.setHgap(30);
+		myGrid.setVgap(10);
 	}
 	
 	private void loadSimulation(){
@@ -66,14 +70,14 @@ public class InitialChoiceDialog {
 		}
 	}
 
-	private void initializeGrid() {
+	private void initializeBasicOptions() {
+		
 		SimulationOption simulationOption = new SimulationOption(this, mySimulationTypes);
 		addPersonalizationOption(simulationOption, 0);
-		Label allowPersonalize = new Label("Personalize: ");
-		CheckBox personalizeCheckBox = new CheckBox();
-		personalizeCheckBox.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> allowPersonalization());
-		myGrid.add(allowPersonalize, 0, 1);
-		myGrid.add(personalizeCheckBox, 1, 1);
+		
+		AllowPersonalizationOption allowPersonalizationOption = new AllowPersonalizationOption(this);
+		addPersonalizationOption(allowPersonalizationOption, 1);
+		
 		myDialog.getDialogPane().setContent(myGrid);
 		
 	}
@@ -88,7 +92,7 @@ public class InitialChoiceDialog {
 		return ok;
 	}
 	
-	private void allowPersonalization(){
+	public void allowPersonalization(){
 		if(!personalized){
 			
 			NumberOfCellsOption firstOption = new NumberOfCellsOption(this);
@@ -100,11 +104,12 @@ public class InitialChoiceDialog {
 			
 			myDialog.getDialogPane().setContent(myGrid);
 			
-			
 			personalized = true;
+			
 		} else {
+			
 			myGrid.getChildren().clear();
-			initializeGrid();
+			initializeBasicOptions();
 			personalized = false;
 		}
 		

@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 public abstract class PersonalizationOption{
 	
 	private Label optionName;
-	public abstract Control getControl();
+	private Control myControl;
 	
 	public PersonalizationOption(String name){
 		ResourceBundle myResources = ResourceBundle.getBundle("resources.personalization");
@@ -18,5 +18,13 @@ public abstract class PersonalizationOption{
 
 	public Label getOptionName(){
 		return optionName;
+	}
+	
+	public Control getControl(){
+		return myControl;
+	}
+	
+	protected void setControl(Control control){
+		myControl = control;
 	}
 }
