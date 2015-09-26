@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import toolsForGui.GuiBoxContainer;
-import toolsForGui.GuiChoiceDialog;
 import toolsForGui.InitialChoiceDialog;
 import toolsForGui.TopMenu;
 
@@ -31,34 +30,44 @@ public class GUI {
     private String currentSimulationName;
 
     public GUI(Stage primaryStage) throws SimulationException{
-    	
-    	InitialChoiceDialog myGuiChoiceDialog = new InitialChoiceDialog(this, simulationTypes);
-        //GuiChoiceDialog myGuiChoiceDialog = new GuiChoiceDialog(this, simulationTypes);
+   
         myResources = ResourceBundle.getBundle("resources.window");
-        myStage = primaryStage;
-        myStage.setTitle(myResources.getString("Title"));
-        myStage.setResizable(false);
-        root = new BorderPane();
+        initializeStage(primaryStage);
+        
 
-        Scene scene = new Scene(root, 720, 480, Color.WHITE);
-        TopMenu myTopMenu = new TopMenu(myStage, simulationTypes, this);
-        root.setTop(myTopMenu.getMenuBar());
-
-        HBox h = new HBox();
-        int height = 440;
-        int length = 440;
-        myGridPane = new GridPane();
-        myGridPane.setMaxSize(440, 440);
-        initializeEmptyGridPane(height, length);
-        h.getChildren().add(myGridPane);
-        myBoxContainer = new GuiBoxContainer(this, myStage, mySimulation);
-        h.getChildren().add(myBoxContainer.getVBox());
-        root.setCenter(h);
+        Scene myScene= initializeScene();
+        InitialChoiceDialog myGuiChoiceDialog = new InitialChoiceDialog(this, simulationTypes);
         myGuiChoiceDialog.display();
 
-        myStage.setScene(scene);
+        myStage.setScene(myScene);
         myStage.show();
     }
+
+
+	private void initializeStage(Stage primaryStage) {
+		myStage = primaryStage;
+        myStage.setTitle(myResources.getString("Title"));
+        myStage.setResizable(false);
+	}
+
+
+	private Scene initializeScene() {
+		root = new BorderPane();
+		Scene scene = new Scene(root, 720, 480, Color.WHITE);
+        TopMenu myTopMenu = new TopMenu(myStage, simulationTypes, this);
+        root.setTop(myTopMenu.getMenuBar());
+        
+        HBox modifiableElementsBox = new HBox();
+        int gridSideLenght = 440;
+        myGridPane = new GridPane();
+        myGridPane.setMaxSize(440, 440);
+        initializeEmptyGridPane(gridSideLenght, gridSideLenght);
+        modifiableElementsBox.getChildren().add(myGridPane);
+        myBoxContainer = new GuiBoxContainer(this, myStage, mySimulation);
+        modifiableElementsBox.getChildren().add(myBoxContainer.getVBox());
+        root.setCenter(modifiableElementsBox);
+		return scene;
+	}
 
 
     /**
@@ -142,10 +151,10 @@ public class GUI {
     }
 
 
-	public Object loadPersonalizedSimulation(boolean random, int noOfCells, String simulation) {
+	public Object loadPersonalizedSimulation(boolean random, int noOfCells, String simulation, String shape) {
 		
 		//creates a new simulation with these two parameters 
-		System.out.println(random + " " + noOfCells + " " + simulation);
+		System.out.println(random + " " + noOfCells + " " + simulation + " " + shape);
 		
 		return null;
 	}

@@ -79,22 +79,22 @@ public class SimulationFactory {
 	 */
 	public Simulation makeSimulation (String simulation) throws SimulationException {
 		if (simulation.equals("Segregation")) {
-			return new SegregationSimulation(myGridPane, myGUI, myMap, myList, myHeight, myWidth);
+			return new SegregationSimulation(myGridPane, myGUI, myMap, myList, myHeight, myWidth, "rectangle");
 		}
 		else if (simulation.equals("Fire")) {
-			return new FireSimulation(myGridPane, myGUI, myMap, myList, myHeight, myWidth);
+			return new FireSimulation(myGridPane, myGUI, myMap, myList, myHeight, myWidth, "rectangle");
 		}
 		else if (simulation.equals("PredatorPrey")) {
-			return new PredatorPreySimulation(myGridPane, myGUI, myMap, myList, myHeight, myWidth);
+			return new PredatorPreySimulation(myGridPane, myGUI, myMap, myList, myHeight, myWidth,"rectangle");
 		}
 		else if (simulation.equals("GameOfLife")) {
-			return new GameOfLifeSimulation(myGridPane, myGUI, myMap, myList, myHeight, myWidth);
+			return new GameOfLifeSimulation(myGridPane, myGUI, myMap, myList, myHeight, myWidth, "rectangle");
 		}
 		else if (simulation.equals("Sugar")){
-			return new SugarSimulation(myGridPane,myGUI,myMap,myList,myHeight,myWidth);
+			return new SugarSimulation(myGridPane,myGUI,myMap,myList,myHeight,myWidth, "rectangle");
 		}
 		else if (simulation.equals("AntForaging")){
-		        return new AntForagingSimulation(myGridPane,myGUI,myMap,myList,myHeight,myWidth);
+		        return new AntForagingSimulation(myGridPane,myGUI,myMap,myList,myHeight,myWidth, "rectangle");
 		}
 		else{
 			throw(new SimulationException("No such simulation found."));

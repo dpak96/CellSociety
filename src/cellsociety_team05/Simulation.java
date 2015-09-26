@@ -30,6 +30,7 @@ public abstract class Simulation {
     private int myHeight;
     private List<CellInfo> myInfoList;
     protected int[] myStats;
+    private String cellShape;
 
     /**
      * constructor for simulation class
@@ -46,12 +47,13 @@ public abstract class Simulation {
                        Map<String, Double> params,
                        List<CellInfo> list,
                        int height,
-                       int width) {
+                       int width, String shape) {
         myWidth = width;
         setMyHeight(height);
         myInfoList = list;
         myParameters = params;
         myGridPane = gridPane;
+        cellShape = shape;
         myGrid = new ToroidGrid(getMyHeight(), myWidth, this, myParameters);
         try {
             readCellList(myInfoList);
@@ -76,7 +78,8 @@ public abstract class Simulation {
                 Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
                 thisCell.setMyCurrentState(cell.getState());
                 System.out.println(thisCell.getMyCurrentState());
-                thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
+                //thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
+                thisCell.changeColor();
             }
         }
     }
@@ -136,7 +139,8 @@ public abstract class Simulation {
     protected void initializeGridPane () {
         for (List<Cell> listCell : myGrid.getCellMatrix()) {
             for (Cell cell : listCell) {
-                myGridPane.getChildren().add(cell.getMySquare());
+                //myGridPane.getChildren().add(cell.getMySquare());
+                myGridPane.getChildren().add(cell.getShape());
             }
         }
     }
@@ -199,5 +203,9 @@ public abstract class Simulation {
 	        }
 	    }
 	    return list;
+	}
+	
+	public String getShape(){
+		return cellShape;
 	}
 }
