@@ -14,8 +14,8 @@ public class AntForagingSimulation extends Simulation{
 	private int maxNumberOfAnts = 20;
 
 	public AntForagingSimulation(GridPane gridPane, GUI gui, Map<String, Double> params, 
-			List<CellInfo> list, int height,int width) {
-		super(gridPane, gui, params, list, height, width);
+			List<CellInfo> list, int height,int width, String shape) {
+		super(gridPane, gui, params, list, height, width, shape);
 		numberOfAnts = 0;
 	}
 	

@@ -29,8 +29,8 @@ public class PredatorPreySimulation extends Simulation {
                                    Map<String, Double> params,
                                    List<CellInfo> list,
                                    int height,
-                                   int width) {
-        super(gridPane, gui, params, list, height, width);
+                                   int width, String shape) {
+        super(gridPane, gui, params, list, height, width, shape);
         myReproductionTimes = new int[width][height];
         myEnergies = new int[width][height];
         PREY_REPRODUCTION_TIME = (int) Math.round(params.get("preyreproductiontime"));

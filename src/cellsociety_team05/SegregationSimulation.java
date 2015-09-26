@@ -28,8 +28,8 @@ public class SegregationSimulation extends Simulation {
                                   Map<String, Double> param,
                                   List<CellInfo> list,
                                   int height,
-                                  int width) {
-        super(gridPane, gui, param, list, height, width);
+                                  int width, String shape) {
+        super(gridPane, gui, param, list, height, width, shape);
         similar = param.get("similar");
         ratio = param.get("ratio");
         empty = param.get("empty");
@@ -71,7 +71,7 @@ public class SegregationSimulation extends Simulation {
                 int ran = (int) Math.floor(Math.random() * list.size());
                 cell.setParameter("similar", similar);
                 cell.setMyCurrentState(list.remove(ran));
-                cell.getMySquare().setFill(cell.myColors[cell.getMyCurrentState()]);
+                cell.changeColor();
             }
         }
     }

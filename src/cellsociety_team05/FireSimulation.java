@@ -25,8 +25,8 @@ public class FireSimulation extends Simulation {
                            Map<String, Double> params,
                            List<CellInfo> list,
                            int height,
-                           int width) {
-        super(gridPane, gui, params, list, height, width);
+                           int width, String shape) {
+        super(gridPane, gui, params, list, height, width, shape);
         probCatch = params.get("probCatch");
     }
 

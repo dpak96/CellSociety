@@ -22,8 +22,8 @@ public class SugarSimulation extends Simulation {
                             Map<String, Double> params,
                             List<CellInfo> list,
                             int height,
-                            int width) {
-        super(gridPane, gui, params, list, height, width);
+                            int width, String shape) {
+        super(gridPane, gui, params, list, height, width, shape);
         myAgentSugars = new int[width][height];
         mySugarLimit = (int) Math.round(params.get("sugarlimit"));
         myVision = (int) Math.round(params.get("vision"));

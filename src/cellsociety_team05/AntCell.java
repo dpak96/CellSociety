@@ -35,8 +35,7 @@ public class AntCell extends Cell {
         	homePheromones = 0;
         	foodPheromones = 0;
         }
-		this.setMySquare(new Rectangle(440/sim.getMyHeight(), 440/sim.getMyHeight(),myColors[startingState]));
-		GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
+        this.setMyShape(440/sim.getMyHeight(), myColors[startingState], sim.getShape());
 	}
 
     @Override
