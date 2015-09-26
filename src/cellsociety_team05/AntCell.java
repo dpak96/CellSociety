@@ -24,7 +24,6 @@ public class AntCell extends Cell {
 	public AntCell(int xCoordinate, int yCoordinate, int startingState, 
 			Map<String, Double> map,Grid grid, AntForagingSimulation sim) {
 		super(xCoordinate, yCoordinate, startingState);
-		// TODO Auto-generated constructor stub
 		mySimulation = sim;
 		myColors = new Color[] {Color.WHITE, Color.BROWN, Color.BLACK, Color.RED};
         myPossibleStates = new String[] {"Nothing", "isNest", "isFood", "hasAnt"};
