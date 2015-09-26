@@ -9,26 +9,20 @@ public class Ant {
 	
 	private int[] orientation;
 	private boolean hasFoodItem;
-	private boolean atNest;
-	private int xCoordinate; 
-	private int yCoordinate;
 	private AntCell currentCell;
-	private boolean hasMoved;
-	private int foodPheromones;
-	private int homePheromones;
 	
 	public Ant(AntCell startingCell){
 		currentCell = startingCell;
 		orientation = new int[]{0,1};
 		hasFoodItem = false;
 		forage();
-		hasMoved = false;
-		homePheromones = 1000;
+		//homePheromones = 1000;
 	}
 	
 	
 	public void forage(){
 		if(hasFoodItem){
+			//System.out.println("I'M COMING HOME");
 			returnToNest();
 		} else {
 			findFoodSource();
@@ -37,7 +31,7 @@ public class Ant {
 	
 	private void returnToNest(){
 		int max = 0;
-		AntCell bestDirection;
+		AntCell bestDirection = currentCell;
 		List<AntCell> possibleDirections = new ArrayList<AntCell>();
 		for(Cell cell: currentCell.getMyNeighbors()){
 			AntCell neighbor = (AntCell) cell;
@@ -64,22 +58,26 @@ public class Ant {
 				int randomNum = rand.nextInt((bestPossibleDirections.size() - 1) + 1);
 			    bestDirection = bestPossibleDirections.get(randomNum);
 			}
-		} else {
-			bestDirection = new AntCell(0,0,0,null,null,null);
 		}
-		orientation = computeNewOrientation(bestDirection);
-		System.out.println(Arrays.toString(orientation));
-		currentCell = bestDirection;
-		currentCell.AntArrives(this);
-		dropFoodPheromones();
+		if(bestDirection.getMyCurrentState() != bestDirection.isNest){
+			orientation = computeNewOrientation(bestDirection);
+			currentCell.antLeaves();
+			currentCell = bestDirection;
+			currentCell.AntArrives(this);
+			dropFoodPheromones();
+			//dropPheromonoes(true);
+		} else {
+			System.out.println("WE RETURNED TO THE NEST");
+			hasFoodItem = false;
+		}
 	}
 	
 	private void findFoodSource(){
 		
 		//what to do when there are no possible directions?? 
-		
+
 		int max = 0;
-		AntCell bestDirection;
+		AntCell bestDirection = currentCell;
 		List<AntCell> possibleDirections = new ArrayList<AntCell>();
 		for(Cell cell: currentCell.getMyNeighbors()){
 			AntCell neighbor = (AntCell) cell;
@@ -106,14 +104,17 @@ public class Ant {
 				int randomNum = rand.nextInt((bestPossibleDirections.size() - 1) + 1);
 			    bestDirection = bestPossibleDirections.get(randomNum);
 			}
-		} else {
-			bestDirection = new AntCell(0,0,0,null,null,null);
 		}
-		orientation = computeNewOrientation(bestDirection);
-		currentCell.antLeaves();
-		currentCell = bestDirection;
-		currentCell.AntArrives(this);
-		dropHomePheromones();
+		if(bestDirection.getMyCurrentState() != bestDirection.isFood){
+			orientation = computeNewOrientation(bestDirection);
+			currentCell.antLeaves();
+			currentCell = bestDirection;
+			currentCell.AntArrives(this);
+			dropHomePheromones();
+			//dropPheromonoes(false);
+		} else {
+			hasFoodItem = true;
+		}
 	}
 	
 	private boolean isInOrientation(AntCell cell){
@@ -128,6 +129,39 @@ public class Ant {
 		return new int[]{xChange, yChange};
 	}
 	
+	
+//	private void dropPheromonoes(boolean food){
+//		int max = 0; int currentPheromones;
+//		if(food){
+//			currentPheromones = currentCell.getFoodPheromones();
+//		} else {
+//			currentPheromones = currentCell.getHomePheromones();
+//		}
+//		for(Cell cell: currentCell.getMyNeighbors()){
+//			AntCell neighbor = (AntCell) cell;
+//			int pheromoneValue;
+//			if(food){
+//				pheromoneValue = neighbor.getFoodPheromones();
+//			} else {
+//				pheromoneValue = neighbor.getHomePheromones();
+//			}
+//			if(pheromoneValue > max){
+//				max = pheromoneValue;
+//			}
+//		}
+//		int DES = max - 2;
+//		int D = DES - currentPheromones;
+//		if(D > 0){
+//			//move this if statement to another method
+//			if(food){
+//				currentCell.addFoodPheromones(D);
+//			} else {
+//				currentCell.addHomePheromones(D);
+//			}
+//		}
+//	}
+
+
 	private void dropFoodPheromones(){
 		int max = 0;
 		for(Cell cell: currentCell.getMyNeighbors()){
@@ -156,10 +190,6 @@ public class Ant {
 		if(D > 0){
 			currentCell.addHomePheromones(D);
 		}
-	}
-	
-	private void moveInDirection(int xDirection, int yDirection){
-		
 	}
 
 }

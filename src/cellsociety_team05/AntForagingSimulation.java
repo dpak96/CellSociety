@@ -11,7 +11,7 @@ public class AntForagingSimulation extends Simulation{
 	private List<Ant> myAnts = new ArrayList<Ant>();
 	private List<AntCell> myNests;
 	private int numberOfAnts;
-	private int maxNumberOfAnts = 1;
+	private int maxNumberOfAnts = 20;
 
 	public AntForagingSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> params, 
 			List<CellInfo> list, int height,int width) {
@@ -57,9 +57,6 @@ public class AntForagingSimulation extends Simulation{
 	    myGrid.updateGrid();
 	    updateStats();
 	    myGUI.updateGraph();
-	    System.out.println(count + " - number of steps");
-	    System.out.println(myAnts.size() + " - number of ants");
-	    System.out.println();
 	    count++;
 	}
 	

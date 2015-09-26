@@ -16,7 +16,6 @@ public class AntCell extends Cell {
 	public final int  hasAnt = 2;
 	private int foodPheromones;
 	private int homePheromones;
-	private int MAX_PHEROMONES = 1000;
 	private AntForagingSimulation mySimulation;
 	private Ant currentAnt;
 	
@@ -35,7 +34,6 @@ public class AntCell extends Cell {
         	homePheromones = 0;
         	foodPheromones = 0;
         }
-        //hardcoded height, we'll have to pass in the parameters
 		this.setMySquare(new Rectangle(440/sim.getMyHeight(), 440/sim.getMyHeight(),myColors[startingState]));
 		GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
 	}
@@ -43,43 +41,52 @@ public class AntCell extends Cell {
 	@Override
 	public void preUpdateCell() {
 		
+		//safety check 
+        if(myCurrentState == isNest){
+        	homePheromones = 1000;
+        } else if (myCurrentState == isFood){
+        	foodPheromones = 1000;
+        }
 		if(this.myNextState == hasAnt && currentAnt == null){
-			System.out.println("NOT WHAT I WNAN");
 			AntArrives(new Ant(this));
 		}
 		
 		if(this.myCurrentState == isNest && mySimulation.checkIfNotTooManyAnts()){
-			System.out.println("NEW ANT SHOULD BE CREATED");
 			createAnt();
 		}
 	}
 
 	public void AntArrives(Ant ant){
+		if(this.myCurrentState == isNest){
+			return;
+		}
 		currentAnt = ant;
 		this.setMyNextState(hasAnt);
-		//System.out.println(this.getMyNextState()+ " - myCurrentState");
+
 	}
 	
 	public void createAnt(){
 		currentAnt = new Ant(this);
 		mySimulation.addAnt(currentAnt);
-		//this.setMyCurrentState(hasAnt);
 	}
 	
 	public void antLeaves(){
-		System.out.println("THE ANT LEFT");
-		if(this.getMyCurrentState() != isNest){
+		if(this.getMyCurrentState() != isNest && this.getMyCurrentState() != isFood){
 			this.setMyNextState(0);
 			currentAnt  = null;
 		}
 	}
 	
 	public void addHomePheromones(int value){
-		homePheromones += value;
+		if(value > homePheromones){
+			homePheromones = value;
+		}
 	}
 	
 	public void addFoodPheromones(int value){
-		foodPheromones += value;
+		if(value > foodPheromones){
+			foodPheromones = value;
+		}
 	}
 	
 	public int getHomePheromones(){
@@ -91,7 +98,7 @@ public class AntCell extends Cell {
 	}
 	
 	public boolean isFree(){
-		return (this.getMyCurrentState() == 0);
+		return !(this.getMyCurrentState() == hasAnt);
 	}
 
 }
