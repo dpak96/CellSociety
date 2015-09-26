@@ -1,11 +1,9 @@
 package toolsForGui;
 
-import javafx.scene.control.Control;
 import javafx.scene.control.Spinner;
 
 public class NumberOfCellsOption extends PersonalizationOption {
-	
-	private Control myControl;
+
 	private int numberCells;
 	private InitialChoiceDialog myDialog; 
 	
@@ -14,24 +12,15 @@ public class NumberOfCellsOption extends PersonalizationOption {
 		myDialog = myChoiceDialog;
 		numberCells = 50;
 		myChoiceDialog.setNumberCells(numberCells);
-		initializeOption();
+		initializeControl();
 	}
 	
-	private void initializeOption(){
+	private void initializeControl(){
 		Spinner<Integer> spinnerNoOfCells = new Spinner(5,220,50);	
 		spinnerNoOfCells.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
 			myDialog.setNumberCells(Integer.parseInt(newValue));
 		});
-		myControl = spinnerNoOfCells;
-	}
-
-	@Override
-	public Control getControl() {
-		return myControl;
-	}
-	
-	public int numberOfCells(){
-		return numberCells;
+		this.setControl(spinnerNoOfCells);
 	}
 
 }
