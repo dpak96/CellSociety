@@ -151,12 +151,26 @@ public class GUI {
     }
 
 
-	public Object loadPersonalizedSimulation(boolean random, int noOfCells, String simulation, String shape) {
+	public Object loadPersonalizedSimulation(boolean random, int noOfCells, String simulation, 
+			String shape, String myGridType) {
 		
 		//creates a new simulation with these two parameters 
-		System.out.println(random + " " + noOfCells + " " + simulation + " " + shape);
+		System.out.println(random + " " + noOfCells + " " + simulation + " " + shape + " " + myGridType);
 		
 		return null;
+	}
+	
+	public void saveSimulation(){
+		
+		//hook it up with editor
+		
+	}
+	
+	public void loadSimulation(){
+		
+		//hook up with editor
+		//unsure how you want to do this 
+		
 	}
 
 }

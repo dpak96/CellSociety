@@ -32,9 +32,11 @@ public class GuiBoxContainer{
 		FlowControlBox f = new FlowControlBox(myGui, myStage, mySimulation);
 		SpeedControlBox s = new SpeedControlBox(5, myGui);
 		p = new PopulationChartBox(myGui, myStage);
+		SaveControlBox save = new SaveControlBox(myGui, myStage, mySimulation);
 		myBoxes.add(f);
 		myBoxes.add(s);
 		myBoxes.add(p);
+		myBoxes.add(save);
 	}
 
 	public VBox getVBox() {
