@@ -4,8 +4,10 @@ import java.util.HashMap;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import java.util.Map;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
 
 public class AntCell extends Cell {
 	
@@ -20,7 +22,7 @@ public class AntCell extends Cell {
 	private Ant currentAnt;
 	
 	public AntCell(int xCoordinate, int yCoordinate, int startingState, 
-			HashMap<String, Double> map,Grid grid, AntForagingSimulation sim) {
+			Map<String, Double> map,Grid grid, AntForagingSimulation sim) {
 		super(xCoordinate, yCoordinate, startingState);
 		// TODO Auto-generated constructor stub
 		mySimulation = sim;
@@ -38,7 +40,7 @@ public class AntCell extends Cell {
 		GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
 	}
 
-	@Override
+    @Override
 	public void preUpdateCell() {
 		
 		//safety check 
@@ -100,5 +102,4 @@ public class AntCell extends Cell {
 	public boolean isFree(){
 		return !(this.getMyCurrentState() == hasAnt);
 	}
-
 }

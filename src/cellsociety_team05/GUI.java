@@ -1,7 +1,6 @@
 package cellsociety_team05;
 
 import java.util.ResourceBundle;
-
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -14,6 +13,7 @@ import toolsForGui.GuiChoiceDialog;
 import toolsForGui.InitialChoiceDialog;
 import toolsForGui.TopMenu;
 
+
 public class GUI {
 
     /**
@@ -22,7 +22,7 @@ public class GUI {
 
     private Stage myStage;
     private BorderPane root;
-    private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire", "AntForaging"};
+    private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire", "Sugear", "AntForaging"};
     private Simulation mySimulation;
     private long simulationSpeed;
     private GridPane myGridPane;
@@ -30,10 +30,10 @@ public class GUI {
     private ResourceBundle myResources;
     private String currentSimulationName;
 
-    public GUI(Stage primaryStage){
+    public GUI(Stage primaryStage) throws SimulationException{
     	
-        //GuiChoiceDialog myGuiChoiceDialog = new GuiChoiceDialog(this, simulationTypes);
     	InitialChoiceDialog myGuiChoiceDialog = new InitialChoiceDialog(this, simulationTypes);
+        //GuiChoiceDialog myGuiChoiceDialog = new GuiChoiceDialog(this, simulationTypes);
         myResources = ResourceBundle.getBundle("resources.window");
         myStage = primaryStage;
         myStage.setTitle(myResources.getString("Title"));
@@ -65,16 +65,23 @@ public class GUI {
      * Modified to test ant foraging 
      * @param letter
      */
-    
-    public void loadSimulationValue(String letter){
+
+    public void loadSimulationValue (String letter) {
         myGridPane.getChildren().clear();
         if(letter.equals("AntForaging")){
-        	mySimulation = new AntForagingSimulation(myGridPane, this, null, null, 40, 40);
-        } else {
-            System.out.println(letter + "Sim type");
-            currentSimulationName = letter;
-            Setup setup = new Setup(letter,this,myGridPane);
-            mySimulation = setup.getSimulation();        
+			System.out.println("HEY ANTS");
+			mySimulation = new AntForagingSimulation(myGridPane, this, null, null, 40, 40);
+			return;
+		}
+        System.out.println(letter + "Sim type");
+        currentSimulationName = letter;
+        try{
+        Setup setup = new Setup(letter, this, myGridPane);
+        mySimulation = setup.getSimulation();
+
+        }
+        catch(SimulationException e){
+        	e.printStackTrace();; 
         }
     }
 
@@ -85,11 +92,10 @@ public class GUI {
         //testRowTriangle();
     }
 
-    public void step(){
+    public void step () {
         mySimulation.step();
     }
 
-   
     public void updateGraph(){
         myBoxContainer.getPCB().AddToQueue(mySimulation.getStats());
         myBoxContainer.getPCB().addDataToSeries();
@@ -101,42 +107,41 @@ public class GUI {
         startSimulation();
     }
 
-    public void updateSimulationSpeed(double speed){
+    public void updateSimulationSpeed (double speed) {
         System.out.println(speed);
         mySimulation.updateSpeed(speed);
     }
 
-    public Simulation getCurrentSimulation(){
+    public Simulation getCurrentSimulation () {
         return mySimulation;
     }
 
-    public void changeSimulationFlow(){
+    public void changeSimulationFlow () {
         mySimulation.changeFlow();
     }
 
-    public long getSimulationSpeed() {
+    public long getSimulationSpeed () {
         return simulationSpeed;
     }
 
-    public void startNewSimulation(String simulation){
+    public void startNewSimulation (String simulation) {
         loadSimulationValue(simulation);
         startSimulation();
     }
 
-
     /**
-     *	The following methods show the functionality of two 
-     *  different triangle grids 
+     * The following methods show the functionality of two
+     * different triangle grids
      */
 
-    private void initializeEmptyGridPane(int height, int length){
+    private void initializeEmptyGridPane (int height, int length) {
         Rectangle size = new Rectangle(height, length);
         myGridPane.getChildren().add(size);
     }
 
-    private void testRowTriangle(){
+    private void testRowTriangle () {
         myGridPane.getChildren().clear();
-        for(int i=0; i<8; i++){
+        for (int i = 0; i < 8; i++) {
             TriangleRow t = new TriangleRow(i, myGridPane, 8, 440);
         }
     }
