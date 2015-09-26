@@ -3,7 +3,7 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import javafx.scene.layout.GridPane;
 
 public class AntForagingSimulation extends Simulation{
@@ -55,21 +55,21 @@ public class AntForagingSimulation extends Simulation{
 		moveAnts();
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
-	    updateStats();
+	    //updateStats();
 	    myGUI.updateGraph();
 	    count++;
 	}
 	
 
 	@Override
-	public AntCell makeCell (int x, int y, int start, Grid g, HashMap<String,Double> map) {
+	public AntCell makeCell(int x, int y, int start, Grid g, Map<String, Double> map) {
 	        //myGrid = g;
 	        AntCell c = new AntCell(x,y,start,map,myGrid,this);
 	        return c;
 	    }
 	
 	@Override
-	public ArrayList<List<Cell>> setUpCells (Grid grid, int width, int height, HashMap<String,Double> map) {
+	public ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height, Map<String, Double> map) {
 	    ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
 	    
 	    for (int i=0;i<width;i++){
@@ -101,5 +101,5 @@ public class AntForagingSimulation extends Simulation{
 			 a.forage();
 		 }
 	}
-	
+
 }

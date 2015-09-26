@@ -5,7 +5,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
+
 public class TriangleRow {
+
 	public Canvas myTriangles;
 	private double height;
 	private Cell topCell;

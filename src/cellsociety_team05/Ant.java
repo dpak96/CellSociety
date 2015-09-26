@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Ant {
-	
+
 	private int[] orientation;
 	private boolean hasFoodItem;
 	private AntCell currentCell;
