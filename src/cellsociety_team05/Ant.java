@@ -21,13 +21,16 @@ public class Ant {
 	
 	public void forage(){
 		if(hasFoodItem){
-			returnToNest();
+			//returnToNest();
+			antSearch(false);
 		} else {
-			findFoodSource();
+			//findFoodSource();
+			antSearch(true);
 		}
 	}
 	
-	private void returnToNest(){
+	
+	private void antSearch(boolean food){
 		int max = 0;
 		AntCell bestDirection = currentCell;
 		List<AntCell> possibleDirections = new ArrayList<AntCell>();
@@ -35,9 +38,9 @@ public class Ant {
 			AntCell neighbor = (AntCell) cell;
 			if(neighbor.isFree()){
 				possibleDirections.add(neighbor);
-				if(neighbor.getPheromones(false) > max){
+				if(neighbor.getPheromones(food) > max){
 					bestDirection = neighbor;
-					max = neighbor.getPheromones(false);
+					max = neighbor.getPheromones(food);
 				}
 			}
 		}
@@ -45,80 +48,44 @@ public class Ant {
 			return;
 		}
 		if(max == 0){
-			List<AntCell> bestPossibleDirections = new ArrayList<AntCell>();
-			for(AntCell possibleCell: possibleDirections){
-				if(isInOrientation(possibleCell)){
-					bestPossibleDirections.add(possibleCell);
-				}
-			}
-			Random rand = new Random();
-			if(bestPossibleDirections.isEmpty()){
-				int randomNum = rand.nextInt((possibleDirections.size() - 1) + 1);
-			    bestDirection = possibleDirections.get(randomNum);
-			} else {
-				int randomNum = rand.nextInt((bestPossibleDirections.size() - 1) + 1);
-			    bestDirection = bestPossibleDirections.get(randomNum);
-			}
-		}
-		if(bestDirection.getMyCurrentState() != bestDirection.isNest){
-			orientation = computeNewOrientation(bestDirection);
-			currentCell.antLeaves();
-			currentCell = bestDirection;
-			currentCell.AntArrives(this);
-			//dropFoodPheromones();
-			dropPheromonoes(true);
-		} else {
-			hasFoodItem = false;
-		}
-	}
-	
-	private void findFoodSource(){
-		
-		//what to do when there are no possible directions?? 
-
-		int max = 0;
-		AntCell bestDirection = currentCell;
-		List<AntCell> possibleDirections = new ArrayList<AntCell>();
-		for(Cell cell: currentCell.getMyNeighbors()){
-			AntCell neighbor = (AntCell) cell;
-			if(neighbor.isFree()){
-				possibleDirections.add(neighbor);
-				if(neighbor.getPheromones(true) > max){
-					bestDirection = neighbor;
-					max = neighbor.getPheromones(true);
-				}
-			}
-		}
-		if(possibleDirections.isEmpty()){
-			return;
-		}
-		if(max == 0){
-			List<AntCell> bestPossibleDirections = new ArrayList<AntCell>();
-			for(AntCell possibleCell: possibleDirections){
-				if(isInOrientation(possibleCell)){
-					bestPossibleDirections.add(possibleCell);
-				}
-			}
-			Random rand = new Random();
-			if(bestPossibleDirections.isEmpty()){
-				int randomNum = rand.nextInt((possibleDirections.size() - 1) + 1);
-			    bestDirection = possibleDirections.get(randomNum);
-			} else {
-				int randomNum = rand.nextInt((bestPossibleDirections.size() - 1) + 1);
-			    bestDirection = bestPossibleDirections.get(randomNum);
-			}
+			bestDirection = computeRandomMovement(possibleDirections);
 		}
 		if(bestDirection.getMyCurrentState() != bestDirection.isFood){
-			orientation = computeNewOrientation(bestDirection);
-			currentCell.antLeaves();
-			currentCell = bestDirection;
-			currentCell.AntArrives(this);
-			//dropHomePheromones();
-			dropPheromonoes(false);
+			antMovesToDirection(food, bestDirection);
 		} else {
-			hasFoodItem = true;
+			hasFoodItem = !hasFoodItem;
 		}
 	}
+
+
+	private void antMovesToDirection(boolean food, AntCell bestDirection) {
+		orientation = computeNewOrientation(bestDirection);
+		currentCell.antLeaves();
+		currentCell = bestDirection;
+		currentCell.AntArrives(this);
+		dropPheromonoes(!food);
+	}
+
+
+	private AntCell computeRandomMovement(List<AntCell> possibleDirections) {
+		AntCell bestDirection;
+		List<AntCell> bestPossibleDirections = new ArrayList<AntCell>();
+		for(AntCell possibleCell: possibleDirections){
+			if(isInOrientation(possibleCell)){
+				bestPossibleDirections.add(possibleCell);
+			}
+		}
+		Random rand = new Random();
+		if(bestPossibleDirections.isEmpty()){
+			int randomNum = rand.nextInt((possibleDirections.size() - 1) + 1);
+		    bestDirection = possibleDirections.get(randomNum);
+		} else {
+			int randomNum = rand.nextInt((bestPossibleDirections.size() - 1) + 1);
+		    bestDirection = bestPossibleDirections.get(randomNum);
+		}
+		return bestDirection;
+	}
+		
 	
 	private boolean isInOrientation(AntCell cell){
 		int[] newCellOrientation = computeNewOrientation(cell);
@@ -149,36 +116,4 @@ public class Ant {
 			currentCell.addPheromones(food, D);
 		}
 	}
-
-/*
-	private void dropFoodPheromones(){
-		int max = 0;
-		for(Cell cell: currentCell.getMyNeighbors()){
-			AntCell neighbor = (AntCell) cell;
-			if(neighbor.getFoodPheromones() > max){
-				max = neighbor.getFoodPheromones();
-			}
-		}
-		int DES = max - 2;
-		int D = DES - currentCell.getFoodPheromones();
-		if(D > 0){
-			currentCell.addFoodPheromones(D);
-		}
-	}
-	
-	private void dropHomePheromones(){
-		int max = 0;
-		for(Cell cell: currentCell.getMyNeighbors()){
-			AntCell neighbor = (AntCell) cell;
-			if(neighbor.getHomePheromones() > max){
-				max = neighbor.getHomePheromones();
-			}
-		}
-		int DES = max - 2;
-		int D = DES - currentCell.getHomePheromones();
-		if(D > 0){
-			currentCell.addHomePheromones(D);
-		}
-	}
-*/
 }
