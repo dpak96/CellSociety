@@ -11,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import toolsForGui.GuiBoxContainer;
 import toolsForGui.GuiChoiceDialog;
+import toolsForGui.InitialChoiceDialog;
 import toolsForGui.TopMenu;
 
 public class GUI {
@@ -30,7 +31,9 @@ public class GUI {
     private String currentSimulationName;
 
     public GUI(Stage primaryStage){
-        GuiChoiceDialog myGuiChoiceDialog = new GuiChoiceDialog(this, simulationTypes);
+    	
+        //GuiChoiceDialog myGuiChoiceDialog = new GuiChoiceDialog(this, simulationTypes);
+    	InitialChoiceDialog myGuiChoiceDialog = new InitialChoiceDialog(this, simulationTypes);
         myResources = ResourceBundle.getBundle("resources.window");
         myStage = primaryStage;
         myStage.setTitle(myResources.getString("Title"));
@@ -75,17 +78,9 @@ public class GUI {
         }
     }
 
-    /**
-     * The following two methods have been modified to show how the triangle display. 
-     */
-
     public void startSimulation(){
         mySimulation.start();
 
-        /**
-         * If you want to test the triangle grid, choose one of the following
-         * (Only one at the time)
-         */
         //testUpdateTriangle();
         //testRowTriangle();
     }
@@ -94,17 +89,11 @@ public class GUI {
         mySimulation.step();
     }
 
-    /**
-     * updates state of graph (called in simulation)
-     */
+   
     public void updateGraph(){
         myBoxContainer.getPCB().AddToQueue(mySimulation.getStats());
         myBoxContainer.getPCB().addDataToSeries();
     }
-
-    /**
-     * End of modifications
-     */
 
 
     public void restartSimulation(){
@@ -151,5 +140,14 @@ public class GUI {
             TriangleRow t = new TriangleRow(i, myGridPane, 8, 440);
         }
     }
+
+
+	public Object loadPersonalizedSimulation(boolean random, int noOfCells, String simulation) {
+		
+		//creates a new simulation with these two parameters 
+		System.out.println(random + " " + noOfCells + " " + simulation);
+		
+		return null;
+	}
 
 }
