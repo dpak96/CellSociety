@@ -1,15 +1,14 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.scene.layout.GridPane;
 
 public class AntForagingSimulation extends Simulation{
 	
 	private List<Ant> myAnts = new ArrayList<Ant>();
-	private List<AntCell> myNests;
 	private int numberOfAnts;
 	private int maxNumberOfAnts = 20;
 
@@ -48,16 +47,13 @@ public class AntForagingSimulation extends Simulation{
             }
         }
     }
-	private int count = 1;
 	@Override
 	public void step(){
 		moveAnts();
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
-	    //updateStats();
 	    myStats = myGrid.getStats();
 	    myGUI.updateGraph();
-	    count++;
 	}
 	
 

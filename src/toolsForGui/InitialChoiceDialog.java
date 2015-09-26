@@ -26,14 +26,17 @@ public class InitialChoiceDialog {
 	public InitialChoiceDialog(GUI gui, String[] simulationTypes){
 		myGui = gui;
 		mySimulationTypes = simulationTypes;
+		initializeSimulationParameters();
+	}
+
+	private void initializeSimulationParameters() {
 		personalized = false;
 		random = false;
-		currentSimulation = simulationTypes[0];
+		currentSimulation = mySimulationTypes[0];
 		cellShape = myCellShapes[0];
 	}
 	
 	public void display(){
-		
 		initializeGrid();
 		initializeDialog();
 		initializeBasicOptions();

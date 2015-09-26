@@ -1,12 +1,8 @@
 package cellsociety_team05;
 
-import java.util.HashMap;
-
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import java.util.Map;
+
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 
 public class AntCell extends Cell {
@@ -14,8 +10,8 @@ public class AntCell extends Cell {
 	//three possible states: 0 = nothing, 1 = isNest, 2 = isFood, 3 = hasAnt;
 	
 	public final int  isNest = 1;
-	public final int  isFood = 3;
 	public final int  hasAnt = 2;
+	public final int  isFood = 3;
 	private int foodPheromones;
 	private int homePheromones;
 	private AntForagingSimulation mySimulation;
@@ -31,6 +27,7 @@ public class AntCell extends Cell {
         	homePheromones = 1000;
         } else if (startingState == isFood){
         	foodPheromones = 1000;
+        	this.myNextState = startingState;
         } else {
         	homePheromones = 0;
         	foodPheromones = 0;
@@ -44,8 +41,10 @@ public class AntCell extends Cell {
 		//safety check 
         if(myCurrentState == isNest){
         	homePheromones = 1000;
+        	myNextState = myCurrentState;
         } else if (myCurrentState == isFood){
         	foodPheromones = 1000;
+        	myNextState = myCurrentState;
         }
 		if(this.myNextState == hasAnt && currentAnt == null){
 			AntArrives(new Ant(this));
@@ -89,15 +88,23 @@ public class AntCell extends Cell {
 		}
 	}
 	
-	public int getHomePheromones(){
-		return homePheromones;
+	public int getPheromones(boolean food){
+		if(food){
+			return foodPheromones;
+		} else {
+			return homePheromones;
+		}
 	}
 	
-	public int getFoodPheromones(){
-		return foodPheromones;
+	public void addPheromones(boolean food, int value){
+		if(food){
+			addFoodPheromones(value);
+		} else {
+			addHomePheromones(value);
+		}
 	}
 	
 	public boolean isFree(){
-		return !(this.getMyCurrentState() == hasAnt);
+		return (currentAnt == null);
 	}
 }

@@ -27,7 +27,6 @@ public abstract class Cell {
     protected String[] myPossibleStates;
     protected Color[] myColors;
     protected boolean myDirty;
-    protected Rectangle mySquare;
     protected Shape myShape;
     protected Map<String, Double> myParameters;
 
@@ -74,7 +73,7 @@ public abstract class Cell {
      */
     public void updateCell () {
         myCurrentState = myNextState;
-        mySquare.setFill(myColors[myCurrentState]);
+        myShape.setFill(myColors[myCurrentState]);
     }
 
     /**
@@ -212,6 +211,7 @@ public abstract class Cell {
     	} else if (typeOfCell.equals("rectangle")){
     		myShape = new Rectangle(squareBoxSide, squareBoxSide, imgColor);
     	}
+    	myShape.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> nextState());
     	GridPane.setConstraints(myShape, myXCoordinate, myYCoordinate);
     }
     
