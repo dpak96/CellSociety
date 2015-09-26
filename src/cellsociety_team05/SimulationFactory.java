@@ -62,6 +62,9 @@ public class SimulationFactory {
 		else if (simulation.equals("Sugar")){
 			return "XMLFiles/sugar_test.xml";
 		}
+		else if (simulation.equals("AntForaging")){
+		        return "XMLFiles/ant_test.xml";
+		}
 		else{
 			throw(new SimulationException("No such simulation found."));
 		}
@@ -89,6 +92,9 @@ public class SimulationFactory {
 		}
 		else if (simulation.equals("Sugar")){
 			return new SugarSimulation(myGridPane,myGUI,myMap,myList,myHeight,myWidth);
+		}
+		else if (simulation.equals("AntForaging")){
+		        return new AntForagingSimulation(myGridPane,myGUI,myMap,myList,myHeight,myWidth);
 		}
 		else{
 			throw(new SimulationException("No such simulation found."));

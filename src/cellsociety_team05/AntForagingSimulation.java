@@ -13,10 +13,9 @@ public class AntForagingSimulation extends Simulation{
 	private int numberOfAnts;
 	private int maxNumberOfAnts = 20;
 
-	public AntForagingSimulation(GridPane gridPane, GUI gui, HashMap<String, Double> params, 
+	public AntForagingSimulation(GridPane gridPane, GUI gui, Map<String, Double> params, 
 			List<CellInfo> list, int height,int width) {
 		super(gridPane, gui, params, list, height, width);
-		// TODO Auto-generated constructor stub
 		numberOfAnts = 0;
 	}
 	
@@ -56,6 +55,7 @@ public class AntForagingSimulation extends Simulation{
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	    //updateStats();
+	    myStats = myGrid.getStats();
 	    myGUI.updateGraph();
 	    count++;
 	}
@@ -63,7 +63,7 @@ public class AntForagingSimulation extends Simulation{
 
 	@Override
 	public AntCell makeCell(int x, int y, int start, Grid g, Map<String, Double> map) {
-	        //myGrid = g;
+	        myGrid = g;
 	        AntCell c = new AntCell(x,y,start,map,myGrid,this);
 	        return c;
 	    }

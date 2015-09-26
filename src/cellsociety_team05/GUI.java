@@ -21,7 +21,7 @@ public class GUI {
 
     private Stage myStage;
     private BorderPane root;
-    private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire", "Sugear", "AntForaging"};
+    private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire", "Sugar", "AntForaging"};
     private Simulation mySimulation;
     private long simulationSpeed;
     private GridPane myGridPane;
@@ -65,11 +65,6 @@ public class GUI {
 
     public void loadSimulationValue (String letter) {
         myGridPane.getChildren().clear();
-        if(letter.equals("AntForaging")){
-			System.out.println("HEY ANTS");
-			mySimulation = new AntForagingSimulation(myGridPane, this, null, null, 40, 40);
-			return;
-		}
         System.out.println(letter + "Sim type");
         currentSimulationName = letter;
         try{
@@ -78,7 +73,7 @@ public class GUI {
 
         }
         catch(SimulationException e){
-        	e.printStackTrace();; 
+        	e.printStackTrace();
         }
     }
 
