@@ -68,7 +68,8 @@ public class SugarSimulation extends Simulation {
                 Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
                 thisCell.setMyCurrentState(cell.getState());
                 thisCell.setMyNextState(cell.getState());
-                thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
+                thisCell.changeColor();
+                //thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
                 if (thisCell.getMyCurrentState()!=5){
                     mySugars[thisCell.getX()][thisCell.getY()]=thisCell.getMyCurrentState();
                 }

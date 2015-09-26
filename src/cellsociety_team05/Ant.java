@@ -16,13 +16,11 @@ public class Ant {
 		orientation = new int[]{0,1};
 		hasFoodItem = false;
 		forage();
-		//homePheromones = 1000;
 	}
 	
 	
 	public void forage(){
 		if(hasFoodItem){
-			//System.out.println("I'M COMING HOME");
 			returnToNest();
 		} else {
 			findFoodSource();
@@ -37,11 +35,14 @@ public class Ant {
 			AntCell neighbor = (AntCell) cell;
 			if(neighbor.isFree()){
 				possibleDirections.add(neighbor);
-				if(neighbor.getHomePheromones() > max){
+				if(neighbor.getPheromones(false) > max){
 					bestDirection = neighbor;
-					max = neighbor.getHomePheromones();
+					max = neighbor.getPheromones(false);
 				}
 			}
+		}
+		if(possibleDirections.isEmpty()){
+			return;
 		}
 		if(max == 0){
 			List<AntCell> bestPossibleDirections = new ArrayList<AntCell>();
@@ -64,10 +65,9 @@ public class Ant {
 			currentCell.antLeaves();
 			currentCell = bestDirection;
 			currentCell.AntArrives(this);
-			dropFoodPheromones();
-			//dropPheromonoes(true);
+			//dropFoodPheromones();
+			dropPheromonoes(true);
 		} else {
-			System.out.println("WE RETURNED TO THE NEST");
 			hasFoodItem = false;
 		}
 	}
@@ -83,11 +83,14 @@ public class Ant {
 			AntCell neighbor = (AntCell) cell;
 			if(neighbor.isFree()){
 				possibleDirections.add(neighbor);
-				if(neighbor.getFoodPheromones() > max){
+				if(neighbor.getPheromones(true) > max){
 					bestDirection = neighbor;
-					max = neighbor.getFoodPheromones();
+					max = neighbor.getPheromones(true);
 				}
 			}
+		}
+		if(possibleDirections.isEmpty()){
+			return;
 		}
 		if(max == 0){
 			List<AntCell> bestPossibleDirections = new ArrayList<AntCell>();
@@ -110,8 +113,8 @@ public class Ant {
 			currentCell.antLeaves();
 			currentCell = bestDirection;
 			currentCell.AntArrives(this);
-			dropHomePheromones();
-			//dropPheromonoes(false);
+			//dropHomePheromones();
+			dropPheromonoes(false);
 		} else {
 			hasFoodItem = true;
 		}
@@ -130,38 +133,24 @@ public class Ant {
 	}
 	
 	
-//	private void dropPheromonoes(boolean food){
-//		int max = 0; int currentPheromones;
-//		if(food){
-//			currentPheromones = currentCell.getFoodPheromones();
-//		} else {
-//			currentPheromones = currentCell.getHomePheromones();
-//		}
-//		for(Cell cell: currentCell.getMyNeighbors()){
-//			AntCell neighbor = (AntCell) cell;
-//			int pheromoneValue;
-//			if(food){
-//				pheromoneValue = neighbor.getFoodPheromones();
-//			} else {
-//				pheromoneValue = neighbor.getHomePheromones();
-//			}
-//			if(pheromoneValue > max){
-//				max = pheromoneValue;
-//			}
-//		}
-//		int DES = max - 2;
-//		int D = DES - currentPheromones;
-//		if(D > 0){
-//			//move this if statement to another method
-//			if(food){
-//				currentCell.addFoodPheromones(D);
-//			} else {
-//				currentCell.addHomePheromones(D);
-//			}
-//		}
-//	}
+	private void dropPheromonoes(boolean food){
+		int max = 0; int currentPheromones;
+		currentPheromones = currentCell.getPheromones(food);
+		for(Cell cell: currentCell.getMyNeighbors()){
+			AntCell neighbor = (AntCell) cell;
+			int pheromoneValue = neighbor.getPheromones(food);
+			if(pheromoneValue > max){
+				max = pheromoneValue;
+			}
+		}
+		int DES = max - 2;
+		int D = DES - currentPheromones;
+		if(D > 0){
+			currentCell.addPheromones(food, D);
+		}
+	}
 
-
+/*
 	private void dropFoodPheromones(){
 		int max = 0;
 		for(Cell cell: currentCell.getMyNeighbors()){
@@ -191,5 +180,5 @@ public class Ant {
 			currentCell.addHomePheromones(D);
 		}
 	}
-
+*/
 }

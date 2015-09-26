@@ -16,7 +16,7 @@ public class NumberOfCellsOption extends PersonalizationOption {
 	}
 	
 	private void initializeControl(){
-		Spinner<Integer> spinnerNoOfCells = new Spinner(5,220,50);	
+		Spinner<Integer> spinnerNoOfCells = new Spinner<Integer>(5,220,50);	
 		spinnerNoOfCells.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
 			myDialog.setNumberCells(Integer.parseInt(newValue));
 		});

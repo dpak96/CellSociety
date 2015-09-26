@@ -55,6 +55,7 @@ public class AntForagingSimulation extends Simulation{
 	    myGrid.preUpdateGrid();
 	    myGrid.updateGrid();
 	    //updateStats();
+	    System.out.println(numberOfAnts);
 	    myStats = myGrid.getStats();
 	    myGUI.updateGraph();
 	    count++;
