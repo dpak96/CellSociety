@@ -1,12 +1,9 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 
 public class PredatorPreyCell extends Cell {
@@ -18,7 +15,7 @@ public class PredatorPreyCell extends Cell {
 
     /**
      * constructor for predator prey cell
-     * 
+     *
      * @param xCoordinate
      * @param yCoordinate
      * @param startingState
@@ -41,7 +38,7 @@ public class PredatorPreyCell extends Cell {
         myGrid = g;
         myPossibleStates = new String[] { "Fish/Blue", "Shark/Red", "Empty" };
         myColors = new Color[] { Color.BLUE, Color.RED, Color.WHITE };
-        this.setMyShape(440/sim.getMyHeight(), myColors[startingState], sim.getShape());
+        setMyShape(440 / sim.getMyHeight(), myColors[startingState], sim.getShape());
     }
 
     /**
@@ -83,7 +80,7 @@ public class PredatorPreyCell extends Cell {
 
     /**
      * transfers state of this cell to new cell
-     * 
+     *
      * @param cell
      */
     private void moveTo (Cell cell) {
@@ -97,7 +94,7 @@ public class PredatorPreyCell extends Cell {
 
     /**
      * transfers state of this cell to prey and resets energy
-     * 
+     *
      * @param prey
      */
     private void eat (Cell prey) {
@@ -108,7 +105,7 @@ public class PredatorPreyCell extends Cell {
 
     /**
      * checks if given cell is out of energy
-     * 
+     *
      * @param cell
      */
     private void checkDeath (Cell cell) {
@@ -122,7 +119,7 @@ public class PredatorPreyCell extends Cell {
 
     /**
      * increments cell's energy and reproduction timer by one
-     * 
+     *
      * @param cell
      */
     private void age (Cell cell) {
@@ -135,9 +132,9 @@ public class PredatorPreyCell extends Cell {
     /**
      * clears state of current cell
      */
-    private void leave(int time){
-        if(myCurrentState!=2){
-            if (mySim.getMyReproductionTimes()[getX()][getY()]>=time){
+    private void leave (int time) {
+        if (myCurrentState != 2) {
+            if (mySim.getMyReproductionTimes()[getX()][getY()] >= time) {
                 myNextState = myCurrentState;
                 mySim.getMyReproductionTimes()[getX()][getY()] = 0;
                 mySim.getMyEnergies()[getX()][getY()] = 0;
@@ -148,7 +145,7 @@ public class PredatorPreyCell extends Cell {
                 mySim.getMyEnergies()[getX()][getY()] = 0;
             }
         }
-        else  {
+        else {
             myNextState = 2;
             mySim.getMyReproductionTimes()[getX()][getY()] = 0;
             mySim.getMyEnergies()[getX()][getY()] = 0;

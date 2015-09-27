@@ -22,11 +22,12 @@ public class SaveControlBox extends HorizontalControlBoxes {
 		myHBox.setPrefHeight(20);
 		myHBox.setSpacing(20.0);
 		myHBox.setAlignment(Pos.CENTER);
-		
+		ClearButton clearButton = new ClearButton(myGui);
 		SaveButton saveButton = new SaveButton(myGui);
 		LoadButton loadButton = new LoadButton(myGui);
 		myHBox.getChildren().add(saveButton.getButton());
 		myHBox.getChildren().add(loadButton.getButton());
+		myHBox.getChildren().add(clearButton.getButton());
 	}
 	
 	@Override

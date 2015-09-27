@@ -1,9 +1,9 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.layout.GridPane;
@@ -34,7 +34,7 @@ public abstract class Simulation {
 
     /**
      * constructor for simulation class
-     * 
+     *
      * @param gridPane
      * @param gui
      * @param params
@@ -47,7 +47,8 @@ public abstract class Simulation {
                        Map<String, Double> params,
                        List<CellInfo> list,
                        int height,
-                       int width, String shape) {
+                       int width,
+                       String shape) {
         myWidth = width;
         setMyHeight(height);
         myInfoList = list;
@@ -68,17 +69,15 @@ public abstract class Simulation {
 
     /**
      * reads in list of cells specified in xml file and initializes grid
-     * 
+     *
      * @param list
-     * @throws SimulationException 
+     * @throws SimulationException
      */
-    public void readCellList (List<CellInfo> list) throws SimulationException{
+    public void readCellList (List<CellInfo> list) throws SimulationException {
         if (list != null) {
             for (CellInfo cell : list) {
                 Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
                 thisCell.setMyCurrentState(cell.getState());
-                System.out.println(thisCell.getMyCurrentState());
-                //thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
                 thisCell.changeColor();
             }
         }
@@ -89,9 +88,9 @@ public abstract class Simulation {
      */
     public void start () {
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                                      e -> this.step());
+                                      e -> step());
         animation.getKeyFrames().add(frame);
-        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.setCycleCount(Animation.INDEFINITE);
         animation.play();
         paused = false;
     }
@@ -111,7 +110,7 @@ public abstract class Simulation {
 
     /**
      * changes speed of animation
-     * 
+     *
      * @param speed
      */
     public void updateSpeed (double speed) {
@@ -139,7 +138,6 @@ public abstract class Simulation {
     protected void initializeGridPane () {
         for (List<Cell> listCell : myGrid.getCellMatrix()) {
             for (Cell cell : listCell) {
-                //myGridPane.getChildren().add(cell.getMySquare());
                 myGridPane.getChildren().add(cell.getShape());
             }
         }
@@ -154,7 +152,7 @@ public abstract class Simulation {
 
     /**
      * initializes cells of appropriate type for given simulation
-     * 
+     *
      * @param grid
      * @param width
      * @param height
@@ -174,7 +172,7 @@ public abstract class Simulation {
 
     /**
      * initializes cell of specific type for given simulation
-     * 
+     *
      * @param x
      * @param y
      * @param start
@@ -192,20 +190,44 @@ public abstract class Simulation {
         this.myHeight = myHeight;
     }
 
-	public List<List<Cell>> setUpRandomCells (Grid grid, int width, int height, Map<String, Double> map, int states) {
-	    ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
-	    for (int i=0;i<width;i++){
-	        list.add(new ArrayList<Cell>());
-	        for (int j=0;j<height;j++){
-	            int state = (int) Math.floor(Math.random()*states);
-	            Cell newcell = makeCell(i, j, state, grid, map);
-	            list.get(i).add(newcell);
-	        }
-	    }
-	    return list;
-	}
-	
-	public String getShape(){
-		return cellShape;
-	}
+    public List<List<Cell>> setUpRandomCells (Grid grid,
+                                              int width,
+                                              int height,
+                                              Map<String, Double> map,
+                                              int states) {
+        ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
+        for (int i = 0; i < width; i++) {
+            list.add(new ArrayList<Cell>());
+            for (int j = 0; j < height; j++) {
+                int state = (int) Math.floor(Math.random() * states);
+                Cell newcell = makeCell(i, j, state, grid, map);
+                list.get(i).add(newcell);
+            }
+        }
+        return list;
+    }
+
+    public String getShape () {
+        return cellShape;
+    }
+
+    public void clear () {
+        int temp = myGrid.getCellMatrix().get(0).get(0).getNumberStates();
+        for (int i = 0; i < myHeight; i++) {
+            for (int j = 0; j < myWidth; j++) {
+                myGrid.getCellMatrix().get(i).get(j).setMyCurrentState(temp - 1);
+            }
+        }
+        step();
+    }
+
+    public abstract String getName ();
+
+    public Map<String, Double> getParams () {
+        return myParameters;
+    }
+
+    public Grid getGrid () {
+        return myGrid;
+    }
 }

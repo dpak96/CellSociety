@@ -1,13 +1,11 @@
 package cellsociety_team05;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
 /**
- * 
+ *
  * @author Lucas Donaldson
  *
  */
@@ -17,7 +15,7 @@ public abstract class Grid {
 
     /**
      * constructor for grid class
-     * 
+     *
      * @param width
      * @param height
      * @param sim
@@ -51,13 +49,6 @@ public abstract class Grid {
     }
 
     /**
-     * prints type of cells FOR DEBUGGING
-     */
-    public void printType () {
-        System.out.println(myCells.get(0).get(0).getClass().toString());
-    }
-
-    /**
      * Switches the state of each cell in the grid to it's next state.
      */
     public void updateGrid () {
@@ -69,7 +60,7 @@ public abstract class Grid {
     }
 
     /**
-     * 
+     *
      * @return A list of the cells in the grid.
      */
     public List<List<Cell>> getCellMatrix () {
@@ -80,6 +71,11 @@ public abstract class Grid {
         return myCells.get(0).get(0).getMyColors().length;
     }
 
+    /**
+     * returns number of cells of each type for use in graph display
+     *
+     * @return
+     */
     public int[] getStats () {
         int[] stats = new int[3];
         for (int i = 0; i < 3; i++) {

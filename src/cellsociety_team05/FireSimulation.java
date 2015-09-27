@@ -1,7 +1,6 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.layout.GridPane;
@@ -12,7 +11,7 @@ public class FireSimulation extends Simulation {
 
     /**
      * constructor for fire simulation class
-     * 
+     *
      * @param gridPane
      * @param gui
      * @param params
@@ -25,9 +24,20 @@ public class FireSimulation extends Simulation {
                            Map<String, Double> params,
                            List<CellInfo> list,
                            int height,
-                           int width, String shape) {
+                           int width,
+                           String shape) {
         super(gridPane, gui, params, list, height, width, shape);
-        probCatch = params.get("probCatch");
+        try {
+            probCatch = params.get("probCatch");
+        }
+        catch (Exception e) {
+            try {
+                probCatch = 0.5;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
     }
 
     /**
@@ -36,7 +46,7 @@ public class FireSimulation extends Simulation {
     @Override
     public Cell makeCell (int x, int y, int start, Grid g, Map<String, Double> map) {
         FireCell c = new FireCell(x, y, start, this);
-        c.setProb(0.5);
+        c.setProb(probCatch);
         return c;
     }
 
@@ -55,5 +65,10 @@ public class FireSimulation extends Simulation {
             }
         }
         return list;
+    }
+
+    @Override
+    public String getName () {
+        return "Fire";
     }
 }

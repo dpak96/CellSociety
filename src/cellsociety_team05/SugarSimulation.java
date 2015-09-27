@@ -1,7 +1,5 @@
 package cellsociety_team05;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.layout.GridPane;
@@ -22,20 +20,72 @@ public class SugarSimulation extends Simulation {
                             Map<String, Double> params,
                             List<CellInfo> list,
                             int height,
-                            int width, String shape) {
+                            int width,
+                            String shape) {
         super(gridPane, gui, params, list, height, width, shape);
         myAgentSugars = new int[width][height];
-        mySugarLimit = (int) Math.round(params.get("sugarlimit"));
-        myVision = (int) Math.round(params.get("vision"));
-        myMetabolism = (int) Math.round(params.get("metabolism"));
-        myInterval = (int) Math.round(params.get("interval"));
-        myRate = (int) Math.round(params.get("rate"));
+
+        try {
+            mySugarLimit = (int) Math.round(params.get("sugarlimit"));
+        }
+        catch (Exception e) {
+            try {
+                mySugarLimit = 3;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
+        try {
+            myVision = (int) Math.round(params.get("vision"));
+        }
+        catch (Exception e) {
+            try {
+                myVision = 1;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
+        try {
+            myMetabolism = (int) Math.round(params.get("metabolism"));
+        }
+        catch (Exception e) {
+            try {
+                myMetabolism = 2;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
+        try {
+            myInterval = (int) Math.round(params.get("interval"));
+        }
+        catch (Exception e) {
+            try {
+                myInterval = 1;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
+        try {
+            myRate = (int) Math.round(params.get("rate"));
+        }
+        catch (Exception e) {
+            try {
+                myRate = 1;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
         myTimes = new int[width][height];
     }
 
     @Override
     public List<List<Cell>> setUpCells (Grid grid, int width, int height, Map<String, Double> map) {
-        return setUpRandomCells(grid,width,height,map,3);
+        return setUpRandomCells(grid, width, height, map, 3);
     }
 
     @Override
@@ -44,40 +94,46 @@ public class SugarSimulation extends Simulation {
         SugarCell c = new SugarCell(x, y, start, g, this);
         return c;
     }
-    
+
     /**
      * reads in list of cells specified in xml file and initializes grid
+     *
      * @param list
-     * @throws SimulationException 
+     * @throws SimulationException
      */
     @Override
-    public void readCellList(List<CellInfo> list) throws SimulationException{
-        if (list!=null){
+    public void readCellList (List<CellInfo> list) throws SimulationException {
+        if (list != null) {
             int width = 0;
             int height = 0;
-            for (CellInfo c:list){
-                if (c.getX()>width){
+            for (CellInfo c : list) {
+                if (c.getX() > width) {
                     width = c.getX();
                 }
-                if (c.getY()>height){
+                if (c.getY() > height) {
                     height = c.getY();
                 }
             }
-            mySugars = new int[width+1][height+1];
-            for (CellInfo cell: list){
+            mySugars = new int[width + 1][height + 1];
+            for (CellInfo cell : list) {
                 Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
                 thisCell.setMyCurrentState(cell.getState());
                 thisCell.setMyNextState(cell.getState());
                 thisCell.changeColor();
-                //thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
-                if (thisCell.getMyCurrentState()!=5){
-                    mySugars[thisCell.getX()][thisCell.getY()]=thisCell.getMyCurrentState();
+                // thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
+                if (thisCell.getMyCurrentState() != 5) {
+                    mySugars[thisCell.getX()][thisCell.getY()] = thisCell.getMyCurrentState();
                 }
                 else {
-                    mySugars[thisCell.getX()][thisCell.getY()]=0;
+                    mySugars[thisCell.getX()][thisCell.getY()] = 0;
                 }
             }
         }
+    }
+
+    @Override
+    public String getName () {
+        return "Sugar";
     }
 
 }

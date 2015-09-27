@@ -11,9 +11,11 @@ import javafx.scene.input.MouseEvent;
 public class PauseButton extends GuiButton{
 	
 	private boolean paused;
+	private GUI myGui;
 
 	public PauseButton(GUI gui) {
 		super(gui);
+		myGui = gui;
 		this.setButton(this.getResources().getString("PauseButton"));
 		paused = false;
 		this.implementAction();
@@ -25,17 +27,16 @@ public class PauseButton extends GuiButton{
 	}
 	
 	private void updateResumeButton(){
-		paused = !paused;
 		if(paused){
 			updateButtonText(this.getResources().getString("PauseButton"));
 		} else {
 			updateButtonText(this.getResources().getString("ResumeButton"));
 		}
+		paused = !paused;
+		myGui.changeSimulationFlow();
 	}
 	
 	private void updateButtonText(String s){
 		this.getButton().setText(s);
 	}
-	
-	
 }

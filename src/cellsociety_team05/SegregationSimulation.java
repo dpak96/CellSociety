@@ -1,7 +1,6 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.layout.GridPane;
@@ -15,7 +14,7 @@ public class SegregationSimulation extends Simulation {
 
     /**
      * constructor for segregation simulation
-     * 
+     *
      * @param gridPane
      * @param gui
      * @param param
@@ -28,11 +27,42 @@ public class SegregationSimulation extends Simulation {
                                   Map<String, Double> param,
                                   List<CellInfo> list,
                                   int height,
-                                  int width, String shape) {
+                                  int width,
+                                  String shape) {
         super(gridPane, gui, param, list, height, width, shape);
-        similar = param.get("similar");
-        ratio = param.get("ratio");
-        empty = param.get("empty");
+        try {
+            similar = param.get("similar");
+        }
+        catch (Exception e) {
+            try {
+                similar = 0.5;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
+        try {
+            ratio = param.get("ratio");
+        }
+        catch (Exception e) {
+            try {
+                ratio = 0.5;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
+        try {
+            empty = param.get("empty");
+        }
+        catch (Exception e) {
+            try {
+                empty = 0.5;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
         if (list == null) {
             initGrid();
         }
@@ -40,7 +70,7 @@ public class SegregationSimulation extends Simulation {
 
     /**
      * sets parameter for percent of similar neighbors required for satisfaction
-     * 
+     *
      * @param x
      */
     public void setSimilar (double x) {
@@ -50,12 +80,13 @@ public class SegregationSimulation extends Simulation {
     /**
      * initializes grid randomly with appropriate number of blue, red, and empty cells
      */
+    @Override
     public void initGrid () {
         int num = myGrid.getCellMatrix().size() * myGrid.getCellMatrix().get(0).size();
         ArrayList<Integer> list = new ArrayList<Integer>();
-        int numEmpty = (int) Math.floor(((double) num) * empty);
+        int numEmpty = (int) Math.floor((num) * empty);
         num -= numEmpty;
-        int num1 = (int) Math.floor(((double) num) * ratio);
+        int num1 = (int) Math.floor((num) * ratio);
         int num2 = num - num1;
         for (int i = 0; i < numEmpty; i++) {
             list.add(2);
@@ -71,7 +102,12 @@ public class SegregationSimulation extends Simulation {
                 int ran = (int) Math.floor(Math.random() * list.size());
                 cell.setParameter("similar", similar);
                 cell.setMyCurrentState(list.remove(ran));
-                cell.changeColor();
+                try {
+                    cell.changeColor();
+                }
+                catch (SimulationException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -100,5 +136,10 @@ public class SegregationSimulation extends Simulation {
             }
         }
         return list;
+    }
+
+    @Override
+    public String getName () {
+        return "Segregation";
     }
 }

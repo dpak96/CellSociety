@@ -1,7 +1,5 @@
 package cellsociety_team05;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.layout.GridPane;
@@ -11,7 +9,7 @@ public class GameOfLifeSimulation extends Simulation {
 
     /**
      * constructor for game of life simulation
-     * 
+     *
      * @param gridPane
      * @param gui
      * @param params
@@ -24,7 +22,8 @@ public class GameOfLifeSimulation extends Simulation {
                                  Map<String, Double> params,
                                  List<CellInfo> list,
                                  int height,
-                                 int width, String shape) {
+                                 int width,
+                                 String shape) {
         super(gridPane, gui, params, list, height, width, shape);
 
     }
@@ -43,7 +42,12 @@ public class GameOfLifeSimulation extends Simulation {
      * overrides super class method
      */
     @Override
-    public List<List<Cell>> setUpCells (Grid grid, int width, int height, Map<String,Double> map) {
-        return setUpRandomCells(grid,width,height,map,2);
+    public List<List<Cell>> setUpCells (Grid grid, int width, int height, Map<String, Double> map) {
+        return setUpRandomCells(grid, width, height, map, 2);
+    }
+
+    @Override
+    public String getName () {
+        return "GameOfLife";
     }
 }

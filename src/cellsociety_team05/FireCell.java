@@ -1,8 +1,6 @@
 package cellsociety_team05;
 
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 
 public class FireCell extends Cell {
@@ -10,7 +8,7 @@ public class FireCell extends Cell {
 
     /**
      * FireCell Constructor
-     * 
+     *
      * @param xCoordinate
      * @param yCoordinate
      * @param startingState
@@ -20,12 +18,12 @@ public class FireCell extends Cell {
         super(xCoordinate, yCoordinate, startingState);
         myColors = new Color[] { Color.WHITE, Color.GREEN, Color.RED };
         myPossibleStates = new String[] { "Empty", "Tree", "Burning" };
-        this.setMyShape(440 / sim.getMyHeight(), myColors[startingState], sim.getShape());
+        setMyShape(440 / sim.getMyHeight(), myColors[startingState], sim.getShape());
     }
 
     /**
      * Sets probability for tree to catch fire
-     * 
+     *
      * @param prob
      */
     public void setProb (double prob) {
@@ -34,7 +32,7 @@ public class FireCell extends Cell {
 
     /**
      * checks if neighbor is burning
-     * 
+     *
      * @return true if neighbor cell's current state is burning
      */
     private boolean neighborIsBurning () {
@@ -55,7 +53,7 @@ public class FireCell extends Cell {
         if (myCurrentState == 1) {
             if (neighborIsBurning()) {
                 double ran = Math.random();
-                if (ran <= probCatch) {
+                if (ran < probCatch) {
                     myNextState = 2;
                 }
                 else {

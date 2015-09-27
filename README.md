@@ -1,14 +1,13 @@
-# cellsociety (Emanuele Macchi, Lucas Donaldson, Daniel Pak)
+#Cell Society
+Team Members: Lucas Donaldson, Emanuele Macchie, and Daniel Pak
+Date Started: September 10, 2015
+Date Finished: September 27, 2015
 
-Date started: 09/06/2015 
-Date finished: 09/27/2015
-
-Hoous spent on it: more than 80 each.
-
-Resources used: Stackoverflow.com, http://www.java2s.com/Tutorials/Java/JavaFX/, JavaFX oracle documentation 
-
-##Roles
-Lucas designed the grid and the simulations. Daniel designed the XML reader, as well as the simulation factory. Emanuele designed mainly the GUI and the tools for the gui. Also wrote the ant simulation class.
+## Team Roles
+While each team member worked together to fix bugs and connect different project components, each member also had their own area of focus when working on the project.
+Lucas Donaldson: Focused on simulation logic and manipulating grid elements.
+Emanuele Macchi: Focused on creating GUI and designing the appearance of the program.
+Daniel Pak: Focused on reading and writing to XMLs and setting up simulations from them.
 
 ##Resource files
 1. button.properties contains the string that we need to display the buttons'
@@ -45,15 +44,16 @@ Satisfaction Tag: similar
 Ratio Tag: ratio
 Empty tag: empty
 
-## Fire
-Simulation Tag: Fire
+##Fire
+Simulation Tag: Fire 
 probCatch Tag: probCatch
 
-## Predator Prey
-Simulation Tag: PredatorPrey
-Predator Reproduction Rate Tag: predatorreproductiontime
-Prey Reproduction Rate Tag: preyreproductiontime
-Predator Energy Rate: energy
+##Predator Prey
 
-## Game Of Life
+Simulation Tag: PredatorPrey 
+Predator Reproduction Rate Tag: predatorreproductiontime 
+Prey Reproduction Rate Tag: preyreproductiontime Predator 
+Energy Rate: energy
+
+##Game Of Life
 Simulation Tag: GameOfLife

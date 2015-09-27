@@ -1,5 +1,6 @@
 package toolsForGui;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 import cellsociety_team05.GUI;
@@ -18,7 +19,7 @@ import javafx.scene.layout.GridPane;
 public class InitialChoiceDialog {
 
 	private GUI myGui;
-	private String[] mySimulationTypes;
+	private List<String> mySimulationTypes;
 	private Dialog<String> myDialog;
 	private GridPane myGrid;
 	private boolean personalized;
@@ -29,7 +30,7 @@ public class InitialChoiceDialog {
 	private String[] myCellShapes = {"rectangle", "circle"};
 	private String myGridType;
 	
-	public InitialChoiceDialog(GUI gui, String[] simulationTypes){
+	public InitialChoiceDialog(GUI gui, List<String> simulationTypes){
 		myGui = gui;
 		mySimulationTypes = simulationTypes;
 		initializeSimulationParameters();
@@ -38,7 +39,7 @@ public class InitialChoiceDialog {
 	private void initializeSimulationParameters() {
 		personalized = false;
 		random = false;
-		currentSimulation = mySimulationTypes[0];
+		currentSimulation = mySimulationTypes.get(0);
 		cellShape = myCellShapes[0];
 		myGridType = "Normal";
 	}
