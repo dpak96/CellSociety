@@ -34,6 +34,4 @@ public class PauseButton extends GuiButton{
 	private void updateButtonText(String s){
 		this.getButton().setText(s);
 	}
-	
-	
 }

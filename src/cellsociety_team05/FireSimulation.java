@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.scene.layout.GridPane;
 
 
@@ -65,5 +66,9 @@ public class FireSimulation extends Simulation {
 			}
 		}
 		return list;
+	}
+	
+	public String getName(){
+		return "Fire";
 	}
 }

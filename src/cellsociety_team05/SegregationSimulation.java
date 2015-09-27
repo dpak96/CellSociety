@@ -136,4 +136,8 @@ public class SegregationSimulation extends Simulation {
         }
         return list;
     }
+	
+	public String getName(){
+		return "Segregation";
+	}
 }

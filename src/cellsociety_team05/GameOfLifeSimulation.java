@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.scene.layout.GridPane;
 
 
@@ -45,5 +46,8 @@ public class GameOfLifeSimulation extends Simulation {
     @Override
     public List<List<Cell>> setUpCells (Grid grid, int width, int height, Map<String,Double> map) {
         return setUpRandomCells(grid,width,height,map,2);
-    }
+    }	
+	public String getName(){
+		return "GameOfLife";
+	}
 }

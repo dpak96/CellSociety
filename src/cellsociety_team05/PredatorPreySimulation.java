@@ -170,4 +170,8 @@ public class PredatorPreySimulation extends Simulation {
     public void setMyEnergies (int[][] myEnergies) {
         this.myEnergies = myEnergies;
     }
+	
+	public String getName(){
+		return "PredatorPrey";
+	}
 }

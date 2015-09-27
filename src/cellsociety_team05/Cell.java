@@ -54,7 +54,9 @@ public abstract class Cell {
     public void setParameter (String name, double value) {
         myParameters.put(name, value);
     }
-
+    public int getNumberStates(){
+    	return myColors.length;
+    }
     /**
      * 
      * @return current color of this cell

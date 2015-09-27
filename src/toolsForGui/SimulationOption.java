@@ -1,5 +1,7 @@
 package toolsForGui;
 
+import java.util.List;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -8,9 +10,9 @@ import javafx.scene.control.ChoiceBox;
 public class SimulationOption extends PersonalizationOption{
 
 	private InitialChoiceDialog myDialog; 
-	private String[] mySimulationTypes;
+	private List<String> mySimulationTypes;
 	
-	public SimulationOption(InitialChoiceDialog dialog, String[] simulationTypes){
+	public SimulationOption(InitialChoiceDialog dialog, List<String> simulationTypes){
 		super("Simulation");
 		myDialog = dialog;
 		mySimulationTypes = simulationTypes;
@@ -24,7 +26,7 @@ public class SimulationOption extends PersonalizationOption{
 				new ChangeListener<Number>(){
 					@Override
 					public void changed(ObservableValue oc, Number value, Number newValue){
-						myDialog.setSimulation(mySimulationTypes[newValue.intValue()]);
+						myDialog.setSimulation(mySimulationTypes.get(newValue.intValue()));
 					}
 				}
 		);

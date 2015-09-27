@@ -65,6 +65,9 @@ public class SimulationFactory {
 		else if (simulation.equals("AntForaging")){
 		        return "XMLFiles/ant_test.xml";
 		}
+		else if (simulation.equals("Custom")){
+			return "XMLFiles/custom.xml";
+		}
 		else{
 			throw(new SimulationException("No such simulation found."));
 		}

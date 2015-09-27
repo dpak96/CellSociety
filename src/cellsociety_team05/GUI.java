@@ -1,6 +1,11 @@
 package cellsociety_team05;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -21,7 +26,7 @@ public class GUI {
 
     private Stage myStage;
     private BorderPane root;
-    private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire", "Sugar", "AntForaging"};
+    private String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire", "Sugar", "AntForaging"};
     private Simulation mySimulation;
     private long simulationSpeed;
     private GridPane myGridPane;
@@ -33,10 +38,10 @@ public class GUI {
    
         myResources = ResourceBundle.getBundle("resources.window");
         initializeStage(primaryStage);
-        
+        List<String> simList = Arrays.asList(simulationTypes);
 
         Scene myScene= initializeScene();
-        InitialChoiceDialog myGuiChoiceDialog = new InitialChoiceDialog(this, simulationTypes);
+        InitialChoiceDialog myGuiChoiceDialog = new InitialChoiceDialog(this, simList);
         myGuiChoiceDialog.display();
 
         myStage.setScene(myScene);
@@ -108,7 +113,7 @@ public class GUI {
 
     public void restartSimulation(){
         loadSimulationValue(currentSimulationName);
-        startSimulation();
+        //startSimulation();
     }
 
     public void updateSimulationSpeed (double speed) {
@@ -130,7 +135,7 @@ public class GUI {
 
     public void startNewSimulation (String simulation) {
         loadSimulationValue(simulation);
-        startSimulation();
+        //startSimulation();
     }
 
     /**
@@ -153,24 +158,27 @@ public class GUI {
 
 	public Object loadPersonalizedSimulation(boolean random, int noOfCells, String simulation, 
 			String shape, String myGridType) {
-		
+		if(random){
+			startNewSimulation(simulation);
+		}
 		//creates a new simulation with these two parameters 
 		System.out.println(random + " " + noOfCells + " " + simulation + " " + shape + " " + myGridType);
 		
 		return null;
 	}
 	
+	public void clearSimulation(){
+		mySimulation.clear();
+	}
+	
 	public void saveSimulation(){
-		
-		//hook it up with editor
-		
+
+		XMLEditor x = new XMLEditor("XMLFiles/custom.xml", mySimulation.getName() , mySimulation.getParams(), mySimulation.getGrid().getCellMatrix());
+		x.editFile();
 	}
 	
 	public void loadSimulation(){
-		
-		//hook up with editor
-		//unsure how you want to do this 
-		
+		startNewSimulation("Custom");		
 	}
 
 }
