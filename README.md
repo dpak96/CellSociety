@@ -1,20 +1,17 @@
-# cellsociety
+# Cell Society - Team 5
 
-## Segregation
-Simulation Tag: Segregation
-Satisfaction Tag: similar
-Ratio Tag: ratio
-Empty tag: empty
+Team Members: Lucas Donaldson, Emanuele Macchie, and Daniel Pak
+Date Started: September 10, 2015
+Date Finished: September 27, 2015
 
-## Fire
-Simulation Tag: Fire
-probCatch Tag: probCatch
+## Team Roles
+While each team member worked together to fix bugs and connect different project components, each member also had their own area of focus when working on the project.
+Lucas Donaldson: Focused on simulation logic and manipulating grid elements.
+Emanuele Macchi: Focused on creating GUI and designing the appearance of the program.
+Daniel Pak: Focused on reading and writing to XMLs and setting up simulations from them.
 
-## Predator Prey
-Simulation Tag: PredatorPrey
-Predator Reproduction Rate Tag: predatorreproductiontime
-Prey Reproduction Rate Tag: preyreproductiontime
-Predator Energy Rate: energy
+## Important Files
+To start the project: Main.java
+Data files: xml files in folder XMLFiles
 
-## Game Of Life
-Simulation Tag: GameOfLife
+## Known Bugs
