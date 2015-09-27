@@ -4,6 +4,11 @@ import cellsociety_team05.GUI;
 import cellsociety_team05.Simulation;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class RestartButton extends GuiButton{
 	
 	public RestartButton(GUI gui) {

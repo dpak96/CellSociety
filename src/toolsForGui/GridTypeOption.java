@@ -6,6 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Dialog;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class GridTypeOption extends PersonalizationOption{
 	private InitialChoiceDialog myDialog;
 	private String[] myGridTypes = {"Normal", "Toroidal"};
