@@ -71,7 +71,11 @@ public class SegregationSimulation extends Simulation {
                 int ran = (int) Math.floor(Math.random() * list.size());
                 cell.setParameter("similar", similar);
                 cell.setMyCurrentState(list.remove(ran));
-                cell.changeColor();
+                try {
+					cell.changeColor();
+				} catch (SimulationException e) {
+					e.printStackTrace();
+				}
             }
         }
     }
