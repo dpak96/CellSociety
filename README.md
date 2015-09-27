@@ -1,4 +1,5 @@
 # cellsociety
+
 ## Segregation
 Simulation Tag: Segregation
 Satisfaction Tag: similar

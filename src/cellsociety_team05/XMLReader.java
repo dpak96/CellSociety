@@ -93,9 +93,7 @@ public class XMLReader {
 				String[] states = eElement.getElementsByTagName("values").item(0).getTextContent().split(",");
 				for (int x = 0; x < states.length; x++) {
 					cells.add(new CellInfo(x, temp, Integer.valueOf(states[x])));
-					System.out.print(states[x]);
 				}
-				System.out.println();
 				if(first){
 					width = states.length;
 					first = !first;

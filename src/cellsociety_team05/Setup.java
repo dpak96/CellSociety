@@ -30,7 +30,7 @@ public class Setup {
         myWidth = xml.getGridWidth();
         myCells = xml.getCells();
         sf = new SimulationFactory(myGridPane, myGUI, parameters, myCells, myHeight, myWidth);
-        System.out.println("hi"+xml.getSimulationName());
+        //System.out.println("hi"+xml.getSimulationName());
         mySimulation = sf.makeSimulation(xml.getSimulationName());
     }
    

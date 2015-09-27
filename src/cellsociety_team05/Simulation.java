@@ -77,7 +77,7 @@ public abstract class Simulation {
             for (CellInfo cell : list) {
                 Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
                 thisCell.setMyCurrentState(cell.getState());
-                System.out.println(thisCell.getMyCurrentState());
+                //System.out.println(thisCell.getMyCurrentState());
                 //thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
                 thisCell.changeColor();
             }
