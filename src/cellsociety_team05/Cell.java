@@ -219,7 +219,11 @@ public abstract class Cell {
     	return myShape;
     }
     
-    public void changeColor(){
+    public void changeColor() throws SimulationException{
+    	int curr = getMyCurrentState();
+    	if(curr > myColors.length-1){
+    		throw(new SimulationException("State not available."));
+    	}
     	myShape.setFill(myColors[getMyCurrentState()]);
     }
     

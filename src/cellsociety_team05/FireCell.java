@@ -55,7 +55,7 @@ public class FireCell extends Cell {
         if (myCurrentState == 1) {
             if (neighborIsBurning()) {
                 double ran = Math.random();
-                if (ran <= probCatch) {
+                if (ran < probCatch) {
                     myNextState = 2;
                 }
                 else {
