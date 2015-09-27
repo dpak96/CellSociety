@@ -5,26 +5,32 @@ import java.util.List;
 import java.util.Map;
 import javafx.scene.layout.GridPane;
 
+
 /**
- * 
+ *
  * @author emanuele
  *
  */
-public class AntForagingSimulation extends Simulation{
-	
-	private List<Ant> myAnts = new ArrayList<Ant>();
-	private int numberOfAnts;
-	private int maxNumberOfAnts = 20;
+public class AntForagingSimulation extends Simulation {
 
-	public AntForagingSimulation(GridPane gridPane, GUI gui, Map<String, Double> params, 
-			List<CellInfo> list, int height,int width, String shape) {
-		super(gridPane, gui, params, list, height, width, shape);
-		numberOfAnts = 0;
-	}
-	
-	public void initNeighbors(){
-        for (List<Cell> list: myGrid.getCellMatrix()){
-            for (Cell cell: list){
+    private List<Ant> myAnts = new ArrayList<Ant>();
+    private int numberOfAnts;
+    private int maxNumberOfAnts = 20;
+
+    public AntForagingSimulation (GridPane gridPane,
+                                  GUI gui,
+                                  Map<String, Double> params,
+                                  List<CellInfo> list,
+                                  int height,
+                                  int width,
+                                  String shape) {
+        super(gridPane, gui, params, list, height, width, shape);
+        numberOfAnts = 0;
+    }
+
+    public void initNeighbors () {
+        for (List<Cell> list : myGrid.getCellMatrix()) {
+            for (Cell cell : list) {
                 List<Cell> neighbors = new ArrayList<Cell>();
                 int[] x = { 0, 0, 1, -1, 1, -1, 1, -1 };
                 int[] y = { 1, -1, 0, 0, 1, -1, -1, 1 };
