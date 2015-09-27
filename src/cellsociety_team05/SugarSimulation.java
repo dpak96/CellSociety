@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.scene.layout.GridPane;
 
 
@@ -25,11 +26,62 @@ public class SugarSimulation extends Simulation {
                             int width, String shape) {
         super(gridPane, gui, params, list, height, width, shape);
         myAgentSugars = new int[width][height];
-        mySugarLimit = (int) Math.round(params.get("sugarlimit"));
-        myVision = (int) Math.round(params.get("vision"));
-        myMetabolism = (int) Math.round(params.get("metabolism"));
-        myInterval = (int) Math.round(params.get("interval"));
-        myRate = (int) Math.round(params.get("rate"));
+        
+        try{
+        	mySugarLimit = (int) Math.round(params.get("sugarlimit"));
+		}
+		catch(Exception e){
+			try{
+				mySugarLimit = 3;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
+        try{
+            myVision = (int) Math.round(params.get("vision"));
+		}
+		catch(Exception e){
+			try{
+				myVision = 1;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
+        try{
+            myMetabolism = (int) Math.round(params.get("metabolism"));
+		}
+		catch(Exception e){
+			try{
+				myMetabolism = 2;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
+        try{
+            myInterval = (int) Math.round(params.get("interval"));
+		}
+		catch(Exception e){
+			try{
+				myInterval = 1;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
+        try{
+            myRate = (int) Math.round(params.get("rate"));
+		}
+		catch(Exception e){
+			try{
+				myRate = 1;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
         myTimes = new int[width][height];
     }
 

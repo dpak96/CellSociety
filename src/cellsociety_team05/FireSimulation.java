@@ -29,7 +29,6 @@ public class FireSimulation extends Simulation {
 		super(gridPane, gui, params, list, height, width, shape);
 		try{
 			probCatch = params.get("probCatch");
-			System.out.println("check");
 		}
 		catch(Exception e){
 			try{

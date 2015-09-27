@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.scene.layout.GridPane;
 
 
@@ -30,9 +31,39 @@ public class SegregationSimulation extends Simulation {
                                   int height,
                                   int width, String shape) {
         super(gridPane, gui, param, list, height, width, shape);
-        similar = param.get("similar");
-        ratio = param.get("ratio");
-        empty = param.get("empty");
+        try{
+			similar = param.get("similar");
+		}
+		catch(Exception e){
+			try{
+				similar = 0.5;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
+        try{
+            ratio = param.get("ratio");
+		}
+		catch(Exception e){
+			try{
+				ratio = 0.5;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
+        try{
+            empty = param.get("empty");
+		}
+		catch(Exception e){
+			try{
+				empty = 0.5;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
         if (list == null) {
             initGrid();
         }
