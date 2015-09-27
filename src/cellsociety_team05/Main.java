@@ -13,7 +13,7 @@ public class Main extends Application {
     @Override
     public void start (Stage arg0) throws Exception {
 
-        GUI myGUI = new GUI(arg0);
+        new GUI(arg0);
 
     }
 

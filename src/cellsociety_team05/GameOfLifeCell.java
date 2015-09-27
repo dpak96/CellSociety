@@ -1,15 +1,13 @@
 package cellsociety_team05;
 
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 
 public class GameOfLifeCell extends Cell {
 
     /**
      * constructor for game of life cell
-     * 
+     *
      * @param xCoordinate
      * @param yCoordinate
      * @param startingState
@@ -19,7 +17,7 @@ public class GameOfLifeCell extends Cell {
         super(xCoordinate, yCoordinate, startingState);
         myColors = new Color[] { Color.BLACK, Color.WHITE };
         myPossibleStates = new String[] { "Alive", "Dead" };
-        this.setMyShape(440/sim.getMyHeight(), myColors[startingState], sim.getShape());
+        setMyShape(440 / sim.getMyHeight(), myColors[startingState], sim.getShape());
     }
 
     /**
