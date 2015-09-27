@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.scene.layout.GridPane;
 
 
@@ -33,9 +34,40 @@ public class PredatorPreySimulation extends Simulation {
         super(gridPane, gui, params, list, height, width, shape);
         myReproductionTimes = new int[width][height];
         myEnergies = new int[width][height];
-        PREY_REPRODUCTION_TIME = (int) Math.round(params.get("preyreproductiontime"));
-        PREDATOR_REPRODUCTION_TIME = (int) Math.round(params.get("predatorreproductiontime"));
-        PREDATOR_ENERGY = (int) Math.round(params.get("energylimit"));
+        
+        try{
+            PREY_REPRODUCTION_TIME = (int) Math.round(params.get("preyreproductiontime"));
+		}
+		catch(Exception e){
+			try{
+				PREY_REPRODUCTION_TIME = 5;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
+        try{
+            PREDATOR_REPRODUCTION_TIME = (int) Math.round(params.get("predatorreproductiontime"));
+		}
+		catch(Exception e){
+			try{
+				PREDATOR_REPRODUCTION_TIME = 5;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
+        try{
+            PREDATOR_ENERGY = (int) Math.round(params.get("energylimit"));
+		}
+		catch(Exception e){
+			try{
+				PREDATOR_ENERGY = 5;
+			}
+			catch(Exception ee){
+				return;
+			}
+		}
     }
 
     /**
