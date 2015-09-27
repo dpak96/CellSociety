@@ -208,4 +208,24 @@ public abstract class Simulation {
 	public String getShape(){
 		return cellShape;
 	}
+	
+	public void clear(){
+		int temp = myGrid.getCellMatrix().get(0).get(0).getNumberStates();
+		for(int i = 0; i< myHeight; i++){
+			for(int j = 0; j<myWidth; j++){
+				//System.out.println(temp);
+				myGrid.getCellMatrix().get(i).get(j).setMyCurrentState(temp-1);
+			}
+		}
+		step();
+	}
+	public abstract String getName();
+	
+	public Map<String, Double> getParams(){
+		return myParameters;
+	}
+	
+	public Grid getGrid(){
+		return myGrid;
+	}
 }

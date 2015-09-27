@@ -97,5 +97,9 @@ public class AntForagingSimulation extends Simulation{
 			 a.forage();
 		 }
 	}
+	
+	public String getName(){
+		return "AntForaging";
+	}
 
 }

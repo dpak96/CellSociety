@@ -131,5 +131,9 @@ public class SugarSimulation extends Simulation {
             }
         }
     }
+	
+	public String getName(){
+		return "Sugar";
+	}
 
 }

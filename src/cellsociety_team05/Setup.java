@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.scene.layout.GridPane;
 
 
@@ -25,6 +26,7 @@ public class Setup {
         String file = sf.chooseFileFromUserInput(simulation);
         xml = new XMLReader(file);
         xml.readFile();
+    	System.out.println("In grid");
         parameters = xml.getParams();
         myHeight = xml.getGridHeight();
         myWidth = xml.getGridWidth();

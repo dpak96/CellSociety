@@ -26,16 +26,16 @@ import org.xml.sax.SAXException;
 public class XMLEditor{
 	private String fileName;
 	private Map<String, Double> parameters;
-	private List<ArrayList<CellInfo>> cells;
+	private List<List<Cell>> cells;
 	private String simulation;
 	private static String SIMULATION = "simulation";
 	private static String NAME = "name";
 
-	public XMLEditor(String s, String sim, Map<String, Double> params, List<ArrayList<CellInfo>> c){
+	public XMLEditor(String s, String sim, Map<String, Double> params, List<List<Cell>> list){
 		fileName = s;
 		simulation = sim;
 		parameters = params;
-		cells = c;
+		cells = list;
 	}
 
 	public Document readFile(){
@@ -95,7 +95,7 @@ public class XMLEditor{
 		}
 	}
 
-	public void addCells(Document doc, Node first, List<ArrayList<CellInfo>> cells2){
+	public void addCells(Document doc, Node first, List<List<Cell>> cells2){
 		removeNode(first, "row");
 		for(int i = 0; i<cells2.size(); i++){
 			String row = listToString(cells2.get(i));
@@ -114,7 +114,7 @@ public class XMLEditor{
 	}
 	public void removeNode(Node curr, String check){
 		NodeList list = curr.getChildNodes();
-		for(int i = 0; i<list.getLength(); i++){
+		for(int i = list.getLength()-1; i>0; i--){
 			if(list.item(i).getNodeName().equals(check)){
 				curr.removeChild(list.item(i));
 			}
@@ -176,30 +176,12 @@ public class XMLEditor{
 	 * @param list
 	 * @return
 	 */
-	public String listToString(List<CellInfo> list){
+	public String listToString(List<Cell> list){
 		String temp = ""; 
 		for(int i = 0; i<list.size()-1; i++){
-			temp += Integer.toString(list.get(i).getState()) + ",";
+			temp += Integer.toString(list.get(i).getMyCurrentState()) + ",";
 		}
-		temp += Integer.toString(list.get(list.size()-1).getState());
+		temp += Integer.toString(list.get(list.size()-1).getMyCurrentState());
 		return temp;
-	}
-	public static void main(String[] args){
-		String s = "XMLFiles/custom.xml";
-		String sim = "Fire";
-		HashMap<String, Double> params = new HashMap<String,Double>();
-		params.put("probCatch", 0.23);
-		List<ArrayList<CellInfo>> c = new ArrayList<ArrayList<CellInfo>>();
-		for(int i = 0; i< 4; i++){
-			ArrayList<CellInfo> temp = new ArrayList<CellInfo>();
-			for(int j = 0; j<4; j++){
-				temp.add(new CellInfo(0,0,1));
-			}
-			c.add(temp);
-		}
-		
-		XMLEditor x = new XMLEditor(s, sim, params, c);
-		x.readFile();
-		x.editFile();
 	}
 }
