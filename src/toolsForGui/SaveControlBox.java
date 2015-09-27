@@ -6,6 +6,11 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class SaveControlBox extends HorizontalControlBoxes {
 	
 	private HBox myHBox;

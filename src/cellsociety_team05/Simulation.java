@@ -12,7 +12,7 @@ import javafx.util.Duration;
 
 /**
  * 
- * @author emanuele macchi
+ * @author emanuele macchi / Lucas Donaldson
  *
  */
 

@@ -2,6 +2,11 @@ package toolsForGui;
 
 import javafx.scene.control.Spinner;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class NumberOfCellsOption extends PersonalizationOption {
 
 	private int numberCells;

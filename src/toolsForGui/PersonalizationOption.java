@@ -5,6 +5,11 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public abstract class PersonalizationOption{
 	
 	private Label optionName;

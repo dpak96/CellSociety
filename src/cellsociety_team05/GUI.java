@@ -91,9 +91,6 @@ public class GUI {
 
     public void startSimulation(){
         mySimulation.start();
-
-        //testUpdateTriangle();
-        //testRowTriangle();
     }
 
     public void step () {
@@ -132,11 +129,6 @@ public class GUI {
         loadSimulationValue(simulation);
         startSimulation();
     }
-
-    /**
-     * The following methods show the functionality of two
-     * different triangle grids
-     */
 
     private void initializeEmptyGridPane (int height, int length) {
         Rectangle size = new Rectangle(height, length);

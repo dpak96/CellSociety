@@ -10,6 +10,11 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.layout.GridPane;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class InitialChoiceDialog {
 
 	private GUI myGui;

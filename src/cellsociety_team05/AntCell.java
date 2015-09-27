@@ -4,6 +4,11 @@ import java.util.Map;
 
 import javafx.scene.paint.Color;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 
 public class AntCell extends Cell {
 	

@@ -3,6 +3,11 @@ package toolsForGui;
 import cellsociety_team05.GUI;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class LoadButton extends GuiButton{
 	
 	public LoadButton(GUI gui) {

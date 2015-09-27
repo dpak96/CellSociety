@@ -6,6 +6,11 @@ import java.util.Map;
 
 import javafx.scene.layout.GridPane;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class AntForagingSimulation extends Simulation{
 	
 	private List<Ant> myAnts = new ArrayList<Ant>();

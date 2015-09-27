@@ -11,6 +11,11 @@ import javafx.scene.Node;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class GuiChoiceDialog {
 	private GUI myGui;
 	private String[] mySimulationTypes;
