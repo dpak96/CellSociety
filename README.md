@@ -33,27 +33,27 @@ We thought this project was very interesting. In particular, the implementation 
 ##Simulation details
 
 ##Ant Foraging
-Simulation Tag: AntForaging
-Maximum number of ants: 20
-Maximum home pheromones: 1000
-Maximum food pheromones: 1000
+* Simulation Tag: AntForaging
+* Maximum number of ants: 20
+* Maximum home pheromones: 1000
+* Maximum food pheromones: 1000
 
 ## Segregation
-Simulation Tag: Segregation
-Satisfaction Tag: similar
-Ratio Tag: ratio
-Empty tag: empty
+* Simulation Tag: Segregation
+* Satisfaction Tag: similar
+* Ratio Tag: ratio
+* Empty tag: empty
 
 ##Fire
-Simulation Tag: Fire 
-probCatch Tag: probCatch
+* Simulation Tag: Fire 
+* probCatch Tag: probCatch
 
 ##Predator Prey
 
-Simulation Tag: PredatorPrey 
-Predator Reproduction Rate Tag: predatorreproductiontime 
-Prey Reproduction Rate Tag: preyreproductiontime Predator 
-Energy Rate: energy
+* Simulation Tag: PredatorPrey 
+* Predator Reproduction Rate Tag: predatorreproductiontime 
+* Prey Reproduction Rate Tag: preyreproductiontime Predator 
+* Energy Rate: energy
 
 ##Game Of Life
-Simulation Tag: GameOfLife
+* Simulation Tag: GameOfLife
