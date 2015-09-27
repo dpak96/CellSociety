@@ -142,14 +142,14 @@ public class GUI {
         Rectangle size = new Rectangle(height, length);
         myGridPane.getChildren().add(size);
     }
-
+    /**
     private void testRowTriangle () {
         myGridPane.getChildren().clear();
         for (int i = 0; i < 8; i++) {
             TriangleRow t = new TriangleRow(i, myGridPane, 8, 440);
         }
     }
-
+     **/
 
 	public Object loadPersonalizedSimulation(boolean random, int noOfCells, String simulation, 
 			String shape, String myGridType) {

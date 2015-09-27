@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><test>
-<simulation><name>Fire</name></simulation><parameters><name>probCatch</name><value>0.23</value></parameters><row><values>1,1,1,1</values></row><row><values>1,1,1,1</values></row><row><values>1,1,1,1</values></row><row><values>1,1,1,1</values></row></test>
+<row><values>1,1,1,1</values></row><row><values>1,1,1,1</values></row><row><values>1,1,1,1</values></row><simulation><name>Fire</name></simulation><parameters><name>probCatch</name><value>0.23</value></parameters><row><values>1,1,1,1</values></row><row><values>1,1,1,1</values></row><row><values>1,1,1,1</values></row><row><values>1,1,1,1</values></row></test>
