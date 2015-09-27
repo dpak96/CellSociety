@@ -22,8 +22,7 @@ public class SugarCell extends Cell {
         mySim = sim;
         myPossibleStates = new String[] {"Empty","1","2","3","4","5"};
         myColors = new Color[] {Color.WHITE, Color.YELLOW, Color.GOLD, Color.ORANGE, Color.RED, Color.BLACK};
-        this.setMySquare(new Rectangle(440/sim.getMyHeight(), 440/sim.getMyHeight(), myColors[startingState]));
-        GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
+        this.setMyShape(440/sim.getMyHeight(), myColors[startingState], sim.getShape());
     }
 
     @Override

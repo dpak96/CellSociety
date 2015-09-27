@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import toolsForGui.GuiBoxContainer;
-import toolsForGui.GuiChoiceDialog;
+import toolsForGui.InitialChoiceDialog;
 import toolsForGui.TopMenu;
 
 
@@ -21,7 +21,7 @@ public class GUI {
 
     private Stage myStage;
     private BorderPane root;
-    private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire","Sugar"};
+    private final String[] simulationTypes = {"Segregation", "GameOfLife", "PredatorPrey", "Fire", "Sugar", "AntForaging"};
     private Simulation mySimulation;
     private long simulationSpeed;
     private GridPane myGridPane;
@@ -29,33 +29,51 @@ public class GUI {
     private ResourceBundle myResources;
     private String currentSimulationName;
 
-    public GUI (Stage primaryStage) throws SimulationException {
-        GuiChoiceDialog myGuiChoiceDialog = new GuiChoiceDialog(this, simulationTypes);
+    public GUI(Stage primaryStage) throws SimulationException{
+   
         myResources = ResourceBundle.getBundle("resources.window");
-        myStage = primaryStage;
-        myStage.setTitle(myResources.getString("Title"));
-        myStage.setResizable(false);
-        root = new BorderPane();
+        initializeStage(primaryStage);
+        
 
-        Scene scene = new Scene(root, 720, 480, Color.WHITE);
-        TopMenu myTopMenu = new TopMenu(myStage, simulationTypes, this);
-        root.setTop(myTopMenu.getMenuBar());
-
-        HBox h = new HBox();
-        int height = 440;
-        int length = 440;
-        myGridPane = new GridPane();
-        myGridPane.setMaxSize(440, 440);
-        initializeEmptyGridPane(height, length);
-        h.getChildren().add(myGridPane);
-        myBoxContainer = new GuiBoxContainer(this, myStage, mySimulation);
-        h.getChildren().add(myBoxContainer.getVBox());
-        root.setCenter(h);
+        Scene myScene= initializeScene();
+        InitialChoiceDialog myGuiChoiceDialog = new InitialChoiceDialog(this, simulationTypes);
         myGuiChoiceDialog.display();
 
-        myStage.setScene(scene);
+        myStage.setScene(myScene);
         myStage.show();
     }
+
+
+	private void initializeStage(Stage primaryStage) {
+		myStage = primaryStage;
+        myStage.setTitle(myResources.getString("Title"));
+        myStage.setResizable(false);
+	}
+
+
+	private Scene initializeScene() {
+		root = new BorderPane();
+		Scene scene = new Scene(root, 720, 480, Color.WHITE);
+        TopMenu myTopMenu = new TopMenu(myStage, simulationTypes, this);
+        root.setTop(myTopMenu.getMenuBar());
+        
+        HBox modifiableElementsBox = new HBox();
+        int gridSideLenght = 440;
+        myGridPane = new GridPane();
+        myGridPane.setMaxSize(440, 440);
+        initializeEmptyGridPane(gridSideLenght, gridSideLenght);
+        modifiableElementsBox.getChildren().add(myGridPane);
+        myBoxContainer = new GuiBoxContainer(this, myStage, mySimulation);
+        modifiableElementsBox.getChildren().add(myBoxContainer.getVBox());
+        root.setCenter(modifiableElementsBox);
+		return scene;
+	}
+
+
+    /**
+     * Modified to test ant foraging 
+     * @param letter
+     */
 
     public void loadSimulationValue (String letter) {
         myGridPane.getChildren().clear();
@@ -67,43 +85,28 @@ public class GUI {
 
         }
         catch(SimulationException e){
-        	e.printStackTrace();; 
+        	e.printStackTrace();
         }
     }
 
-    /**
-     * The following two methods have been modified to show how the triangle display.
-     */
-
-    public void startSimulation () {
+    public void startSimulation(){
         mySimulation.start();
 
-        /**
-         * If you want to test the triangle grid, choose one of the following
-         * (Only one at the time)
-         */
-        // testUpdateTriangle();
-        // testRowTriangle();
+        //testUpdateTriangle();
+        //testRowTriangle();
     }
 
     public void step () {
         mySimulation.step();
     }
 
-    /**
-     * updates state of graph (called in simulation)
-     */
-    public void updateGraph () {
+    public void updateGraph(){
         myBoxContainer.getPCB().AddToQueue(mySimulation.getStats());
         myBoxContainer.getPCB().addDataToSeries();
     }
 
-    /**
-     * End of modifications
-     * @throws SimulationException 
-     */
 
-    public void restartSimulation () {
+    public void restartSimulation(){
         loadSimulationValue(currentSimulationName);
         startSimulation();
     }
@@ -146,5 +149,28 @@ public class GUI {
             TriangleRow t = new TriangleRow(i, myGridPane, 8, 440);
         }
     }
+
+
+	public Object loadPersonalizedSimulation(boolean random, int noOfCells, String simulation, 
+			String shape, String myGridType) {
+		
+		//creates a new simulation with these two parameters 
+		System.out.println(random + " " + noOfCells + " " + simulation + " " + shape + " " + myGridType);
+		
+		return null;
+	}
+	
+	public void saveSimulation(){
+		
+		//hook it up with editor
+		
+	}
+	
+	public void loadSimulation(){
+		
+		//hook up with editor
+		//unsure how you want to do this 
+		
+	}
 
 }

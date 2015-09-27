@@ -19,9 +19,7 @@ public class GameOfLifeCell extends Cell {
         super(xCoordinate, yCoordinate, startingState);
         myColors = new Color[] { Color.BLACK, Color.WHITE };
         myPossibleStates = new String[] { "Alive", "Dead" };
-        this.setMySquare(new Rectangle(440 / sim.getMyHeight(), 440 / sim.getMyHeight(),
-                                       myColors[startingState]));
-        GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
+        this.setMyShape(440/sim.getMyHeight(), myColors[startingState], sim.getShape());
     }
 
     /**

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<test>
+	<simulation> 
+		<name>AntForaging</name>
+	</simulation>
+	
+<row><values>0,0,0,0,0,0,0,0,0</values></row>
+<row><values>0,1,0,0,0,0,0,0,0</values></row>
+<row><values>0,0,0,0,0,0,0,0,0</values></row>
+<row><values>0,0,0,0,0,0,0,0,0</values></row>
+<row><values>0,0,0,0,0,0,0,0,0</values></row>
+<row><values>0,0,0,0,0,0,0,0,0</values></row>
+<row><values>0,0,0,0,0,0,0,0,0</values></row>
+<row><values>0,0,0,0,0,0,0,3,0</values></row>
+<row><values>0,0,0,0,0,0,0,0,0</values></row>
+
+</test>

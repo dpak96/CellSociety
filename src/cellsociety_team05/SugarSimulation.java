@@ -22,8 +22,8 @@ public class SugarSimulation extends Simulation {
                             Map<String, Double> params,
                             List<CellInfo> list,
                             int height,
-                            int width) {
-        super(gridPane, gui, params, list, height, width);
+                            int width, String shape) {
+        super(gridPane, gui, params, list, height, width, shape);
         myAgentSugars = new int[width][height];
         mySugarLimit = (int) Math.round(params.get("sugarlimit"));
         myVision = (int) Math.round(params.get("vision"));
@@ -68,7 +68,8 @@ public class SugarSimulation extends Simulation {
                 Cell thisCell = myGrid.getCellMatrix().get(cell.getX()).get(cell.getY());
                 thisCell.setMyCurrentState(cell.getState());
                 thisCell.setMyNextState(cell.getState());
-                thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
+                thisCell.changeColor();
+                //thisCell.mySquare.setFill(thisCell.myColors[thisCell.getMyCurrentState()]);
                 if (thisCell.getMyCurrentState()!=5){
                     mySugars[thisCell.getX()][thisCell.getY()]=thisCell.getMyCurrentState();
                 }

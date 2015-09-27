@@ -1,48 +1,110 @@
 package cellsociety_team05;
 
-import java.util.HashMap;
 import java.util.Map;
+
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 
 public class AntCell extends Cell {
-
-    // three possible states: 0 = nothing, 1 = isNest, 2 = isFood, 3 = hasAnt;
-
-    public final int isNest = 1;
-    public final int isFood = 2;
-    public final int hasAnt = 3;
-    private AntForagingSimulation mySimulation;
-
-    public AntCell (int xCoordinate,
-                    int yCoordinate,
-                    int startingState,
-                    Map<String, Double> map,
-                    Grid grid,
-                    AntForagingSimulation sim) {
-        super(xCoordinate, yCoordinate, startingState);
-        // TODO Auto-generated constructor stub
-        myColors = new Color[] { Color.WHITE, Color.BROWN, Color.BLACK, Color.RED };
-        myPossibleStates = new String[] { "Nothing", "isNest", "isFood", "hasAnt" };
-        this.setMySquare(new Rectangle(440 / sim.getMyHeight(), 440 / sim.getMyHeight(),
-                                       myColors[startingState]));
-    }
+	
+	//three possible states: 0 = nothing, 1 = isNest, 2 = isFood, 3 = hasAnt;
+	
+	public final int  isNest = 1;
+	public final int  hasAnt = 2;
+	public final int  isFood = 3;
+	private int foodPheromones;
+	private int homePheromones;
+	private AntForagingSimulation mySimulation;
+	private Ant currentAnt;
+	
+	public AntCell(int xCoordinate, int yCoordinate, int startingState, 
+			Map<String, Double> map,Grid grid, AntForagingSimulation sim) {
+		super(xCoordinate, yCoordinate, startingState);
+		mySimulation = sim;
+		myColors = new Color[] {Color.WHITE, Color.BROWN, Color.BLACK, Color.RED};
+        myPossibleStates = new String[] {"Nothing", "isNest", "isFood", "hasAnt"};
+        if(startingState == isNest){
+        	homePheromones = 1000;
+        } else if (startingState == isFood){
+        	foodPheromones = 1000;
+        	this.myNextState = startingState;
+        } else {
+        	homePheromones = 0;
+        	foodPheromones = 0;
+        }
+        this.setMyShape(440/sim.getMyHeight(), myColors[startingState], sim.getShape());
+	}
 
     @Override
 	public void preUpdateCell() {
-		// TODO Auto-generated method stub
-		if(this.getMyCurrentState() == hasAnt){
-			mySquare.setFill(myColors[hasAnt]);
-		} else if (this.getMyCurrentState() == isNest){
-			mySquare.setFill(myColors[isNest]);
-		} else if (this.getMyCurrentState() == isFood){
-			mySquare.setFill(myColors[isFood]);
-		} else {
-			mySquare.setFill(myColors[0]);
+		
+		//safety check 
+        if(myCurrentState == isNest){
+        	homePheromones = 1000;
+        	myNextState = myCurrentState;
+        } else if (myCurrentState == isFood){
+        	foodPheromones = 1000;
+        	myNextState = myCurrentState;
+        }
+		if(this.myNextState == hasAnt && currentAnt == null){
+			AntArrives(new Ant(this));
+		}
+		
+		if(this.myCurrentState == isNest && mySimulation.checkIfNotTooManyAnts()){
+			createAnt();
 		}
 	}
 
-    public void receuveAnt()
+	public void AntArrives(Ant ant){
+		if(this.myCurrentState == isNest){
+			return;
+		}
+		currentAnt = ant;
+		this.setMyNextState(hasAnt);
 
+	}
+	
+	public void createAnt(){
+		currentAnt = new Ant(this);
+		mySimulation.addAnt(currentAnt);
+	}
+	
+	public void antLeaves(){
+		if(this.getMyCurrentState() != isNest && this.getMyCurrentState() != isFood){
+			this.setMyNextState(0);
+			currentAnt  = null;
+		}
+	}
+	
+	public void addHomePheromones(int value){
+		if(value > homePheromones){
+			homePheromones = value;
+		}
+	}
+	
+	public void addFoodPheromones(int value){
+		if(value > foodPheromones){
+			foodPheromones = value;
+		}
+	}
+	
+	public int getPheromones(boolean food){
+		if(food){
+			return foodPheromones;
+		} else {
+			return homePheromones;
+		}
+	}
+	
+	public void addPheromones(boolean food, int value){
+		if(food){
+			addFoodPheromones(value);
+		} else {
+			addHomePheromones(value);
+		}
+	}
+	
+	public boolean isFree(){
+		return (currentAnt == null);
+	}
 }
