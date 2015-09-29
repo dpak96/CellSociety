@@ -98,9 +98,15 @@ public class XMLEditor{
 	public void addCells(Document doc, Node first, List<List<Cell>> cells2){
 		removeNode(first, "row");
 		for(int i = 0; i<cells2.size(); i++){
-			String row = listToString(cells2.get(i));
-			addNode(doc, first, "row", "values", row);
+			String temp = "";
+			for(int j = 0; j<cells2.get(i).size()-1; j++){
+				temp += Integer.toString(cells2.get(j).get(i).getMyCurrentState()) + ",";
+			}
+			temp += Integer.toString(cells2.get(0).get(cells2.get(0).size()-1).getMyCurrentState());
+			addNode(doc, first, "row", "values", temp);
+
 		}
+
 	}
 
 
@@ -170,18 +176,5 @@ public class XMLEditor{
 	 */
 	public void addElement(Document doc, Node curr, String element, Double value){
 		addElement(doc, curr, element, Double.toString(value));
-	}
-	/**
-	 * Convert a list of cells into a list of states separated by commas. 
-	 * @param list
-	 * @return
-	 */
-	public String listToString(List<Cell> list){
-		String temp = ""; 
-		for(int i = 0; i<list.size()-1; i++){
-			temp += Integer.toString(list.get(i).getMyCurrentState()) + ",";
-		}
-		temp += Integer.toString(list.get(list.size()-1).getMyCurrentState());
-		return temp;
 	}
 }
