@@ -8,6 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class SpeedControlBox extends HorizontalControlBoxes{
 	
 	private HBox myHBox;

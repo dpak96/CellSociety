@@ -6,6 +6,11 @@ import cellsociety_team05.GUI;
 import cellsociety_team05.Simulation;
 import javafx.scene.control.Button;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public abstract class GuiButton{
 
 	private GUI myGui;

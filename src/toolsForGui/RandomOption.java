@@ -3,6 +3,11 @@ package toolsForGui;
 import javafx.scene.control.CheckBox;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class RandomOption extends PersonalizationOption{
 
 	private InitialChoiceDialog myDialog; 

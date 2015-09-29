@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javafx.scene.layout.GridPane;
 
 
@@ -17,7 +16,7 @@ public class PredatorPreySimulation extends Simulation {
 
     /**
      * constructor for predator prey simulation
-     * 
+     *
      * @param gridPane
      * @param gui
      * @param params
@@ -30,44 +29,45 @@ public class PredatorPreySimulation extends Simulation {
                                    Map<String, Double> params,
                                    List<CellInfo> list,
                                    int height,
-                                   int width, String shape) {
+                                   int width,
+                                   String shape) {
         super(gridPane, gui, params, list, height, width, shape);
         myReproductionTimes = new int[width][height];
         myEnergies = new int[width][height];
-        
-        try{
+
+        try {
             PREY_REPRODUCTION_TIME = (int) Math.round(params.get("preyreproductiontime"));
-		}
-		catch(Exception e){
-			try{
-				PREY_REPRODUCTION_TIME = 5;
-			}
-			catch(Exception ee){
-				return;
-			}
-		}
-        try{
+        }
+        catch (Exception e) {
+            try {
+                PREY_REPRODUCTION_TIME = 5;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
+        try {
             PREDATOR_REPRODUCTION_TIME = (int) Math.round(params.get("predatorreproductiontime"));
-		}
-		catch(Exception e){
-			try{
-				PREDATOR_REPRODUCTION_TIME = 5;
-			}
-			catch(Exception ee){
-				return;
-			}
-		}
-        try{
+        }
+        catch (Exception e) {
+            try {
+                PREDATOR_REPRODUCTION_TIME = 5;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
+        try {
             PREDATOR_ENERGY = (int) Math.round(params.get("energylimit"));
-		}
-		catch(Exception e){
-			try{
-				PREDATOR_ENERGY = 5;
-			}
-			catch(Exception ee){
-				return;
-			}
-		}
+        }
+        catch (Exception e) {
+            try {
+                PREDATOR_ENERGY = 5;
+            }
+            catch (Exception ee) {
+                return;
+            }
+        }
     }
 
     /**
@@ -170,8 +170,9 @@ public class PredatorPreySimulation extends Simulation {
     public void setMyEnergies (int[][] myEnergies) {
         this.myEnergies = myEnergies;
     }
-	
-	public String getName(){
-		return "PredatorPrey";
-	}
+
+    @Override
+    public String getName () {
+        return "PredatorPrey";
+    }
 }

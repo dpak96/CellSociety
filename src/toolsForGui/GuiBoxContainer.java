@@ -8,6 +8,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class GuiBoxContainer{
 	
 	private GUI myGui;

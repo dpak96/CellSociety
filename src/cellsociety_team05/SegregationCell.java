@@ -1,16 +1,13 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 
 /**
- * 
+ *
  * @author Lucas Donaldson
  *
  */
@@ -22,7 +19,7 @@ public class SegregationCell extends Cell {
 
     /**
      * constructor for segregation cell
-     * 
+     *
      * @param xCoordinate
      * @param yCoordinate
      * @param startingState
@@ -42,7 +39,7 @@ public class SegregationCell extends Cell {
         myGrid = grid;
         myDirty = false;
         myColors = new Color[] { Color.BLUE, Color.RED, Color.WHITE };
-        this.setMyShape(440/sim.getMyHeight(), myColors[startingState], sim.getShape());
+        setMyShape(440 / sim.getMyHeight(), myColors[startingState], sim.getShape());
     }
 
     /**
@@ -88,7 +85,7 @@ public class SegregationCell extends Cell {
 
     /**
      * returns the color of the cell
-     * 
+     *
      * @Emanuele
      */
     public Color getColor () {

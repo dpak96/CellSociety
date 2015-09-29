@@ -8,6 +8,11 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class TopMenu {
 	private MenuBar myMenu;
 	private ResourceBundle myResources;

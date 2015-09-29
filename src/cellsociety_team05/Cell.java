@@ -1,10 +1,8 @@
 package cellsociety_team05;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -13,7 +11,7 @@ import javafx.scene.shape.Shape;
 
 
 /**
- * 
+ *
  * @author Lucas Donaldson
  *
  */
@@ -32,7 +30,7 @@ public abstract class Cell {
 
     /**
      * Cell constructor
-     * 
+     *
      * @param grid
      * @param xCoordinate
      * @param yCoordinate
@@ -47,18 +45,25 @@ public abstract class Cell {
 
     /**
      * sets value in parameter map
-     * 
+     *
      * @param name string of key in parameter map
      * @param value to be stored at name
      */
     public void setParameter (String name, double value) {
         myParameters.put(name, value);
     }
-    public int getNumberStates(){
-    	return myColors.length;
-    }
+
     /**
-     * 
+     * returns number of states this type of cell can occupy
+     *
+     * @return number of possible states
+     */
+    public int getNumberStates () {
+        return myColors.length;
+    }
+
+    /**
+     *
      * @return current color of this cell
      */
     public Color getCurrentColor () {
@@ -93,7 +98,7 @@ public abstract class Cell {
     }
 
     /**
-     * 
+     *
      * @return array of cell's possible state names
      */
     public String[] getPossibleStates () {
@@ -137,7 +142,7 @@ public abstract class Cell {
 
     /**
      * @param myCurrentState the myCurrentState to set
-     * @throws SimulationException 
+     * @throws SimulationException
      */
     public void setMyCurrentState (int myCurrentState) {
         this.myCurrentState = myCurrentState;
@@ -165,24 +170,10 @@ public abstract class Cell {
     }
 
     /**
-     * @param myPossibleStates the myPossibleStates to set
-     */
-    public void setMyPossibleStates (String[] myPossibleStates) {
-        this.myPossibleStates = myPossibleStates;
-    }
-
-    /**
      * @return the myColors
      */
     public Color[] getMyColors () {
         return myColors;
-    }
-
-    /**
-     * @param myColors the myColors to set
-     */
-    public void setMyColors (Color[] myColors) {
-        this.myColors = myColors;
     }
 
     /**
@@ -198,37 +189,39 @@ public abstract class Cell {
     public void setMyDirty (boolean myDirty) {
         this.myDirty = myDirty;
     }
+
     /**
      * @param mySquare the mySquare to set
-     * 
+     *
      * @author emanuele
      *         I modified setMySquare, as well as adding another method to allow for update of the
      *         cell status
      */
-    public void setMyShape(double squareBoxSide, Color imgColor, String typeOfCell){
-    	if(typeOfCell.equals("circle")){
-    		double radius = squareBoxSide/2;
-    		myShape = new Circle(radius, radius, radius);
-    		myShape.setFill(imgColor);
-    	} else if (typeOfCell.equals("rectangle")){
-    		myShape = new Rectangle(squareBoxSide, squareBoxSide, imgColor);
-    	}
-    	myShape.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> nextState());
-    	GridPane.setConstraints(myShape, myXCoordinate, myYCoordinate);
+    public void setMyShape (double squareBoxSide, Color imgColor, String typeOfCell) {
+        if (typeOfCell.equals("circle")) {
+            double radius = squareBoxSide / 2;
+            myShape = new Circle(radius, radius, radius);
+            myShape.setFill(imgColor);
+        }
+        else if (typeOfCell.equals("rectangle")) {
+            myShape = new Rectangle(squareBoxSide, squareBoxSide, imgColor);
+        }
+        myShape.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> nextState());
+        GridPane.setConstraints(myShape, myXCoordinate, myYCoordinate);
     }
-    
-    public Shape getShape(){
-    	return myShape;
+
+    public Shape getShape () {
+        return myShape;
     }
-    
-    public void changeColor() throws SimulationException{
-    	int curr = getMyCurrentState();
-    	if(curr > myColors.length-1){
-    		throw(new SimulationException("State not available."));
-    	}
-    	myShape.setFill(myColors[getMyCurrentState()]);
+
+    public void changeColor () throws SimulationException {
+        int curr = getMyCurrentState();
+        if (curr > myColors.length - 1) {
+            throw (new SimulationException("State not available."));
+        }
+        myShape.setFill(myColors[getMyCurrentState()]);
     }
-    
+
     private void nextState () {
         myNextState = (myCurrentState + 1) % myColors.length;
         updateCell();
@@ -239,12 +232,5 @@ public abstract class Cell {
      */
     public Map<String, Double> getMyParameters () {
         return myParameters;
-    }
-
-    /**
-     * @param myParameters the myParameters to set
-     */
-    public void setMyParameters (Map<String, Double> myParameters) {
-        this.myParameters = myParameters;
     }
 }

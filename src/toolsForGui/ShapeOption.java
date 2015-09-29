@@ -5,6 +5,11 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
 
+/**
+ * 
+ * @author emanuele
+ *
+ */
 public class ShapeOption extends PersonalizationOption{
 	
 	private InitialChoiceDialog myDialog; 
