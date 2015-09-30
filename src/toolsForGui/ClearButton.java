@@ -5,7 +5,6 @@ import cellsociety_team05.GUI;
 
 public class ClearButton extends GuiButton {
 
-
 	public ClearButton(GUI gui) {
 		super(gui);
 		this.setButton(this.getResources().getString("ClearButton"));
@@ -14,7 +13,8 @@ public class ClearButton extends GuiButton {
 
 	@Override
 	protected void implementAction() {
-		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> this.getGui().clearSimulation());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED,
+				e -> this.getGui().clearSimulation());
 	}
 
 }

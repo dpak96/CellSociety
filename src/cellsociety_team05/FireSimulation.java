@@ -5,70 +5,65 @@ import java.util.List;
 import java.util.Map;
 import javafx.scene.layout.GridPane;
 
-
 public class FireSimulation extends Simulation {
-    private double probCatch;
+	private double probCatch;
 
-    /**
-     * constructor for fire simulation class
-     *
-     * @param gridPane
-     * @param gui
-     * @param params
-     * @param list
-     * @param height
-     * @param width
-     */
-    public FireSimulation (GridPane gridPane,
-                           GUI gui,
-                           Map<String, Double> params,
-                           List<CellInfo> list,
-                           int height,
-                           int width,
-                           String shape) {
-        super(gridPane, gui, params, list, height, width, shape);
-        try {
-            probCatch = params.get("probCatch");
-        }
-        catch (Exception e) {
-            try {
-                probCatch = 0.5;
-            }
-            catch (Exception ee) {
-                return;
-            }
-        }
-    }
+	/**
+	 * constructor for fire simulation class
+	 *
+	 * @param gridPane
+	 * @param gui
+	 * @param params
+	 * @param list
+	 * @param height
+	 * @param width
+	 */
+	public FireSimulation(GridPane gridPane, GUI gui,
+			Map<String, Double> params, List<CellInfo> list, int height,
+			int width, String shape) {
+		super(gridPane, gui, params, list, height, width, shape);
+		try {
+			probCatch = params.get("probCatch");
+		} catch (Exception e) {
+			try {
+				probCatch = 0.5;
+			} catch (Exception ee) {
+				return;
+			}
+		}
+	}
 
-    /**
-     * overrides super class method
-     */
-    @Override
-    public Cell makeCell (int x, int y, int start, Grid g, Map<String, Double> map) {
-        FireCell c = new FireCell(x, y, start, this);
-        c.setProb(probCatch);
-        return c;
-    }
+	/**
+	 * overrides super class method
+	 */
+	@Override
+	public Cell makeCell(int x, int y, int start, Grid g,
+			Map<String, Double> map) {
+		FireCell c = new FireCell(x, y, start, this);
+		c.setProb(probCatch);
+		return c;
+	}
 
-    /**
-     * overrides super class method
-     */
-    @Override
-    public List<List<Cell>> setUpCells (Grid grid, int width, int height, Map<String, Double> map) {
-        List<List<Cell>> list = new ArrayList<List<Cell>>();
-        for (int i = 0; i < width; i++) {
-            list.add(new ArrayList<Cell>());
-            for (int j = 0; j < height; j++) {
-                int state = (int) (Math.random() * 3);
-                Cell newcell = makeCell(i, j, state, grid, map);
-                list.get(i).add(newcell);
-            }
-        }
-        return list;
-    }
+	/**
+	 * overrides super class method
+	 */
+	@Override
+	public List<List<Cell>> setUpCells(Grid grid, int width, int height,
+			Map<String, Double> map) {
+		List<List<Cell>> list = new ArrayList<List<Cell>>();
+		for (int i = 0; i < width; i++) {
+			list.add(new ArrayList<Cell>());
+			for (int j = 0; j < height; j++) {
+				int state = (int) (Math.random() * 3);
+				Cell newcell = makeCell(i, j, state, grid, map);
+				list.get(i).add(newcell);
+			}
+		}
+		return list;
+	}
 
-    @Override
-    public String getName () {
-        return "Fire";
-    }
+	@Override
+	public String getName() {
+		return "Fire";
+	}
 }

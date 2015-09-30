@@ -11,18 +11,18 @@ import javafx.stage.Stage;
  * @author emanuele
  *
  */
-public class FlowControlBox extends HorizontalControlBoxes{
-	
+public class FlowControlBox extends HorizontalControlBoxes {
+
 	private HBox myHBox;
 	private GUI myGui;
-	
-	public FlowControlBox(GUI gui, Stage primaryStage, Simulation mySimulation){
+
+	public FlowControlBox(GUI gui, Stage primaryStage, Simulation mySimulation) {
 		myGui = gui;
 		myHBox = new HBox();
 		myHBox.setPrefHeight(20);
 		myHBox.setSpacing(20.0);
 		myHBox.setAlignment(Pos.CENTER);
-		
+
 		StartButton save = new StartButton(myGui);
 		PauseButton pause = new PauseButton(myGui);
 		NextStepButton next = new NextStepButton(gui);
@@ -32,9 +32,9 @@ public class FlowControlBox extends HorizontalControlBoxes{
 		myHBox.getChildren().add(next.getButton());
 		myHBox.getChildren().add(restart.getButton());
 	}
-	
+
 	@Override
-	public HBox getBox(){
+	public HBox getBox() {
 		return myHBox;
 	}
 
