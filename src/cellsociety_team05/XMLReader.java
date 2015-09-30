@@ -33,13 +33,13 @@ public class XMLReader {
 		fileName = file;
 		cells = new ArrayList<CellInfo>();
 		parameters = new HashMap<String, Double>();
-		// myGrid = grid;
 	}
 
 	/**
 	 * Read the file and set variables according to the information in the XML
 	 * file
 	 */
+
 	public void readFile() {
 		try {
 			File fXmlFile = new File(fileName);
@@ -61,6 +61,7 @@ public class XMLReader {
 	 * @param doc
 	 * @throws SimulationException
 	 */
+
 	public void initSimType(Document doc) throws SimulationException {
 		// Getting simulation type
 		NodeList nList = doc.getElementsByTagName(SIMNAME);
@@ -81,6 +82,7 @@ public class XMLReader {
 	 * 
 	 * @param doc
 	 */
+
 	public void initParameters(Document doc) {
 		NodeList nList = doc.getElementsByTagName(PARAM);
 		Node nNode = nList.item(ZERO);
@@ -104,6 +106,7 @@ public class XMLReader {
 	 * @param doc
 	 * @throws SimulationException
 	 */
+
 	public void initCells(Document doc) throws SimulationException {
 		NodeList nList = doc.getElementsByTagName(TAGNAME);
 		height = nList.getLength();
@@ -135,6 +138,7 @@ public class XMLReader {
 	 * 
 	 * @return parameters
 	 */
+
 	public Map<String, Double> getParams() {
 		return parameters;
 	}
@@ -144,6 +148,7 @@ public class XMLReader {
 	 * 
 	 * @return cells
 	 */
+
 	public List<CellInfo> getCells() {
 		return cells;
 	}
@@ -153,6 +158,7 @@ public class XMLReader {
 	 * 
 	 * @return simulation
 	 */
+
 	public String getSimulationName() {
 		return simulation;
 	}
@@ -162,6 +168,7 @@ public class XMLReader {
 	 * 
 	 * @return width
 	 */
+
 	public int getGridWidth() {
 		return width;
 	}
@@ -171,6 +178,7 @@ public class XMLReader {
 	 * 
 	 * @return
 	 */
+
 	public int getGridHeight() {
 		return height;
 	}

@@ -30,7 +30,6 @@ public class XMLEditor {
 	private static String VALUE = "value";
 	private static String VALUES = "values";
 	private static String ROW = "row";
-	
 
 	public XMLEditor(String s, String sim, Map<String, Double> params,
 			List<List<Cell>> list) {
@@ -64,6 +63,7 @@ public class XMLEditor {
 	 * Reads an XML file and adds the new information on simulation type,
 	 * parameters, and cells.
 	 */
+
 	public void editFile() {
 		Document doc = readFile();
 		Node first = doc.getFirstChild();
@@ -148,6 +148,7 @@ public class XMLEditor {
 	 * @param curr
 	 * @param check
 	 */
+
 	public void removeNode(Node curr, String check) {
 		NodeList list = curr.getChildNodes();
 		for (int i = list.getLength() - 1; i > 0; i--) {

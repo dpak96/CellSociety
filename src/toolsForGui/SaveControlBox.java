@@ -12,11 +12,11 @@ import javafx.stage.Stage;
  *
  */
 public class SaveControlBox extends HorizontalControlBoxes {
-	
+
 	private HBox myHBox;
 	private GUI myGui;
 
-	public SaveControlBox(GUI gui, Stage primaryStage, Simulation mySimulation){
+	public SaveControlBox(GUI gui, Stage primaryStage, Simulation mySimulation) {
 		myGui = gui;
 		myHBox = new HBox();
 		myHBox.setPrefHeight(20);
@@ -29,7 +29,7 @@ public class SaveControlBox extends HorizontalControlBoxes {
 		myHBox.getChildren().add(loadButton.getButton());
 		myHBox.getChildren().add(clearButton.getButton());
 	}
-	
+
 	@Override
 	public HBox getBox() {
 		// TODO Auto-generated method stub
