@@ -13,23 +13,23 @@ import javafx.stage.Stage;
  * @author emanuele
  *
  */
-public class GuiBoxContainer{
-	
+public class GuiBoxContainer {
+
 	private GUI myGui;
 	private VBox myVBox;
 	private ArrayList<HorizontalControlBoxes> myBoxes;
 	private Stage myStage;
 	private PopulationChartBox p;
 	private Simulation mySimulation;
-	
-	public GuiBoxContainer(GUI gui, Stage primaryStage, Simulation sim){
+
+	public GuiBoxContainer(GUI gui, Stage primaryStage, Simulation sim) {
 		myGui = gui;
 		createBoxContainer();
 		myStage = primaryStage;
 		mySimulation = sim;
 	}
-	
-	private void createBoxContainer(){
+
+	private void createBoxContainer() {
 		myVBox = new VBox();
 		myBoxes = new ArrayList<HorizontalControlBoxes>();
 		myVBox.setSpacing(10.0);
@@ -46,13 +46,13 @@ public class GuiBoxContainer{
 
 	public VBox getVBox() {
 		myVBox.getChildren().add(new HBox());
-		for(HorizontalControlBoxes box: myBoxes){
+		for (HorizontalControlBoxes box : myBoxes) {
 			myVBox.getChildren().add(box.getBox());
 		}
 		return myVBox;
 	}
-	
-	public PopulationChartBox getPCB(){
+
+	public PopulationChartBox getPCB() {
 		return p;
 	}
 

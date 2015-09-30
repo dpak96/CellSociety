@@ -9,8 +9,8 @@ import javafx.scene.input.MouseEvent;
  * @author emanuele
  *
  */
-public class RestartButton extends GuiButton{
-	
+public class RestartButton extends GuiButton {
+
 	public RestartButton(GUI gui) {
 		super(gui);
 		this.setButton(this.getResources().getString("RestartButton"));
@@ -19,7 +19,8 @@ public class RestartButton extends GuiButton{
 
 	@Override
 	protected void implementAction() {
-		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> this.getGui().restartSimulation());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED,
+				e -> this.getGui().restartSimulation());
 	}
 
 }

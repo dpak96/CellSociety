@@ -19,7 +19,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-
 public class XMLEditor {
     private String fileName;
     private Map<String, Double> parameters;
@@ -193,4 +192,5 @@ public class XMLEditor {
         temp += Integer.toString(list.get(list.size() - 1).getMyCurrentState());
         return temp;
     }
+
 }

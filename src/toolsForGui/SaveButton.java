@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
  * @author emanuele
  *
  */
-public class SaveButton extends GuiButton{
+public class SaveButton extends GuiButton {
 
 	public SaveButton(GUI gui) {
 		super(gui);
@@ -18,7 +18,8 @@ public class SaveButton extends GuiButton{
 
 	@Override
 	protected void implementAction() {
-		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> this.getGui().saveSimulation());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED,
+				e -> this.getGui().saveSimulation());
 	}
 
 }

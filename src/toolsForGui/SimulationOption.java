@@ -12,29 +12,32 @@ import javafx.scene.control.ChoiceBox;
  * @author emanuele
  *
  */
-public class SimulationOption extends PersonalizationOption{
+public class SimulationOption extends PersonalizationOption {
 
-	private InitialChoiceDialog myDialog; 
+	private InitialChoiceDialog myDialog;
 	private List<String> mySimulationTypes;
-	
-	public SimulationOption(InitialChoiceDialog dialog, List<String> simulationTypes){
+
+	public SimulationOption(InitialChoiceDialog dialog,
+			List<String> simulationTypes) {
 		super("Simulation");
 		myDialog = dialog;
 		mySimulationTypes = simulationTypes;
 		initializeOption();
 	}
-	
-	private void initializeOption(){
-		ChoiceBox<String> myChoiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(mySimulationTypes));
+
+	private void initializeOption() {
+		ChoiceBox<String> myChoiceBox = new ChoiceBox<String>(
+				FXCollections.observableArrayList(mySimulationTypes));
 		myChoiceBox.getSelectionModel().selectFirst();
-		myChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
-				new ChangeListener<Number>(){
+		myChoiceBox.getSelectionModel().selectedIndexProperty()
+				.addListener(new ChangeListener<Number>() {
 					@Override
-					public void changed(ObservableValue oc, Number value, Number newValue){
-						myDialog.setSimulation(mySimulationTypes.get(newValue.intValue()));
+					public void changed(ObservableValue oc, Number value,
+							Number newValue) {
+						myDialog.setSimulation(mySimulationTypes.get(newValue
+								.intValue()));
 					}
-				}
-		);
+				});
 		this.setControl(myChoiceBox);
 	}
 

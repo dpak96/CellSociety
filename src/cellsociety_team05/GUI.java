@@ -14,7 +14,6 @@ import toolsForGui.GuiBoxContainer;
 import toolsForGui.InitialChoiceDialog;
 import toolsForGui.TopMenu;
 
-
 public class GUI {
 
     /**
