@@ -23,16 +23,16 @@ import org.xml.sax.SAXException;
 public class XMLEditor {
     private String fileName;
     private Map<String, Double> parameters;
-    private List<List<Cell>> cells;
-    private String simulation;
+    private Simulation mySimulation;
+    private String mySimName;
     private static String SIMULATION = "simulation";
     private static String NAME = "name";
 
-    public XMLEditor (String s, String sim, Map<String, Double> params, List<List<Cell>> list) {
+    public XMLEditor (String s, Simulation simulation) {
         fileName = s;
-        simulation = sim;
-        parameters = params;
-        cells = list;
+        mySimName = simulation.getName();
+        parameters = simulation.getParams();
+        mySimulation = simulation;
     }
 
     public Document readFile () {
@@ -60,9 +60,9 @@ public class XMLEditor {
     public void editFile () {
         Document doc = readFile();
         Node first = doc.getFirstChild();
-        addSimulation(doc, first, simulation);
+        addSimulation(doc, first, mySimName);
         addParameters(doc, first, parameters);
-        addCells(doc, first, cells);
+        addCells(doc, first, mySimulation);
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer;
         try {
@@ -72,11 +72,9 @@ public class XMLEditor {
             transformer.transform(source, result);
         }
         catch (TransformerConfigurationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         catch (TransformerException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -96,10 +94,10 @@ public class XMLEditor {
         }
     }
 
-    public void addCells (Document doc, Node first, List<List<Cell>> cells2) {
+    public void addCells (Document doc, Node first, Simulation sim) {
         removeNode(first, "row");
-        for (int i = 0; i < cells2.size(); i++) {
-            String row = listToString(cells2.get(i));
+        for (int i = 0; i < sim.getMyHeight(); i++) {
+            String row = listToString(sim.getGridRow(i));
             addNode(doc, first, "row", "values", row);
         }
     }

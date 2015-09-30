@@ -154,8 +154,7 @@ public class GUI {
     public void saveSimulation () {
 
         XMLEditor x =
-                new XMLEditor("XMLFiles/custom.xml", mySimulation.getName(),
-                              mySimulation.getParams(), mySimulation.getGrid().getCellMatrix());
+                new XMLEditor("XMLFiles/custom.xml", mySimulation);
         x.editFile();
     }
 

@@ -28,7 +28,6 @@ public class XMLReader {
         fileName = file;
         cells = new ArrayList<CellInfo>();
         parameters = new HashMap<String, Double>();
-        // myGrid = grid;
     }
 
     /**

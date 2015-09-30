@@ -1,6 +1,7 @@
 package cellsociety_team05;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import javafx.animation.Animation;
@@ -23,14 +24,14 @@ public abstract class Simulation {
     protected GridPane myGridPane;
     protected GUI myGUI;
     private static final int MILLISECOND_DELAY = 1000;
-    protected Timeline animation;
+    protected Timeline myAnimation;
     protected Map<String, Double> myParameters;
-    private boolean paused;
+    private boolean myPaused;
     private int myWidth;
     private int myHeight;
     private List<CellInfo> myInfoList;
     protected int[] myStats;
-    private String cellShape;
+    private String myCellShape;
 
     /**
      * constructor for simulation class
@@ -54,7 +55,7 @@ public abstract class Simulation {
         myInfoList = list;
         myParameters = params;
         myGridPane = gridPane;
-        cellShape = shape;
+        myCellShape = shape;
         myGrid = new ToroidGrid(getMyHeight(), myWidth, this, myParameters);
         try {
             readCellList(myInfoList);
@@ -62,7 +63,7 @@ public abstract class Simulation {
         catch (SimulationException e) {
             e.printStackTrace();
         }
-        animation = new Timeline();
+        myAnimation = new Timeline();
         myGUI = gui;
         initializeGridPane();
     }
@@ -89,23 +90,23 @@ public abstract class Simulation {
     public void start () {
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                                       e -> step());
-        animation.getKeyFrames().add(frame);
-        animation.setCycleCount(Animation.INDEFINITE);
-        animation.play();
-        paused = false;
+        myAnimation.getKeyFrames().add(frame);
+        myAnimation.setCycleCount(Animation.INDEFINITE);
+        myAnimation.play();
+        myPaused = false;
     }
 
     /**
      * pauses/resumes animation
      */
     public void changeFlow () {
-        if (paused) {
-            animation.play();
+        if (myPaused) {
+            myAnimation.play();
         }
         else {
-            animation.pause();
+            myAnimation.pause();
         }
-        paused = !paused;
+        myPaused = !myPaused;
     }
 
     /**
@@ -115,7 +116,7 @@ public abstract class Simulation {
      */
     public void updateSpeed (double speed) {
         mySpeed = speed;
-        animation.setRate(2 * (speed / 10));
+        myAnimation.setRate(2 * (speed / 10));
     }
 
     /**
@@ -147,7 +148,7 @@ public abstract class Simulation {
      * stops animation
      */
     public void stopAnimation () {
-        animation.stop();
+        myAnimation.stop();
     }
 
     /**
@@ -208,7 +209,7 @@ public abstract class Simulation {
     }
 
     public String getShape () {
-        return cellShape;
+        return myCellShape;
     }
 
     public void clear () {
@@ -224,10 +225,11 @@ public abstract class Simulation {
     public abstract String getName ();
 
     public Map<String, Double> getParams () {
-        return myParameters;
+        return Collections.unmodifiableMap(myParameters);
     }
 
-    public Grid getGrid () {
-        return myGrid;
+    public List<Cell> getGridRow(int row) {
+        return Collections.unmodifiableList(myGrid.getCellMatrix().get(row));
+        
     }
 }
