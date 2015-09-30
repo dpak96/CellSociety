@@ -19,7 +19,7 @@ public class GuiBoxContainer{
 	private VBox myVBox;
 	private ArrayList<HorizontalControlBoxes> myBoxes;
 	private Stage myStage;
-	private PopulationChartBox p;
+	private PopulationChartBox population;
 	private Simulation mySimulation;
 	
 	public GuiBoxContainer(GUI gui, Stage primaryStage, Simulation sim){
@@ -34,13 +34,13 @@ public class GuiBoxContainer{
 		myBoxes = new ArrayList<HorizontalControlBoxes>();
 		myVBox.setSpacing(10.0);
 		myVBox.setPrefHeight(50);
-		FlowControlBox f = new FlowControlBox(myGui, myStage, mySimulation);
-		SpeedControlBox s = new SpeedControlBox(5, myGui);
-		p = new PopulationChartBox(myGui, myStage);
+		FlowControlBox flow = new FlowControlBox(myGui, myStage, mySimulation);
+		SpeedControlBox speed = new SpeedControlBox(5, myGui);
+		population = new PopulationChartBox(myGui, myStage);
 		SaveControlBox save = new SaveControlBox(myGui, myStage, mySimulation);
-		myBoxes.add(f);
-		myBoxes.add(s);
-		myBoxes.add(p);
+		myBoxes.add(flow);
+		myBoxes.add(speed);
+		myBoxes.add(population);
 		myBoxes.add(save);
 	}
 
@@ -53,7 +53,7 @@ public class GuiBoxContainer{
 	}
 	
 	public PopulationChartBox getPCB(){
-		return p;
+		return population;
 	}
 
 }

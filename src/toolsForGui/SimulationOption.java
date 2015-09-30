@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// EMANUELE MACCHI
+
 package toolsForGui;
 
 import java.util.List;

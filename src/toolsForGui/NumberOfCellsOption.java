@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// EMANUELE MACCHi
+
 package toolsForGui;
 
 import javafx.scene.control.Spinner;

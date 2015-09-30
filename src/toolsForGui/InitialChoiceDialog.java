@@ -1,5 +1,11 @@
+// This entire file is part of my masterpiece.
+// EMANUELE MACCHI
+
+
 package toolsForGui;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -13,7 +19,7 @@ import javafx.scene.layout.GridPane;
 
 /**
  * 
- * @author emanuele
+ * @author Emanuele Macchi
  *
  */
 public class InitialChoiceDialog {
@@ -29,6 +35,10 @@ public class InitialChoiceDialog {
 	private String cellShape;
 	private String[] myCellShapes = {"rectangle", "circle"};
 	private String myGridType;
+	private List<PersonalizationOption> myPersonalizationOptions;
+	private List<PersonalizationOption> myBasicOptions;
+	private String PERSONALIZED_OPTIONS = "Personalized";
+	private String BASIC_OPTIONS = "Basic";
 	
 	public InitialChoiceDialog(GUI gui, List<String> simulationTypes){
 		myGui = gui;
@@ -47,23 +57,43 @@ public class InitialChoiceDialog {
 	public void display(){
 		initializeGrid();
 		initializeDialog();
-		initializeBasicOptions();
+		createOptions(BASIC_OPTIONS);
 		myDialog.showAndWait();
 		
 	}
 
 	private void initializeDialog() {
-		ResourceBundle myResources = ResourceBundle.getBundle("resources.window");
 		myDialog = new Dialog<>();
+		initializeDialogLayout();
+		createDialogButtons();
+	}
+
+	private void createDialogButtons() {
+		
+		Node endApplication = myDialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+		endApplication.addEventFilter(ActionEvent.ACTION, event -> System.exit(0));
+		Node startApplication = myDialog.getDialogPane().lookupButton(ButtonType.OK);
+		startApplication.addEventFilter(ActionEvent.ACTION, event -> loadSimulation());
+	}
+	private void loadSimulation(){
+		if(personalized){
+			myGui.loadPersonalizedSimulation(random, noOfCells, currentSimulation, cellShape, myGridType); 
+		} else {
+			myGui.loadSimulationValue(currentSimulation);
+		}
+	}
+	
+	private ButtonType cancelButton(){
+		ButtonType cancel = ButtonType.CANCEL;
+		return cancel;
+	}
+	private void initializeDialogLayout() {
+		ResourceBundle myResources = ResourceBundle.getBundle("resources.window");
 		myDialog.setDialogPane(new DialogPane());
 		myDialog.setTitle(myResources.getString("Title"));
 		myDialog.setHeaderText(myResources.getString("ChoiceDialogHeader"));
 		myDialog.getDialogPane().getButtonTypes().add(cancelButton());
 		myDialog.getDialogPane().getButtonTypes().add(okButton());
-		Node endApplication = myDialog.getDialogPane().lookupButton(ButtonType.CANCEL);
-		endApplication.addEventFilter(ActionEvent.ACTION, event -> System.exit(0));
-		Node startApplication = myDialog.getDialogPane().lookupButton(ButtonType.OK);
-		startApplication.addEventFilter(ActionEvent.ACTION, event -> loadSimulation());
 	}
 
 	private void initializeGrid() {
@@ -73,62 +103,57 @@ public class InitialChoiceDialog {
 		myGrid.setVgap(10);
 	}
 	
-	private void loadSimulation(){
-		if(personalized){
-			myGui.loadPersonalizedSimulation(random, noOfCells, currentSimulation, cellShape, myGridType); 
-		} else {
-			myGui.loadSimulationValue(currentSimulation);
-		}
-	}
-
-	private void initializeBasicOptions() {
-		
-		SimulationOption simulationOption = new SimulationOption(this, mySimulationTypes);
-		addPersonalizationOption(simulationOption, 0);
-		
-		AllowPersonalizationOption allowPersonalizationOption = new AllowPersonalizationOption(this);
-		addPersonalizationOption(allowPersonalizationOption, 1);
-		
-		myDialog.getDialogPane().setContent(myGrid);
-		
-	}
 	
-	private ButtonType cancelButton(){
-		ButtonType cancel = ButtonType.CANCEL;
-		return cancel;
-	}
 	
 	private ButtonType okButton(){
 		ButtonType ok = ButtonType.OK;
 		return ok;
 	}
 	
+	private void initializeBasicOptions(){
+		myBasicOptions = new ArrayList<PersonalizationOption>();
+		Collections.addAll(myBasicOptions, new SimulationOption(this, mySimulationTypes),
+		new AllowPersonalizationOption(this));
+	}
+	
+	private void initializePersonalizationOptions(){
+		myPersonalizationOptions = new ArrayList<PersonalizationOption>();
+		Collections.addAll(myPersonalizationOptions, new NumberOfCellsOption(this),
+				new RandomOption(this), new ShapeOption(this, myCellShapes),
+				new GridTypeOption(this));
+	}
+	
+	private void createOptions(String optionType){
+		if(optionType.equals(BASIC_OPTIONS)){
+			initializeBasicOptions();
+			addOptions(myBasicOptions, 0);
+		} else if (optionType.equals(PERSONALIZED_OPTIONS)){
+			initializePersonalizationOptions();
+			addOptions(myPersonalizationOptions, 2);
+		}
+		myDialog.getDialogPane().setContent(myGrid);
+	}
+	
 	public void allowPersonalization(){
 		if(!personalized){
-			
-			NumberOfCellsOption firstOption = new NumberOfCellsOption(this);
-			addPersonalizationOption(firstOption, 2);
-			RandomOption randomOption = new RandomOption(this);
-			addPersonalizationOption(randomOption, 3);
-			ShapeOption shapeOption = new ShapeOption(this, myCellShapes);
-			addPersonalizationOption(shapeOption, 4);	
-			GridTypeOption gridTypeOption = new GridTypeOption(this);
-			addPersonalizationOption(gridTypeOption, 5);
-			myDialog.getDialogPane().setContent(myGrid);
+			createOptions(PERSONALIZED_OPTIONS);
 			personalized = true;
 			
 		} else {
 			
 			myGrid.getChildren().clear();
-			initializeBasicOptions();
+			createOptions(BASIC_OPTIONS);
 			personalized = false;
 		}
 		
 	}
 	
-	private void addPersonalizationOption(PersonalizationOption myOption, int row){
-		myGrid.add(myOption.getOptionName(), 0, row);
-		myGrid.add(myOption.getControl(), 1, row);
+	private void addOptions(List<PersonalizationOption> myOptions, int row){
+		for(PersonalizationOption extraOption: myOptions){
+			myGrid.add(extraOption.getOptionName(), 0, row);
+			myGrid.add(extraOption.getControl(), 1, row);
+			row++;
+		}
 	}
 	
 	public void randomSim(){

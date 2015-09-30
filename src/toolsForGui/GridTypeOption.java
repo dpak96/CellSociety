@@ -1,10 +1,12 @@
+// This entire file is part of my masterpiece.
+// EMANUELE MACCHI
+
 package toolsForGui;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Dialog;
 
 /**
  * 
