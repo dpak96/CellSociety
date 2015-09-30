@@ -1,4 +1,5 @@
 package toolsForGui;
+
 import cellsociety_team05.GUI;
 import cellsociety_team05.Simulation;
 import javafx.scene.input.MouseEvent;
@@ -8,8 +9,8 @@ import javafx.scene.input.MouseEvent;
  * @author emanuele
  *
  */
-public class PauseButton extends GuiButton{
-	
+public class PauseButton extends GuiButton {
+
 	private boolean paused;
 	private GUI myGui;
 
@@ -23,11 +24,12 @@ public class PauseButton extends GuiButton{
 
 	@Override
 	protected void implementAction() {
-		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> updateResumeButton());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED,
+				e -> updateResumeButton());
 	}
-	
-	private void updateResumeButton(){
-		if(paused){
+
+	private void updateResumeButton() {
+		if (paused) {
 			updateButtonText(this.getResources().getString("PauseButton"));
 		} else {
 			updateButtonText(this.getResources().getString("ResumeButton"));
@@ -35,8 +37,8 @@ public class PauseButton extends GuiButton{
 		paused = !paused;
 		myGui.changeSimulationFlow();
 	}
-	
-	private void updateButtonText(String s){
+
+	private void updateButtonText(String s) {
 		this.getButton().setText(s);
 	}
 }

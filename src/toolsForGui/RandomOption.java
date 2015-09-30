@@ -8,22 +8,21 @@ import javafx.scene.input.MouseEvent;
  * @author emanuele
  *
  */
-public class RandomOption extends PersonalizationOption{
+public class RandomOption extends PersonalizationOption {
 
-	private InitialChoiceDialog myDialog; 
-	
+	private InitialChoiceDialog myDialog;
+
 	public RandomOption(InitialChoiceDialog myChoiceDialog) {
 		super("Random");
 		myDialog = myChoiceDialog;
 		initializeOption();
 	}
-	
-	private void initializeOption(){
+
+	private void initializeOption() {
 		CheckBox randomCheckBox = new CheckBox();
-		randomCheckBox.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->  myDialog.randomSim());
+		randomCheckBox.addEventHandler(MouseEvent.MOUSE_CLICKED,
+				e -> myDialog.randomSim());
 		this.setControl(randomCheckBox);
 	}
-
-
 
 }

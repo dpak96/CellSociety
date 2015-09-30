@@ -8,8 +8,8 @@ import javafx.scene.input.MouseEvent;
  * @author emanuele
  *
  */
-public class LoadButton extends GuiButton{
-	
+public class LoadButton extends GuiButton {
+
 	public LoadButton(GUI gui) {
 		super(gui);
 		this.setButton(this.getResources().getString("LoadButton"));
@@ -18,7 +18,8 @@ public class LoadButton extends GuiButton{
 
 	@Override
 	protected void implementAction() {
-		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e-> this.getGui().loadSimulation());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED,
+				e -> this.getGui().loadSimulation());
 	}
 
 }

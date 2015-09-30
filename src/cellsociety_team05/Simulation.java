@@ -159,7 +159,7 @@ public abstract class Simulation {
      * @param map
      * @return
      */
-    public abstract List<List<Cell>> setUpCells (Grid grid,
+	public abstract List<List<Cell>> setUpCells (Grid grid,
                                                  int width,
                                                  int height,
                                                  Map<String, Double> map);

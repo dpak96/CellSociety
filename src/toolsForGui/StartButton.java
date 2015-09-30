@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
  * @author emanuele
  *
  */
-public class StartButton extends GuiButton{
+public class StartButton extends GuiButton {
 
 	public StartButton(GUI gui) {
 		super(gui);
@@ -19,7 +19,8 @@ public class StartButton extends GuiButton{
 
 	@Override
 	protected void implementAction() {
-		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> this.getGui().startSimulation());
+		this.getButton().addEventHandler(MouseEvent.MOUSE_CLICKED,
+				e -> this.getGui().startSimulation());
 	}
-	
+
 }

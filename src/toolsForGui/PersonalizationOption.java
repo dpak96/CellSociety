@@ -10,26 +10,26 @@ import javafx.scene.control.Label;
  * @author emanuele
  *
  */
-public abstract class PersonalizationOption{
-	
+public abstract class PersonalizationOption {
+
 	private Label optionName;
 	private Control myControl;
-	
-	public PersonalizationOption(String name){
-		ResourceBundle myResources = ResourceBundle.getBundle("resources.personalization");
+
+	public PersonalizationOption(String name) {
+		ResourceBundle myResources = ResourceBundle
+				.getBundle("resources.personalization");
 		optionName = new Label(myResources.getString(name));
 	}
-	
 
-	public Label getOptionName(){
+	public Label getOptionName() {
 		return optionName;
 	}
-	
-	public Control getControl(){
+
+	public Control getControl() {
 		return myControl;
 	}
-	
-	protected void setControl(Control control){
+
+	protected void setControl(Control control) {
 		myControl = control;
 	}
 }
