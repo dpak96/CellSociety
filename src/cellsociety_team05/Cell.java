@@ -24,7 +24,7 @@ public abstract class Cell {
 	protected String[] myPossibleStates;
 	protected Color[] myColors;
 	protected boolean myDirty;
-	protected Shape myShape;
+	protected Rectangle mySquare;
 	protected Map<String, Double> myParameters;
 
 	/**
@@ -81,7 +81,7 @@ public abstract class Cell {
 	 */
 	public void updateCell() {
 		myCurrentState = myNextState;
-		myShape.setFill(myColors[myCurrentState]);
+		mySquare.setFill(myColors[myCurrentState]);
 	}
 
 	/**
@@ -197,37 +197,32 @@ public abstract class Cell {
 		this.myDirty = myDirty;
 	}
 
-	/**
-	 * @param mySquare
-	 *            the mySquare to set
-	 *
-	 * @author emanuele I modified setMySquare, as well as adding another method
-	 *         to allow for update of the cell status
-	 */
-	public void setMyShape(double squareBoxSide, Color imgColor,
-			String typeOfCell) {
-		if (typeOfCell.equals("circle")) {
-			double radius = squareBoxSide / 2;
-			myShape = new Circle(radius, radius, radius);
-			myShape.setFill(imgColor);
-		} else if (typeOfCell.equals("rectangle")) {
-			myShape = new Rectangle(squareBoxSide, squareBoxSide, imgColor);
-		}
-		myShape.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> nextState());
-		GridPane.setConstraints(myShape, myXCoordinate, myYCoordinate);
-	}
-
-	public Shape getShape() {
-		return myShape;
-	}
-
 	public void changeColor() throws SimulationException {
 		int curr = getMyCurrentState();
 		if (curr > myColors.length - 1) {
 			throw (new SimulationException("State not available."));
 		}
-		myShape.setFill(myColors[getMyCurrentState()]);
+		mySquare.setFill(myColors[getMyCurrentState()]);
 	}
+	
+	/**
+	     * @param mySquare the mySquare to set
+	     * 
+	     * @author emanuele
+	     *         I modified setMySquare, as well as adding another method to allow for update of the
+	     *         cell status
+	     */
+	    public void setMySquare (Rectangle mySquare) {
+	        this.mySquare = mySquare;
+	        mySquare.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> nextState());
+	    }
+	    
+	    /**
+	     * @return the mySquare
+	     */
+	    public Rectangle getMySquare () {
+	        return mySquare;
+	    }
 
 	private void nextState() {
 		myNextState = (myCurrentState + 1) % myColors.length;

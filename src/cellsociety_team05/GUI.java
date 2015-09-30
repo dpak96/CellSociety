@@ -146,10 +146,6 @@ public class GUI {
         return null;
     }
 
-    public void clearSimulation () {
-        mySimulation.clear();
-    }
-
     public void saveSimulation () {
 
         XMLEditor x =

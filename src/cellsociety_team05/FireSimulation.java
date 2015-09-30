@@ -20,8 +20,8 @@ public class FireSimulation extends Simulation {
 	 */
 	public FireSimulation(GridPane gridPane, GUI gui,
 			Map<String, Double> params, List<CellInfo> list, int height,
-			int width, String shape) {
-		super(gridPane, gui, params, list, height, width, shape);
+			int width) {
+		super(gridPane, gui, params, list, height, width);
 		try {
 			probCatch = params.get("probCatch");
 		} catch (Exception e) {
@@ -48,14 +48,13 @@ public class FireSimulation extends Simulation {
 	 * overrides super class method
 	 */
 	@Override
-	public List<List<Cell>> setUpCells(Grid grid, int width, int height,
-			Map<String, Double> map) {
+	public List<List<Cell>> setUpCells() {
 		List<List<Cell>> list = new ArrayList<List<Cell>>();
-		for (int i = 0; i < width; i++) {
+		for (int i = 0; i < myWidth; i++) {
 			list.add(new ArrayList<Cell>());
-			for (int j = 0; j < height; j++) {
+			for (int j = 0; j < myHeight; j++) {
 				int state = (int) (Math.random() * 3);
-				Cell newcell = makeCell(i, j, state, grid, map);
+				Cell newcell = makeCell(i, j, state, myGrid, myParameters);
 				list.get(i).add(newcell);
 			}
 		}

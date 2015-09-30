@@ -3,7 +3,9 @@ package cellsociety_team05;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  *
@@ -34,8 +36,9 @@ public class SegregationCell extends Cell {
 		myGrid = grid;
 		myDirty = false;
 		myColors = new Color[] { Color.BLUE, Color.RED, Color.WHITE };
-		setMyShape(440 / sim.getMyHeight(), myColors[startingState],
-				sim.getShape());
+		this.setMySquare(new Rectangle(440 / sim.getMyHeight(), 440 / sim.getMyHeight(),
+	                                       myColors[startingState]));
+		GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
 	}
 
 	/**

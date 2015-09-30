@@ -23,8 +23,8 @@ public class SegregationSimulation extends Simulation {
 	 */
 	public SegregationSimulation(GridPane gridPane, GUI gui,
 			Map<String, Double> param, List<CellInfo> list, int height,
-			int width, String shape) {
-		super(gridPane, gui, param, list, height, width, shape);
+			int width) {
+		super(gridPane, gui, param, list, height, width);
 		try {
 			similar = param.get("similar");
 		} catch (Exception e) {
@@ -52,9 +52,6 @@ public class SegregationSimulation extends Simulation {
 				return;
 			}
 		}
-		if (list == null) {
-			initGrid();
-		}
 	}
 
 	/**
@@ -64,42 +61,6 @@ public class SegregationSimulation extends Simulation {
 	 */
 	public void setSimilar(double x) {
 		similar = x;
-	}
-
-	/**
-	 * initializes grid randomly with appropriate number of blue, red, and empty
-	 * cells
-	 */
-	@Override
-	public void initGrid() {
-		int num = myGrid.getCellMatrix().size()
-				* myGrid.getCellMatrix().get(0).size();
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		int numEmpty = (int) Math.floor((num) * empty);
-		num -= numEmpty;
-		int num1 = (int) Math.floor((num) * ratio);
-		int num2 = num - num1;
-		for (int i = 0; i < numEmpty; i++) {
-			list.add(2);
-		}
-		for (int i = 0; i < num1; i++) {
-			list.add(0);
-		}
-		for (int i = 0; i < num2; i++) {
-			list.add(1);
-		}
-		for (List<Cell> cells : myGrid.getCellMatrix()) {
-			for (Cell cell : cells) {
-				int ran = (int) Math.floor(Math.random() * list.size());
-				cell.setParameter("similar", similar);
-				cell.setMyCurrentState(list.remove(ran));
-				try {
-					cell.changeColor();
-				} catch (SimulationException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 
 	/**
@@ -117,13 +78,12 @@ public class SegregationSimulation extends Simulation {
 	 * Initiate the grid with preset cells.
 	 */
 	@Override
-	public List<List<Cell>> setUpCells(Grid grid, int width, int height,
-			Map<String, Double> map) {
+	public List<List<Cell>> setUpCells() {
 		List<List<Cell>> list = new ArrayList<List<Cell>>();
-		for (int i = 0; i < width; i++) {
+		for (int i = 0; i < myWidth; i++) {
 			list.add(new ArrayList<Cell>());
-			for (int j = 0; j < height; j++) {
-				Cell newcell = makeCell(i, j, 1, grid, map);
+			for (int j = 0; j < myHeight; j++) {
+				Cell newcell = makeCell(i, j, 1, myGrid, myParameters);
 				list.get(i).add(newcell);
 			}
 		}

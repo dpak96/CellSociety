@@ -16,8 +16,8 @@ public class SugarSimulation extends Simulation {
 
 	public SugarSimulation(GridPane gridPane, GUI gui,
 			Map<String, Double> params, List<CellInfo> list, int height,
-			int width, String shape) {
-		super(gridPane, gui, params, list, height, width, shape);
+			int width) {
+		super(gridPane, gui, params, list, height, width);
 		myAgentSugars = new int[width][height];
 
 		try {
@@ -69,9 +69,8 @@ public class SugarSimulation extends Simulation {
 	}
 
 	@Override
-	public List<List<Cell>> setUpCells(Grid grid, int width, int height,
-			Map<String, Double> map) {
-		return setUpRandomCells(grid, width, height, map, 3);
+	public List<List<Cell>> setUpCells() {
+		return setUpRandomCells(3);
 	}
 
 	@Override

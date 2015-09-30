@@ -18,8 +18,8 @@ public class GameOfLifeSimulation extends Simulation {
 	 */
 	public GameOfLifeSimulation(GridPane gridPane, GUI gui,
 			Map<String, Double> params, List<CellInfo> list, int height,
-			int width, String shape) {
-		super(gridPane, gui, params, list, height, width, shape);
+			int width) {
+		super(gridPane, gui, params, list, height, width);
 
 	}
 
@@ -38,9 +38,8 @@ public class GameOfLifeSimulation extends Simulation {
 	 * overrides super class method
 	 */
 	@Override
-	public List<List<Cell>> setUpCells(Grid grid, int width, int height,
-			Map<String, Double> map) {
-		return setUpRandomCells(grid, width, height, map, 2);
+	public List<List<Cell>> setUpCells() {
+		return setUpRandomCells(2);
 	}
 
 	@Override

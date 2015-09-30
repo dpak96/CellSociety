@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Lucas Donaldson
+
 package cellsociety_team05;
 
 import java.util.ArrayList;
@@ -20,18 +23,14 @@ import javafx.util.Duration;
 public abstract class Simulation {
 
     protected Grid myGrid;
-    protected double mySpeed;
-    protected GridPane myGridPane;
     protected GUI myGUI;
     private static final int MILLISECOND_DELAY = 1000;
-    protected Timeline myAnimation;
+    private Timeline myAnimation;
     protected Map<String, Double> myParameters;
     private boolean myPaused;
-    private int myWidth;
-    private int myHeight;
-    private List<CellInfo> myInfoList;
+    protected int myWidth;
+    protected int myHeight;
     protected int[] myStats;
-    private String myCellShape;
 
     /**
      * constructor for simulation class
@@ -43,29 +42,21 @@ public abstract class Simulation {
      * @param height
      * @param width
      */
-    public Simulation (GridPane gridPane,
-                       GUI gui,
-                       Map<String, Double> params,
-                       List<CellInfo> list,
-                       int height,
-                       int width,
-                       String shape) {
+    public Simulation (GridPane gridPane, GUI gui, Map<String, Double> params, 
+                       List<CellInfo> list, int height, int width) {
         myWidth = width;
-        setMyHeight(height);
-        myInfoList = list;
+        myHeight = height;
         myParameters = params;
-        myGridPane = gridPane;
-        myCellShape = shape;
         myGrid = new ToroidGrid(getMyHeight(), myWidth, this, myParameters);
         try {
-            readCellList(myInfoList);
+            readCellList(list);
         }
         catch (SimulationException e) {
             e.printStackTrace();
         }
         myAnimation = new Timeline();
         myGUI = gui;
-        initializeGridPane();
+        initializeGridPane(gridPane);
     }
 
     /**
@@ -88,8 +79,7 @@ public abstract class Simulation {
      * begins animation
      */
     public void start () {
-        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                                      e -> step());
+        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
         myAnimation.getKeyFrames().add(frame);
         myAnimation.setCycleCount(Animation.INDEFINITE);
         myAnimation.play();
@@ -115,7 +105,6 @@ public abstract class Simulation {
      * @param speed
      */
     public void updateSpeed (double speed) {
-        mySpeed = speed;
         myAnimation.setRate(2 * (speed / 10));
     }
 
@@ -129,6 +118,10 @@ public abstract class Simulation {
         myGUI.updateGraph();
     }
 
+    /**
+     * returns number of cells of each type for use in graph display
+     * @return myStats
+     */
     public int[] getStats () {
         return myStats;
     }
@@ -136,10 +129,10 @@ public abstract class Simulation {
     /**
      * connects grid of cells to GUI
      */
-    protected void initializeGridPane () {
+    protected void initializeGridPane (GridPane gridpane) {
         for (List<Cell> listCell : myGrid.getCellMatrix()) {
             for (Cell cell : listCell) {
-                myGridPane.getChildren().add(cell.getShape());
+                gridpane.getChildren().add(cell.getMySquare());
             }
         }
     }
@@ -160,16 +153,7 @@ public abstract class Simulation {
      * @param map
      * @return
      */
-	public abstract List<List<Cell>> setUpCells (Grid grid,
-                                                 int width,
-                                                 int height,
-                                                 Map<String, Double> map);
-
-    /**
-     * initializes grid with randomized cell states
-     */
-    public void initGrid () {
-    }
+    public abstract List<List<Cell>> setUpCells ();
 
     /**
      * initializes cell of specific type for given simulation
@@ -183,53 +167,53 @@ public abstract class Simulation {
      */
     public abstract Cell makeCell (int x, int y, int start, Grid g, Map<String, Double> map);
 
+    /**
+     * returns simulation grid height
+     * @return myHeight
+     */
     public int getMyHeight () {
         return myHeight;
     }
 
-    public void setMyHeight (int myHeight) {
-        this.myHeight = myHeight;
-    }
-
-    public List<List<Cell>> setUpRandomCells (Grid grid,
-                                              int width,
-                                              int height,
-                                              Map<String, Double> map,
-                                              int states) {
+    /**
+     * sets up simulation with randomized cells
+     * @param states 
+     * @return grid of cells
+     */
+    public List<List<Cell>> setUpRandomCells (int states) {
         ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < myWidth; i++) {
             list.add(new ArrayList<Cell>());
-            for (int j = 0; j < height; j++) {
+            for (int j = 0; j < myHeight; j++) {
                 int state = (int) Math.floor(Math.random() * states);
-                Cell newcell = makeCell(i, j, state, grid, map);
+                Cell newcell = makeCell(i, j, state, myGrid, myParameters);
                 list.get(i).add(newcell);
             }
         }
         return list;
     }
 
-    public String getShape () {
-        return myCellShape;
-    }
-
-    public void clear () {
-        int temp = myGrid.getCellMatrix().get(0).get(0).getNumberStates();
-        for (int i = 0; i < myHeight; i++) {
-            for (int j = 0; j < myWidth; j++) {
-                myGrid.getCellMatrix().get(i).get(j).setMyCurrentState(temp - 1);
-            }
-        }
-        step();
-    }
-
+    /**
+     * returns name of simulation
+     * @return string name of simulation
+     */
     public abstract String getName ();
 
+    /**
+     * returns unmodifiable version of myParameters
+     * @return myParameters
+     */
     public Map<String, Double> getParams () {
         return Collections.unmodifiableMap(myParameters);
     }
 
-    public List<Cell> getGridRow(int row) {
+    /**
+     * returns unmodifiable list of cells in given row number
+     * @param row
+     * @return list of cells
+     */
+    public List<Cell> getGridRow (int row) {
         return Collections.unmodifiableList(myGrid.getCellMatrix().get(row));
-        
+
     }
 }

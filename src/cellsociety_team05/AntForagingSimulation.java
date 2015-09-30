@@ -18,8 +18,8 @@ public class AntForagingSimulation extends Simulation {
 
 	public AntForagingSimulation(GridPane gridPane, GUI gui,
 			Map<String, Double> params, List<CellInfo> list, int height,
-			int width, String shape) {
-		super(gridPane, gui, params, list, height, width, shape);
+			int width) {
+		super(gridPane, gui, params, list, height, width);
 		numberOfAnts = 0;
 	}
 
@@ -78,14 +78,13 @@ public class AntForagingSimulation extends Simulation {
 	}
 
 	@Override
-	public ArrayList<List<Cell>> setUpCells(Grid grid, int width, int height,
-			Map<String, Double> map) {
+	public ArrayList<List<Cell>> setUpCells() {
 		ArrayList<List<Cell>> list = new ArrayList<List<Cell>>();
 
-		for (int i = 0; i < width; i++) {
+		for (int i = 0; i < myWidth; i++) {
 			list.add(new ArrayList<Cell>());
-			for (int j = 0; j < height; j++) {
-				AntCell newcell = makeCell(i, j, 0, grid, map);
+			for (int j = 0; j < myHeight; j++) {
+				AntCell newcell = makeCell(i, j, 0, myGrid, myParameters);
 				list.get(i).add(newcell);
 			}
 		}

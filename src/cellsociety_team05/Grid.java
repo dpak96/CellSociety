@@ -22,7 +22,7 @@ public abstract class Grid {
 	 */
 	public Grid(int width, int height, Simulation sim, Map<String, Double> map) {
 		mySimulation = sim;
-		myCells = mySimulation.setUpCells(this, width, height, map);
+		myCells = mySimulation.setUpCells();
 		initNeighbors();
 	}
 

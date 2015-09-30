@@ -1,6 +1,8 @@
 package cellsociety_team05;
 
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class FireCell extends Cell {
 	private double probCatch;
@@ -18,8 +20,9 @@ public class FireCell extends Cell {
 		super(xCoordinate, yCoordinate, startingState);
 		myColors = new Color[] { Color.WHITE, Color.GREEN, Color.RED };
 		myPossibleStates = new String[] { "Empty", "Tree", "Burning" };
-		setMyShape(440 / sim.getMyHeight(), myColors[startingState],
-				sim.getShape());
+		this.setMySquare(new Rectangle(440 / sim.getMyHeight(), 440 / sim.getMyHeight(),
+                                               myColors[startingState]));
+                GridPane.setConstraints(mySquare, myXCoordinate, myYCoordinate);
 	}
 
 	/**
