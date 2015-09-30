@@ -20,6 +20,7 @@ public class XMLReader {
     private final static String SIMNAME = "simulation";
     private final static String TAGNAME = "row";
     private final static String PARAM = "parameters";
+    private final static int ZERO = 0;
     private Map<String, Double> parameters;
     private int width;
     private int height;
@@ -53,27 +54,27 @@ public class XMLReader {
     public void initSimType (Document doc) throws SimulationException {
         // Getting simulation type
         NodeList nList = doc.getElementsByTagName(SIMNAME);
-        Node nNode = nList.item(0);
+        Node nNode = nList.item(ZERO);
         if (nNode.getNodeType() == Node.ELEMENT_NODE) {
             Element eElement = (Element) nNode;
             // Simulation type
-            simulation = eElement.getElementsByTagName("name").item(0).getTextContent();
+            simulation = eElement.getElementsByTagName("name").item(ZERO).getTextContent();
         }
-        if (simulation.length() <= 0) {
+        if (simulation.length() <= ZERO) {
             throw (new SimulationException("No simulation type given."));
         }
     }
 
     public void initParameters (Document doc) {
         NodeList nList = doc.getElementsByTagName(PARAM);
-        Node nNode = nList.item(0);
+        Node nNode = nList.item(ZERO);
         for (int temp = 0; temp < nList.getLength(); temp++) {
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 nNode = nList.item(temp);
                 Element eElement = (Element) nNode;
-                String name = eElement.getElementsByTagName("name").item(0).getTextContent();
+                String name = eElement.getElementsByTagName("name").item(ZERO).getTextContent();
                 Double val =
-                        Double.parseDouble(eElement.getElementsByTagName("value").item(0)
+                        Double.parseDouble(eElement.getElementsByTagName("value").item(ZERO)
                                 .getTextContent());
                 parameters.put(name, val);
             }
@@ -84,13 +85,13 @@ public class XMLReader {
         NodeList nList = doc.getElementsByTagName(TAGNAME);
         height = nList.getLength();
         boolean first = true;
-        for (int temp = 0; temp < nList.getLength(); temp++) {
+        for (int temp = ZERO; temp < nList.getLength(); temp++) {
             Node nNode = nList.item(temp);
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
                 String[] states =
-                        eElement.getElementsByTagName("values").item(0).getTextContent().split(",");
-                for (int x = 0; x < states.length; x++) {
+                        eElement.getElementsByTagName("values").item(ZERO).getTextContent().split(",");
+                for (int x = ZERO; x < states.length; x++) {
                     cells.add(new CellInfo(x, temp, Integer.valueOf(states[x])));
                 }
                 if (first) {
