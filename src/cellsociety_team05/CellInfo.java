@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Daniel Pak
+
 package cellsociety_team05;
 
 public class CellInfo {
