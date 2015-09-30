@@ -85,6 +85,13 @@ public abstract class Simulation {
         myAnimation.play();
         myPaused = false;
     }
+    
+    /**
+     * stops animation
+     */
+    public void stopAnimation () {
+        myAnimation.stop();
+    }
 
     /**
      * pauses/resumes animation
@@ -119,14 +126,6 @@ public abstract class Simulation {
     }
 
     /**
-     * returns number of cells of each type for use in graph display
-     * @return myStats
-     */
-    public int[] getStats () {
-        return myStats;
-    }
-
-    /**
      * connects grid of cells to GUI
      */
     protected void initializeGridPane (GridPane gridpane) {
@@ -135,13 +134,6 @@ public abstract class Simulation {
                 gridpane.getChildren().add(cell.getMySquare());
             }
         }
-    }
-
-    /**
-     * stops animation
-     */
-    public void stopAnimation () {
-        myAnimation.stop();
     }
 
     /**
@@ -168,14 +160,6 @@ public abstract class Simulation {
     public abstract Cell makeCell (int x, int y, int start, Grid g, Map<String, Double> map);
 
     /**
-     * returns simulation grid height
-     * @return myHeight
-     */
-    public int getMyHeight () {
-        return myHeight;
-    }
-
-    /**
      * sets up simulation with randomized cells
      * @param states 
      * @return grid of cells
@@ -194,11 +178,27 @@ public abstract class Simulation {
     }
 
     /**
+     * returns number of cells of each type for use in graph display
+     * @return myStats
+     */
+    public int[] getStats () {
+        return myStats;
+    }
+
+    /**
      * returns name of simulation
      * @return string name of simulation
      */
     public abstract String getName ();
 
+    /**
+     * returns simulation grid height
+     * @return myHeight
+     */
+    public int getMyHeight () {
+        return myHeight;
+    }
+    
     /**
      * returns unmodifiable version of myParameters
      * @return myParameters
